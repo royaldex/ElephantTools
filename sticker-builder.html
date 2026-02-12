@@ -1232,6 +1232,41 @@ body { padding: 0; }
 </head>
 <body>
 
+<!-- Access Control -->
+<script>
+  const ACCESS_KEY = 'ELEPHANT2024';
+  const STORAGE_KEY = 'elephantToolsAccess';
+  
+  // Check access on page load
+  (function() {
+    const storedKey = localStorage.getItem(STORAGE_KEY);
+    if (storedKey !== ACCESS_KEY) {
+      window.location.href = 'index.html';
+    }
+  })();
+</script>
+
+<!-- Back to Dashboard Link -->
+<div style="position: fixed; top: 10px; left: 10px; z-index: 1000;">
+  <a href="index.html" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    color: #f4f4f5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  " onmouseover="this.style.borderColor='#3f3f46'" onmouseout="this.style.borderColor='#27272a'">
+    ← Back to Dashboard
+  </a>
+</div>
+
+
     <div class="tool-panel active" id="panel-sticker" style="display:block;">
       <h1 class="page-title">🏷️ Sticker Sheet Arranger</h1>
       <p class="page-subtitle">Arrange stickers onto printable sheets for Cricut, Silhouette, or print-and-cut</p>
