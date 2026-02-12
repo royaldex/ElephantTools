@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Elephant Tools</title>
+</head>
+<body>
+    <h1>Welcome to Elephant Tools</h1>
+    <script>
+        const TOOLS = {
+            pngUpscaler: 'png-upscaler.html',
+            photoComposer: 'photo-composer.html',
+            contentFiller: 'content-filler.html',
+            videoMerger: 'video-merger.html',
+            imgCompressor: 'img-compressor.html',
+            pdfConverter: 'pdf-converter.html',
+            gifAnimator: 'gif-animator.html',
+            audioExtractor: 'audio-extractor.html',
+            textSummarizer: 'text-summarizer.html',
+            languageTranslator: 'language-translator.html',
+            colorPicker: 'color-picker.html',
+            screenRecorder: 'screen-recorder.html',
+            fontGenerator: 'font-generator.html',
+            htmlToPdf: 'html-to-pdf.html'
+        };
+
+        console.log(TOOLS);
+    </script>
+</body>
+</html>
