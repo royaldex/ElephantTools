@@ -1,28 +1,328 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Elephant Tools</title>
-</head>
-<body>
-    <h1>Welcome to Elephant Tools</h1>
-    <script>
-        const TOOLS = {
-            pngUpscaler: 'png-upscaler.html',
-            photoComposer: 'photo-composer.html',
-            contentFiller: 'content-filler.html',
-            videoMerger: 'video-merger.html',
-            imgCompressor: 'img-compressor.html',
-            pdfConverter: 'pdf-converter.html',
-            gifAnimator: 'gif-animator.html',
-            audioExtractor: 'audio-extractor.html',
-            textSummarizer: 'text-summarizer.html',
-            languageTranslator: 'language-translator.html',
-            colorPicker: 'color-picker.html',
-            screenRecorder: 'screen-recorder.html',
-            fontGenerator: 'font-generator.html',
-            htmlToPdf: 'html-to-pdf.html'
-        };
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elephant Tools — Creative Tools for Everyone</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
 
-        console.log(TOOLS);
-    </script>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #1f1f23;
+      --border: #27272a;
+      --border-hover: #3f3f46;
+      --text: #f4f4f5;
+      --text-dim: #a1a1aa;
+      --text-muted: #71717a;
+      --accent-green: #10b981;
+      --accent-green-dim: #34d399;
+      --accent-purple: #a371f7;
+      --accent-purple-dim: #c4a5fd;
+      --accent-orange: #f97316;
+      --accent-yellow: #fbbf24;
+      --accent-blue: #3b82f6;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f4f5;
+      --surface: #ffffff;
+      --surface-2: #f9fafb;
+      --border: #e4e4e7;
+      --border-hover: #d4d4d8;
+      --text: #18181b;
+      --text-dim: #52525b;
+      --text-muted: #71717a;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-orange);
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--text-muted); font-weight: 400; }
+
+    .theme-toggle {
+      padding: 8px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--border-hover);
+      background: var(--surface);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Tools Grid */
+    .tools-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .tool-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .tool-card:nth-child(4n+1) .tool-icon { background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dim)); }
+    .tool-card:nth-child(4n+2) .tool-icon { background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-dim)); }
+    .tool-card:nth-child(4n+3) .tool-icon { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); }
+    .tool-card:nth-child(4n+4) .tool-icon { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
+
+    .tool-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tool-description {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .hero p { font-size: 16px; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+
+</style>
+</head>
+<body data-theme="dark">
+
+  <div class="header">
+    <div class="header-inner">
+      <div class="logo">
+        🐘 <span>Elephant Tools</span>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">☀️</span> Toggle Theme
+      </button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Welcome to Elephant Tools</h1>
+    <p>A collection of creative tools for designers, developers, and content creators. Choose a tool below to get started.</p>
+  </div>
+
+  <div class="tools-container">
+    <div class="tools-grid">
+
+      <a href="bundle-creator.html" class="tool-card">
+        <div class="tool-icon">📦</div>
+        <div class="tool-title">Bundle Creator</div>
+        <div class="tool-description">Create and manage product bundles with customizable templates and layouts.</div>
+      </a>
+
+      <a href="color-palette.html" class="tool-card">
+        <div class="tool-icon">🎨</div>
+        <div class="tool-title">Color Palette</div>
+        <div class="tool-description">Generate beautiful color palettes and schemes for your design projects.</div>
+      </a>
+
+      <a href="color-variants.html" class="tool-card">
+        <div class="tool-icon">🌈</div>
+        <div class="tool-title">Color Variants</div>
+        <div class="tool-description">Create color variations and explore different shades and tints.</div>
+      </a>
+
+      <a href="coloring-book.html" class="tool-card">
+        <div class="tool-icon">🖍️</div>
+        <div class="tool-title">Coloring Book</div>
+        <div class="tool-description">Design and create custom coloring book pages for kids and adults.</div>
+      </a>
+
+      <a href="greeting-cards.html" class="tool-card">
+        <div class="tool-icon">💌</div>
+        <div class="tool-title">Greeting Cards</div>
+        <div class="tool-description">Design personalized greeting cards for any occasion or celebration.</div>
+      </a>
+
+      <a href="invitations.html" class="tool-card">
+        <div class="tool-icon">✉️</div>
+        <div class="tool-title">Invitations</div>
+        <div class="tool-description">Create stunning invitation designs for events and special occasions.</div>
+      </a>
+
+      <a href="journal-builder.html" class="tool-card">
+        <div class="tool-icon">📓</div>
+        <div class="tool-title">Journal Builder</div>
+        <div class="tool-description">Build custom journal layouts and templates for digital or print use.</div>
+      </a>
+
+      <a href="kids-cards.html" class="tool-card">
+        <div class="tool-icon">🎴</div>
+        <div class="tool-title">Kids Cards</div>
+        <div class="tool-description">Design fun and educational cards for children's activities and games.</div>
+      </a>
+
+      <a href="photo-composer.html" class="tool-card">
+        <div class="tool-icon">📸</div>
+        <div class="tool-title">Photo Composer</div>
+        <div class="tool-description">Compose and arrange photos into beautiful layouts and collages.</div>
+      </a>
+
+      <a href="png-upscaler.html" class="tool-card">
+        <div class="tool-icon">🔍</div>
+        <div class="tool-title">PNG Upscaler</div>
+        <div class="tool-description">Upscale and enhance PNG images while maintaining quality.</div>
+      </a>
+
+      <a href="shop-banner.html" class="tool-card">
+        <div class="tool-icon">🏪</div>
+        <div class="tool-title">Shop Banner</div>
+        <div class="tool-description">Create eye-catching banners for your online shop or marketplace.</div>
+      </a>
+
+      <a href="simple-frames.html" class="tool-card">
+        <div class="tool-icon">🖼️</div>
+        <div class="tool-title">Simple Frames</div>
+        <div class="tool-description">Add beautiful frames and borders to your images and artwork.</div>
+      </a>
+
+      <a href="sticker-builder.html" class="tool-card">
+        <div class="tool-icon">✨</div>
+        <div class="tool-title">Sticker Builder</div>
+        <div class="tool-description">Design custom stickers with various shapes, styles, and effects.</div>
+      </a>
+
+      <a href="wall-art-resizer.html" class="tool-card">
+        <div class="tool-icon">🎭</div>
+        <div class="tool-title">Wall Art Resizer</div>
+        <div class="tool-description">Resize and prepare artwork for wall displays and printing.</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 Elephant Tools — Creative tools for everyone</p>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      
+      const icon = document.getElementById('theme-icon');
+      icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  </script>
+
 </body>
 </html>
