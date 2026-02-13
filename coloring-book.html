@@ -1721,21 +1721,16 @@ function updateStats() {
         }
       }
 
-      // Click/Touch handler - different behavior for mobile
-      const triggerInput = (e) => {
+      // Click handler - simple version for mobile
+      zone.addEventListener('click', (e) => {
+        // On desktop, prevent default and stop propagation to avoid conflicts
         if (!isMobile) {
-          e.stopPropagation(); // Only stop propagation on desktop
+          e.preventDefault();
+          e.stopPropagation();
         }
-        e.preventDefault();
+        // On mobile, DON'T call preventDefault - let browser handle it naturally
         input.click();
-      };
-
-      zone.addEventListener('click', triggerInput);
-      
-      // Add touch support for mobile
-      if (isMobile) {
-        zone.addEventListener('touchend', triggerInput);
-      }
+      });
 
       // Drag handlers (desktop only)
       if (!isMobile) {
