@@ -332,8 +332,6 @@ body {
         cursor: pointer;
         transition: all 0.2s;
       "
-      onmouseover="this.style.background='#ea580c'"
-      onmouseout="this.style.background='var(--accent-orange)'"
     >
       Unlock Tools
     </button>
@@ -405,6 +403,15 @@ body {
         input.style.borderColor = 'var(--border)';
       }, 2000);
     }
+  });
+  
+  // Handle button hover effects
+  const submitBtn = document.getElementById('accessSubmitBtn');
+  submitBtn.addEventListener('mouseover', function() {
+    this.style.background = '#ea580c';
+  });
+  submitBtn.addEventListener('mouseout', function() {
+    this.style.background = 'var(--accent-orange)';
   });
   
   // Handle Enter key
