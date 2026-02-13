@@ -1,0 +1,2239 @@
+From 62a663e4a16363a577effd717056a2e8ba5b0ffd Mon Sep 17 00:00:00 2001
+From: "copilot-swe-agent[bot]" <198982749+Copilot@users.noreply.github.com>
+Date: Fri, 13 Feb 2026 18:12:33 +0000
+Subject: [PATCH] Mobile upload fixes and coloring book improvements
+
+- Fix file uploads on Android Chrome (14 HTML tools)
+- Add mobile device detection and touch event handlers
+- Make stopPropagation conditional (desktop only)
+- Add defensive null checks in coloring-book.html
+- Fix JavaScript syntax errors in coloring-book.html
+- Refactor index.html for better UX
+
+Files changed: 16 (965 insertions, 643 deletions)
+Fixes mobile file upload functionality across all tools
+---
+ .gitignore            |   1 -
+ bundle-creator.html   |  40 +-
+ color-palette.html    |  40 +-
+ color-variants.html   |  40 +-
+ coloring-book.html    | 169 +++++---
+ greeting-cards.html   |  40 +-
+ index.html            | 918 +++++++++++++++++++++++++-----------------
+ invitations.html      |  40 +-
+ journal-builder.html  |  40 +-
+ kids-cards.html       |  40 +-
+ photo-composer.html   |  40 +-
+ png-upscaler.html     |  40 +-
+ shop-banner.html      |  40 +-
+ simple-frames.html    |  40 +-
+ sticker-builder.html  |  40 +-
+ wall-art-resizer.html |  40 +-
+ 16 files changed, 965 insertions(+), 643 deletions(-)
+ delete mode 100644 .gitignore
+
+diff --git a/.gitignore b/.gitignore
+deleted file mode 100644
+index c190512..0000000
+--- a/.gitignore
++++ /dev/null
+@@ -1 +0,0 @@
+-*.backup
+diff --git a/bundle-creator.html b/bundle-creator.html
+index 920b08d..a17a2fb 100644
+--- a/bundle-creator.html
++++ b/bundle-creator.html
+@@ -1603,9 +1603,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1635,6 +1632,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1675,28 +1674,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/color-palette.html b/color-palette.html
+index e963803..4349546 100644
+--- a/color-palette.html
++++ b/color-palette.html
+@@ -1614,9 +1614,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1646,6 +1643,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1686,28 +1685,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/color-variants.html b/color-variants.html
+index 0018ffa..0d7e0de 100644
+--- a/color-variants.html
++++ b/color-variants.html
+@@ -1633,9 +1633,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1665,6 +1662,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1705,28 +1704,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/coloring-book.html b/coloring-book.html
+index 78cd2e2..acfa76b 100644
+--- a/coloring-book.html
++++ b/coloring-book.html
+@@ -1301,18 +1301,29 @@ body { padding: 0; }
+           </div>
+ 
+           <div class="settings-group">
+-            <label>Cover Page</label>
+-            <input type="text" id="coloringCoverTitle" placeholder="Coloring Book" value="Coloring Book">
++            <label>PDF Options</label>
+             <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
+               <input type="checkbox" id="coloringCoverPage" checked style="width:auto;">
+               <span>Include cover page</span>
+             </label>
++            <div id="coloringCoverSettings" style="margin-left:24px;margin-top:8px;">
++              <input type="text" id="coloringCoverTitle" placeholder="Coloring Book" value="Coloring Book" style="margin-bottom:8px;">
++            </div>
++            <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
++              <input type="checkbox" id="coloringInstructions" style="width:auto;">
++              <span>Include instructions page</span>
++            </label>
+             <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
+               <input type="checkbox" id="coloringPageNumbers" checked style="width:auto;">
+               <span>Add page numbers</span>
+             </label>
+           </div>
+ 
++          <div class="settings-group">
++            <label>Export Filename</label>
++            <input type="text" id="coloringFilename" placeholder="coloring-book" value="coloring-book">
++          </div>
++
+           <div class="action-bar">
+             <button class="btn btn-secondary" id="coloringSelectAll" disabled>Select All</button>
+             <button class="btn btn-primary" id="coloringDownload" disabled>⬇️ Download PDF</button>
+@@ -1320,7 +1331,7 @@ body { padding: 0; }
+         </div>
+ 
+         <div class="panel">
+-          <div class="panel-title">Preview</div>
++          <div class="panel-title">Preview <span id="coloringCount"></span></div>
+           <div id="coloringGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;min-height:300px;">
+             <div class="empty-state" style="grid-column:1/-1;">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+@@ -1530,8 +1541,10 @@ document.addEventListener('DOMContentLoaded', function() {
+       infoEl.textContent = info || `${lightboxIndex + 1} of ${lightboxImages.length}`;
+ 
+       // Show/hide nav buttons
+-      document.querySelector('.lightbox-prev').style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+-      document.querySelector('.lightbox-next').style.display = lightboxImages.length > 1 ? 'flex' : 'none';
++      const prevBtn = document.querySelector('.lightbox-prev');
++      const nextBtn = document.querySelector('.lightbox-next');
++      if (prevBtn) prevBtn.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
++      if (nextBtn) nextBtn.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+ 
+       lightbox.classList.add('open');
+       document.body.style.overflow = 'hidden';
+@@ -1711,28 +1724,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+@@ -1766,36 +1788,59 @@ function updateStats() {
+     setupUploadZone('coloringUpload', 'coloringInput', handleColoringFiles);
+ 
+     let coloringMode = 'edges';
+-    document.getElementById('coloringEdges').addEventListener('click', () => {
+-      coloringMode = 'edges';
+-      document.getElementById('coloringEdges').classList.add('active');
+-      document.getElementById('coloringSketch').classList.remove('active');
+-      processColoringPages();
+-    });
+-    document.getElementById('coloringSketch').addEventListener('click', () => {
+-      coloringMode = 'sketch';
+-      document.getElementById('coloringSketch').classList.add('active');
+-      document.getElementById('coloringEdges').classList.remove('active');
+-      processColoringPages();
+-    });
++    const coloringEdgesBtn = document.getElementById('coloringEdges');
++    const coloringSketchBtn = document.getElementById('coloringSketch');
++    
++    if (coloringEdgesBtn) {
++      coloringEdgesBtn.addEventListener('click', () => {
++        coloringMode = 'edges';
++        coloringEdgesBtn.classList.add('active');
++        if (coloringSketchBtn) coloringSketchBtn.classList.remove('active');
++        processColoringPages();
++      });
++    }
++    
++    if (coloringSketchBtn) {
++      coloringSketchBtn.addEventListener('click', () => {
++        coloringMode = 'sketch';
++        coloringSketchBtn.classList.add('active');
++        if (coloringEdgesBtn) coloringEdgesBtn.classList.remove('active');
++        processColoringPages();
++      });
++    }
+ 
+-    document.getElementById('coloringSensitivity').addEventListener('input', e => {
+-      document.getElementById('coloringSensVal').textContent = e.target.value + '%';
+-    });
+-    document.getElementById('coloringStrength').addEventListener('input', e => {
+-      document.getElementById('coloringStrVal').textContent = (e.target.value / 10).toFixed(1) + 'x';
+-    });
++    const coloringSensitivity = document.getElementById('coloringSensitivity');
++    const coloringSensVal = document.getElementById('coloringSensVal');
++    if (coloringSensitivity && coloringSensVal) {
++      coloringSensitivity.addEventListener('input', e => {
++        coloringSensVal.textContent = e.target.value + '%';
++      });
++    }
++    
++    const coloringStrength = document.getElementById('coloringStrength');
++    const coloringStrVal = document.getElementById('coloringStrVal');
++    if (coloringStrength && coloringStrVal) {
++      coloringStrength.addEventListener('input', e => {
++        coloringStrVal.textContent = (e.target.value / 10).toFixed(1) + 'x';
++      });
++    }
+ 
+-    document.getElementById('coloringSelectAll').addEventListener('click', () => {
+-      if (state.coloring.selected.size === state.coloring.files.length) {
+-        state.coloring.selected.clear();
+-      } else {
+-        state.coloring.files.forEach(f => state.coloring.selected.add(f.id));
+-      }
+-      renderColoringGrid();
+-    });
++    const coloringSelectAll = document.getElementById('coloringSelectAll');
++    if (coloringSelectAll) {
++      coloringSelectAll.addEventListener('click', () => {
++        if (state.coloring.selected.size === state.coloring.files.length) {
++          state.coloring.selected.clear();
++        } else {
++          state.coloring.files.forEach(f => state.coloring.selected.add(f.id));
++        }
++        renderColoringGrid();
++      });
++    }
+ 
+-    document.getElementById('coloringDownload').addEventListener('click', downloadColoringPDF);
++    const coloringDownloadBtn = document.getElementById('coloringDownload');
++    if (coloringDownloadBtn) {
++      coloringDownloadBtn.addEventListener('click', downloadColoringPDF);
++    }
+ 
+     async function handleColoringFiles(files) {
+       const fileArray = Array.from(files);
+@@ -1901,9 +1946,11 @@ function updateStats() {
+     function renderColoringGrid() {
+       const grid = document.getElementById('coloringGrid');
+       const count = document.getElementById('coloringCount');
++      const downloadBtn = document.getElementById('coloringDownload');
+ 
+-      count.textContent = `(${state.coloring.files.length})`;
+-      document.getElementById('coloringDownload').disabled = state.coloring.selected.size === 0;
++      if (!grid) return;
++      if (count) count.textContent = `(${state.coloring.files.length})`;
++      if (downloadBtn) downloadBtn.disabled = state.coloring.selected.size === 0;
+ 
+       if (state.coloring.files.length === 0) {
+         grid.innerHTML = '<div class="empty-state"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><p>Upload images to create coloring pages</p></div>';
+@@ -1940,14 +1987,21 @@ function updateStats() {
+       }
+ 
+       const btn = document.getElementById('coloringDownload');
++      if (!btn) return;
++      
+       btn.disabled = true;
+       btn.textContent = '⏳ Creating PDF...';
+ 
+       // Get options
+-      const addPageNumbers = document.getElementById('coloringPageNumbers').checked;
+-      const addCover = document.getElementById('coloringCoverPage').checked;
+-      const addInstructions = document.getElementById('coloringInstructions').checked;
+-      const coverTitle = document.getElementById('coloringCoverTitle').value || 'Coloring Book';
++      const pageNumbersEl = document.getElementById('coloringPageNumbers');
++      const coverPageEl = document.getElementById('coloringCoverPage');
++      const instructionsEl = document.getElementById('coloringInstructions');
++      const coverTitleEl = document.getElementById('coloringCoverTitle');
++      
++      const addPageNumbers = pageNumbersEl ? pageNumbersEl.checked : true;
++      const addCover = coverPageEl ? coverPageEl.checked : true;
++      const addInstructions = instructionsEl ? instructionsEl.checked : false;
++      const coverTitle = coverTitleEl ? (coverTitleEl.value || 'Coloring Book') : 'Coloring Book';
+ 
+       try {
+         const { jsPDF } = window.jspdf;
+@@ -2052,7 +2106,8 @@ function updateStats() {
+           await new Promise(r => setTimeout(r, 50));
+         }
+ 
+-        const filename = document.getElementById('coloringFilename').value.trim() || 'coloring-book';
++        const filenameEl = document.getElementById('coloringFilename');
++        const filename = (filenameEl ? filenameEl.value.trim() : '') || 'coloring-book';
+ 
+         // Use blob method for better compatibility
+         const blob = pdf.output('blob');
+@@ -2079,9 +2134,13 @@ function updateStats() {
+     // ============================================
+     // ENHANCED COLORING BOOK - Cover & Page Numbers
+     // ============================================
+-    document.getElementById('coloringCoverPage').onchange = (e) => {
+-      document.getElementById('coloringCoverSettings').style.display = e.target.checked ? 'block' : 'none';
+-    };
++    const coloringCoverPage = document.getElementById('coloringCoverPage');
++    const coloringCoverSettings = document.getElementById('coloringCoverSettings');
++    if (coloringCoverPage && coloringCoverSettings) {
++      coloringCoverPage.onchange = (e) => {
++        coloringCoverSettings.style.display = e.target.checked ? 'block' : 'none';
++      };
++    }
+ 
+ 
+ // Settings/theme (with guards)
+diff --git a/greeting-cards.html b/greeting-cards.html
+index 9171f3a..cdda81e 100644
+--- a/greeting-cards.html
++++ b/greeting-cards.html
+@@ -1687,9 +1687,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1719,6 +1716,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1759,28 +1758,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/index.html b/index.html
+index 889dcce..934b7bb 100644
+--- a/index.html
++++ b/index.html
+@@ -3,426 +3,586 @@
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-<title>ElephantTools - Digital Product Creation Toolkit</title>
++<title>Elephant Tools — Professional Design Tool Suite</title>
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+ <style>
+-* {
+-  margin: 0;
+-  padding: 0;
+-  box-sizing: border-box;
+-}
+-
+-:root {
+-  --bg: #09090b;
+-  --surface: #18181b;
+-  --surface-2: #1f1f23;
+-  --border: #27272a;
+-  --border-hover: #3f3f46;
+-  --text: #f4f4f5;
+-  --text-dim: #a1a1aa;
+-  --text-muted: #71717a;
+-  --accent-green: #10b981;
+-  --accent-orange: #f97316;
+-  --accent-purple: #a371f7;
+-  --accent-blue: #3b82f6;
+-}
+-
+-body {
+-  font-family: 'DM Sans', sans-serif;
+-  background: var(--bg);
+-  color: var(--text);
+-  min-height: 100vh;
+-}
+-
+-.header {
+-  background: var(--surface);
+-  border-bottom: 1px solid var(--border);
+-  padding: 0 20px;
+-}
+-
+-.header-inner {
+-  max-width: 1400px;
+-  margin: 0 auto;
+-  display: flex;
+-  align-items: center;
+-  height: 60px;
+-}
+-
+-.logo {
+-  font-family: 'Space Mono', monospace;
+-  font-size: 20px;
+-  font-weight: 700;
+-  color: var(--accent-orange);
+-}
+-
+-.logo span {
+-  color: var(--text-muted);
+-  font-weight: 400;
+-}
+-
+-.container {
+-  max-width: 1400px;
+-  margin: 0 auto;
+-  padding: 40px 20px;
+-}
+-
+-.hero {
+-  text-align: center;
+-  margin-bottom: 60px;
+-}
+-
+-.hero h1 {
+-  font-size: 48px;
+-  font-weight: 700;
+-  margin-bottom: 16px;
+-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
+-  -webkit-background-clip: text;
+-  -webkit-text-fill-color: transparent;
+-  background-clip: text;
+-}
+-
+-.hero p {
+-  font-size: 18px;
+-  color: var(--text-dim);
+-  max-width: 600px;
+-  margin: 0 auto;
+-}
+-
+-.tools-grid {
+-  display: grid;
+-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+-  gap: 20px;
+-  margin-bottom: 40px;
+-}
+-
+-.tool-card {
+-  background: var(--surface);
+-  border: 1px solid var(--border);
+-  border-radius: 12px;
+-  padding: 24px;
+-  transition: all 0.2s;
+-  text-decoration: none;
+-  color: var(--text);
+-  display: block;
+-}
+-
+-.tool-card:hover {
+-  border-color: var(--border-hover);
+-  transform: translateY(-2px);
+-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+-}
+-
+-.tool-card h3 {
+-  font-size: 18px;
+-  font-weight: 600;
+-  margin-bottom: 8px;
+-  color: var(--text);
+-}
+-
+-.tool-card p {
+-  font-size: 14px;
+-  color: var(--text-muted);
+-  line-height: 1.5;
+-}
+-
+-.tool-icon {
+-  width: 40px;
+-  height: 40px;
+-  border-radius: 8px;
+-  display: flex;
+-  align-items: center;
+-  justify-content: center;
+-  font-size: 20px;
+-  margin-bottom: 12px;
+-}
+-
+-.icon-orange { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
+-.icon-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+-.icon-purple { background: rgba(163, 113, 247, 0.15); color: var(--accent-purple); }
+-.icon-blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+-
+-.footer {
+-  text-align: center;
+-  padding: 40px 20px;
+-  color: var(--text-muted);
+-  font-size: 14px;
+-  border-top: 1px solid var(--border);
+-  margin-top: 60px;
+-}
+-
+-@media (max-width: 768px) {
++  * { margin: 0; padding: 0; box-sizing: border-box; }
++
++  :root {
++    --bg: #09090b;
++    --surface: #18181b;
++    --surface-2: #1f1f23;
++    --border: #27272a;
++    --border-hover: #3f3f46;
++    --text: #f4f4f5;
++    --text-dim: #a1a1aa;
++    --text-muted: #71717a;
++    --accent-green: #10b981;
++    --accent-orange: #f97316;
++    --accent-purple: #a371f7;
++    --accent-blue: #3b82f6;
++  }
++
++  body {
++    font-family: 'DM Sans', sans-serif;
++    background: var(--bg);
++    color: var(--text);
++    min-height: 100vh;
++  }
++
++  /* Header */
++  .header {
++    background: var(--surface);
++    border-bottom: 1px solid var(--border);
++    padding: 0 20px;
++    position: sticky;
++    top: 0;
++    z-index: 100;
++  }
++
++  .header-inner {
++    max-width: 1400px;
++    margin: 0 auto;
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    height: 60px;
++  }
++
++  .logo {
++    font-family: 'Space Mono', monospace;
++    font-size: 20px;
++    font-weight: 700;
++    color: var(--accent-orange);
++  }
++
++  .logo span {
++    color: var(--text-muted);
++    font-weight: 400;
++  }
++
++  /* Container */
++  .container {
++    max-width: 1400px;
++    margin: 0 auto;
++    padding: 40px 20px;
++  }
++
++  /* Hero Section */
++  .hero {
++    text-align: center;
++    padding: 60px 20px 40px;
++    max-width: 800px;
++    margin: 0 auto;
++  }
++
+   .hero h1 {
+-    font-size: 32px;
++    font-family: 'Space Mono', monospace;
++    font-size: 48px;
++    font-weight: 700;
++    margin-bottom: 20px;
++    background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
++    -webkit-background-clip: text;
++    -webkit-text-fill-color: transparent;
++    background-clip: text;
+   }
+-  
++
+   .hero p {
++    font-size: 18px;
++    color: var(--text-dim);
++    line-height: 1.6;
++    margin-bottom: 30px;
++  }
++
++  /* Access Control Section */
++  .access-section {
++    background: var(--surface);
++    border: 1px solid var(--border);
++    border-radius: 16px;
++    padding: 40px;
++    margin: 40px auto;
++    max-width: 600px;
++    text-align: center;
++  }
++
++  .access-section.unlocked {
++    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(163, 113, 247, 0.1));
++    border-color: var(--accent-green);
++  }
++
++  .access-section h2 {
++    font-size: 24px;
++    margin-bottom: 12px;
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    gap: 10px;
++  }
++
++  .access-section p {
++    color: var(--text-dim);
++    margin-bottom: 24px;
++  }
++
++  .access-input-group {
++    display: flex;
++    gap: 12px;
++    max-width: 400px;
++    margin: 0 auto;
++  }
++
++  .access-input {
++    flex: 1;
++    padding: 12px 16px;
++    background: var(--surface-2);
++    border: 1px solid var(--border);
++    border-radius: 10px;
++    color: var(--text);
+     font-size: 16px;
++    font-family: 'Space Mono', monospace;
++    text-align: center;
++    letter-spacing: 2px;
+   }
+-  
++
++  .access-input:focus {
++    outline: none;
++    border-color: var(--accent-orange);
++  }
++
++  .btn {
++    padding: 12px 24px;
++    background: var(--accent-orange);
++    color: white;
++    border: none;
++    border-radius: 10px;
++    font-weight: 600;
++    font-size: 14px;
++    cursor: pointer;
++    transition: all 0.2s;
++  }
++
++  .btn:hover {
++    background: #ea580c;
++    transform: translateY(-1px);
++  }
++
++  .btn:disabled {
++    opacity: 0.5;
++    cursor: not-allowed;
++    transform: none;
++  }
++
++  .access-message {
++    margin-top: 16px;
++    padding: 12px;
++    border-radius: 8px;
++    font-size: 14px;
++    display: none;
++  }
++
++  .access-message.success {
++    background: rgba(16, 185, 129, 0.2);
++    color: var(--accent-green);
++    display: block;
++  }
++
++  .access-message.error {
++    background: rgba(239, 68, 68, 0.2);
++    color: #ef4444;
++    display: block;
++  }
++
++  /* Tools Grid */
++  .tools-section {
++    margin-top: 60px;
++  }
++
++  .section-header {
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    margin-bottom: 24px;
++  }
++
++  .section-title {
++    font-size: 24px;
++    font-weight: 700;
++  }
++
+   .tools-grid {
+-    grid-template-columns: 1fr;
++    display: grid;
++    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
++    gap: 20px;
++  }
++
++  .tool-card {
++    background: var(--surface);
++    border: 1px solid var(--border);
++    border-radius: 16px;
++    padding: 24px;
++    text-decoration: none;
++    color: var(--text);
++    transition: all 0.2s;
++    position: relative;
++    overflow: hidden;
++  }
++
++  .tool-card:hover {
++    border-color: var(--border-hover);
++    transform: translateY(-2px);
++  }
++
++  .tool-card.locked {
++    opacity: 0.6;
++    cursor: not-allowed;
++  }
++
++  .tool-card.locked:hover {
++    transform: none;
++    border-color: var(--border);
++  }
++
++  .tool-card.locked::before {
++    content: '🔒';
++    position: absolute;
++    top: 16px;
++    right: 16px;
++    font-size: 20px;
++  }
++
++  .tool-icon {
++    font-size: 32px;
++    margin-bottom: 12px;
++    display: block;
++  }
++
++  .tool-name {
++    font-size: 18px;
++    font-weight: 700;
++    margin-bottom: 8px;
++  }
++
++  .tool-description {
++    font-size: 14px;
++    color: var(--text-dim);
++    line-height: 1.5;
++  }
++
++  /* How to Access Section */
++  .info-section {
++    background: var(--surface);
++    border: 1px solid var(--border);
++    border-radius: 16px;
++    padding: 32px;
++    margin-top: 60px;
++  }
++
++  .info-section h3 {
++    font-size: 20px;
++    margin-bottom: 16px;
++  }
++
++  .info-section ul {
++    list-style: none;
++    padding-left: 0;
++  }
++
++  .info-section li {
++    padding: 8px 0 8px 28px;
++    color: var(--text-dim);
++    position: relative;
++  }
++
++  .info-section li::before {
++    content: '→';
++    position: absolute;
++    left: 0;
++    color: var(--accent-orange);
++  }
++
++  /* Footer */
++  .footer {
++    text-align: center;
++    padding: 40px 20px;
++    margin-top: 80px;
++    border-top: 1px solid var(--border);
++  }
++
++  .footer p {
++    color: var(--text-muted);
++    font-size: 14px;
++  }
++
++  /* Responsive */
++  @media (max-width: 768px) {
++    .hero h1 {
++      font-size: 32px;
++    }
++
++    .hero p {
++      font-size: 16px;
++    }
++
++    .tools-grid {
++      grid-template-columns: 1fr;
++    }
++
++    .access-section {
++      padding: 24px;
++    }
++
++    .access-input-group {
++      flex-direction: column;
++    }
+   }
+-}
+ </style>
+ </head>
+ <body>
+ 
++<!-- Header -->
+ <div class="header">
+   <div class="header-inner">
+-    <div class="logo">ElephantTools <span>by RoyalDex</span></div>
++    <div class="logo">
++      ELEPHANT<span>TOOLS</span>
++    </div>
+   </div>
+ </div>
+ 
++<!-- Main Content -->
+ <div class="container">
++  
++  <!-- Hero Section -->
+   <div class="hero">
+-    <h1>Digital Product Creation Toolkit</h1>
+-    <p>Professional tools for creating and editing digital products for Etsy, online stores, and creative projects.</p>
++    <h1>🐘 Elephant Tools</h1>
++    <p>Professional design tool suite for creators, artists, and entrepreneurs. Access 15 powerful tools to streamline your workflow.</p>
+   </div>
+ 
+-  <div class="tools-grid">
++  <!-- Access Control Section -->
++  <div class="access-section" id="accessSection">
++    <h2 id="accessTitle">
++      <span id="accessIcon">🔐</span>
++      <span id="accessTitleText">Unlock Tools</span>
++    </h2>
++    <p id="accessDescription">Enter your access key to unlock all tools</p>
+     
+-    <a href="bundle-creator.html" class="tool-card">
+-      <div class="tool-icon icon-orange">📦</div>
+-      <h3>Bundle Creator</h3>
+-      <p>Create product bundles with multiple images and layouts for maximum sales impact.</p>
+-    </a>
+-
+-    <a href="color-palette.html" class="tool-card">
+-      <div class="tool-icon icon-purple">🎨</div>
+-      <h3>Color Palette Generator</h3>
+-      <p>Extract beautiful color palettes from images for your design projects.</p>
+-    </a>
+-
+-    <a href="color-variants.html" class="tool-card">
+-      <div class="tool-icon icon-purple">🌈</div>
+-      <h3>Color Variants Creator</h3>
+-      <p>Generate multiple color variations of your designs instantly.</p>
+-    </a>
+-
+-    <a href="coloring-book.html" class="tool-card">
+-      <div class="tool-icon icon-blue">📚</div>
+-      <h3>Coloring Book Generator</h3>
+-      <p>Transform photos into printable coloring book pages with edge detection.</p>
+-    </a>
+-
+-    <a href="greeting-cards.html" class="tool-card">
+-      <div class="tool-icon icon-green">💌</div>
+-      <h3>Greeting Cards Designer</h3>
+-      <p>Design beautiful greeting cards with custom text and layouts.</p>
+-    </a>
+-
+-    <a href="invitations.html" class="tool-card">
+-      <div class="tool-icon icon-orange">✉️</div>
+-      <h3>Invitation Maker</h3>
+-      <p>Create stunning invitations for events, parties, and special occasions.</p>
+-    </a>
+-
+-    <a href="journal-builder.html" class="tool-card">
+-      <div class="tool-icon icon-blue">📓</div>
+-      <h3>Journal Builder</h3>
+-      <p>Design custom journal pages and planners with templates and layouts.</p>
+-    </a>
+-
+-    <a href="kids-cards.html" class="tool-card">
+-      <div class="tool-icon icon-purple">🎈</div>
+-      <h3>Kids Cards Creator</h3>
+-      <p>Make fun and colorful cards perfect for children's events and activities.</p>
+-    </a>
+-
+-    <a href="photo-composer.html" class="tool-card">
+-      <div class="tool-icon icon-green">🖼️</div>
+-      <h3>Photo Composer</h3>
+-      <p>Combine multiple photos into beautiful compositions and collages.</p>
+-    </a>
+-
+-    <a href="png-upscaler.html" class="tool-card">
+-      <div class="tool-icon icon-blue">🔍</div>
+-      <h3>PNG Upscaler</h3>
+-      <p>Upscale PNG images to higher resolutions while maintaining quality.</p>
+-    </a>
+-
+-    <a href="shop-banner.html" class="tool-card">
+-      <div class="tool-icon icon-orange">🏪</div>
+-      <h3>Shop Banner Creator</h3>
+-      <p>Design eye-catching banners for your Etsy shop or online store.</p>
+-    </a>
+-
+-    <a href="simple-frames.html" class="tool-card">
+-      <div class="tool-icon icon-purple">🖼️</div>
+-      <h3>Simple Frames</h3>
+-      <p>Add elegant frames and borders to your images with just a few clicks.</p>
+-    </a>
+-
+-    <a href="sticker-builder.html" class="tool-card">
+-      <div class="tool-icon icon-green">⭐</div>
+-      <h3>Sticker Builder</h3>
+-      <p>Create printable sticker sheets with custom designs and layouts.</p>
+-    </a>
+-
+-    <a href="wall-art-resizer.html" class="tool-card">
+-      <div class="tool-icon icon-blue">🎯</div>
+-      <h3>Wall Art Resizer</h3>
+-      <p>Resize and format images for wall art prints in standard frame sizes.</p>
+-    </a>
+-
++    <div id="accessInputGroup" class="access-input-group">
++      <input 
++        type="text" 
++        id="accessKeyInput" 
++        class="access-input" 
++        placeholder="ACCESS KEY"
++        maxlength="20"
++      >
++      <button class="btn" id="unlockBtn" onclick="validateAccess()">Unlock</button>
++    </div>
++    
++    <div class="access-message" id="accessMessage"></div>
+   </div>
+-</div>
+-
+-<div class="footer">
+-  <p>&copy; 2024 ElephantTools by RoyalDex. All rights reserved.</p>
+-</div>
+ 
+-<!-- Access Gate Overlay -->
+-<div id="accessGate" style="
+-  position: fixed;
+-  inset: 0;
+-  background: var(--bg);
+-  z-index: 9999;
+-  display: none;
+-  align-items: center;
+-  justify-content: center;
+-  padding: 20px;
+-">
+-  <div style="
+-    background: var(--surface);
+-    border: 1px solid var(--border);
+-    border-radius: 16px;
+-    padding: 40px;
+-    max-width: 450px;
+-    width: 100%;
+-    text-align: center;
+-  ">
+-    <div style="font-size: 48px; margin-bottom: 20px;">🐘</div>
+-    <h2 style="font-size: 24px; margin-bottom: 12px; color: var(--text);">Welcome to ElephantTools</h2>
+-    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">
+-      Enter your access code to unlock all tools.<br>
+-      <span style="font-size: 12px;">(Provided with your Etsy purchase)</span>
+-    </p>
+-    
+-    <input 
+-      type="text" 
+-      id="accessCodeInput" 
+-      placeholder="Enter access code"
+-      style="
+-        width: 100%;
+-        padding: 12px 16px;
+-        background: var(--surface-2);
+-        border: 2px solid var(--border);
+-        border-radius: 10px;
+-        color: var(--text);
+-        font-size: 16px;
+-        text-align: center;
+-        font-family: 'Space Mono', monospace;
+-        margin-bottom: 16px;
+-      "
+-      autofocus
+-    >
+-    
+-    <button 
+-      id="accessSubmitBtn"
+-      style="
+-        width: 100%;
+-        padding: 14px 20px;
+-        background: var(--accent-orange);
+-        border: none;
+-        border-radius: 10px;
+-        color: white;
+-        font-size: 16px;
+-        font-weight: 600;
+-        cursor: pointer;
+-        transition: all 0.2s;
+-      "
+-    >
+-      Unlock Tools
+-    </button>
+-    
+-    <div id="accessError" style="
+-      color: var(--accent-orange);
+-      font-size: 13px;
+-      margin-top: 12px;
+-      display: none;
+-    ">
+-      Invalid access code. Please check your Etsy purchase email.
++  <!-- Tools Grid -->
++  <div class="tools-section">
++    <div class="section-header">
++      <h2 class="section-title">Available Tools</h2>
+     </div>
+     
+-    <p style="font-size: 12px; color: var(--text-muted); margin-top: 24px;">
+-      Don't have access? <a href="https://www.etsy.com/shop/YourShopName" style="color: var(--accent-purple); text-decoration: none;">Purchase on Etsy</a>
+-    </p>
++    <div class="tools-grid" id="toolsGrid">
++      <!-- Tools will be populated by JavaScript -->
++    </div>
++  </div>
++
++  <!-- How to Access Section -->
++  <div class="info-section">
++    <h3>How to Access</h3>
++    <ul>
++      <li>Enter your access key in the unlock section above</li>
++      <li>Once validated, your access is saved locally in your browser</li>
++      <li>All tools will become available immediately</li>
++      <li>Your access persists across sessions</li>
++    </ul>
+   </div>
++
++</div>
++
++<!-- Footer -->
++<div class="footer">
++  <p>© 2024 Elephant Tools. Professional Design Tool Suite.</p>
+ </div>
+ 
+ <script>
+   const ACCESS_KEY = 'ELEPHANT2024';
+   const STORAGE_KEY = 'elephantToolsAccess';
+-  
+-  // Check if user has access
++
++  const tools = [
++    {
++      name: 'Wall Art Resizer',
++      file: 'wall-art-resizer.html',
++      icon: '🖼️',
++      description: 'Batch resize artwork for multiple sizes at 300 DPI'
++    },
++    {
++      name: 'Sticker Sheet Builder',
++      file: 'sticker-builder.html',
++      icon: '🏷️',
++      description: 'Create professional sticker sheets with custom layouts'
++    },
++    {
++      name: 'Simple Frames',
++      file: 'simple-frames.html',
++      icon: '🖼️',
++      description: 'Add beautiful frames and borders to your images'
++    },
++    {
++      name: 'Shop Banner Builder',
++      file: 'shop-banner.html',
++      icon: '🏪',
++      description: 'Design eye-catching banners for your online shop'
++    },
++    {
++      name: 'PNG Upscaler',
++      file: 'png-upscaler.html',
++      icon: '📈',
++      description: 'Upscale images while maintaining quality'
++    },
++    {
++      name: 'Photo Composer',
++      file: 'photo-composer.html',
++      icon: '📸',
++      description: 'Compose and arrange multiple photos into layouts'
++    },
++    {
++      name: 'Kids Card Sheets',
++      file: 'kids-cards.html',
++      icon: '🎨',
++      description: 'Create fun card sheets perfect for children'
++    },
++    {
++      name: 'Journal Page Builder',
++      file: 'journal-builder.html',
++      icon: '📔',
++      description: 'Design custom journal and planner pages'
++    },
++    {
++      name: 'Invitations Generator',
++      file: 'invitations.html',
++      icon: '💌',
++      description: 'Create beautiful invitations for any occasion'
++    },
++    {
++      name: 'Greeting Card Creator',
++      file: 'greeting-cards.html',
++      icon: '💝',
++      description: 'Design personalized greeting cards'
++    },
++    {
++      name: 'Coloring Book Creator',
++      file: 'coloring-book.html',
++      icon: '🎨',
++      description: 'Generate coloring book pages from images'
++    },
++    {
++      name: 'Color Variants',
++      file: 'color-variants.html',
++      icon: '🎨',
++      description: 'Create color variations of your designs'
++    },
++    {
++      name: 'Color Palette Generator',
++      file: 'color-palette.html',
++      icon: '🎨',
++      description: 'Extract and generate color palettes from images'
++    },
++    {
++      name: 'Bundle Creator',
++      file: 'bundle-creator.html',
++      icon: '📦',
++      description: 'Bundle multiple products for optimized selling'
++    }
++  ];
++
+   function checkAccess() {
+     const storedKey = localStorage.getItem(STORAGE_KEY);
+-    if (storedKey === ACCESS_KEY) {
+-      // Access granted - show tools
+-      document.getElementById('accessGate').style.display = 'none';
+-      document.body.style.overflow = '';
+-      return true;
++    return storedKey === ACCESS_KEY;
++  }
++
++  function validateAccess() {
++    const input = document.getElementById('accessKeyInput');
++    const message = document.getElementById('accessMessage');
++    const enteredKey = input.value.trim();
++
++    if (enteredKey === ACCESS_KEY) {
++      localStorage.setItem(STORAGE_KEY, enteredKey);
++      message.className = 'access-message success';
++      message.textContent = '✓ Access granted! All tools are now unlocked.';
++      updateAccessUI(true);
++      updateToolCards(true);
+     } else {
+-      // No access - show gate
+-      document.getElementById('accessGate').style.display = 'flex';
+-      document.body.style.overflow = 'hidden';
+-      return false;
++      message.className = 'access-message error';
++      message.textContent = '✗ Invalid access key. Please try again.';
+     }
+   }
+-  
+-  // Handle access submission
+-  document.getElementById('accessSubmitBtn').addEventListener('click', function() {
+-    const input = document.getElementById('accessCodeInput');
+-    const error = document.getElementById('accessError');
+-    const enteredCode = input.value.trim().toUpperCase();
+-    
+-    if (enteredCode === ACCESS_KEY) {
+-      // Correct code
+-      localStorage.setItem(STORAGE_KEY, ACCESS_KEY);
+-      error.style.display = 'none';
+-      checkAccess();
+-      
+-      // Show success message
+-      const btn = this;
+-      btn.textContent = '✓ Access Granted!';
+-      btn.style.background = 'var(--accent-green)';
+-      setTimeout(() => {
+-        document.getElementById('accessGate').style.display = 'none';
+-        document.body.style.overflow = '';
+-      }, 800);
+-    } else {
+-      // Wrong code
+-      error.style.display = 'block';
+-      input.style.borderColor = 'var(--accent-orange)';
+-      input.value = '';
+-      input.focus();
+-      
+-      // Reset border after 2 seconds
+-      setTimeout(() => {
+-        input.style.borderColor = 'var(--border)';
+-      }, 2000);
++
++  function updateAccessUI(hasAccess) {
++    const section = document.getElementById('accessSection');
++    const title = document.getElementById('accessTitleText');
++    const description = document.getElementById('accessDescription');
++    const icon = document.getElementById('accessIcon');
++    const inputGroup = document.getElementById('accessInputGroup');
++
++    if (hasAccess) {
++      section.classList.add('unlocked');
++      title.textContent = 'Tools Unlocked';
++      description.textContent = 'You have full access to all tools';
++      icon.textContent = '✅';
++      inputGroup.style.display = 'none';
+     }
+-  });
+-  
+-  // Handle button hover effects
+-  const submitBtn = document.getElementById('accessSubmitBtn');
+-  submitBtn.addEventListener('mouseover', function() {
+-    this.style.background = '#ea580c';
+-  });
+-  submitBtn.addEventListener('mouseout', function() {
+-    this.style.background = 'var(--accent-orange)';
+-  });
+-  
+-  // Handle Enter key
+-  document.getElementById('accessCodeInput').addEventListener('keypress', function(e) {
+-    if (e.key === 'Enter') {
+-      document.getElementById('accessSubmitBtn').click();
++  }
++
++  function updateToolCards(hasAccess) {
++    const grid = document.getElementById('toolsGrid');
++    grid.innerHTML = '';
++
++    tools.forEach(tool => {
++      const card = document.createElement('a');
++      card.className = 'tool-card';
++      
++      if (hasAccess) {
++        card.href = tool.file;
++      } else {
++        card.classList.add('locked');
++        card.onclick = (e) => {
++          e.preventDefault();
++          alert('Please unlock tools first by entering your access key above.');
++        };
++      }
++
++      card.innerHTML = `
++        <span class="tool-icon">${tool.icon}</span>
++        <div class="tool-name">${tool.name}</div>
++        <div class="tool-description">${tool.description}</div>
++      `;
++
++      grid.appendChild(card);
++    });
++  }
++
++  // Handle Enter key in access input
++  document.addEventListener('DOMContentLoaded', () => {
++    const input = document.getElementById('accessKeyInput');
++    input.addEventListener('keypress', (e) => {
++      if (e.key === 'Enter') {
++        validateAccess();
++      }
++    });
++
++    // Initialize UI based on access status
++    const hasAccess = checkAccess();
++    if (hasAccess) {
++      updateAccessUI(true);
++      document.getElementById('accessMessage').className = 'access-message success';
++      document.getElementById('accessMessage').textContent = '✓ Access granted! All tools are now unlocked.';
+     }
++    updateToolCards(hasAccess);
+   });
+-  
+-  // Check access on page load
+-  checkAccess();
+ </script>
+ 
+ </body>
+diff --git a/invitations.html b/invitations.html
+index dcc80c7..b541bfc 100644
+--- a/invitations.html
++++ b/invitations.html
+@@ -1641,9 +1641,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1673,6 +1670,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1713,28 +1712,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/journal-builder.html b/journal-builder.html
+index 2286189..2ff45d6 100644
+--- a/journal-builder.html
++++ b/journal-builder.html
+@@ -1669,9 +1669,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1701,6 +1698,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1741,28 +1740,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/kids-cards.html b/kids-cards.html
+index 6598fbf..dc26117 100644
+--- a/kids-cards.html
++++ b/kids-cards.html
+@@ -1660,9 +1660,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1692,6 +1689,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1732,28 +1731,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/photo-composer.html b/photo-composer.html
+index bd84fac..99fe7cb 100644
+--- a/photo-composer.html
++++ b/photo-composer.html
+@@ -1623,9 +1623,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1655,6 +1652,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1695,28 +1694,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/png-upscaler.html b/png-upscaler.html
+index af2122d..fe77bab 100644
+--- a/png-upscaler.html
++++ b/png-upscaler.html
+@@ -1751,9 +1751,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1783,6 +1780,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1823,28 +1822,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/shop-banner.html b/shop-banner.html
+index 698cb2a..71f9c48 100644
+--- a/shop-banner.html
++++ b/shop-banner.html
+@@ -1712,9 +1712,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1744,6 +1741,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1784,28 +1783,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/simple-frames.html b/simple-frames.html
+index e7d4b8f..c7dc818 100644
+--- a/simple-frames.html
++++ b/simple-frames.html
+@@ -1612,9 +1612,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1644,6 +1641,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1684,28 +1683,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/sticker-builder.html b/sticker-builder.html
+index 3f15c83..893fe4a 100644
+--- a/sticker-builder.html
++++ b/sticker-builder.html
+@@ -1645,9 +1645,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1677,6 +1674,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1717,28 +1716,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+diff --git a/wall-art-resizer.html b/wall-art-resizer.html
+index d534789..4da7f98 100644
+--- a/wall-art-resizer.html
++++ b/wall-art-resizer.html
+@@ -1685,9 +1685,6 @@ document.addEventListener('DOMContentLoaded', function() {
+         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
+           ${name}
+           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+-        </button>
+-      `).join('');
+-    }
+ 
+ // ============================================  
+ // SAFE NAV STUBS (prevent crashes in standalone mode)
+@@ -1717,6 +1714,8 @@ function updateStats() {
+ // ============================================
+ // FILE HELPERS
+ // ============================================
++      // Stats display removed - function kept for compatibility
++    }
+ 
+     function readFileAsDataURL(file) {
+       return new Promise((resolve, reject) => {
+@@ -1757,28 +1756,37 @@ function updateStats() {
+       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
+       if (!input) { console.error('File input not found:', inputId); return; }
+ 
+-      // Detect mobile device
++      // Mobile detection
+       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ 
+-      // Update hint text for mobile
+-      if (isMobile) {
+-        const hintEl = zone.querySelector('.upload-text');
+-        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+-          hintEl.textContent = 'Tap to select files';
+-        }
+-      }
+-
+-      // Click handler - simple version for mobile
++      // Click handler
+       zone.addEventListener('click', (e) => {
+-        // On desktop, prevent default and stop propagation to avoid conflicts
+         if (!isMobile) {
+-          e.preventDefault();
+           e.stopPropagation();
+         }
+-        // On mobile, DON'T call preventDefault - let browser handle it naturally
+         input.click();
+       });
+ 
++      // Mobile touch support
++      if (isMobile) {
++        zone.addEventListener('touchend', (e) => {
++          e.preventDefault();
++          input.click();
++        }, { passive: false });
++      }
++
++      // Hide drag-drop hint on mobile
++      if (isMobile) {
++        const hint = zone.querySelector('.upload-hint');
++        if (hint && hint.textContent.toLowerCase().includes('drop')) {
++          hint.textContent = 'Tap to select files';
++        }
++        const text = zone.querySelector('.upload-text');
++        if (text && text.textContent.toLowerCase().includes('drop')) {
++          text.textContent = 'Tap to select files';
++        }
++      }
++
+       // Drag handlers (desktop only)
+       if (!isMobile) {
+         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+-- 
+2.52.0
+
