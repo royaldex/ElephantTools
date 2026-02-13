@@ -1734,8 +1734,15 @@ function updateStats() {
         }
       }
 
+      // Flag to prevent double-firing on mobile (touchend + click)
+      let touchHandled = false;
+
       // Click handler - simple version for mobile
       zone.addEventListener('click', (e) => {
+        if (touchHandled) {
+          touchHandled = false;
+          return;
+        }
         // On desktop, prevent default and stop propagation to avoid conflicts
         if (!isMobile) {
           e.preventDefault();
@@ -1749,6 +1756,7 @@ function updateStats() {
       if (isMobile) {
         zone.addEventListener('touchend', (e) => {
           e.preventDefault();
+          touchHandled = true;
           input.click();
         });
       }
