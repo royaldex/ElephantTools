@@ -1,0 +1,8 @@
+127.0.0.1 - - [13/Feb/2026 00:00:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:00:31] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:00:40] "GET /simple-frames.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:02:19] "GET /simple-frames.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:03:22] "GET /simple-frames.html?t=1 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:03:56] "GET /simple-frames.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:05:10] "GET /simple-frames.html?t=2 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Feb/2026 00:06:19] "GET /simple-frames.html?t=3 HTTP/1.1" 200 -

@@ -1318,6 +1318,8 @@ body { padding: 0; }
 // Wrap everything in DOMContentLoaded to ensure HTML is ready
 document.addEventListener('DOMContentLoaded', function() {
 
+// Stub for multi-tool dashboard compatibility
+const toolMap = {};
 
 // ============================================
 // STANDALONE TOOL - SHARED UTILITIES
@@ -1612,6 +1614,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <button class="btn btn-secondary btn-sm" onclick="loadPreset('${tool}','${name}')" style="position:relative;">
           ${name}
           <span onclick="event.stopPropagation();deletePreset('${tool}','${name}')" style="margin-left:6px;color:var(--text-muted);">×</span>
+        </button>
+      `).join('');
+    }
 
 // ============================================  
 // SAFE NAV STUBS (prevent crashes in standalone mode)
@@ -1641,8 +1646,6 @@ function updateStats() {
 // ============================================
 // FILE HELPERS
 // ============================================
-      // Stats display removed - function kept for compatibility
-    }
 
     function readFileAsDataURL(file) {
       return new Promise((resolve, reject) => {
@@ -1815,13 +1818,14 @@ try {
 
     function renderFavorites() {
       const container = document.getElementById('favoriteTools');
+      if (!container) return; // Guard for standalone mode
       if (favorites.length === 0) {
         container.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">No favorites yet</span>';
         return;
       }
       container.innerHTML = favorites.map(f => `
-        <button class="btn btn-secondary btn-sm" onclick="switchTab('${f}', toolMap['${f}']?.icon, toolMap['${f}']?.name); document.getElementById('settingsModal').style.display='none';">
-          ${toolMap[f]?.icon || '🔧'} ${toolMap[f]?.name || f}
+        <button class="btn btn-secondary btn-sm" onclick="window.location.href='${f}.html'">
+          ${f}
         </button>
       `).join('');
     }
@@ -1838,6 +1842,7 @@ try {
 
     function renderRecentFiles() {
       const container = document.getElementById('recentFilesList');
+      if (!container) return; // Guard for standalone mode
       if (recentFiles.length === 0) {
         container.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">No recent files</span>';
         return;
@@ -1845,7 +1850,7 @@ try {
       container.innerHTML = recentFiles.slice(0, 10).map(f => `
         <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;">
           <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px;">${f.name}</span>
-          <span style="color:var(--text-muted);font-size:11px;">${toolMap[f.tool]?.name || f.tool}</span>
+          <span style="color:var(--text-muted);font-size:11px;">${f.tool || ''}</span>
         </div>
       `).join('');
     }
