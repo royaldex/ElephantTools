@@ -1302,7 +1302,9 @@ body { padding: 0; }
 
           <div class="settings-group">
             <label>Cover Page</label>
-            <input type="text" id="coloringCoverTitle" placeholder="Coloring Book" value="Coloring Book">
+            <div id="coloringCoverSettings">
+              <input type="text" id="coloringCoverTitle" placeholder="Coloring Book" value="Coloring Book">
+            </div>
             <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
               <input type="checkbox" id="coloringCoverPage" checked style="width:auto;">
               <span>Include cover page</span>
@@ -1311,6 +1313,15 @@ body { padding: 0; }
               <input type="checkbox" id="coloringPageNumbers" checked style="width:auto;">
               <span>Add page numbers</span>
             </label>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
+              <input type="checkbox" id="coloringInstructions" style="width:auto;">
+              <span>Include instructions page</span>
+            </label>
+          </div>
+
+          <div class="settings-group">
+            <label>Filename</label>
+            <input type="text" id="coloringFilename" value="coloring-book" placeholder="coloring-book">
           </div>
 
           <div class="action-bar">
@@ -1320,7 +1331,7 @@ body { padding: 0; }
         </div>
 
         <div class="panel">
-          <div class="panel-title">Preview</div>
+          <div class="panel-title">Preview <span id="coloringCount">(0)</span></div>
           <div id="coloringGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;min-height:300px;">
             <div class="empty-state" style="grid-column:1/-1;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
