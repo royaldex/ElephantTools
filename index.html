@@ -272,5 +272,158 @@ body {
   <p>&copy; 2024 ElephantTools by RoyalDex. All rights reserved.</p>
 </div>
 
+<!-- Access Gate Overlay -->
+<div id="accessGate" style="
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+">
+  <div style="
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+  ">
+    <div style="font-size: 48px; margin-bottom: 20px;">🐘</div>
+    <h2 style="font-size: 24px; margin-bottom: 12px; color: var(--text);">Welcome to ElephantTools</h2>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">
+      Enter your access code to unlock all tools.<br>
+      <span style="font-size: 12px;">(Provided with your Etsy purchase)</span>
+    </p>
+    
+    <input 
+      type="text" 
+      id="accessCodeInput" 
+      placeholder="Enter access code"
+      style="
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--surface-2);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        font-size: 16px;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        margin-bottom: 16px;
+      "
+      autofocus
+    >
+    
+    <button 
+      id="accessSubmitBtn"
+      style="
+        width: 100%;
+        padding: 14px 20px;
+        background: var(--accent-orange);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      "
+    >
+      Unlock Tools
+    </button>
+    
+    <div id="accessError" style="
+      color: var(--accent-orange);
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    ">
+      Invalid access code. Please check your Etsy purchase email.
+    </div>
+    
+    <p style="font-size: 12px; color: var(--text-muted); margin-top: 24px;">
+      Don't have access? <a href="https://www.etsy.com/shop/YourShopName" style="color: var(--accent-purple); text-decoration: none;">Purchase on Etsy</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  const ACCESS_KEY = 'ELEPHANT2024';
+  const STORAGE_KEY = 'elephantToolsAccess';
+  
+  // Check if user has access
+  function checkAccess() {
+    const storedKey = localStorage.getItem(STORAGE_KEY);
+    if (storedKey === ACCESS_KEY) {
+      // Access granted - show tools
+      document.getElementById('accessGate').style.display = 'none';
+      document.body.style.overflow = '';
+      return true;
+    } else {
+      // No access - show gate
+      document.getElementById('accessGate').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      return false;
+    }
+  }
+  
+  // Handle access submission
+  document.getElementById('accessSubmitBtn').addEventListener('click', function() {
+    const input = document.getElementById('accessCodeInput');
+    const error = document.getElementById('accessError');
+    const enteredCode = input.value.trim().toUpperCase();
+    
+    if (enteredCode === ACCESS_KEY) {
+      // Correct code
+      localStorage.setItem(STORAGE_KEY, ACCESS_KEY);
+      error.style.display = 'none';
+      checkAccess();
+      
+      // Show success message
+      const btn = this;
+      btn.textContent = '✓ Access Granted!';
+      btn.style.background = 'var(--accent-green)';
+      setTimeout(() => {
+        document.getElementById('accessGate').style.display = 'none';
+        document.body.style.overflow = '';
+      }, 800);
+    } else {
+      // Wrong code
+      error.style.display = 'block';
+      input.style.borderColor = 'var(--accent-orange)';
+      input.value = '';
+      input.focus();
+      
+      // Reset border after 2 seconds
+      setTimeout(() => {
+        input.style.borderColor = 'var(--border)';
+      }, 2000);
+    }
+  });
+  
+  // Handle button hover effects
+  const submitBtn = document.getElementById('accessSubmitBtn');
+  submitBtn.addEventListener('mouseover', function() {
+    this.style.background = '#ea580c';
+  });
+  submitBtn.addEventListener('mouseout', function() {
+    this.style.background = 'var(--accent-orange)';
+  });
+  
+  // Handle Enter key
+  document.getElementById('accessCodeInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      document.getElementById('accessSubmitBtn').click();
+    }
+  });
+  
+  // Check access on page load
+  checkAccess();
+</script>
+
 </body>
 </html>
