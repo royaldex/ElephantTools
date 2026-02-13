@@ -1758,22 +1758,45 @@ function updateStats() {
       if (!zone) { console.error('Upload zone not found:', zoneId); return; }
       if (!input) { console.error('File input not found:', inputId); return; }
 
-      // Click handler
-      zone.addEventListener('click', (e) => {
-        e.stopPropagation();
-        input.click();
-      });
+      // Detect mobile device
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-      // Drag handlers
-      zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-      zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-      zone.addEventListener('drop', e => {
-        e.preventDefault();
-        zone.classList.remove('dragover');
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-          handler(e.dataTransfer.files);
+      // Update hint text for mobile
+      if (isMobile) {
+        const hintEl = zone.querySelector('.upload-text');
+        if (hintEl && hintEl.textContent.toLowerCase().includes('drop')) {
+          hintEl.textContent = 'Tap to select files';
         }
-      });
+      }
+
+      // Click/Touch handler - different behavior for mobile
+      const triggerInput = (e) => {
+        if (!isMobile) {
+          e.stopPropagation(); // Only stop propagation on desktop
+        }
+        e.preventDefault();
+        input.click();
+      };
+
+      zone.addEventListener('click', triggerInput);
+      
+      // Add touch support for mobile
+      if (isMobile) {
+        zone.addEventListener('touchend', triggerInput);
+      }
+
+      // Drag handlers (desktop only)
+      if (!isMobile) {
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+        zone.addEventListener('drop', e => {
+          e.preventDefault();
+          zone.classList.remove('dragover');
+          if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handler(e.dataTransfer.files);
+          }
+        });
+      }
 
       // File input change handler
       input.addEventListener('change', e => {
