@@ -1541,8 +1541,10 @@ document.addEventListener('DOMContentLoaded', function() {
       infoEl.textContent = info || `${lightboxIndex + 1} of ${lightboxImages.length}`;
 
       // Show/hide nav buttons
-      document.querySelector('.lightbox-prev').style.display = lightboxImages.length > 1 ? 'flex' : 'none';
-      document.querySelector('.lightbox-next').style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+      const prevBtn = document.querySelector('.lightbox-prev');
+      const nextBtn = document.querySelector('.lightbox-next');
+      if (prevBtn) prevBtn.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+      if (nextBtn) nextBtn.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
 
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1785,36 +1787,59 @@ function updateStats() {
     setupUploadZone('coloringUpload', 'coloringInput', handleColoringFiles);
 
     let coloringMode = 'edges';
-    document.getElementById('coloringEdges').addEventListener('click', () => {
-      coloringMode = 'edges';
-      document.getElementById('coloringEdges').classList.add('active');
-      document.getElementById('coloringSketch').classList.remove('active');
-      processColoringPages();
-    });
-    document.getElementById('coloringSketch').addEventListener('click', () => {
-      coloringMode = 'sketch';
-      document.getElementById('coloringSketch').classList.add('active');
-      document.getElementById('coloringEdges').classList.remove('active');
-      processColoringPages();
-    });
+    const coloringEdgesBtn = document.getElementById('coloringEdges');
+    const coloringSketchBtn = document.getElementById('coloringSketch');
+    
+    if (coloringEdgesBtn) {
+      coloringEdgesBtn.addEventListener('click', () => {
+        coloringMode = 'edges';
+        coloringEdgesBtn.classList.add('active');
+        if (coloringSketchBtn) coloringSketchBtn.classList.remove('active');
+        processColoringPages();
+      });
+    }
+    
+    if (coloringSketchBtn) {
+      coloringSketchBtn.addEventListener('click', () => {
+        coloringMode = 'sketch';
+        coloringSketchBtn.classList.add('active');
+        if (coloringEdgesBtn) coloringEdgesBtn.classList.remove('active');
+        processColoringPages();
+      });
+    }
 
-    document.getElementById('coloringSensitivity').addEventListener('input', e => {
-      document.getElementById('coloringSensVal').textContent = e.target.value + '%';
-    });
-    document.getElementById('coloringStrength').addEventListener('input', e => {
-      document.getElementById('coloringStrVal').textContent = (e.target.value / 10).toFixed(1) + 'x';
-    });
+    const coloringSensitivity = document.getElementById('coloringSensitivity');
+    const coloringSensVal = document.getElementById('coloringSensVal');
+    if (coloringSensitivity && coloringSensVal) {
+      coloringSensitivity.addEventListener('input', e => {
+        coloringSensVal.textContent = e.target.value + '%';
+      });
+    }
+    
+    const coloringStrength = document.getElementById('coloringStrength');
+    const coloringStrVal = document.getElementById('coloringStrVal');
+    if (coloringStrength && coloringStrVal) {
+      coloringStrength.addEventListener('input', e => {
+        coloringStrVal.textContent = (e.target.value / 10).toFixed(1) + 'x';
+      });
+    }
 
-    document.getElementById('coloringSelectAll').addEventListener('click', () => {
-      if (state.coloring.selected.size === state.coloring.files.length) {
-        state.coloring.selected.clear();
-      } else {
-        state.coloring.files.forEach(f => state.coloring.selected.add(f.id));
-      }
-      renderColoringGrid();
-    });
+    const coloringSelectAll = document.getElementById('coloringSelectAll');
+    if (coloringSelectAll) {
+      coloringSelectAll.addEventListener('click', () => {
+        if (state.coloring.selected.size === state.coloring.files.length) {
+          state.coloring.selected.clear();
+        } else {
+          state.coloring.files.forEach(f => state.coloring.selected.add(f.id));
+        }
+        renderColoringGrid();
+      });
+    }
 
-    document.getElementById('coloringDownload').addEventListener('click', downloadColoringPDF);
+    const coloringDownloadBtn = document.getElementById('coloringDownload');
+    if (coloringDownloadBtn) {
+      coloringDownloadBtn.addEventListener('click', downloadColoringPDF);
+    }
 
     async function handleColoringFiles(files) {
       const fileArray = Array.from(files);
@@ -1920,9 +1945,11 @@ function updateStats() {
     function renderColoringGrid() {
       const grid = document.getElementById('coloringGrid');
       const count = document.getElementById('coloringCount');
+      const downloadBtn = document.getElementById('coloringDownload');
 
-      count.textContent = `(${state.coloring.files.length})`;
-      document.getElementById('coloringDownload').disabled = state.coloring.selected.size === 0;
+      if (!grid) return;
+      if (count) count.textContent = `(${state.coloring.files.length})`;
+      if (downloadBtn) downloadBtn.disabled = state.coloring.selected.size === 0;
 
       if (state.coloring.files.length === 0) {
         grid.innerHTML = '<div class="empty-state"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><p>Upload images to create coloring pages</p></div>';
@@ -1959,14 +1986,21 @@ function updateStats() {
       }
 
       const btn = document.getElementById('coloringDownload');
+      if (!btn) return;
+      
       btn.disabled = true;
       btn.textContent = '⏳ Creating PDF...';
 
       // Get options
-      const addPageNumbers = document.getElementById('coloringPageNumbers').checked;
-      const addCover = document.getElementById('coloringCoverPage').checked;
-      const addInstructions = document.getElementById('coloringInstructions').checked;
-      const coverTitle = document.getElementById('coloringCoverTitle').value || 'Coloring Book';
+      const pageNumbersEl = document.getElementById('coloringPageNumbers');
+      const coverPageEl = document.getElementById('coloringCoverPage');
+      const instructionsEl = document.getElementById('coloringInstructions');
+      const coverTitleEl = document.getElementById('coloringCoverTitle');
+      
+      const addPageNumbers = pageNumbersEl ? pageNumbersEl.checked : true;
+      const addCover = coverPageEl ? coverPageEl.checked : true;
+      const addInstructions = instructionsEl ? instructionsEl.checked : false;
+      const coverTitle = coverTitleEl ? (coverTitleEl.value || 'Coloring Book') : 'Coloring Book';
 
       try {
         const { jsPDF } = window.jspdf;
@@ -2071,7 +2105,8 @@ function updateStats() {
           await new Promise(r => setTimeout(r, 50));
         }
 
-        const filename = document.getElementById('coloringFilename').value.trim() || 'coloring-book';
+        const filenameEl = document.getElementById('coloringFilename');
+        const filename = (filenameEl ? filenameEl.value.trim() : '') || 'coloring-book';
 
         // Use blob method for better compatibility
         const blob = pdf.output('blob');
@@ -2098,9 +2133,13 @@ function updateStats() {
     // ============================================
     // ENHANCED COLORING BOOK - Cover & Page Numbers
     // ============================================
-    document.getElementById('coloringCoverPage').onchange = (e) => {
-      document.getElementById('coloringCoverSettings').style.display = e.target.checked ? 'block' : 'none';
-    };
+    const coloringCoverPage = document.getElementById('coloringCoverPage');
+    const coloringCoverSettings = document.getElementById('coloringCoverSettings');
+    if (coloringCoverPage && coloringCoverSettings) {
+      coloringCoverPage.onchange = (e) => {
+        coloringCoverSettings.style.display = e.target.checked ? 'block' : 'none';
+      };
+    }
 
 
 // Settings/theme (with guards)
