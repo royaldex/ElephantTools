@@ -1806,6 +1806,14 @@ function updateStats() {
         input.click();
       });
 
+      // Touch handler for mobile devices
+      if (isMobile) {
+        zone.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          input.click();
+        });
+      }
+
       // Drag handlers (desktop only)
       if (!isMobile) {
         zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
