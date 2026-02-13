@@ -1783,6 +1783,10 @@ function updateStats() {
         if (hint && hint.textContent.toLowerCase().includes('drop')) {
           hint.textContent = 'Tap to select files';
         }
+        const text = zone.querySelector('.upload-text');
+        if (text && text.textContent.toLowerCase().includes('drop')) {
+          text.textContent = 'Tap to select files';
+        }
       }
 
       // Drag handlers (desktop only)
