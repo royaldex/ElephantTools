@@ -1,1 +1,1019 @@
-<!DOCTYPE html>\n<html lang=\
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip Art Packager</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-tertiary: #1e1e1e;
+            --accent: #f97316;
+            --accent-dim: #ea580c;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --success: #22c55e;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .app-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .stepper {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-line {
+            width: 60px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .step-line.completed {
+            background: var(--success);
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title .step-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .dropzone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg-tertiary);
+        }
+
+        .dropzone:hover, .dropzone.drag-over {
+            border-color: var(--accent);
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        .dropzone-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .dropzone-text {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .dropzone-hint {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .file-item {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .file-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto 8px;
+            background: repeating-conic-gradient(#333 0% 25%, #222 0% 50%) 50% / 16px 16px;
+            border-radius: 6px;
+        }
+
+        .file-name {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .option-group {
+            background: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .option-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px 12px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .radio-option:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .radio-option input:checked + .radio-custom {
+            border-color: var(--accent);
+        }
+
+        .radio-option input:checked + .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+
+        .checkbox-option input {
+            display: none;
+        }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .checkbox-option input:checked + .checkbox-custom {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .checkbox-option input:checked + .checkbox-custom::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--accent-dim);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .progress-container {
+            margin-top: 24px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #fb923c);
+            border-radius: 100px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 12px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .complete-screen {
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .complete-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+        }
+
+        .complete-title {
+            font-size: 1.75rem;
+            margin-bottom: 8px;
+        }
+
+        .complete-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        .summary-item {
+            background: var(--bg-tertiary);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .summary-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .summary-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            .card {
+                padding: 20px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useCallback } = React;
+
+        // Upscale image to minimum 3000x3000px with high-quality interpolation
+        async function upscaleImage(file, scale) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Calculate dimensions - use scale factor or minimum 3000px, whichever is larger
+                    const minSize = 3000;
+                    const scaledWidth = img.width * scale;
+                    const scaledHeight = img.height * scale;
+                    
+                    let finalWidth, finalHeight;
+                    
+                    if (scaledWidth >= minSize && scaledHeight >= minSize) {
+                        // Scale factor already meets minimum
+                        finalWidth = scaledWidth;
+                        finalHeight = scaledHeight;
+                    } else {
+                        // Need to scale up more to meet minimum
+                        const scaleToMeetMin = Math.max(minSize / img.width, minSize / img.height);
+                        finalWidth = Math.round(img.width * scaleToMeetMin);
+                        finalHeight = Math.round(img.height * scaleToMeetMin);
+                    }
+                    
+                    canvas.width = finalWidth;
+                    canvas.height = finalHeight;
+                    
+                    // High-quality upscaling for print
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    URL.revokeObjectURL(img.src);
+                    
+                    resolve({
+                        canvas,
+                        width: canvas.width,
+                        height: canvas.height,
+                        name: file.name
+                    });
+                };
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        // Convert canvas to PNG blob
+        function canvasToPngBlob(canvas) {
+            return new Promise((resolve) => {
+                canvas.toBlob((blob) => resolve(blob), 'image/png');
+            });
+        }
+
+        function App() {
+            const [step, setStep] = useState(1);
+            const [files, setFiles] = useState([]);
+            const [scale, setScale] = useState(2);
+            const [zipName, setZipName] = useState('clipart');
+            const [startNumber, setStartNumber] = useState(1);
+            const [processing, setProcessing] = useState(false);
+            const [progress, setProgress] = useState(0);
+            const [progressText, setProgressText] = useState('');
+            const [result, setResult] = useState(null);
+            const fileInputRef = useRef(null);
+            const [dragOver, setDragOver] = useState(false);
+
+            const handleFiles = useCallback((newFiles) => {
+                const pngFiles = Array.from(newFiles).filter(f => 
+                    f.type === 'image/png' && f.name.toLowerCase().endsWith('.png')
+                );
+                
+                const filesWithPreview = pngFiles.map(file => ({
+                    file,
+                    preview: URL.createObjectURL(file),
+                    id: Math.random().toString(36).substr(2, 9)
+                }));
+                
+                setFiles(prev => [...prev, ...filesWithPreview]);
+            }, []);
+
+            const handleDrop = useCallback((e) => {
+                e.preventDefault();
+                setDragOver(false);
+                handleFiles(e.dataTransfer.files);
+            }, [handleFiles]);
+
+            const removeFile = (id) => {
+                setFiles(prev => prev.filter(f => f.id !== id));
+            };
+
+            const processFiles = async () => {
+                setProcessing(true);
+                setProgress(0);
+                
+                try {
+                    const total = files.length;
+                    const pngBlobs = [];
+                    
+                    // PHASE 1: Upscale all images, store blobs with real sizes
+                    for (let i = 0; i < files.length; i++) {
+                        setProgressText(`Upscaling ${i + 1}/${total}...`);
+                        await new Promise(r => setTimeout(r, 50));
+                        
+                        const upscaled = await upscaleImage(files[i].file, scale);
+                        const pngBlob = await canvasToPngBlob(upscaled.canvas);
+                        
+                        pngBlobs.push({
+                            name: upscaled.name.replace(/\.png$/i, ''),
+                            blob: pngBlob,
+                            size: pngBlob.size
+                        });
+                        
+                        // Clear canvas memory
+                        upscaled.canvas.width = 1;
+                        upscaled.canvas.height = 1;
+                        
+                        setProgress(Math.round(((i + 1) / total) * 60));
+                        
+                        await new Promise(r => setTimeout(r, 30));
+                    }
+                    
+                    // PHASE 2: Bin-pack using REAL sizes
+                    setProgressText('Organizing into Etsy-ready ZIPs...');
+                    await new Promise(r => setTimeout(r, 100));
+                    
+                    const MAX_ZIP_SIZE = 19 * 1024 * 1024; // 19MB to be safe
+                    const zipBins = [];
+                    
+                    // Sort largest first for better packing
+                    const sorted = [...pngBlobs].sort((a, b) => b.size - a.size);
+                    
+                    for (const file of sorted) {
+                        // Try to fit in existing bin
+                        let placed = false;
+                        for (const bin of zipBins) {
+                            if (bin.totalSize + file.size <= MAX_ZIP_SIZE) {
+                                bin.files.push(file);
+                                bin.totalSize += file.size;
+                                placed = true;
+                                break;
+                            }
+                        }
+                        // Create new bin if doesn't fit anywhere
+                        if (!placed) {
+                            zipBins.push({ files: [file], totalSize: file.size });
+                        }
+                    }
+                    
+                    setProgress(65);
+                    
+                    // PHASE 3: Create ZIPs
+                    const zipBlobs = [];
+                    
+                    for (let z = 0; z < zipBins.length; z++) {
+                        const bin = zipBins[z];
+                        setProgressText(`Creating ZIP ${z + 1}/${zipBins.length} (${bin.files.length} images)...`);
+                        await new Promise(r => setTimeout(r, 100));
+                        
+                        const zip = new JSZip();
+                        
+                        for (const file of bin.files) {
+                            zip.file(`${file.name}_${scale}x_300dpi.png`, file.blob);
+                        }
+                        
+                        const zipBlob = await zip.generateAsync({ 
+                            type: 'blob',
+                            compression: 'DEFLATE',
+                            compressionOptions: { level: 5 }
+                        });
+                        
+                        zipBlobs.push({
+                            blob: zipBlob,
+                            sizeMB: (zipBlob.size / (1024 * 1024)).toFixed(2),
+                            imageCount: bin.files.length,
+                            isOverLimit: zipBlob.size > 20 * 1024 * 1024
+                        });
+                        
+                        // Clear blobs from this bin to free memory
+                        bin.files.length = 0;
+                        
+                        setProgress(65 + Math.round(((z + 1) / zipBins.length) * 35));
+                    }
+                    
+                    pngBlobs.length = 0;
+                    setProgress(100);
+                    
+                    setResult({
+                        zips: zipBlobs,
+                        totalImages: files.length,
+                        scale: scale,
+                        zipName: zipName,
+                        startNumber: startNumber
+                    });
+                    
+                    setStep(4);
+                } catch (error) {
+                    console.error('Processing error:', error);
+                    setProgressText(`Error: ${error.message}`);
+                } finally {
+                    setProcessing(false);
+                }
+            };
+
+            const downloadZip = (index) => {
+                const zip = result.zips[index];
+                const url = URL.createObjectURL(zip.blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const safeName = sanitizeFilename(result.zipName);
+                const seqNum = result.startNumber + index;
+                a.download = `${safeName}${seqNum}.zip`;
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+
+            const downloadAll = async () => {
+                for (let i = 0; i < result.zips.length; i++) {
+                    downloadZip(i);
+                    await new Promise(r => setTimeout(r, 500));
+                }
+            };
+
+            const sanitizeFilename = (name) => {
+                return name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'clipart';
+            };
+
+            const reset = () => {
+                setStep(1);
+                setFiles([]);
+                setScale(2);
+                setZipName('clipart');
+                setStartNumber(1);
+                setProgress(0);
+                setResult(null);
+            };
+
+            return (
+                <div className="app-container">
+                    <div className="header">
+                        <h1>Clip Art Packager</h1>
+                        <p>Upscale & package clip art for customer delivery</p>
+                    </div>
+
+                    <div className="stepper">
+                        <div className="step-indicator">
+                            <div className={`step-dot ${step >= 1 ? (step > 1 ? 'completed' : 'active') : ''}`}>
+                                {step > 1 ? '✓' : '1'}
+                            </div>
+                        </div>
+                        <div className={`step-line ${step > 1 ? 'completed' : ''}`}></div>
+                        <div className="step-indicator">
+                            <div className={`step-dot ${step >= 2 ? (step > 2 ? 'completed' : 'active') : ''}`}>
+                                {step > 2 ? '✓' : '2'}
+                            </div>
+                        </div>
+                        <div className={`step-line ${step > 2 ? 'completed' : ''}`}></div>
+                        <div className="step-indicator">
+                            <div className={`step-dot ${step >= 3 ? (step > 3 ? 'completed' : 'active') : ''}`}>
+                                {step > 3 ? '✓' : '3'}
+                            </div>
+                        </div>
+                        <div className={`step-line ${step > 3 ? 'completed' : ''}`}></div>
+                        <div className="step-indicator">
+                            <div className={`step-dot ${step >= 4 ? 'active' : ''}`}>4</div>
+                        </div>
+                    </div>
+
+                    {step === 1 && (
+                        <div className="card">
+                            <h2 className="card-title">
+                                <span className="step-num">STEP 1</span>
+                                Upload Clip Art
+                            </h2>
+                            
+                            <div 
+                                className={`dropzone ${dragOver ? 'drag-over' : ''}`}
+                                onClick={() => fileInputRef.current?.click()}
+                                onDrop={handleDrop}
+                                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                                onDragLeave={() => setDragOver(false)}
+                            >
+                                <div className="dropzone-icon">📁</div>
+                                <div className="dropzone-text">Drop PNG files here or click to browse</div>
+                                <div className="dropzone-hint">Transparent PNG files only</div>
+                                <input 
+                                    ref={fileInputRef}
+                                    type="file" 
+                                    accept=".png,image/png"
+                                    multiple
+                                    style={{ display: 'none' }}
+                                    onChange={(e) => handleFiles(e.target.files)}
+                                />
+                            </div>
+
+                            {files.length > 0 && (
+                                <div className="file-list">
+                                    {files.map(f => (
+                                        <div key={f.id} className="file-item">
+                                            <button 
+                                                className="file-remove"
+                                                onClick={() => removeFile(f.id)}
+                                            >×</button>
+                                            <img 
+                                                src={f.preview} 
+                                                alt={f.file.name}
+                                                className="file-thumb"
+                                            />
+                                            <div className="file-name">{f.file.name}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            <div className="action-row">
+                                <button 
+                                    className="btn btn-primary"
+                                    disabled={files.length === 0}
+                                    onClick={() => setStep(2)}
+                                >
+                                    Continue with {files.length} file{files.length !== 1 ? 's' : ''}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {step === 2 && (
+                        <div className="card">
+                            <h2 className="card-title">
+                                <span className="step-num">STEP 2</span>
+                                Configure Options
+                            </h2>
+                            
+                            <div className="options-grid">
+                                <div className="option-group">
+                                    <div className="option-label">ZIP Base Name</div>
+                                    <input 
+                                        type="text"
+                                        value={zipName}
+                                        onChange={(e) => setZipName(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
+                                        placeholder="clipart"
+                                        maxLength={30}
+                                        style={{
+                                            width: '100%',
+                                            padding: '12px',
+                                            background: 'var(--bg-primary)',
+                                            border: '1px solid var(--border)',
+                                            borderRadius: '6px',
+                                            color: 'var(--text-primary)',
+                                            fontSize: '1rem',
+                                            fontFamily: 'Space Mono, monospace'
+                                        }}
+                                    />
+                                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '8px' }}>
+                                        Letters and numbers only
+                                    </div>
+                                </div>
+
+                                <div className="option-group">
+                                    <div className="option-label">Start Sequence At</div>
+                                    <input 
+                                        type="number"
+                                        value={startNumber}
+                                        onChange={(e) => setStartNumber(Math.max(1, parseInt(e.target.value) || 1))}
+                                        min="1"
+                                        style={{
+                                            width: '100%',
+                                            padding: '12px',
+                                            background: 'var(--bg-primary)',
+                                            border: '1px solid var(--border)',
+                                            borderRadius: '6px',
+                                            color: 'var(--text-primary)',
+                                            fontSize: '1rem',
+                                            fontFamily: 'Space Mono, monospace'
+                                        }}
+                                    />
+                                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '8px' }}>
+                                        Example: {sanitizeFilename(zipName)}{startNumber}.zip, {sanitizeFilename(zipName)}{startNumber + 1}.zip...
+                                    </div>
+                                </div>
+
+                                <div className="option-group">
+                                    <div className="option-label">Upscale Factor</div>
+                                    <div className="radio-group">
+                                        <label className="radio-option">
+                                            <input 
+                                                type="radio" 
+                                                name="scale" 
+                                                checked={scale === 2}
+                                                onChange={() => setScale(2)}
+                                            />
+                                            <span className="radio-custom"></span>
+                                            <span>2x (Double)</span>
+                                        </label>
+                                        <label className="radio-option">
+                                            <input 
+                                                type="radio" 
+                                                name="scale" 
+                                                checked={scale === 4}
+                                                onChange={() => setScale(4)}
+                                            />
+                                            <span className="radio-custom"></span>
+                                            <span>4x (Quadruple)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div className="option-group">
+                                    <div className="option-label">Output</div>
+                                    <div style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>
+                                        PNG (transparent, min 3000×3000px)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="action-row">
+                                <button className="btn btn-secondary" onClick={() => setStep(1)}>
+                                    Back
+                                </button>
+                                <button className="btn btn-primary" onClick={() => setStep(3)}>
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {step === 3 && (
+                        <div className="card">
+                            <h2 className="card-title">
+                                <span className="step-num">STEP 3</span>
+                                Process & Package
+                            </h2>
+                            
+                            {!processing ? (
+                                <>
+                                    <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                                        <p style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                                            Ready to process <strong>{files.length}</strong> image{files.length !== 1 ? 's' : ''}
+                                        </p>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                                            {scale}x upscale • 300 DPI PNG • PDF preview
+                                        </p>
+                                    </div>
+                                    <div className="action-row">
+                                        <button className="btn btn-secondary" onClick={() => setStep(2)}>
+                                            Back
+                                        </button>
+                                        <button className="btn btn-primary" onClick={processFiles}>
+                                            Process Files
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="progress-container">
+                                    <div className="progress-bar">
+                                        <div 
+                                            className="progress-fill" 
+                                            style={{ width: `${progress}%` }}
+                                        ></div>
+                                    </div>
+                                    <div className="progress-text">{progressText}</div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {step === 4 && result && (
+                        <div className="card">
+                            <div className="complete-screen">
+                                <div className="complete-icon">✓</div>
+                                <h2 className="complete-title">Etsy-Ready Packages!</h2>
+                                <p className="complete-subtitle">
+                                    {result.totalImages} images → {result.zips.length} ZIP{result.zips.length > 1 ? 's' : ''} (under 20MB each)
+                                </p>
+                                
+                                <div style={{ 
+                                    display: 'flex', 
+                                    flexDirection: 'column', 
+                                    gap: '12px',
+                                    maxWidth: '400px',
+                                    margin: '24px auto'
+                                }}>
+                                    {result.zips.map((zip, i) => (
+                                        <div key={i} style={{
+                                            background: 'var(--bg-tertiary)',
+                                            border: zip.isOverLimit ? '1px solid #ef4444' : '1px solid var(--border)',
+                                            borderRadius: '8px',
+                                            padding: '16px',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}>
+                                            <div>
+                                                <div style={{ fontWeight: '600', marginBottom: '4px', fontFamily: 'Space Mono, monospace' }}>
+                                                    {sanitizeFilename(result.zipName)}{result.startNumber + i}.zip
+                                                </div>
+                                                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                                                    {zip.imageCount} images • {zip.sizeMB} MB
+                                                </div>
+                                            </div>
+                                            <button 
+                                                className="btn btn-primary" 
+                                                style={{ padding: '10px 16px' }}
+                                                onClick={() => downloadZip(i)}
+                                            >
+                                                Download
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div style={{ 
+                                    background: 'var(--bg-tertiary)', 
+                                    padding: '12px 16px', 
+                                    borderRadius: '8px',
+                                    fontSize: '0.875rem',
+                                    color: 'var(--text-muted)',
+                                    maxWidth: '400px',
+                                    margin: '0 auto 24px'
+                                }}>
+                                    Each ZIP contains upscaled <span style={{ color: 'var(--accent)' }}>PNG</span> files ready for Etsy
+                                </div>
+
+                                <div className="action-row">
+                                    <button className="btn btn-secondary" onClick={reset}>
+                                        Start Over
+                                    </button>
+                                    {result.zips.length > 1 && (
+                                        <button className="btn btn-primary" onClick={downloadAll}>
+                                            Download All ({result.zips.length})
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
