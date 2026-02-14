@@ -4,4 +4,936 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watermark Studio Pro</title>
-    <script src="https://cdnjs.cloudflare.com/a
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 10px; color: #818cf8; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
+        .app { display: flex; gap: 20px; flex-wrap: wrap; }
+        .panel {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+        .controls { width: 320px; flex-shrink: 0; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .preview-area { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
+        
+        .upload-btn {
+            display: block;
+            width: 100%;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .upload-btn:hover { opacity: 0.9; }
+        
+        .drop-zone {
+            border: 3px dashed #444;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .drop-zone.drag-over {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .image-count {
+            background: #252540;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .clear-btn {
+            background: #ef4444;
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .section { margin-bottom: 20px; }
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+        
+        label { display: block; font-size: 13px; color: #aaa; margin-bottom: 6px; }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px 12px;
+            background: #252540;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #6366f1;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slider-value {
+            min-width: 45px;
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        input[type="color"] {
+            width: 45px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: none;
+        }
+        
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .checkbox-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: #6366f1; }
+        
+        .action-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        .btn-secondary {
+            background: #252540;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .preview-header h2 { font-size: 16px; color: #aaa; }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+        .preview-card {
+            background: #12121f;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .preview-card-canvas {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a12;
+            overflow: hidden;
+        }
+        .preview-card-canvas canvas {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .preview-card-info {
+            padding: 8px 10px;
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #444;
+        }
+        .empty-state span { font-size: 60px; margin-bottom: 15px; }
+        
+        .progress-container {
+            background: #252540;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        .progress-container.show { display: block; }
+        .progress-bar {
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #6366f1;
+            width: 0%;
+        }
+        .progress-text { font-size: 11px; color: #888; text-align: center; }
+        
+        .logo-upload-btn {
+            width: 100%;
+            padding: 12px;
+            background: #252540;
+            border: 2px dashed #444;
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        .logo-upload-btn:hover { border-color: #6366f1; color: #fff; }
+        .logo-upload-btn.has-logo { border-color: #10b981; color: #10b981; border-style: solid; }
+        
+        .logo-preview-container {
+            background: #252540;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px;
+            text-align: center;
+            display: none;
+        }
+        .logo-preview-container.show { display: block; }
+        .logo-preview-container img {
+            max-width: 100%;
+            max-height: 60px;
+            border-radius: 4px;
+        }
+        .logo-remove {
+            background: #ef4444;
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 800px) {
+            .app { flex-direction: column; }
+            .controls { width: 100%; max-height: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Watermark Studio Pro</h1>
+        <p class="subtitle">Protect your images with text and logo watermarks</p>
+        
+        <div class="app">
+            <div class="panel controls">
+                <!-- IMAGE UPLOAD -->
+                <div class="section">
+                    <button type="button" class="upload-btn" id="uploadBtn">📁 Select Images</button>
+                    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
+                    <div class="drop-zone" id="dropZone">Or drag & drop here</div>
+                    <div class="image-count">
+                        <span id="imageCount">0 images</span>
+                        <button type="button" class="clear-btn" id="clearBtn">Clear</button>
+                    </div>
+                </div>
+                
+                <!-- TEXT WATERMARK -->
+                <div class="section">
+                    <div class="section-title">Text Watermark</div>
+                    
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="textEnabled" checked>
+                        <span>Enable text watermark</span>
+                    </label>
+                    
+                    <div id="textOptions">
+                        <input type="text" id="wmText" value="© Your Name" placeholder="Enter watermark text">
+                        
+                        <label>Font</label>
+                        <select id="wmFont">
+                            <option value="Arial">Arial</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Courier New">Courier New</option>
+                        </select>
+                        
+                        <label>Size</label>
+                        <div class="slider-row">
+                            <input type="range" id="wmSize" min="20" max="150" value="40">
+                            <span class="slider-value" id="wmSizeVal">40px</span>
+                        </div>
+                        
+                        <label>Color</label>
+                        <div class="color-row">
+                            <input type="color" id="wmColor" value="#ffffff">
+                            <span id="wmColorVal">#FFFFFF</span>
+                        </div>
+                        
+                        <label class="checkbox-row">
+                            <input type="checkbox" id="wmTiled" checked>
+                            <span>Diagonal tiled pattern</span>
+                        </label>
+                        
+                        <div id="tiledOptions">
+                            <label>Rotation</label>
+                            <div class="slider-row">
+                                <input type="range" id="wmAngle" min="-60" max="60" value="-30">
+                                <span class="slider-value" id="wmAngleVal">-30°</span>
+                            </div>
+                        </div>
+                        
+                        <div id="singleOptions" class="hidden">
+                            <label>Position</label>
+                            <select id="wmPosition">
+                                <option value="br" selected>Bottom Right</option>
+                                <option value="bl">Bottom Left</option>
+                                <option value="tr">Top Right</option>
+                                <option value="tl">Top Left</option>
+                                <option value="c">Center</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LOGO WATERMARK -->
+                <div class="section">
+                    <div class="section-title">Logo Watermark</div>
+                    
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="logoEnabled">
+                        <span>Enable logo watermark</span>
+                    </label>
+                    
+                    <div id="logoOptions" class="hidden">
+                        <button type="button" class="logo-upload-btn" id="logoUploadBtn">📤 Upload Logo (PNG/JPG)</button>
+                        <input type="file" id="logoInput" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none">
+                        
+                        <div class="logo-preview-container" id="logoPreviewContainer">
+                            <img id="logoPreview" src="" alt="Logo preview">
+                            <br>
+                            <button type="button" class="logo-remove" id="logoRemoveBtn">Remove Logo</button>
+                        </div>
+                        
+                        <label>Logo Size (% of image width)</label>
+                        <div class="slider-row">
+                            <input type="range" id="logoSize" min="5" max="50" value="15">
+                            <span class="slider-value" id="logoSizeVal">15%</span>
+                        </div>
+                        
+                        <label>Logo Position</label>
+                        <select id="logoPosition">
+                            <option value="br" selected>Bottom Right</option>
+                            <option value="bl">Bottom Left</option>
+                            <option value="tr">Top Right</option>
+                            <option value="tl">Top Left</option>
+                            <option value="c">Center</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- GLOBAL SETTINGS -->
+                <div class="section">
+                    <div class="section-title">Global Settings</div>
+                    
+                    <label>Opacity (applies to both)</label>
+                    <div class="slider-row">
+                        <input type="range" id="wmOpacity" min="5" max="100" value="25">
+                        <span class="slider-value" id="wmOpacityVal">25%</span>
+                    </div>
+                </div>
+                
+                <!-- EXPORT -->
+                <div class="section">
+                    <div class="section-title">Export</div>
+                    
+                    <label>Format</label>
+                    <select id="outputFormat">
+                        <option value="png">PNG (best quality)</option>
+                        <option value="jpeg">JPG (high quality)</option>
+                    </select>
+                    
+                    <label>Filename Prefix</label>
+                    <input type="text" id="filePrefix" value="protected">
+                    
+                    <div class="progress-container" id="progress">
+                        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                        <div class="progress-text" id="progressText">Processing...</div>
+                    </div>
+                    
+                    <button type="button" class="action-btn btn-primary" id="downloadBtn">📦 Download ZIP</button>
+                </div>
+            </div>
+            
+            <!-- PREVIEW AREA -->
+            <div class="panel preview-area">
+                <div class="preview-header">
+                    <h2>Preview</h2>
+                    <span id="previewCount"></span>
+                </div>
+                <div class="preview-grid" id="previewGrid">
+                    <div class="empty-state" id="emptyState">
+                        <span>🖼️</span>
+                        <p>Add images to see preview</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // State
+        var images = [];
+        var logoImage = null;
+        var settings = {
+            textEnabled: true,
+            text: '© Your Name',
+            font: 'Arial',
+            size: 40,
+            color: '#ffffff',
+            tiled: true,
+            angle: -30,
+            position: 'br',
+            logoEnabled: false,
+            logoSize: 15,
+            logoPosition: 'br',
+            opacity: 25,
+            format: 'png',
+            prefix: 'protected'
+        };
+        
+        // DOM Elements
+        var fileInput = document.getElementById('fileInput');
+        var uploadBtn = document.getElementById('uploadBtn');
+        var dropZone = document.getElementById('dropZone');
+        var clearBtn = document.getElementById('clearBtn');
+        var previewGrid = document.getElementById('previewGrid');
+        var emptyState = document.getElementById('emptyState');
+        var logoInput = document.getElementById('logoInput');
+        var logoUploadBtn = document.getElementById('logoUploadBtn');
+        var logoPreviewContainer = document.getElementById('logoPreviewContainer');
+        var logoPreview = document.getElementById('logoPreview');
+        var logoRemoveBtn = document.getElementById('logoRemoveBtn');
+        
+        // Helpers
+        function getDPR() {
+            return window.devicePixelRatio || 1;
+        }
+        
+        // ==================
+        // IMAGE UPLOAD
+        // ==================
+        uploadBtn.onclick = function() { fileInput.click(); };
+        
+        fileInput.onchange = function(e) {
+            if (e.target.files.length) addFiles(e.target.files);
+            e.target.value = '';
+        };
+        
+        dropZone.ondragover = function(e) { e.preventDefault(); this.classList.add('drag-over'); };
+        dropZone.ondragleave = function() { this.classList.remove('drag-over'); };
+        dropZone.ondrop = function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+        };
+        
+        function addFiles(files) {
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].type.indexOf('image') === 0) {
+                    loadImage(files[i]);
+                }
+            }
+        }
+        
+        function loadImage(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                    images.push({ name: file.name, img: img, w: img.width, h: img.height });
+                    updateUI();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        clearBtn.onclick = function() {
+            images = [];
+            updateUI();
+        };
+        
+        function updateUI() {
+            document.getElementById('imageCount').textContent = images.length + ' image' + (images.length !== 1 ? 's' : '');
+            document.getElementById('previewCount').textContent = images.length ? images.length + ' files' : '';
+            emptyState.style.display = images.length ? 'none' : 'flex';
+            renderPreviews();
+        }
+        
+        // ==================
+        // LOGO UPLOAD
+        // ==================
+        logoUploadBtn.onclick = function() { logoInput.click(); };
+        
+        logoInput.onchange = function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(ev) {
+                    var img = new Image();
+                    img.onload = function() {
+                        logoImage = img;
+                        logoPreview.src = ev.target.result;
+                        logoPreviewContainer.classList.add('show');
+                        logoUploadBtn.classList.add('has-logo');
+                        logoUploadBtn.textContent = '✓ Logo Loaded';
+                        renderPreviews();
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            e.target.value = '';
+        };
+        
+        logoRemoveBtn.onclick = function() {
+            logoImage = null;
+            logoPreview.src = '';
+            logoPreviewContainer.classList.remove('show');
+            logoUploadBtn.classList.remove('has-logo');
+            logoUploadBtn.textContent = '📤 Upload Logo (PNG/JPG)';
+            renderPreviews();
+        };
+        
+        // ==================
+        // PREVIEW RENDERING
+        // ==================
+        function renderPreviews() {
+            var cards = previewGrid.querySelectorAll('.preview-card');
+            for (var i = 0; i < cards.length; i++) cards[i].remove();
+            
+            for (var i = 0; i < images.length; i++) {
+                createPreviewCard(images[i]);
+            }
+        }
+        
+        function createPreviewCard(imgData) {
+            var card = document.createElement('div');
+            card.className = 'preview-card';
+            
+            var canvasWrap = document.createElement('div');
+            canvasWrap.className = 'preview-card-canvas';
+            
+            var canvas = document.createElement('canvas');
+            
+            var info = document.createElement('div');
+            info.className = 'preview-card-info';
+            info.innerHTML = '<span>' + imgData.name.substring(0, 25) + '</span><span>' + imgData.w + '×' + imgData.h + '</span>';
+            
+            canvasWrap.appendChild(canvas);
+            card.appendChild(canvasWrap);
+            card.appendChild(info);
+            previewGrid.appendChild(card);
+            
+            drawPreviewHiDPI(canvas, imgData);
+        }
+        
+        function drawPreviewHiDPI(canvas, imgData) {
+            var dpr = getDPR();
+            
+            var maxDisplayW = 280;
+            var maxDisplayH = 220;
+            var displayScale = Math.min(maxDisplayW / imgData.w, maxDisplayH / imgData.h, 1);
+            var displayW = Math.round(imgData.w * displayScale);
+            var displayH = Math.round(imgData.h * displayScale);
+            
+            canvas.width = displayW * dpr;
+            canvas.height = displayH * dpr;
+            canvas.style.width = displayW + 'px';
+            canvas.style.height = displayH + 'px';
+            
+            var ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
+            ctx.drawImage(imgData.img, 0, 0, displayW, displayH);
+            
+            // Draw text watermark first
+            if (settings.textEnabled) {
+                drawTextWatermark(ctx, displayW, displayH, displayScale);
+            }
+            
+            // Draw logo watermark on top
+            if (settings.logoEnabled && logoImage) {
+                drawLogoWatermark(ctx, displayW, displayH, displayScale);
+            }
+        }
+        
+        function drawTextWatermark(ctx, canvasW, canvasH, scale) {
+            var fontSize = Math.round(settings.size * scale);
+            
+            ctx.save();
+            ctx.globalAlpha = settings.opacity / 100;
+            ctx.font = 'bold ' + fontSize + 'px ' + settings.font;
+            ctx.fillStyle = settings.color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            if (settings.tiled) {
+                var spacing = fontSize * 6;
+                var rotation = settings.angle * Math.PI / 180;
+                
+                for (var y = -canvasH; y < canvasH * 2; y += spacing) {
+                    for (var x = -canvasW; x < canvasW * 2; x += spacing) {
+                        ctx.save();
+                        ctx.translate(x, y);
+                        ctx.rotate(rotation);
+                        ctx.fillText(settings.text, 0, 0);
+                        ctx.restore();
+                    }
+                }
+            } else {
+                var pos = getPositionCoords(settings.position, canvasW, canvasH, scale, 0, 0);
+                ctx.fillText(settings.text, pos.x, pos.y);
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawLogoWatermark(ctx, canvasW, canvasH, scale) {
+            if (!logoImage) return;
+            
+            ctx.save();
+            ctx.globalAlpha = settings.opacity / 100;
+            
+            // Calculate logo size based on percentage of canvas width
+            var logoW = canvasW * (settings.logoSize / 100);
+            var logoH = (logoImage.height / logoImage.width) * logoW;
+            
+            var padding = 20 * scale;
+            var pos = getLogoPosition(settings.logoPosition, canvasW, canvasH, logoW, logoH, padding);
+            
+            ctx.drawImage(logoImage, pos.x, pos.y, logoW, logoH);
+            ctx.restore();
+        }
+        
+        function getPositionCoords(position, canvasW, canvasH, scale, offsetX, offsetY) {
+            var m = 30 * scale;
+            var x, y;
+            switch (position) {
+                case 'tl': x = m + 50 * scale; y = m + 20 * scale; break;
+                case 'tr': x = canvasW - m - 50 * scale; y = m + 20 * scale; break;
+                case 'bl': x = m + 50 * scale; y = canvasH - m - 20 * scale; break;
+                case 'br': x = canvasW - m - 50 * scale; y = canvasH - m - 20 * scale; break;
+                default: x = canvasW / 2; y = canvasH / 2;
+            }
+            return { x: x + offsetX, y: y + offsetY };
+        }
+        
+        function getLogoPosition(position, canvasW, canvasH, logoW, logoH, padding) {
+            var x, y;
+            switch (position) {
+                case 'tl': x = padding; y = padding; break;
+                case 'tr': x = canvasW - logoW - padding; y = padding; break;
+                case 'bl': x = padding; y = canvasH - logoH - padding; break;
+                case 'br': x = canvasW - logoW - padding; y = canvasH - logoH - padding; break;
+                default: x = (canvasW - logoW) / 2; y = (canvasH - logoH) / 2;
+            }
+            return { x: x, y: y };
+        }
+        
+        // ==================
+        // SETTINGS LISTENERS
+        // ==================
+        
+        // Text watermark controls
+        document.getElementById('textEnabled').onchange = function() {
+            settings.textEnabled = this.checked;
+            document.getElementById('textOptions').classList.toggle('hidden', !this.checked);
+            renderPreviews();
+        };
+        
+        document.getElementById('wmText').oninput = function() { 
+            settings.text = this.value || '©'; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('wmFont').onchange = function() { 
+            settings.font = this.value; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('wmSize').oninput = function() { 
+            settings.size = +this.value; 
+            document.getElementById('wmSizeVal').textContent = this.value + 'px'; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('wmColor').oninput = function() { 
+            settings.color = this.value; 
+            document.getElementById('wmColorVal').textContent = this.value.toUpperCase(); 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('wmTiled').onchange = function() {
+            settings.tiled = this.checked;
+            document.getElementById('tiledOptions').classList.toggle('hidden', !this.checked);
+            document.getElementById('singleOptions').classList.toggle('hidden', this.checked);
+            renderPreviews();
+        };
+        
+        document.getElementById('wmAngle').oninput = function() { 
+            settings.angle = +this.value; 
+            document.getElementById('wmAngleVal').textContent = this.value + '°'; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('wmPosition').onchange = function() { 
+            settings.position = this.value; 
+            renderPreviews(); 
+        };
+        
+        // Logo watermark controls
+        document.getElementById('logoEnabled').onchange = function() {
+            settings.logoEnabled = this.checked;
+            document.getElementById('logoOptions').classList.toggle('hidden', !this.checked);
+            renderPreviews();
+        };
+        
+        document.getElementById('logoSize').oninput = function() { 
+            settings.logoSize = +this.value; 
+            document.getElementById('logoSizeVal').textContent = this.value + '%'; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('logoPosition').onchange = function() { 
+            settings.logoPosition = this.value; 
+            renderPreviews(); 
+        };
+        
+        // Global settings
+        document.getElementById('wmOpacity').oninput = function() { 
+            settings.opacity = +this.value; 
+            document.getElementById('wmOpacityVal').textContent = this.value + '%'; 
+            renderPreviews(); 
+        };
+        
+        document.getElementById('outputFormat').onchange = function() { 
+            settings.format = this.value; 
+        };
+        
+        document.getElementById('filePrefix').oninput = function() { 
+            settings.prefix = this.value || 'image'; 
+        };
+        
+        // ==================
+        // ZIP DOWNLOAD - FULL RESOLUTION
+        // ==================
+        document.getElementById('downloadBtn').onclick = function() {
+            if (!images.length) { alert('Add images first'); return; }
+            
+            var zip = new JSZip();
+            var btn = this;
+            var prog = document.getElementById('progress');
+            var fill = document.getElementById('progressFill');
+            var text = document.getElementById('progressText');
+            
+            btn.disabled = true;
+            prog.classList.add('show');
+            
+            var ts = Date.now();
+            var idx = 0;
+            
+            function processNext() {
+                if (idx >= images.length) {
+                    text.textContent = 'Creating ZIP...';
+                    zip.generateAsync({ type: 'blob' }).then(function(blob) {
+                        var url = URL.createObjectURL(blob);
+                        var a = document.createElement('a');
+                        a.href = url;
+                        a.download = settings.prefix + '_' + ts + '.zip';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        setTimeout(function() {
+                            URL.revokeObjectURL(url);
+                        }, 1000);
+                        prog.classList.remove('show');
+                        btn.disabled = false;
+                    });
+                    return;
+                }
+                
+                var imgData = images[idx];
+                text.textContent = (idx + 1) + ' / ' + images.length;
+                fill.style.width = ((idx + 1) / images.length * 100) + '%';
+                
+                // Create FULL resolution canvas
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                
+                canvas.width = imgData.w;
+                canvas.height = imgData.h;
+                
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                
+                // Draw original image at full resolution
+                ctx.drawImage(imgData.img, 0, 0, imgData.w, imgData.h);
+                
+                // Draw text watermark at full resolution (scale = 1)
+                if (settings.textEnabled) {
+                    drawTextWatermarkFull(ctx, imgData.w, imgData.h);
+                }
+                
+                // Draw logo watermark at full resolution
+                if (settings.logoEnabled && logoImage) {
+                    drawLogoWatermarkFull(ctx, imgData.w, imgData.h);
+                }
+                
+                // Generate unique filename
+                var ext = settings.format === 'jpeg' ? 'jpg' : 'png';
+                var uniqueId = ts + '_' + idx + '_' + Math.random().toString(36).substr(2, 6);
+                var filename = settings.prefix + '_' + uniqueId + '.' + ext;
+                
+                // Export with maximum quality
+                var mimeType = 'image/' + settings.format;
+                var quality = settings.format === 'jpeg' ? 0.98 : undefined;
+                
+                canvas.toBlob(function(blob) {
+                    zip.file(filename, blob);
+                    idx++;
+                    setTimeout(processNext, 50);
+                }, mimeType, quality);
+            }
+            
+            processNext();
+        };
+        
+        function drawTextWatermarkFull(ctx, canvasW, canvasH) {
+            var fontSize = settings.size;
+            
+            ctx.save();
+            ctx.globalAlpha = settings.opacity / 100;
+            ctx.font = 'bold ' + fontSize + 'px ' + settings.font;
+            ctx.fillStyle = settings.color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            if (settings.tiled) {
+                var spacing = fontSize * 6;
+                var rotation = settings.angle * Math.PI / 180;
+                
+                for (var y = -canvasH; y < canvasH * 2; y += spacing) {
+                    for (var x = -canvasW; x < canvasW * 2; x += spacing) {
+                        ctx.save();
+                        ctx.translate(x, y);
+                        ctx.rotate(rotation);
+                        ctx.fillText(settings.text, 0, 0);
+                        ctx.restore();
+                    }
+                }
+            } else {
+                var pos = getPositionCoords(settings.position, canvasW, canvasH, 1, 0, 0);
+                ctx.fillText(settings.text, pos.x, pos.y);
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawLogoWatermarkFull(ctx, canvasW, canvasH) {
+            if (!logoImage) return;
+            
+            ctx.save();
+            ctx.globalAlpha = settings.opacity / 100;
+            
+            // Calculate logo size at full resolution
+            var logoW = canvasW * (settings.logoSize / 100);
+            var logoH = (logoImage.height / logoImage.width) * logoW;
+            
+            var padding = 20;
+            var pos = getLogoPosition(settings.logoPosition, canvasW, canvasH, logoW, logoH, padding);
+            
+            ctx.drawImage(logoImage, pos.x, pos.y, logoW, logoH);
+            ctx.restore();
+        }
+        
+    })();
+    </script>
+</body>
+</html>
