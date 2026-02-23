@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNG Upscaler Pro</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0a; --surface: #141414; --surface-2: #1a1a1a; --border: #2a2a2a;
+      --text: #f5f5f5; --text-dim: #a1a1a1; --text-muted: #6b6b6b;
+      --accent: #10b981;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .subtitle { color: var(--text-muted); margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: 360px 1fr; gap: 20px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .panel-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 30px 20px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
+    .upload-zone:hover { border-color: var(--accent); background: rgba(16, 185, 129, 0.05); }
+    .upload-zone.dragover { border-color: var(--accent); background: rgba(16, 185, 129, 0.1); }
+    .upload-zone svg { width: 32px; height: 32px; color: var(--text-muted); margin-bottom: 8px; }
+    .upload-text { color: var(--text-dim); font-size: 14px; }
+    .upload-hint { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+    .hidden { display: none !important; }
+    .settings-group { margin-bottom: 16px; }
+    .settings-group > label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+    .size-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+    .btn { padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; }
+    .btn-secondary { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--border); color: var(--text); }
+    .btn-secondary.active { background: var(--accent); color: #000; border-color: var(--accent); }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    input[type="number"] { width: 100%; padding: 8px 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; }
+    input[type="number"]:focus { outline: none; border-color: var(--accent); }
+    .action-bar { display: flex; gap: 8px; margin-top: 20px; }
+    .action-bar .btn { flex: 1; padding: 12px; }
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .result-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .result-card-preview { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: repeating-conic-gradient(#333 0% 25%, #222 0% 50%) 50% / 16px 16px; }
+    .result-card-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .result-card-info { padding: 12px; }
+    .result-card-name { font-size: 12px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .result-card-dims { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+    .result-card-size { font-size: 11px; color: var(--accent); margin-bottom: 8px; }
+    .result-card .btn { width: 100%; padding: 8px; font-size: 11px; }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); grid-column: 1 / -1; }
+    .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5; }
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 12px; }
+    .progress-bar-fill { height: 100%; background: var(--accent); transition: width 0.15s; }
+    .progress-text { font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: center; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .info-box { background: var(--surface-2); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+    .info-box strong { color: var(--text); }
+    .input-row { display: flex; gap: 8px; align-items: center; }
+    .input-row input { flex: 1; }
+    .input-row span { color: var(--text-muted); font-size: 12px; }
+    .mode-card { background: var(--surface-2); border: 2px solid var(--border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; }
+    .mode-card:hover { border-color: var(--text-muted); }
+    .mode-card.active { border-color: var(--accent); background: rgba(16, 185, 129, 0.1); }
+    .mode-card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .mode-card-desc { font-size: 11px; color: var(--text-muted); }
+    .modes-grid { display: grid; gap: 8px; }
+    .quality-indicator { display: flex; align-items: center; gap: 6px; font-size: 11px; margin-top: 4px; }
+    .quality-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .quality-dot.good { background: #10b981; }
+    .quality-dot.ok { background: #eab308; }
+    .quality-dot.poor { background: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 PNG Upscaler Pro</h1>
+    <p class="subtitle">Upscale PNGs with transparency preserved • Exact aspect ratio • Max size under 20MB</p>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="panel-title">Settings</div>
+
+        <div class="upload-zone" id="uploadZone">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="upload-text">Drop PNG images</div>
+          <div class="upload-hint">Transparency preserved • Die-cut safe</div>
+        </div>
+        <input type="file" id="fileInput" accept="image/png,image/*" multiple class="hidden">
+
+        <div class="info-box" id="sourceInfo" style="display:none;">
+          <strong id="sourceCount">0</strong> image(s) loaded
+          <div id="sourceDetails" style="margin-top:4px;"></div>
+        </div>
+
+        <div class="settings-group">
+          <label>Upscale Mode</label>
+          <div class="modes-grid" id="modeCards">
+            <div class="mode-card active" data-mode="max20mb">
+              <div class="mode-card-title">📦 Maximum (under 20MB)</div>
+              <div class="mode-card-desc">Largest size under Etsy's 20MB limit</div>
+            </div>
+            <div class="mode-card" data-mode="preset">
+              <div class="mode-card-title">📐 Target Edge Size</div>
+              <div class="mode-card-desc">Scale longest edge to specific size</div>
+            </div>
+            <div class="mode-card" data-mode="scale">
+              <div class="mode-card-title">✖️ Scale Factor</div>
+              <div class="mode-card-desc">Multiply dimensions by 2×, 3×, etc.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-group hidden" id="presetGroup">
+          <label>Target Edge (longest side)</label>
+          <div class="size-buttons" id="presetButtons">
+            <button class="btn btn-secondary" data-size="3000">3000px</button>
+            <button class="btn btn-secondary" data-size="3600">3600px</button>
+            <button class="btn btn-secondary active" data-size="4500">4500px</button>
+            <button class="btn btn-secondary" data-size="5400">5400px</button>
+            <button class="btn btn-secondary" data-size="6000">6000px</button>
+          </div>
+        </div>
+
+        <div class="settings-group hidden" id="scaleGroup">
+          <label>Scale Factor</label>
+          <div class="size-buttons" id="scaleButtons">
+            <button class="btn btn-secondary" data-scale="2">2×</button>
+            <button class="btn btn-secondary active" data-scale="3">3×</button>
+            <button class="btn btn-secondary" data-scale="4">4×</button>
+            <button class="btn btn-secondary" data-scale="5">5×</button>
+            <button class="btn btn-secondary" data-scale="6">6×</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="settings-group">
+          <label>Sharpening: <span id="sharpVal">Medium</span></label>
+          <input type="range" id="sharpening" min="0" max="4" value="2">
+        </div>
+
+        <div class="settings-group">
+          <label>Quality: <span id="stepsVal">High</span></label>
+          <input type="range" id="steps" min="1" max="5" value="3">
+        </div>
+
+        <div class="action-bar">
+          <button class="btn btn-secondary" id="clearBtn" disabled>Clear</button>
+          <button class="btn btn-primary" id="processBtn" disabled>⚡ Upscale</button>
+        </div>
+
+        <div class="progress-bar hidden" id="progressBar">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text hidden" id="progressText"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Results</div>
+        <div class="results-grid" id="resultsGrid">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <p>Upload PNG images to upscale</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let sourceImages = [];
+    let results = [];
+
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const processBtn = document.getElementById('processBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    uploadZone.onclick = () => fileInput.click();
+    uploadZone.ondragover = e => { e.preventDefault(); uploadZone.classList.add('dragover'); };
+    uploadZone.ondragleave = () => uploadZone.classList.remove('dragover');
+    uploadZone.ondrop = e => { e.preventDefault(); uploadZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); };
+    fileInput.onchange = e => handleFiles(e.target.files);
+
+    document.querySelectorAll('#modeCards .mode-card').forEach(card => {
+      card.onclick = () => {
+        document.querySelectorAll('#modeCards .mode-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const mode = card.dataset.mode;
+        document.getElementById('presetGroup').classList.toggle('hidden', mode !== 'preset');
+        document.getElementById('scaleGroup').classList.toggle('hidden', mode !== 'scale');
+      };
+    });
+
+    document.querySelectorAll('#presetButtons button').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#presetButtons button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+
+    document.querySelectorAll('#scaleButtons button').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#scaleButtons button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+
+    const sharpLabels = ['None', 'Light', 'Medium', 'Strong', 'Maximum'];
+    document.getElementById('sharpening').oninput = e => {
+      document.getElementById('sharpVal').textContent = sharpLabels[e.target.value];
+    };
+
+    const stepsLabels = ['Fast', 'Quick', 'High', 'Very High', 'Maximum'];
+    document.getElementById('steps').oninput = e => {
+      document.getElementById('stepsVal').textContent = stepsLabels[e.target.value - 1];
+    };
+
+    clearBtn.onclick = () => {
+      sourceImages = [];
+      results = [];
+      document.getElementById('sourceInfo').style.display = 'none';
+      processBtn.disabled = true;
+      clearBtn.disabled = true;
+      renderResults();
+    };
+
+    processBtn.onclick = processImages;
+
+    async function handleFiles(files) {
+      for (const file of Array.from(files).filter(f => f.type.startsWith('image/'))) {
+        const dataUrl = await readFile(file);
+        const img = await loadImage(dataUrl);
+        sourceImages.push({ 
+          name: file.name.replace(/\.[^/.]+$/, ''), 
+          img, 
+          width: img.width, 
+          height: img.height,
+          hasAlpha: await checkAlpha(img)
+        });
+      }
+      
+      if (sourceImages.length > 0) {
+        document.getElementById('sourceInfo').style.display = 'block';
+        document.getElementById('sourceCount').textContent = sourceImages.length;
+        
+        const details = sourceImages.map(s => 
+          `${s.name}: ${s.width}×${s.height}${s.hasAlpha ? ' ✓ transparent' : ''}`
+        ).slice(0, 3).join('<br>');
+        document.getElementById('sourceDetails').innerHTML = details + 
+          (sourceImages.length > 3 ? `<br>...and ${sourceImages.length - 3} more` : '');
+        
+        processBtn.disabled = false;
+        clearBtn.disabled = false;
+      }
+    }
+
+    function readFile(file) {
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function loadImage(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.src = src;
+      });
+    }
+
+    async function checkAlpha(img) {
+      const canvas = document.createElement('canvas');
+      const size = Math.min(100, img.width, img.height);
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      const data = ctx.getImageData(0, 0, size, size).data;
+      for (let i = 3; i < data.length; i += 4) {
+        if (data[i] < 255) return true;
+      }
+      return false;
+    }
+
+    // Step-wise upscaling - preserves exact aspect ratio and alpha
+    function stepUpscale(img, targetW, targetH, steps) {
+      let current = document.createElement('canvas');
+      current.width = img.width;
+      current.height = img.height;
+      let ctx = current.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const totalScaleX = targetW / img.width;
+      const totalScaleY = targetH / img.height;
+      
+      if (totalScaleX <= 1 && totalScaleY <= 1) {
+        const result = document.createElement('canvas');
+        result.width = targetW;
+        result.height = targetH;
+        const rCtx = result.getContext('2d');
+        rCtx.imageSmoothingEnabled = true;
+        rCtx.imageSmoothingQuality = 'high';
+        rCtx.drawImage(img, 0, 0, targetW, targetH);
+        return result;
+      }
+      
+      const stepScaleX = Math.pow(totalScaleX, 1 / steps);
+      const stepScaleY = Math.pow(totalScaleY, 1 / steps);
+      
+      for (let i = 0; i < steps; i++) {
+        const isLast = (i === steps - 1);
+        const newW = isLast ? targetW : Math.round(current.width * stepScaleX);
+        const newH = isLast ? targetH : Math.round(current.height * stepScaleY);
+        
+        const next = document.createElement('canvas');
+        next.width = newW;
+        next.height = newH;
+        const nextCtx = next.getContext('2d');
+        
+        nextCtx.imageSmoothingEnabled = true;
+        nextCtx.imageSmoothingQuality = 'high';
+        nextCtx.drawImage(current, 0, 0, newW, newH);
+        
+        current = next;
+      }
+      
+      return current;
+    }
+
+    // Sharpen preserving alpha
+    function applySharpen(canvas, amount) {
+      if (amount === 0) return canvas;
+      
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const data = imageData.data;
+      
+      const strength = [0, 0.25, 0.45, 0.7, 1.0][amount];
+      
+      const kernel = [
+        0, -strength, 0,
+        -strength, 1 + 4 * strength, -strength,
+        0, -strength, 0
+      ];
+      
+      const output = new Uint8ClampedArray(data.length);
+      
+      for (let i = 0; i < data.length; i += 4) {
+        output[i + 3] = data[i + 3];
+      }
+      
+      for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+          const idx = (y * w + x) * 4;
+          
+          if (data[idx + 3] > 0) {
+            for (let c = 0; c < 3; c++) {
+              let sum = 0;
+              for (let ky = -1; ky <= 1; ky++) {
+                for (let kx = -1; kx <= 1; kx++) {
+                  const srcIdx = ((y + ky) * w + (x + kx)) * 4 + c;
+                  sum += data[srcIdx] * kernel[(ky + 1) * 3 + (kx + 1)];
+                }
+              }
+              output[idx + c] = Math.max(0, Math.min(255, Math.round(sum)));
+            }
+          } else {
+            output[idx] = output[idx + 1] = output[idx + 2] = 0;
+          }
+        }
+      }
+      
+      for (let x = 0; x < w; x++) {
+        for (let c = 0; c < 4; c++) {
+          output[x * 4 + c] = data[x * 4 + c];
+          output[((h - 1) * w + x) * 4 + c] = data[((h - 1) * w + x) * 4 + c];
+        }
+      }
+      for (let y = 0; y < h; y++) {
+        for (let c = 0; c < 4; c++) {
+          output[(y * w) * 4 + c] = data[(y * w) * 4 + c];
+          output[(y * w + w - 1) * 4 + c] = data[(y * w + w - 1) * 4 + c];
+        }
+      }
+      
+      ctx.putImageData(new ImageData(output, w, h), 0, 0);
+      return canvas;
+    }
+
+    async function getPngSize(canvas) {
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      return blob.size;
+    }
+
+    // Find max size under 20MB while keeping EXACT aspect ratio
+    async function findMaxSizeUnder20MB(img, steps, sharpening) {
+      const MAX_SIZE = 20 * 1024 * 1024;
+      const ratio = img.width / img.height;
+      
+      // Test original size first
+      const testCanvas = document.createElement('canvas');
+      testCanvas.width = img.width;
+      testCanvas.height = img.height;
+      testCanvas.getContext('2d').drawImage(img, 0, 0);
+      const origSize = await getPngSize(testCanvas);
+      const bytesPerPixel = origSize / (img.width * img.height);
+      
+      // Estimate max pixels
+      const estMaxPixels = MAX_SIZE / (bytesPerPixel * 0.8);
+      const estMaxEdge = Math.sqrt(estMaxPixels * Math.max(ratio, 1 / ratio));
+      
+      let low = Math.max(img.width, img.height);
+      let high = Math.min(15000, Math.ceil(estMaxEdge));
+      let bestCanvas = null;
+      let bestSize = 0;
+      
+      // Binary search
+      for (let i = 0; i < 8; i++) {
+        const mid = Math.floor((low + high) / 2);
+        
+        // Calculate exact dimensions preserving ratio
+        let testW, testH;
+        if (img.width >= img.height) {
+          testW = mid;
+          testH = Math.round(mid / ratio);
+        } else {
+          testH = mid;
+          testW = Math.round(mid * ratio);
+        }
+        
+        const canvas = stepUpscale(img, testW, testH, steps);
+        applySharpen(canvas, sharpening);
+        
+        const size = await getPngSize(canvas);
+        
+        if (size <= MAX_SIZE) {
+          if (mid > bestSize) {
+            bestSize = mid;
+            bestCanvas = canvas;
+          }
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+      
+      if (!bestCanvas) {
+        // Fallback to original
+        bestCanvas = testCanvas;
+      }
+      
+      return bestCanvas;
+    }
+
+    async function processImages() {
+      const mode = document.querySelector('#modeCards .mode-card.active').dataset.mode;
+      const sharpening = parseInt(document.getElementById('sharpening').value);
+      const steps = parseInt(document.getElementById('steps').value);
+
+      results = [];
+      processBtn.disabled = true;
+      progressBar.classList.remove('hidden');
+      progressText.classList.remove('hidden');
+
+      for (let i = 0; i < sourceImages.length; i++) {
+        const src = sourceImages[i];
+        progressText.textContent = `Processing ${i + 1}/${sourceImages.length}: ${src.name}`;
+        progressFill.style.width = ((i + 0.2) / sourceImages.length * 100) + '%';
+
+        let canvas;
+        const ratio = src.width / src.height;
+
+        if (mode === 'max20mb') {
+          canvas = await findMaxSizeUnder20MB(src.img, steps, sharpening);
+        } else if (mode === 'preset') {
+          const targetEdge = parseInt(document.querySelector('#presetButtons .active').dataset.size);
+          let finalW, finalH;
+          // Keep EXACT aspect ratio
+          if (src.width >= src.height) {
+            finalW = targetEdge;
+            finalH = Math.round(targetEdge / ratio);
+          } else {
+            finalH = targetEdge;
+            finalW = Math.round(targetEdge * ratio);
+          }
+          canvas = stepUpscale(src.img, finalW, finalH, steps);
+          applySharpen(canvas, sharpening);
+        } else if (mode === 'scale') {
+          const scale = parseInt(document.querySelector('#scaleButtons .active').dataset.scale);
+          // Keep EXACT aspect ratio
+          const finalW = src.width * scale;
+          const finalH = src.height * scale;
+          canvas = stepUpscale(src.img, finalW, finalH, steps);
+          applySharpen(canvas, sharpening);
+        }
+
+        progressFill.style.width = ((i + 0.8) / sourceImages.length * 100) + '%';
+
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+        const url = URL.createObjectURL(blob);
+        
+        const finalW = canvas.width;
+        const finalH = canvas.height;
+        const fileSizeMB = (blob.size / (1024 * 1024)).toFixed(2);
+        
+        const scaleFactor = Math.max(finalW / src.width, finalH / src.height);
+        let quality = 'good';
+        if (scaleFactor > 4) quality = 'poor';
+        else if (scaleFactor > 2.5) quality = 'ok';
+
+        results.push({
+          name: src.name,
+          url,
+          blob,
+          width: finalW,
+          height: finalH,
+          pixels: `${finalW} × ${finalH}`,
+          fileSize: `${fileSizeMB} MB`,
+          quality,
+          scaleFactor: scaleFactor.toFixed(1),
+          hasAlpha: src.hasAlpha
+        });
+
+        progressFill.style.width = ((i + 1) / sourceImages.length * 100) + '%';
+        await new Promise(r => setTimeout(r, 30));
+      }
+
+      progressBar.classList.add('hidden');
+      progressText.classList.add('hidden');
+      processBtn.disabled = false;
+      renderResults();
+    }
+
+    function renderResults() {
+      if (results.length === 0) {
+        resultsGrid.innerHTML = `<div class="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Upload PNG images to upscale</p>
+        </div>`;
+        return;
+      }
+
+      resultsGrid.innerHTML = results.map((r, i) => `
+        <div class="result-card">
+          <div class="result-card-preview">
+            <img src="${r.url}" alt="${r.name}">
+          </div>
+          <div class="result-card-info">
+            <div class="result-card-name">${r.name}</div>
+            <div class="result-card-dims">${r.pixels}${r.hasAlpha ? ' • transparent' : ''}</div>
+            <div class="result-card-size">${r.fileSize}</div>
+            <div class="quality-indicator">
+              <span class="quality-dot ${r.quality}"></span>
+              <span>${r.scaleFactor}× scale</span>
+            </div>
+            <button class="btn btn-primary" style="margin-top:8px;" onclick="downloadResult(${i})">⬇️ Download PNG</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.downloadResult = (index) => {
+      const r = results[index];
+      const a = document.createElement('a');
+      a.href = r.url;
+      a.download = `${r.name}_${r.width}x${r.height}.png`;
+      a.click();
+    };
+
+    renderResults();
+  </script>
+</body>
+</html>
