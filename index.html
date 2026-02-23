@@ -1,335 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ElephantTools - Digital Product Creation Toolkit</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg: #0a0a0a;
-      --surface: #141414;
-      --surface-2: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #f5f5f5;
-      --text-dim: #a1a1a1;
-      --text-muted: #6b6b6b;
-      --accent: #10b981;
-      --accent-hover: #059669;
-    }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-    .header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .logo-icon { font-size: 28px; }
-    .logo span { color: var(--accent); }
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 48px 24px;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .hero h1 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .hero p {
-      color: var(--text-dim);
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .tool-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.2s ease;
-      display: block;
-    }
-    .tool-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
-    }
-    .tool-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-    .tool-card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .tool-card p {
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .footer {
-      text-align: center;
-      padding: 32px 24px;
-      color: var(--text-muted);
-      font-size: 14px;
-      border-top: 1px solid var(--border);
-      margin-top: 48px;
-    }
-    /* Access Code Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-    .modal-overlay.hidden { display: none; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-    .modal-icon { font-size: 48px; margin-bottom: 16px; }
-    .modal h2 { font-size: 20px; margin-bottom: 8px; }
-    .modal p { color: var(--text-dim); font-size: 14px; margin-bottom: 24px; }
-    .modal input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 16px;
-      text-align: center;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-    }
-    .modal input:focus { outline: none; border-color: var(--accent); }
-    .modal button {
-      width: 100%;
-      padding: 12px;
-      background: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .modal button:hover { background: var(--accent-hover); }
-    .modal .error {
-      color: #ef4444;
-      font-size: 13px;
-      margin-top: 12px;
-      display: none;
-    }
-    .modal .error.show { display: block; }
-    .modal .purchase-link {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .modal .purchase-link a { color: var(--accent); text-decoration: none; }
-    .modal .purchase-link a:hover { text-decoration: underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElephantTools - Digital Product Creation Toolkit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface-2: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #f5f5f5;
+            --text-dim: #a1a1a1;
+            --text-muted: #6b6b6b;
+            --accent: #10b981;
+            --accent-hover: #0ea472;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .tagline {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.1);
+        }
+
+        .tool-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .tool-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .tool-desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Access Code Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal-logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .modal p {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 16px;
+            margin-bottom: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal button:hover {
+            background: var(--accent-hover);
+        }
+
+        .modal .error {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .modal .error.show {
+            display: block;
+        }
+
+        .modal .purchase-link {
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .modal .purchase-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .modal .purchase-link a:hover {
+            text-decoration: underline;
+        }
+
+        .content-locked {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 20px;
+            }
+            .logo {
+                font-size: 36px;
+            }
+            .brand {
+                font-size: 22px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon">🐘</span>
-        <span>Elephant</span>Tools
-      </div>
+    <header class="header">
+        <div class="logo">🐘</div>
+        <div class="brand">Elephant<span>Tools</span></div>
+        <p class="tagline">Professional tools for creating digital products for Etsy, online stores, and creative projects.</p>
+    </header>
+
+    <main class="container" id="content">
+        <h1>Digital Product Creation Toolkit</h1>
+        <p class="subtitle">17 powerful tools to create, enhance, and sell digital products</p>
+
+        <div class="tools-grid">
+            <a href="bundle-creator.html" class="tool-card">
+                <div class="tool-icon">📦</div>
+                <div class="tool-name">Bundle Creator</div>
+                <div class="tool-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
+            </a>
+
+            <a href="clip-art-packager.html" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <div class="tool-name">Clip Art Packager</div>
+                <div class="tool-desc">Browse and download curated clipart collections for your creative projects.</div>
+            </a>
+
+            <a href="color-palette.html" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <div class="tool-name">Color Palette Generator</div>
+                <div class="tool-desc">Extract beautiful color palettes from images for your design projects.</div>
+            </a>
+
+            <a href="color-variants.html" class="tool-card">
+                <div class="tool-icon">🌈</div>
+                <div class="tool-name">Color Variants Creator</div>
+                <div class="tool-desc">Generate multiple color variations of your designs instantly.</div>
+            </a>
+
+            <a href="etsy-thumbnail-creator.html" class="tool-card">
+                <div class="tool-icon">🖼️</div>
+                <div class="tool-name">Etsy Thumbnail Creator <span class="tool-badge">NEW</span></div>
+                <div class="tool-desc">Add padding to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
+            </a>
+
+            <a href="greeting-cards.html" class="tool-card">
+                <div class="tool-icon">💌</div>
+                <div class="tool-name">Greeting Cards Designer</div>
+                <div class="tool-desc">Design beautiful greeting cards with custom text and layouts.</div>
+            </a>
+
+            <a href="invitations.html" class="tool-card">
+                <div class="tool-icon">✉️</div>
+                <div class="tool-name">Invitation Maker</div>
+                <div class="tool-desc">Create stunning invitations for events, parties, and special occasions.</div>
+            </a>
+
+            <a href="journal-builder.html" class="tool-card">
+                <div class="tool-icon">📓</div>
+                <div class="tool-name">Journal Builder</div>
+                <div class="tool-desc">Design custom journal pages and planners with templates and layouts.</div>
+            </a>
+
+            <a href="kids-cards.html" class="tool-card">
+                <div class="tool-icon">🎈</div>
+                <div class="tool-name">Kids Cards Creator</div>
+                <div class="tool-desc">Make fun and colorful cards perfect for children's events and activities.</div>
+            </a>
+
+            <a href="photo-composer.html" class="tool-card">
+                <div class="tool-icon">🖼️</div>
+                <div class="tool-name">Photo Composer</div>
+                <div class="tool-desc">Combine multiple photos into beautiful compositions and collages.</div>
+            </a>
+
+            <a href="png-upscaler.html" class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <div class="tool-name">PNG Upscaler</div>
+                <div class="tool-desc">Upscale PNG images to higher resolutions while maintaining quality.</div>
+            </a>
+
+            <a href="png-upscaler-pro-1.html" class="tool-card">
+                <div class="tool-icon">🔬</div>
+                <div class="tool-name">PNG Upscaler Pro <span class="tool-badge">NEW</span></div>
+                <div class="tool-desc">Advanced upscaling with transparency preservation, max 20MB output, and exact aspect ratio.</div>
+            </a>
+
+            <a href="shop-banner.html" class="tool-card">
+                <div class="tool-icon">🏪</div>
+                <div class="tool-name">Shop Banner Creator</div>
+                <div class="tool-desc">Design eye-catching banners for your Etsy shop or online store.</div>
+            </a>
+
+            <a href="simple-frames.html" class="tool-card">
+                <div class="tool-icon">🖼️</div>
+                <div class="tool-name">Simple Frames</div>
+                <div class="tool-desc">Add elegant frames and borders to your images with just a few clicks.</div>
+            </a>
+
+            <a href="sticker-builder.html" class="tool-card">
+                <div class="tool-icon">⭐</div>
+                <div class="tool-name">Sticker Builder</div>
+                <div class="tool-desc">Create printable sticker sheets with custom designs and layouts.</div>
+            </a>
+
+            <a href="wall-art-resizer.html" class="tool-card">
+                <div class="tool-icon">🎯</div>
+                <div class="tool-name">Wall Art Resizer</div>
+                <div class="tool-desc">Resize and format images for wall art prints in standard frame sizes.</div>
+            </a>
+
+            <a href="WatermarkStudioPro.html" class="tool-card">
+                <div class="tool-icon">🔒</div>
+                <div class="tool-name">Watermark Studio Pro</div>
+                <div class="tool-desc">Protect your images with text and logo watermarks.</div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2024 ElephantTools by RoyalDex. All rights reserved.
+    </footer>
+
+    <!-- Access Code Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-logo">🐘</div>
+            <h2>Welcome to ElephantTools</h2>
+            <p>Enter your access code to unlock all tools.<br>(Provided with your Etsy purchase)</p>
+            <input type="text" id="accessCode" placeholder="Enter access code" maxlength="20" autocomplete="off">
+            <button id="unlockBtn">Unlock Tools</button>
+            <div class="error" id="errorMsg">Invalid access code. Please check your Etsy purchase email.</div>
+            <div class="purchase-link">
+                Don't have access? <a href="https://elephantshoespopshop.etsy.com" target="_blank">Purchase on Etsy</a>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main class="main">
-    <div class="hero">
-      <h1>Digital Product Creation Toolkit</h1>
-      <p>Professional tools for creating digital products for Etsy, online stores, and creative projects.</p>
-    </div>
+    <script>
+        const VALID_CODES = ['ELEPHANT2024', 'TOOLKIT2024', 'ETSY2024', 'ROYAL2024'];
+        const STORAGE_KEY = 'elephanttools_access';
 
-    <div class="tools-grid">
-      <a href="bundle-creator.html" class="tool-card">
-        <div class="tool-icon">📦</div>
-        <h3>Bundle Creator</h3>
-        <p>Create product bundles with multiple images and layouts for maximum sales impact.</p>
-      </a>
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('content');
+        const codeInput = document.getElementById('accessCode');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const errorMsg = document.getElementById('errorMsg');
 
-      <a href="clip-art-packager.html" class="tool-card">
-        <div class="tool-icon">🎨</div>
-        <h3>Clip Art Packager</h3>
-        <p>Browse and download curated clipart collections for your creative projects.</p>
-      </a>
+        // Check if already unlocked
+        function checkAccess() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved && VALID_CODES.includes(saved)) {
+                unlockTools();
+            } else {
+                content.classList.add('content-locked');
+                modal.classList.remove('hidden');
+            }
+        }
 
-      <a href="color-palette.html" class="tool-card">
-        <div class="tool-icon">🎨</div>
-        <h3>Color Palette Generator</h3>
-        <p>Extract beautiful color palettes from images for your design projects.</p>
-      </a>
+        function unlockTools() {
+            modal.classList.add('hidden');
+            content.classList.remove('content-locked');
+        }
 
-      <a href="color-variants.html" class="tool-card">
-        <div class="tool-icon">🌈</div>
-        <h3>Color Variants Creator</h3>
-        <p>Generate multiple color variations of your designs instantly.</p>
-      </a>
+        unlockBtn.addEventListener('click', () => {
+            const code = codeInput.value.trim().toUpperCase();
+            if (VALID_CODES.includes(code)) {
+                localStorage.setItem(STORAGE_KEY, code);
+                unlockTools();
+            } else {
+                errorMsg.classList.add('show');
+                codeInput.style.borderColor = '#ef4444';
+            }
+        });
 
-      <a href="greeting-cards.html" class="tool-card">
-        <div class="tool-icon">💌</div>
-        <h3>Greeting Cards Designer</h3>
-        <p>Design beautiful greeting cards with custom text and layouts.</p>
-      </a>
+        codeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') unlockBtn.click();
+        });
 
-      <a href="invitations.html" class="tool-card">
-        <div class="tool-icon">✉️</div>
-        <h3>Invitation Maker</h3>
-        <p>Create stunning invitations for events, parties, and special occasions.</p>
-      </a>
+        codeInput.addEventListener('input', () => {
+            errorMsg.classList.remove('show');
+            codeInput.style.borderColor = '';
+        });
 
-      <a href="journal-builder.html" class="tool-card">
-        <div class="tool-icon">📓</div>
-        <h3>Journal Builder</h3>
-        <p>Design custom journal pages and planners with templates and layouts.</p>
-      </a>
-
-      <a href="kids-cards.html" class="tool-card">
-        <div class="tool-icon">🎈</div>
-        <h3>Kids Cards Creator</h3>
-        <p>Make fun and colorful cards perfect for children's events and activities.</p>
-      </a>
-
-      <a href="photo-composer.html" class="tool-card">
-        <div class="tool-icon">🖼️</div>
-        <h3>Photo Composer</h3>
-        <p>Combine multiple photos into beautiful compositions and collages.</p>
-      </a>
-
-      <a href="png-upscaler.html" class="tool-card">
-        <div class="tool-icon">🔍</div>
-        <h3>PNG Upscaler</h3>
-        <p>Upscale PNG images to higher resolutions while maintaining quality.</p>
-      </a>
-
-      <a href="shop-banner.html" class="tool-card">
-        <div class="tool-icon">🏪</div>
-        <h3>Shop Banner Creator</h3>
-        <p>Design eye-catching banners for your Etsy shop or online store.</p>
-      </a>
-
-      <a href="simple-frames.html" class="tool-card">
-        <div class="tool-icon">🖼️</div>
-        <h3>Simple Frames</h3>
-        <p>Add elegant frames and borders to your images with just a few clicks.</p>
-      </a>
-
-      <a href="sticker-builder.html" class="tool-card">
-        <div class="tool-icon">⭐</div>
-        <h3>Sticker Builder</h3>
-        <p>Create printable sticker sheets with custom designs and layouts.</p>
-      </a>
-
-      <a href="wall-art-resizer.html" class="tool-card">
-        <div class="tool-icon">🎯</div>
-        <h3>Wall Art Resizer</h3>
-        <p>Resize and format images for wall art prints in standard frame sizes.</p>
-      </a>
-
-      <a href="WatermarkStudioPro.html" class="tool-card">
-        <div class="tool-icon">🔒</div>
-        <h3>Watermark Studio Pro</h3>
-        <p>Protect your images with text and logo watermarks.</p>
-      </a>
-    </div>
-  </main>
-
-  <footer class="footer">
-    © 2024 ElephantTools by RoyalDex. All rights reserved.
-  </footer>
-
-  <!-- Access Code Modal -->
-  <div class="modal-overlay" id="accessModal">
-    <div class="modal">
-      <div class="modal-icon">🐘</div>
-      <h2>Welcome to ElephantTools</h2>
-      <p>Enter your access code to unlock all tools.<br>(Provided with your Etsy purchase)</p>
-      <input type="text" id="accessCode" placeholder="Enter code" maxlength="20" autocomplete="off">
-      <button onclick="checkAccess()">Unlock Tools</button>
-      <div class="error" id="accessError">Invalid access code. Please check your Etsy purchase email.</div>
-      <div class="purchase-link">
-        Don't have access? <a href="https://www.etsy.com/shop/YourShopName" target="_blank">Purchase on Etsy</a>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const VALID_CODES = ['ELEPHANT2024', 'ETSY2024', 'ROYALDEX'];
-    
-    function checkAccess() {
-      const code = document.getElementById('accessCode').value.trim().toUpperCase();
-      if (VALID_CODES.includes(code)) {
-        localStorage.setItem('elephanttools_access', 'granted');
-        document.getElementById('accessModal').classList.add('hidden');
-      } else {
-        document.getElementById('accessError').classList.add('show');
-      }
-    }
-
-    document.getElementById('accessCode').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') checkAccess();
-    });
-
-    // Check if already has access
-    if (localStorage.getItem('elephanttools_access') === 'granted') {
-      document.getElementById('accessModal').classList.add('hidden');
-    }
-  </script>
+        checkAccess();
+    </script>
 </body>
 </html>
