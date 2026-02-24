@@ -314,10 +314,55 @@
             text-decoration: underline;
         }
 
+        .pro-cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.05));
+            border: 1px solid rgba(245,158,11,0.35);
+            border-radius: 12px;
+            padding: 20px 28px;
+            margin-bottom: 36px;
+        }
+
+        .pro-cta-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .pro-cta-sub {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .pro-cta-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #f59e0b;
+            color: #000;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .pro-cta-btn:hover {
+            background: #e08e00;
+        }
+
         @media (max-width: 600px) {
-            .header {
-                padding: 30px 20px;
+            .pro-cta {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
             }
+        }
             .logo {
                 font-size: 36px;
             }
@@ -344,6 +389,14 @@
     <main class="container" id="content">
         <h1>Digital Product Creation Toolkit</h1>
         <p class="subtitle">17 powerful tools to create, enhance, and sell digital products</p>
+
+        <div class="pro-cta">
+            <div>
+                <div class="pro-cta-text">⭐ Unlock all 13 Pro tools</div>
+                <div class="pro-cta-sub">Get lifetime access — one purchase, all tools, forever.</div>
+            </div>
+            <a href="https://elephantshoespopshop.etsy.com" target="_blank" class="pro-cta-btn">Purchase Pro Version on Etsy →</a>
+        </div>
 
         <div class="tools-grid">
 
@@ -379,7 +432,7 @@
             <!-- FREE TOOL -->
             <a href="etsy-thumbnail-creator.html" class="tool-card">
                 <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Etsy Thumbnail Creator <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+                <div class="tool-name">Thumbnail Creator <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
                 <div class="tool-desc">Add padding to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
             </a>
 
@@ -414,7 +467,7 @@
             <a href="gate.html?tool=photo-composer.html" class="tool-card pro-card">
                 <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Photo Composer <span class="tool-badge badge-pro">PRO</span></div>
+                <div class="tool-name">Image Grid Maker <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Combine multiple photos into beautiful compositions and collages.</div>
             </a>
 
@@ -435,7 +488,7 @@
             <a href="gate.html?tool=shop-banner.html" class="tool-card pro-card">
                 <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🏪</div>
-                <div class="tool-name">Shop Banner Creator <span class="tool-badge badge-pro">PRO</span></div>
+                <div class="tool-name">Banner Creator <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Design eye-catching banners for your Etsy shop or online store.</div>
             </a>
 
@@ -449,7 +502,7 @@
             <a href="gate.html?tool=sticker-builder.html" class="tool-card pro-card">
                 <div class="pro-lock">🔒</div>
                 <div class="tool-icon">⭐</div>
-                <div class="tool-name">Sticker Builder <span class="tool-badge badge-pro">PRO</span></div>
+                <div class="tool-name">Sticker Sheet Builder <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Create printable sticker sheets with custom designs and layouts.</div>
             </a>
 
