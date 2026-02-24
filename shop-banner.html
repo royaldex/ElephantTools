@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Banner Maker Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Raleway:wght@400;700&family=Bebas+Neue&family=Lobster&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -11,7 +14,7 @@
       --text: #f5f5f5; --text-dim: #a1a1a1; --text-muted: #6b6b6b;
       --accent: #10b981; --accent-hover: #0d9668;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     
     .app { display: grid; grid-template-columns: 320px 1fr; height: 100vh; }
     @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .sidebar { max-height: 50vh; } }
@@ -102,6 +105,12 @@
     .text-align-btns button { flex: 1; padding: 8px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 14px; color: var(--text-muted); }
     .text-align-btns button:hover { border-color: var(--text-muted); }
     .text-align-btns button.active { background: var(--accent); border-color: var(--accent); color: #000; }
+    .upload-zone.drag-over { border-color: var(--accent); background: rgba(16,185,129,0.1); }
+
+    .back-link { font-size: 12px; color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+
+    .upscale-badge { font-size: 10px; background: rgba(16,185,129,0.15); color: var(--accent); border: 1px solid rgba(16,185,129,0.3); border-radius: 4px; padding: 2px 6px; }
   </style>
 </head>
 <body>
@@ -244,16 +253,27 @@
         <div class="form-group">
           <label>Font</label>
           <select id="textFont">
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="'Helvetica Neue', Helvetica, sans-serif">Helvetica</option>
-            <option value="Georgia, serif">Georgia</option>
-            <option value="'Times New Roman', serif">Times New Roman</option>
-            <option value="'Courier New', monospace">Courier New</option>
-            <option value="Impact, sans-serif">Impact</option>
-            <option value="'Comic Sans MS', cursive">Comic Sans</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-            <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
-            <option value="'Palatino Linotype', serif">Palatino</option>
+            <optgroup label="System Fonts">
+              <option value="Arial, sans-serif">Arial</option>
+              <option value="'Helvetica Neue', Helvetica, sans-serif">Helvetica</option>
+              <option value="Georgia, serif">Georgia</option>
+              <option value="'Times New Roman', serif">Times New Roman</option>
+              <option value="'Courier New', monospace">Courier New</option>
+              <option value="Impact, sans-serif">Impact</option>
+              <option value="'Comic Sans MS', cursive">Comic Sans</option>
+              <option value="Verdana, sans-serif">Verdana</option>
+              <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
+              <option value="'Palatino Linotype', serif">Palatino</option>
+            </optgroup>
+            <optgroup label="Google Fonts">
+              <option value="'Montserrat', sans-serif">Montserrat</option>
+              <option value="'Raleway', sans-serif">Raleway</option>
+              <option value="'Oswald', sans-serif">Oswald</option>
+              <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+              <option value="'Playfair Display', serif">Playfair Display</option>
+              <option value="'Dancing Script', cursive">Dancing Script</option>
+              <option value="'Lobster', cursive">Lobster</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-row" style="margin-bottom:12px;">
@@ -307,6 +327,8 @@
       <header class="header">
         <h1>🏪 Banner Maker Pro</h1>
         <div class="header-actions">
+          <a href="index.html" class="back-link">← All Tools</a>
+          <span class="upscale-badge">2× Export</span>
           <button class="btn btn-secondary" id="resetBtn">Reset</button>
           <button class="btn btn-primary" id="downloadBtn">⬇️ Download</button>
         </div>
@@ -607,6 +629,24 @@
       document.getElementById('downloadPng').addEventListener('click', () => download('png'));
       document.getElementById('downloadJpg').addEventListener('click', () => download('jpg'));
       document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+
+      // Drag-and-drop on upload zones
+      function setupDragDrop(zoneId, type) {
+        const zone = document.getElementById(zoneId);
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+          e.preventDefault();
+          zone.classList.remove('drag-over');
+          const file = e.dataTransfer.files[0];
+          if (file && file.type.startsWith('image/')) loadImage(file, type);
+        });
+      }
+      setupDragDrop('bgUpload', 'bg');
+      setupDragDrop('imageUpload', 'main');
+
+      // Resize listener — keep preview scaled when window resizes
+      window.addEventListener('resize', updatePreviewScale);
     }
 
     function loadImage(file, type) {
@@ -632,22 +672,38 @@
     function render() {
       canvas.width = state.width;
       canvas.height = state.height;
-      document.getElementById('sizeInfo').textContent = `${state.width} × ${state.height}`;
+      document.getElementById('sizeInfo').textContent = `${state.width} × ${state.height} → exports ${state.width * 2}×${state.height * 2}`;
+      updatePreviewScale();
+      renderFull(ctx, state.width, state.height);
+    }
+
+    function updatePreviewScale() {
+      const area = document.querySelector('.canvas-area');
+      const availW = area.clientWidth - 48;
+      const availH = area.clientHeight - 48;
+      const scaleX = availW / state.width;
+      const scaleY = availH / state.height;
+      const s = Math.min(1, scaleX, scaleY);
+      canvas.style.width = Math.round(state.width * s) + 'px';
+      canvas.style.height = Math.round(state.height * s) + 'px';
+    }
+
+    function renderFull(targetCtx, w, h) {
 
       // Background
       if (state.bgType === 'solid') {
-        ctx.fillStyle = state.bgColor;
-        ctx.fillRect(0, 0, state.width, state.height);
+        targetCtx.fillStyle = state.bgColor;
+        targetCtx.fillRect(0, 0, state.width, state.height);
       } else if (state.bgType === 'gradient') {
         let grad;
-        if (state.gradDir === 'horizontal') grad = ctx.createLinearGradient(0, 0, state.width, 0);
-        else if (state.gradDir === 'vertical') grad = ctx.createLinearGradient(0, 0, 0, state.height);
-        else if (state.gradDir === 'diagonal') grad = ctx.createLinearGradient(0, 0, state.width, state.height);
-        else grad = ctx.createRadialGradient(state.width/2, state.height/2, 0, state.width/2, state.height/2, Math.max(state.width, state.height)/2);
+        if (state.gradDir === 'horizontal') grad = targetCtx.createLinearGradient(0, 0, state.width, 0);
+        else if (state.gradDir === 'vertical') grad = targetCtx.createLinearGradient(0, 0, 0, state.height);
+        else if (state.gradDir === 'diagonal') grad = targetCtx.createLinearGradient(0, 0, state.width, state.height);
+        else grad = targetCtx.createRadialGradient(state.width/2, state.height/2, 0, state.width/2, state.height/2, Math.max(state.width, state.height)/2);
         grad.addColorStop(0, state.gradColor1);
         grad.addColorStop(1, state.gradColor2);
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, state.width, state.height);
+        targetCtx.fillStyle = grad;
+        targetCtx.fillRect(0, 0, state.width, state.height);
       } else if (state.bgType === 'image' && state.bgImage) {
         const img = state.bgImage;
         let sx = 0, sy = 0, sw = img.width, sh = img.height;
@@ -666,8 +722,8 @@
         } else if (state.bgFit === 'contain') {
           const imgRatio = img.width / img.height;
           const canvasRatio = state.width / state.height;
-          ctx.fillStyle = '#000';
-          ctx.fillRect(0, 0, state.width, state.height);
+          targetCtx.fillStyle = '#000';
+          targetCtx.fillRect(0, 0, state.width, state.height);
           if (imgRatio > canvasRatio) {
             dw = state.width;
             dh = state.width / imgRatio;
@@ -680,16 +736,16 @@
         }
 
         if (state.bgBlur > 0) {
-          ctx.filter = `blur(${state.bgBlur}px)`;
-          ctx.drawImage(img, sx, sy, sw, sh, dx - state.bgBlur, dy - state.bgBlur, dw + state.bgBlur*2, dh + state.bgBlur*2);
-          ctx.filter = 'none';
+          targetCtx.filter = `blur(${state.bgBlur}px)`;
+          targetCtx.drawImage(img, sx, sy, sw, sh, dx - state.bgBlur, dy - state.bgBlur, dw + state.bgBlur*2, dh + state.bgBlur*2);
+          targetCtx.filter = 'none';
         } else {
-          ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+          targetCtx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
         }
 
         if (state.bgDarken > 0) {
-          ctx.fillStyle = `rgba(0,0,0,${state.bgDarken/100})`;
-          ctx.fillRect(0, 0, state.width, state.height);
+          targetCtx.fillStyle = `rgba(0,0,0,${state.bgDarken/100})`;
+          targetCtx.fillRect(0, 0, state.width, state.height);
         }
       }
 
@@ -714,26 +770,26 @@
         const pos = getPosition(state.imagePos, iw, ih);
 
         if (state.imageShadow) {
-          ctx.save();
-          ctx.shadowColor = 'rgba(0,0,0,0.4)';
-          ctx.shadowBlur = 20;
-          ctx.shadowOffsetX = 5;
-          ctx.shadowOffsetY = 8;
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(pos.x, pos.y, iw, ih);
-          ctx.restore();
+          targetCtx.save();
+          targetCtx.shadowColor = 'rgba(0,0,0,0.4)';
+          targetCtx.shadowBlur = 20;
+          targetCtx.shadowOffsetX = 5;
+          targetCtx.shadowOffsetY = 8;
+          targetCtx.fillStyle = '#fff';
+          targetCtx.fillRect(pos.x, pos.y, iw, ih);
+          targetCtx.restore();
         }
 
-        ctx.drawImage(img, pos.x, pos.y, iw, ih);
+        targetCtx.drawImage(img, pos.x, pos.y, iw, ih);
       }
 
       // Text
       if (state.text) {
         const lines = state.text.split('\n');
         const fontSize = Math.round(state.textSize * (state.width / 1200)); // Scale font to canvas
-        ctx.font = `${state.textBold ? 'bold ' : ''}${fontSize}px ${state.textFont}`;
-        ctx.textAlign = state.textAlign;
-        ctx.textBaseline = 'middle';
+        targetCtx.font = `${state.textBold ? 'bold ' : ''}${fontSize}px ${state.textFont}`;
+        targetCtx.textAlign = state.textAlign;
+        targetCtx.textBaseline = 'middle';
 
         const lineHeight = fontSize * 1.3;
         const totalHeight = lines.length * lineHeight;
@@ -744,17 +800,17 @@
           const y = textPos.y + (i - (lines.length - 1) / 2) * lineHeight + offsetY;
           
           if (state.textShadow) {
-            ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.5)';
-            ctx.shadowBlur = 8;
-            ctx.shadowOffsetX = 2;
-            ctx.shadowOffsetY = 3;
-            ctx.fillStyle = state.textColor;
-            ctx.fillText(line, textPos.x, y);
-            ctx.restore();
+            targetCtx.save();
+            targetCtx.shadowColor = 'rgba(0,0,0,0.5)';
+            targetCtx.shadowBlur = 8;
+            targetCtx.shadowOffsetX = 2;
+            targetCtx.shadowOffsetY = 3;
+            targetCtx.fillStyle = state.textColor;
+            targetCtx.fillText(line, textPos.x, y);
+            targetCtx.restore();
           } else {
-            ctx.fillStyle = state.textColor;
-            ctx.fillText(line, textPos.x, y);
+            targetCtx.fillStyle = state.textColor;
+            targetCtx.fillText(line, textPos.x, y);
           }
         });
       }
@@ -805,13 +861,21 @@
     }
 
     function download(format) {
+      const SCALE = 2;
+      const oc = document.createElement('canvas');
+      oc.width = state.width * SCALE;
+      oc.height = state.height * SCALE;
+      const octx = oc.getContext('2d');
+      octx.scale(SCALE, SCALE);
+      renderFull(octx, state.width, state.height);
       const mime = format === 'jpg' ? 'image/jpeg' : 'image/png';
       const quality = format === 'jpg' ? 0.92 : undefined;
-      canvas.toBlob(blob => {
+      oc.toBlob(blob => {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = `banner-${state.width}x${state.height}.${format}`;
+        a.download = `banner-${state.width * SCALE}x${state.height * SCALE}.${format}`;
         a.click();
+        URL.revokeObjectURL(a.href);
       }, mime, quality);
     }
 
