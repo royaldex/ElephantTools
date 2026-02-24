@@ -60,7 +60,36 @@
             color: var(--text-dim);
             font-size: 16px;
             max-width: 500px;
-            margin: 0 auto;
+            margin: 0 auto 20px;
+        }
+
+        .unlock-btn {
+            display: inline-block;
+            padding: 10px 22px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .unlock-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .unlock-btn.unlocked {
+            border-color: var(--accent);
+            color: var(--accent);
+            cursor: default;
+        }
+
+        .unlock-btn.unlocked:hover {
+            background: transparent;
+            color: var(--accent);
         }
 
         .container {
@@ -96,12 +125,18 @@
             color: var(--text);
             transition: all 0.2s ease;
             display: block;
+            position: relative;
         }
 
         .tool-card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.1);
+        }
+
+        .tool-card.pro-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.1);
         }
 
         .tool-icon {
@@ -131,6 +166,29 @@
             border-radius: 4px;
             margin-left: 8px;
             vertical-align: middle;
+        }
+
+        .badge-free {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .badge-pro {
+            background: #f59e0b;
+            color: #000;
+        }
+
+        .badge-new {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        .pro-lock {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 16px;
+            opacity: 0.5;
         }
 
         .footer {
@@ -218,6 +276,18 @@
             background: var(--accent-hover);
         }
 
+        .modal .close-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .modal .close-btn:hover {
+            background: var(--surface-2);
+        }
+
         .modal .error {
             color: #ef4444;
             font-size: 13px;
@@ -244,12 +314,6 @@
             text-decoration: underline;
         }
 
-        .content-locked {
-            filter: blur(5px);
-            pointer-events: none;
-            user-select: none;
-        }
-
         @media (max-width: 600px) {
             .header {
                 padding: 30px 20px;
@@ -274,6 +338,7 @@
         <div class="logo">🐘</div>
         <div class="brand">Elephant<span>Tools</span></div>
         <p class="tagline">Professional tools for creating digital products for Etsy, online stores, and creative projects.</p>
+        <button class="unlock-btn" id="headerUnlockBtn" onclick="openModal()">🔓 Unlock Pro Tools</button>
     </header>
 
     <main class="container" id="content">
@@ -281,107 +346,127 @@
         <p class="subtitle">17 powerful tools to create, enhance, and sell digital products</p>
 
         <div class="tools-grid">
-            <a href="bundle-creator.html" class="tool-card">
+
+            <!-- PRO TOOLS -->
+            <a href="gate.html?tool=bundle-creator.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">📦</div>
-                <div class="tool-name">Bundle Creator</div>
+                <div class="tool-name">Bundle Creator <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
             </a>
 
-            <a href="clip-art-packager.html" class="tool-card">
+            <a href="gate.html?tool=clip-art-packager.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🎨</div>
-                <div class="tool-name">Clip Art Packager</div>
+                <div class="tool-name">Clip Art Packager <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Browse and download curated clipart collections for your creative projects.</div>
             </a>
 
+            <!-- FREE TOOL -->
             <a href="color-palette.html" class="tool-card">
                 <div class="tool-icon">🎨</div>
-                <div class="tool-name">Color Palette Generator</div>
+                <div class="tool-name">Color Palette Generator <span class="tool-badge badge-free">FREE</span></div>
                 <div class="tool-desc">Extract beautiful color palettes from images for your design projects.</div>
             </a>
 
-            <a href="color-variants.html" class="tool-card">
+            <a href="gate.html?tool=color-variants.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🌈</div>
-                <div class="tool-name">Color Variants Creator</div>
+                <div class="tool-name">Color Variants Creator <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Generate multiple color variations of your designs instantly.</div>
             </a>
 
+            <!-- FREE TOOL -->
             <a href="etsy-thumbnail-creator.html" class="tool-card">
                 <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Etsy Thumbnail Creator <span class="tool-badge">NEW</span></div>
+                <div class="tool-name">Etsy Thumbnail Creator <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
                 <div class="tool-desc">Add padding to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
             </a>
 
-            <a href="greeting-cards.html" class="tool-card">
+            <a href="gate.html?tool=greeting-cards.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">💌</div>
-                <div class="tool-name">Greeting Cards Designer</div>
+                <div class="tool-name">Greeting Cards Designer <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Design beautiful greeting cards with custom text and layouts.</div>
             </a>
 
-            <a href="invitations.html" class="tool-card">
+            <a href="gate.html?tool=invitations.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">✉️</div>
-                <div class="tool-name">Invitation Maker</div>
+                <div class="tool-name">Invitation Maker <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Create stunning invitations for events, parties, and special occasions.</div>
             </a>
 
-            <a href="journal-builder.html" class="tool-card">
+            <a href="gate.html?tool=journal-builder.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">📓</div>
-                <div class="tool-name">Journal Builder</div>
+                <div class="tool-name">Journal Builder <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Design custom journal pages and planners with templates and layouts.</div>
             </a>
 
-            <a href="kids-cards.html" class="tool-card">
+            <a href="gate.html?tool=kids-cards.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🎈</div>
-                <div class="tool-name">Kids Cards Creator</div>
+                <div class="tool-name">Kids Cards Creator <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Make fun and colorful cards perfect for children's events and activities.</div>
             </a>
 
-            <a href="photo-composer.html" class="tool-card">
+            <a href="gate.html?tool=photo-composer.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Photo Composer</div>
+                <div class="tool-name">Photo Composer <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Combine multiple photos into beautiful compositions and collages.</div>
             </a>
 
-            <a href="png-upscaler.html" class="tool-card">
+            <a href="gate.html?tool=png-upscaler.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🔍</div>
-                <div class="tool-name">PNG Upscaler</div>
+                <div class="tool-name">PNG Upscaler <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Upscale PNG images to higher resolutions while maintaining quality.</div>
             </a>
 
-            <a href="png-upscaler-pro-1.html" class="tool-card">
+            <a href="gate.html?tool=png-upscaler-pro-1.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🔬</div>
-                <div class="tool-name">PNG Upscaler Pro <span class="tool-badge">NEW</span></div>
+                <div class="tool-name">PNG Upscaler Pro <span class="tool-badge badge-pro">PRO</span> <span class="tool-badge badge-new">NEW</span></div>
                 <div class="tool-desc">Advanced upscaling with transparency preservation, max 20MB output, and exact aspect ratio.</div>
             </a>
 
-            <a href="shop-banner.html" class="tool-card">
+            <a href="gate.html?tool=shop-banner.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🏪</div>
-                <div class="tool-name">Shop Banner Creator</div>
+                <div class="tool-name">Shop Banner Creator <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Design eye-catching banners for your Etsy shop or online store.</div>
             </a>
 
+            <!-- FREE TOOL -->
             <a href="simple-frames.html" class="tool-card">
                 <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Simple Frames</div>
+                <div class="tool-name">Simple Frames <span class="tool-badge badge-free">FREE</span></div>
                 <div class="tool-desc">Add elegant frames and borders to your images with just a few clicks.</div>
             </a>
 
-            <a href="sticker-builder.html" class="tool-card">
+            <a href="gate.html?tool=sticker-builder.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">⭐</div>
-                <div class="tool-name">Sticker Builder</div>
+                <div class="tool-name">Sticker Builder <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Create printable sticker sheets with custom designs and layouts.</div>
             </a>
 
+            <!-- FREE TOOL -->
             <a href="wall-art-resizer.html" class="tool-card">
                 <div class="tool-icon">🎯</div>
-                <div class="tool-name">Wall Art Resizer</div>
+                <div class="tool-name">Wall Art Resizer <span class="tool-badge badge-free">FREE</span></div>
                 <div class="tool-desc">Resize and format images for wall art prints in standard frame sizes.</div>
             </a>
 
-            <a href="WatermarkStudioPro.html" class="tool-card">
+            <a href="gate.html?tool=WatermarkStudioPro.html" class="tool-card pro-card">
+                <div class="pro-lock">🔒</div>
                 <div class="tool-icon">🔒</div>
-                <div class="tool-name">Watermark Studio Pro</div>
+                <div class="tool-name">Watermark Studio Pro <span class="tool-badge badge-pro">PRO</span></div>
                 <div class="tool-desc">Protect your images with text and logo watermarks.</div>
             </a>
+
         </div>
     </main>
 
@@ -389,14 +474,15 @@
         © 2024 ElephantTools by RoyalDex. All rights reserved.
     </footer>
 
-    <!-- Access Code Modal -->
-    <div class="modal-overlay" id="modal">
+    <!-- Unlock Modal (for existing buyers) -->
+    <div class="modal-overlay hidden" id="modal">
         <div class="modal">
             <div class="modal-logo">🐘</div>
-            <h2>Welcome to ElephantTools</h2>
-            <p>Enter your access code to unlock all tools.<br>(Provided with your Etsy purchase)</p>
+            <h2>Unlock Pro Tools</h2>
+            <p>Enter your access code to unlock all 13 pro tools.<br>(Provided with your Etsy purchase)</p>
             <input type="text" id="accessCode" placeholder="Enter access code" maxlength="20" autocomplete="off">
-            <button id="unlockBtn">Unlock Tools</button>
+            <button id="unlockBtn">Unlock Pro Tools</button>
+            <button class="close-btn" onclick="closeModal()">Cancel</button>
             <div class="error" id="errorMsg">Invalid access code. Please check your Etsy purchase email.</div>
             <div class="purchase-link">
                 Don't have access? <a href="https://elephantshoespopshop.etsy.com" target="_blank">Purchase on Etsy</a>
@@ -409,32 +495,50 @@
         const STORAGE_KEY = 'elephanttools_access';
 
         const modal = document.getElementById('modal');
-        const content = document.getElementById('content');
         const codeInput = document.getElementById('accessCode');
         const unlockBtn = document.getElementById('unlockBtn');
         const errorMsg = document.getElementById('errorMsg');
+        const headerBtn = document.getElementById('headerUnlockBtn');
 
-        // Check if already unlocked
-        function checkAccess() {
+        function isUnlocked() {
             const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved && VALID_CODES.includes(saved)) {
-                unlockTools();
-            } else {
-                content.classList.add('content-locked');
-                modal.classList.remove('hidden');
-            }
+            return saved && VALID_CODES.includes(saved);
         }
 
-        function unlockTools() {
+        function applyUnlockedState() {
+            // Update all pro cards to link directly to their tools
+            document.querySelectorAll('.pro-card').forEach(card => {
+                const url = new URL(card.href);
+                const toolParam = url.searchParams.get('tool');
+                if (toolParam) {
+                    card.href = toolParam;
+                }
+                card.querySelector('.pro-lock').style.display = 'none';
+            });
+            headerBtn.textContent = '✅ Pro Unlocked';
+            headerBtn.classList.add('unlocked');
+            headerBtn.onclick = null;
+        }
+
+        function openModal() {
+            if (isUnlocked()) return;
+            modal.classList.remove('hidden');
+            codeInput.focus();
+        }
+
+        function closeModal() {
             modal.classList.add('hidden');
-            content.classList.remove('content-locked');
+            errorMsg.classList.remove('show');
+            codeInput.value = '';
+            codeInput.style.borderColor = '';
         }
 
         unlockBtn.addEventListener('click', () => {
             const code = codeInput.value.trim().toUpperCase();
             if (VALID_CODES.includes(code)) {
                 localStorage.setItem(STORAGE_KEY, code);
-                unlockTools();
+                closeModal();
+                applyUnlockedState();
             } else {
                 errorMsg.classList.add('show');
                 codeInput.style.borderColor = '#ef4444';
@@ -450,7 +554,15 @@
             codeInput.style.borderColor = '';
         });
 
-        checkAccess();
+        // Close modal on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // On load: if already unlocked, update UI silently
+        if (isUnlocked()) {
+            applyUnlockedState();
+        }
     </script>
 </body>
 </html>

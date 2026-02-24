@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElephantTools Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface-2: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #f5f5f5;
+            --text-dim: #a1a1a1;
+            --text-muted: #6b6b6b;
+            --accent: #10b981;
+            --accent-hover: #0ea472;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .gate-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 52px;
+            margin-bottom: 8px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #000;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .tool-name-display {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .gate-message {
+            color: var(--text-dim);
+            font-size: 14px;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 28px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+            letter-spacing: 2px;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        input::placeholder {
+            letter-spacing: normal;
+            color: var(--text-muted);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-2);
+            color: var(--text);
+        }
+
+        .error {
+            color: #ef4444;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .purchase-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .purchase-section p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .btn-purchase {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #f59e0b;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-purchase:hover {
+            background: #e08e00;
+        }
+
+        /* Loading state */
+        .redirecting {
+            color: var(--accent);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .redirecting.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .gate-card {
+                padding: 36px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gate-card">
+        <div class="logo">🐘</div>
+        <div class="brand">Elephant<span>Tools</span></div>
+        <div class="pro-badge">⭐ PRO TOOL</div>
+
+        <div class="tool-name-display" id="toolNameDisplay">Loading...</div>
+        <p class="gate-message">This is a Pro tool. Enter your access code to continue.</p>
+
+        <input type="text" id="accessCode" placeholder="Enter access code" maxlength="20" autocomplete="off">
+        <div class="error" id="errorMsg">Invalid access code. Please check your Etsy purchase email.</div>
+        <button class="btn-primary" id="unlockBtn">Unlock & Open Tool</button>
+        <a href="index.html" class="btn-secondary">← Back to All Tools</a>
+
+        <div class="redirecting" id="redirectMsg">✓ Access granted — loading tool...</div>
+
+        <div class="purchase-section">
+            <p>Don't have an access code? Get lifetime access to all 17 tools.</p>
+            <a href="https://elephantshoespopshop.etsy.com" target="_blank" class="btn-purchase">Get Pro Access on Etsy →</a>
+        </div>
+    </div>
+
+    <script>
+        const VALID_CODES = ['ELEPHANT2024', 'TOOLKIT2024', 'ETSY2024', 'ROYAL2024'];
+        const STORAGE_KEY = 'elephanttools_access';
+
+        const params = new URLSearchParams(location.search);
+        const tool = params.get('tool');
+
+        // Redirect to index if no tool param
+        if (!tool) {
+            location.replace('index.html');
+        }
+
+        // Map filenames to readable tool names
+        const TOOL_NAMES = {
+            'bundle-creator.html': 'Bundle Creator',
+            'clip-art-packager.html': 'Clip Art Packager',
+            'color-variants.html': 'Color Variants Creator',
+            'greeting-cards.html': 'Greeting Cards Designer',
+            'invitations.html': 'Invitation Maker',
+            'journal-builder.html': 'Journal Builder',
+            'kids-cards.html': 'Kids Cards Creator',
+            'photo-composer.html': 'Photo Composer',
+            'png-upscaler.html': 'PNG Upscaler',
+            'png-upscaler-pro-1.html': 'PNG Upscaler Pro',
+            'shop-banner.html': 'Shop Banner Creator',
+            'sticker-builder.html': 'Sticker Builder',
+            'WatermarkStudioPro.html': 'Watermark Studio Pro',
+            'coloring-book.html': 'Coloring Book Creator',
+            'banner-maker-pro.html': 'Banner Maker Pro',
+        };
+
+        const toolNameDisplay = document.getElementById('toolNameDisplay');
+        toolNameDisplay.textContent = TOOL_NAMES[tool] || tool.replace('.html', '').replace(/-/g, ' ');
+
+        const codeInput = document.getElementById('accessCode');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        const redirectMsg = document.getElementById('redirectMsg');
+
+        function goToTool() {
+            redirectMsg.classList.add('show');
+            unlockBtn.disabled = true;
+            setTimeout(() => location.replace(tool), 600);
+        }
+
+        // Already unlocked? Go straight to the tool
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved && VALID_CODES.includes(saved)) {
+            goToTool();
+        } else {
+            codeInput.focus();
+        }
+
+        unlockBtn.addEventListener('click', () => {
+            const code = codeInput.value.trim().toUpperCase();
+            if (VALID_CODES.includes(code)) {
+                localStorage.setItem(STORAGE_KEY, code);
+                errorMsg.classList.remove('show');
+                goToTool();
+            } else {
+                errorMsg.classList.add('show');
+                codeInput.style.borderColor = '#ef4444';
+            }
+        });
+
+        codeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') unlockBtn.click();
+        });
+
+        codeInput.addEventListener('input', () => {
+            errorMsg.classList.remove('show');
+            codeInput.style.borderColor = '';
+        });
+    </script>
+
+</body>
+</html>
