@@ -6,616 +6,526 @@
     <title>ElephantTools - Digital Product Creation Toolkit</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --surface-2: #1a1a1a;
-            --border: #2a2a2a;
-            --text: #f5f5f5;
-            --text-dim: #a1a1a1;
-            --text-muted: #6b6b6b;
+            --bg: #080808;
+            --surface: #111111;
+            --surface-2: #181818;
+            --border: #242424;
+            --border-light: #2e2e2e;
+            --text: #f2f2f2;
+            --text-dim: #999;
+            --text-muted: #555;
             --accent: #10b981;
-            --accent-hover: #0ea472;
+            --accent-dim: rgba(16,185,129,0.12);
+            --accent-hover: #0d9668;
+            --gold: #f59e0b;
+            --gold-dim: rgba(245,158,11,0.1);
+            --purple: #818cf8;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             line-height: 1.6;
         }
 
+        /* HEADER */
         .header {
-            padding: 40px 20px;
+            padding: 56px 24px 48px;
             text-align: center;
             border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, #0f0f0f 0%, var(--bg) 100%);
         }
-
-        .logo {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .brand {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-
-        .brand span {
-            color: var(--accent);
-        }
-
-        .tagline {
-            color: var(--text-dim);
-            font-size: 16px;
-            max-width: 500px;
-            margin: 0 auto 20px;
-        }
-
-        .unlock-btn {
-            display: inline-block;
-            padding: 10px 22px;
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .unlock-btn:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
-        .unlock-btn.unlocked {
-            border-color: var(--accent);
-            color: var(--accent);
-            cursor: default;
-        }
-
-        .unlock-btn.unlocked:hover {
-            background: transparent;
-            color: var(--accent);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-dim);
-            margin-bottom: 40px;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .tool-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.2s ease;
-            display: block;
-            position: relative;
-        }
-
-        .tool-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.1);
-        }
-
-        .tool-card.pro-card:hover {
-            border-color: #f59e0b;
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.1);
-        }
-
-        .tool-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .tool-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .tool-desc {
-            font-size: 14px;
-            color: var(--text-dim);
-            line-height: 1.5;
-        }
-
-        .tool-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        .badge-free {
-            background: var(--accent);
-            color: #000;
-        }
-
-        .badge-pro {
-            background: #f59e0b;
-            color: #000;
-        }
-
-        .badge-new {
-            background: #6366f1;
-            color: #fff;
-        }
-
-        .pro-lock {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 16px;
-            opacity: 0.5;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Access Code Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+        .header-top {
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-overlay.hidden {
-            display: none;
-        }
-
-        .modal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .modal-logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .modal h2 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .modal p {
-            color: var(--text-dim);
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-
-        .modal input {
-            width: 100%;
-            padding: 14px 16px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 16px;
+            gap: 14px;
             margin-bottom: 16px;
-            text-align: center;
-            letter-spacing: 2px;
         }
+        .logo-emoji { font-size: 44px; line-height: 1; }
+        .brand { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
+        .brand span { color: var(--accent); }
+        .tagline { color: var(--text-dim); font-size: 15px; max-width: 480px; margin: 0 auto 28px; }
 
-        .modal input:focus {
-            outline: none;
-            border-color: var(--accent);
+        .header-actions {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; flex-wrap: wrap; margin-bottom: 32px;
         }
-
-        .modal button {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent);
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
+        .unlock-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 20px; background: transparent;
+            border: 1px solid var(--accent); color: var(--accent);
+            border-radius: 8px; font-size: 13px; font-weight: 600;
+            cursor: pointer; font-family: inherit; transition: all 0.2s;
         }
+        .unlock-btn:hover { background: var(--accent); color: #000; }
+        .unlock-btn.unlocked { cursor: default; opacity: 0.7; }
+        .unlock-btn.unlocked:hover { background: transparent; color: var(--accent); }
 
-        .modal button:hover {
-            background: var(--accent-hover);
+        .stats-strip {
+            display: flex; align-items: center; justify-content: center;
+            max-width: 500px; margin: 0 auto;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
         }
-
-        .modal .close-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-            margin-top: 10px;
-            font-weight: 400;
+        .stat-item {
+            flex: 1; padding: 14px 10px; text-align: center;
+            border-right: 1px solid var(--border);
         }
+        .stat-item:last-child { border-right: none; }
+        .stat-num { font-size: 22px; font-weight: 800; line-height: 1; margin-bottom: 3px; }
+        .stat-num.green { color: var(--accent); }
+        .stat-num.gold { color: var(--gold); }
+        .stat-lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
 
-        .modal .close-btn:hover {
-            background: var(--surface-2);
-        }
+        /* CONTAINER */
+        .container { max-width: 1240px; margin: 0 auto; padding: 48px 24px 80px; }
 
-        .modal .error {
-            color: #ef4444;
-            font-size: 13px;
-            margin-top: 12px;
-            display: none;
-        }
-
-        .modal .error.show {
-            display: block;
-        }
-
-        .modal .purchase-link {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .modal .purchase-link a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .modal .purchase-link a:hover {
-            text-decoration: underline;
-        }
-
+        /* CTA BANNER */
         .pro-cta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             gap: 16px;
-            background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.05));
-            border: 1px solid rgba(245,158,11,0.35);
-            border-radius: 12px;
-            padding: 20px 28px;
-            margin-bottom: 36px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(245,158,11,0.04));
+            border: 1px solid rgba(245,158,11,0.28);
+            border-radius: 14px; padding: 22px 28px; margin-bottom: 52px;
         }
-
-        .pro-cta-text {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .pro-cta-sub {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-top: 2px;
-        }
-
+        .pro-cta-left { display: flex; align-items: center; gap: 14px; }
+        .pro-cta-icon { font-size: 28px; }
+        .pro-cta-text { font-size: 15px; font-weight: 700; }
+        .pro-cta-sub { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
         .pro-cta-btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #f59e0b;
-            color: #000;
-            font-size: 14px;
-            font-weight: 700;
-            border-radius: 8px;
-            text-decoration: none;
-            white-space: nowrap;
+            display: inline-block; padding: 12px 22px;
+            background: var(--gold); color: #000;
+            font-size: 13px; font-weight: 700; border-radius: 8px;
+            text-decoration: none; white-space: nowrap; flex-shrink: 0;
             transition: background 0.2s;
-            flex-shrink: 0;
+        }
+        .pro-cta-btn:hover { background: #e08e00; }
+
+        /* SECTION HEADERS */
+        .section-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+        }
+        .section-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 12px; border-radius: 99px;
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.07em;
+            white-space: nowrap;
+        }
+        .section-pill.free { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(16,185,129,0.25); }
+        .section-pill.pro { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(245,158,11,0.25); }
+        .section-title-text { font-size: 18px; font-weight: 700; }
+        .section-line { flex: 1; height: 1px; background: var(--border); }
+        .section-count { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+
+        /* TOOLS GRID */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 16px;
+            margin-bottom: 52px;
         }
 
-        .pro-cta-btn:hover {
-            background: #e08e00;
+        .tool-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 22px;
+            text-decoration: none; color: var(--text);
+            transition: all 0.18s ease; display: block;
+            position: relative; overflow: hidden;
+        }
+        .tool-card:not(.pro-card):hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(16,185,129,0.1);
+        }
+        .tool-card.pro-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(245,158,11,0.1);
+        }
+        .tool-card:not(.pro-card)::before {
+            content: '';
+            position: absolute; left: 0; top: 16px; bottom: 16px;
+            width: 3px; background: var(--accent);
+            border-radius: 0 3px 3px 0; opacity: 0.5;
         }
 
-        @media (max-width: 600px) {
-            .pro-cta {
-                flex-direction: column;
-                align-items: flex-start;
-                text-align: left;
-            }
+        .tool-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+        .tool-name { font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
+        .tool-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+        .tool-badge {
+            display: inline-block; font-size: 9px; font-weight: 700;
+            padding: 2px 7px; border-radius: 4px; margin-left: 6px;
+            vertical-align: middle; letter-spacing: 0.04em;
         }
-            .logo {
-                font-size: 36px;
-            }
-            .brand {
-                font-size: 22px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
+        .badge-free { background: rgba(16,185,129,0.18); color: var(--accent); }
+        .badge-pro  { background: rgba(245,158,11,0.18); color: var(--gold); }
+        .badge-new  { background: rgba(129,140,248,0.2); color: var(--purple); }
+
+        .pro-lock {
+            position: absolute; top: 14px; right: 14px;
+            font-size: 14px; opacity: 0.35;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center; padding: 32px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 13px;
+        }
+        .footer a { color: var(--accent); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; padding: 20px; backdrop-filter: blur(4px);
+        }
+        .modal-overlay.hidden { display: none; }
+        .modal {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: 18px; padding: 44px 40px;
+            max-width: 400px; width: 100%; text-align: center;
+        }
+        .modal-logo { font-size: 44px; margin-bottom: 16px; }
+        .modal h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .modal p { color: var(--text-dim); margin-bottom: 24px; font-size: 14px; line-height: 1.6; }
+        .modal input {
+            width: 100%; padding: 13px 16px;
+            background: var(--surface-2); border: 1px solid var(--border-light);
+            border-radius: 8px; color: var(--text); font-size: 16px;
+            margin-bottom: 12px; text-align: center; letter-spacing: 3px;
+            font-family: inherit;
+        }
+        .modal input:focus { outline: none; border-color: var(--accent); }
+        .modal button {
+            width: 100%; padding: 13px; background: var(--accent); color: #000;
+            border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+            cursor: pointer; font-family: inherit; transition: background 0.2s;
+        }
+        .modal button:hover { background: var(--accent-hover); }
+        .close-btn {
+            background: transparent !important; border: 1px solid var(--border) !important;
+            color: var(--text-dim) !important; margin-top: 10px; font-weight: 500 !important;
+        }
+        .close-btn:hover { background: var(--surface-2) !important; color: var(--text) !important; }
+        .modal .error { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; }
+        .modal .error.show { display: block; }
+        .modal .purchase-link { margin-top: 20px; font-size: 13px; color: var(--text-muted); }
+        .modal .purchase-link a { color: var(--accent); text-decoration: none; }
+        .modal .purchase-link a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .header { padding: 40px 20px 36px; }
+            .brand { font-size: 26px; }
+            .pro-cta { flex-direction: column; align-items: flex-start; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .stats-strip { max-width: 100%; }
+            .modal { padding: 32px 24px; }
+            .section-count { display: none; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">🐘</div>
+
+<header class="header">
+    <div class="header-top">
+        <span class="logo-emoji">🐘</span>
         <div class="brand">Elephant<span>Tools</span></div>
-        <p class="tagline">Professional tools for creating digital products for Etsy, online stores, and creative projects.</p>
+    </div>
+    <p class="tagline">Professional tools for creating and selling digital products on Etsy and beyond.</p>
+    <div class="header-actions">
         <button class="unlock-btn" id="headerUnlockBtn" onclick="openModal()">🔓 Unlock Pro Tools</button>
-    </header>
+    </div>
+    <div class="stats-strip">
+        <div class="stat-item"><div class="stat-num">23</div><div class="stat-lbl">Total Tools</div></div>
+        <div class="stat-item"><div class="stat-num green">9</div><div class="stat-lbl">Free</div></div>
+        <div class="stat-item"><div class="stat-num gold">14</div><div class="stat-lbl">Pro</div></div>
+        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
+    </div>
+</header>
 
-    <main class="container" id="content">
-        <h1>Digital Product Creation Toolkit</h1>
-        <p class="subtitle">17 powerful tools to create, enhance, and sell digital products</p>
+<main class="container" id="content">
 
-        <div class="pro-cta">
+    <div class="pro-cta">
+        <div class="pro-cta-left">
+            <div class="pro-cta-icon">⭐</div>
             <div>
-                <div class="pro-cta-text">⭐ Unlock all 13 Pro tools</div>
-                <div class="pro-cta-sub">Get lifetime access — one purchase, all tools, forever.</div>
-            </div>
-            <a href="https://elephantshoespopshop.etsy.com" target="_blank" class="pro-cta-btn">Purchase Pro Version on Etsy →</a>
-        </div>
-
-        <div class="tools-grid">
-
-            <!-- PRO TOOLS -->
-            <a href="gate.html?tool=bundle-creator.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">📦</div>
-                <div class="tool-name">Bundle Creator <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
-            </a>
-
-            <a href="gate.html?tool=clip-art-packager.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🎨</div>
-                <div class="tool-name">Clip Art Packager <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Browse and download curated clipart collections for your creative projects.</div>
-            </a>
-
-            <!-- FREE TOOL -->
-            <a href="color-palette.html" class="tool-card">
-                <div class="tool-icon">🎨</div>
-                <div class="tool-name">Color Palette Generator <span class="tool-badge badge-free">FREE</span></div>
-                <div class="tool-desc">Extract beautiful color palettes from images for your design projects.</div>
-            </a>
-
-            <a href="gate.html?tool=color-variants.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🌈</div>
-                <div class="tool-name">Color Variants Creator <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Generate multiple color variations of your designs instantly.</div>
-            </a>
-
-            <!-- FREE TOOL -->
-            <a href="etsy-thumbnail-creator.html" class="tool-card">
-                <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Thumbnail Creator <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
-                <div class="tool-desc">Add padding to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
-            </a>
-
-            <a href="gate.html?tool=greeting-cards.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">💌</div>
-                <div class="tool-name">Greeting Cards Designer <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Design beautiful greeting cards with custom text and layouts.</div>
-            </a>
-
-            <a href="gate.html?tool=invitations.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">✉️</div>
-                <div class="tool-name">Invitation Maker <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Create stunning invitations for events, parties, and special occasions.</div>
-            </a>
-
-            <a href="gate.html?tool=journal-builder.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">📓</div>
-                <div class="tool-name">Journal Builder <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Design custom journal pages and planners with templates and layouts.</div>
-            </a>
-
-            <a href="gate.html?tool=kids-cards.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🎈</div>
-                <div class="tool-name">Kids Cards Creator <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Make fun and colorful cards perfect for children's events and activities.</div>
-            </a>
-
-            <a href="gate.html?tool=photo-composer.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Image Grid Maker <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Combine multiple photos into beautiful compositions and collages.</div>
-            </a>
-
-            <a href="gate.html?tool=png-upscaler.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🔍</div>
-                <div class="tool-name">PNG Upscaler <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Upscale PNG images to higher resolutions while maintaining quality.</div>
-            </a>
-
-            <a href="gate.html?tool=png-upscaler-pro-1.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🔬</div>
-                <div class="tool-name">PNG Upscaler Pro <span class="tool-badge badge-pro">PRO</span> <span class="tool-badge badge-new">NEW</span></div>
-                <div class="tool-desc">Advanced upscaling with transparency preservation, max 20MB output, and exact aspect ratio.</div>
-            </a>
-
-            <a href="gate.html?tool=shop-banner.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🏪</div>
-                <div class="tool-name">Banner Creator <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Design eye-catching banners for your Etsy shop or online store.</div>
-            </a>
-
-            <!-- FREE TOOL -->
-            <a href="simple-frames.html" class="tool-card">
-                <div class="tool-icon">🖼️</div>
-                <div class="tool-name">Simple Frames <span class="tool-badge badge-free">FREE</span></div>
-                <div class="tool-desc">Add elegant frames and borders to your images with just a few clicks.</div>
-            </a>
-
-            <a href="gate.html?tool=sticker-builder.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">⭐</div>
-                <div class="tool-name">Sticker Sheet Builder <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Create printable sticker sheets with custom designs and layouts.</div>
-            </a>
-
-            <!-- FREE TOOL -->
-            <a href="wall-art-resizer.html" class="tool-card">
-                <div class="tool-icon">🎯</div>
-                <div class="tool-name">Wall Art Resizer <span class="tool-badge badge-free">FREE</span></div>
-                <div class="tool-desc">Resize and format images for wall art prints in standard frame sizes.</div>
-            </a>
-
-            <a href="gate.html?tool=WatermarkStudioPro.html" class="tool-card pro-card">
-                <div class="pro-lock">🔒</div>
-                <div class="tool-icon">🔒</div>
-                <div class="tool-name">Watermark Studio Pro <span class="tool-badge badge-pro">PRO</span></div>
-                <div class="tool-desc">Protect your images with text and logo watermarks.</div>
-            </a>
-
-        </div>
-    </main>
-
-    <footer class="footer">
-        © 2024 ElephantTools by RoyalDex. All rights reserved.
-    </footer>
-
-    <!-- Unlock Modal (for existing buyers) -->
-    <div class="modal-overlay hidden" id="modal">
-        <div class="modal">
-            <div class="modal-logo">🐘</div>
-            <h2>Unlock Pro Tools</h2>
-            <p>Enter your access code to unlock all 13 pro tools.<br>(Provided with your Etsy purchase)</p>
-            <input type="text" id="accessCode" placeholder="Enter access code" maxlength="20" autocomplete="off">
-            <button id="unlockBtn">Unlock Pro Tools</button>
-            <button class="close-btn" onclick="closeModal()">Cancel</button>
-            <div class="error" id="errorMsg">Invalid access code. Please check your Etsy purchase email.</div>
-            <div class="purchase-link">
-                Don't have access? <a href="https://elephantshoespopshop.etsy.com" target="_blank">Purchase on Etsy</a>
+                <div class="pro-cta-text">Unlock all 14 Pro tools</div>
+                <div class="pro-cta-sub">One purchase · Lifetime access · No subscriptions</div>
             </div>
         </div>
+        <a href="https://elephantshoespopshop.etsy.com" target="_blank" class="pro-cta-btn">Purchase Pro Version on Etsy →</a>
     </div>
 
-    <script>
-        const VALID_CODES = ['ELEPHANT2024', 'TOOLKIT2024', 'ETSY2024', 'ROYAL2024'];
-        const STORAGE_KEY = 'elephanttools_access';
+    <!-- FREE TOOLS -->
+    <div class="section-header">
+        <span class="section-pill free">✦ Free</span>
+        <span class="section-title-text">Free Tools</span>
+        <div class="section-line"></div>
+        <span class="section-count">9 tools · No code needed</span>
+    </div>
 
-        const modal = document.getElementById('modal');
-        const codeInput = document.getElementById('accessCode');
-        const unlockBtn = document.getElementById('unlockBtn');
-        const errorMsg = document.getElementById('errorMsg');
-        const headerBtn = document.getElementById('headerUnlockBtn');
+    <div class="tools-grid">
 
-        function isUnlocked() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            return saved && VALID_CODES.includes(saved);
-        }
+        <a href="color-palette.html" class="tool-card">
+            <span class="tool-icon">🎨</span>
+            <div class="tool-name">Color Palette Generator <span class="tool-badge badge-free">FREE</span></div>
+            <div class="tool-desc">Extract beautiful color palettes from images for your design projects.</div>
+        </a>
 
-        function applyUnlockedState() {
-            // Update all pro cards to link directly to their tools
-            document.querySelectorAll('.pro-card').forEach(card => {
-                const url = new URL(card.href);
-                const toolParam = url.searchParams.get('tool');
-                if (toolParam) {
-                    card.href = toolParam;
-                }
-                card.querySelector('.pro-lock').style.display = 'none';
-            });
-            headerBtn.textContent = '✅ Pro Unlocked';
-            headerBtn.classList.add('unlocked');
-            headerBtn.onclick = null;
-        }
+        <a href="etsy-thumbnail-creator.html" class="tool-card">
+            <span class="tool-icon">🖼️</span>
+            <div class="tool-name">Thumbnail Creator <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Add padding to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
+        </a>
 
-        function openModal() {
-            if (isUnlocked()) return;
-            modal.classList.remove('hidden');
-            codeInput.focus();
-        }
+        <a href="simple-frames.html" class="tool-card">
+            <span class="tool-icon">🪟</span>
+            <div class="tool-name">Simple Frames <span class="tool-badge badge-free">FREE</span></div>
+            <div class="tool-desc">Add elegant frames and borders to your images with just a few clicks.</div>
+        </a>
 
-        function closeModal() {
-            modal.classList.add('hidden');
-            errorMsg.classList.remove('show');
-            codeInput.value = '';
-            codeInput.style.borderColor = '';
-        }
+        <a href="wall-art-resizer.html" class="tool-card">
+            <span class="tool-icon">🖼️</span>
+            <div class="tool-name">Wall Art Resizer <span class="tool-badge badge-free">FREE</span></div>
+            <div class="tool-desc">Resize and format images for wall art prints in standard frame sizes.</div>
+        </a>
 
-        unlockBtn.addEventListener('click', () => {
-            const code = codeInput.value.trim().toUpperCase();
-            if (VALID_CODES.includes(code)) {
-                localStorage.setItem(STORAGE_KEY, code);
-                closeModal();
-                applyUnlockedState();
-            } else {
-                errorMsg.classList.add('show');
-                codeInput.style.borderColor = '#ef4444';
-            }
+        <a href="etsy-title-optimizer.html" class="tool-card">
+            <span class="tool-icon">✏️</span>
+            <div class="tool-name">Title Optimizer <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Live character count and visual warnings to perfect your Etsy listing title.</div>
+        </a>
+
+        <a href="etsy-tag-checker.html" class="tool-card">
+            <span class="tool-icon">🏷️</span>
+            <div class="tool-name">Tag Checker <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">13 tag fields with 20-character limits and live validation for all your Etsy tags.</div>
+        </a>
+
+        <a href="file-size-checker.html" class="tool-card">
+            <span class="tool-icon">📁</span>
+            <div class="tool-name">File Size Checker <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Check if your digital file meets Etsy's 20MB upload limit before listing.</div>
+        </a>
+
+        <a href="image-resolution-checker.html" class="tool-card">
+            <span class="tool-icon">🔎</span>
+            <div class="tool-name">Resolution Checker <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Check pixel dimensions and estimate max print sizes at 300 DPI.</div>
+        </a>
+
+        <a href="listing-description-formatter.html" class="tool-card">
+            <span class="tool-icon">📝</span>
+            <div class="tool-name">Description Formatter <span class="tool-badge badge-free">FREE</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Paste messy text and get clean bullet-formatted listing copy ready for Etsy.</div>
+        </a>
+
+    </div>
+
+    <!-- PRO TOOLS -->
+    <div class="section-header">
+        <span class="section-pill pro">🔒 Pro</span>
+        <span class="section-title-text">Pro Tools</span>
+        <div class="section-line"></div>
+        <span class="section-count">14 tools · Access code required</span>
+    </div>
+
+    <div class="tools-grid">
+
+        <a href="gate.html?tool=bundle-creator.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">📦</span>
+            <div class="tool-name">Bundle Creator <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
+        </a>
+
+        <a href="gate.html?tool=clip-art-packager.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🎨</span>
+            <div class="tool-name">Clip Art Packager <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Browse and download curated clipart collections for your creative projects.</div>
+        </a>
+
+        <a href="gate.html?tool=coloring-book.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🖍️</span>
+            <div class="tool-name">Coloring Book Creator <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Convert images into professional coloring book pages using edge detection.</div>
+        </a>
+
+        <a href="gate.html?tool=color-variants.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🌈</span>
+            <div class="tool-name">Color Variants Creator <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Generate multiple color variations of your designs instantly.</div>
+        </a>
+
+        <a href="gate.html?tool=greeting-cards.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">💌</span>
+            <div class="tool-name">Greeting Cards Designer <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Design beautiful greeting cards with custom text and layouts.</div>
+        </a>
+
+        <a href="gate.html?tool=invitations.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">✉️</span>
+            <div class="tool-name">Invitation Maker <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Create stunning invitations for events, parties, and special occasions.</div>
+        </a>
+
+        <a href="gate.html?tool=journal-builder.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">📓</span>
+            <div class="tool-name">Journal Builder <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Design custom journal pages and planners with templates and layouts.</div>
+        </a>
+
+        <a href="gate.html?tool=kids-cards.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🎈</span>
+            <div class="tool-name">Kids Cards Creator <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Make fun and colorful cards perfect for children's events and activities.</div>
+        </a>
+
+        <a href="gate.html?tool=photo-composer.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🗂️</span>
+            <div class="tool-name">Image Grid Maker <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Combine multiple photos into beautiful compositions and collages.</div>
+        </a>
+
+        <a href="gate.html?tool=png-upscaler.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🔍</span>
+            <div class="tool-name">PNG Upscaler <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Upscale PNG images to higher resolutions while maintaining quality.</div>
+        </a>
+
+        <a href="gate.html?tool=png-upscaler-pro-1.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🔬</span>
+            <div class="tool-name">PNG Upscaler Pro <span class="tool-badge badge-pro">PRO</span> <span class="tool-badge badge-new">NEW</span></div>
+            <div class="tool-desc">Advanced upscaling with transparency preservation and exact 20MB output control.</div>
+        </a>
+
+        <a href="gate.html?tool=shop-banner.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">🏪</span>
+            <div class="tool-name">Banner Creator <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Design banners for Etsy, social media, and the web — 26 size presets.</div>
+        </a>
+
+        <a href="gate.html?tool=sticker-builder.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">⭐</span>
+            <div class="tool-name">Sticker Sheet Builder <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Create printable sticker sheets with custom designs and layouts.</div>
+        </a>
+
+        <a href="gate.html?tool=WatermarkStudioPro.html" class="tool-card pro-card">
+            <div class="pro-lock">🔒</div>
+            <span class="tool-icon">💧</span>
+            <div class="tool-name">Watermark Studio Pro <span class="tool-badge badge-pro">PRO</span></div>
+            <div class="tool-desc">Protect your images with custom text and logo watermarks.</div>
+        </a>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    © 2024 ElephantTools by RoyalDex &nbsp;·&nbsp;
+    <a href="https://elephantshoespopshop.etsy.com" target="_blank">Get Pro Access on Etsy</a>
+</footer>
+
+<!-- Unlock Modal -->
+<div class="modal-overlay hidden" id="modal">
+    <div class="modal">
+        <div class="modal-logo">🐘</div>
+        <h2>Unlock Pro Tools</h2>
+        <p>Enter your access code to unlock all 14 pro tools.<br><span style="font-size:12px;color:var(--text-muted);">Provided with your Etsy purchase</span></p>
+        <input type="text" id="accessCode" placeholder="ENTER CODE" maxlength="20" autocomplete="off">
+        <button id="unlockBtn">Unlock Pro Tools</button>
+        <button class="close-btn" onclick="closeModal()">Cancel</button>
+        <div class="error" id="errorMsg">Invalid access code. Please check your purchase email.</div>
+        <div class="purchase-link">
+            Don't have a code? <a href="https://elephantshoespopshop.etsy.com" target="_blank">Purchase on Etsy →</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const VALID_CODES = ['ELEPHANT2024', 'TOOLKIT2024', 'ETSY2024', 'ROYAL2024'];
+    const STORAGE_KEY = 'elephanttools_access';
+
+    const modal = document.getElementById('modal');
+    const codeInput = document.getElementById('accessCode');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const headerBtn = document.getElementById('headerUnlockBtn');
+
+    function isUnlocked() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved && VALID_CODES.includes(saved);
+    }
+
+    function applyUnlockedState() {
+        document.querySelectorAll('.pro-card').forEach(card => {
+            const url = new URL(card.href);
+            const toolParam = url.searchParams.get('tool');
+            if (toolParam) card.href = toolParam;
+            const lock = card.querySelector('.pro-lock');
+            if (lock) lock.style.display = 'none';
         });
+        headerBtn.textContent = '✅ Pro Unlocked';
+        headerBtn.classList.add('unlocked');
+        headerBtn.onclick = null;
+    }
 
-        codeInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') unlockBtn.click();
-        });
+    function openModal() {
+        if (isUnlocked()) return;
+        modal.classList.remove('hidden');
+        codeInput.focus();
+    }
 
-        codeInput.addEventListener('input', () => {
-            errorMsg.classList.remove('show');
-            codeInput.style.borderColor = '';
-        });
+    function closeModal() {
+        modal.classList.add('hidden');
+        errorMsg.classList.remove('show');
+        codeInput.value = '';
+        codeInput.style.borderColor = '';
+    }
 
-        // Close modal on overlay click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // On load: if already unlocked, update UI silently
-        if (isUnlocked()) {
+    unlockBtn.addEventListener('click', () => {
+        const code = codeInput.value.trim().toUpperCase();
+        if (VALID_CODES.includes(code)) {
+            localStorage.setItem(STORAGE_KEY, code);
+            closeModal();
             applyUnlockedState();
+        } else {
+            errorMsg.classList.add('show');
+            codeInput.style.borderColor = '#ef4444';
         }
-    </script>
+    });
+
+    codeInput.addEventListener('keypress', e => { if (e.key === 'Enter') unlockBtn.click(); });
+    codeInput.addEventListener('input', () => { errorMsg.classList.remove('show'); codeInput.style.borderColor = ''; });
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+    if (isUnlocked()) applyUnlockedState();
+</script>
 </body>
 </html>
