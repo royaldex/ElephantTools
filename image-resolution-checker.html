@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resolution Checker — ElephantTools</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface-2: #1c1c1c; --border: #2a2a2a;
+    --text: #f0f0f0; --text-dim: #a0a0a0; --text-muted: #5a5a5a;
+    --accent: #10b981; --warn: #f59e0b; --danger: #ef4444;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 40px 20px;
+  }
+  .back { align-self: flex-start; margin-bottom: 32px; color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .back:hover { color: var(--accent); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px; width: 100%; max-width: 680px;
+  }
+  .icon { font-size: 36px; margin-bottom: 12px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+
+  .drop-zone {
+    border: 2px dashed var(--border); border-radius: 12px;
+    padding: 48px 24px; text-align: center; cursor: pointer;
+    transition: all .2s; margin-bottom: 28px;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--accent); background: rgba(16,185,129,.05);
+  }
+  .drop-icon { font-size: 40px; margin-bottom: 12px; }
+  .drop-label { font-size: 15px; color: var(--text-dim); margin-bottom: 6px; }
+  .drop-sub { font-size: 12px; color: var(--text-muted); }
+  input[type="file"] { display: none; }
+
+  .results { display: none; }
+  .results.show { display: block; }
+
+  .preview-wrap {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; margin-bottom: 20px;
+    max-height: 220px; display: flex; align-items: center; justify-content: center;
+  }
+  .preview-wrap img { max-width: 100%; max-height: 220px; object-fit: contain; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; text-align: center;
+  }
+  .stat-val { font-size: 22px; font-weight: 700; color: var(--accent); }
+  .stat-val.warn { color: var(--warn); }
+  .stat-val.danger { color: var(--danger); }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+  .verdict {
+    padding: 14px 18px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .verdict.ok { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3); color: var(--accent); }
+  .verdict.warn { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); color: var(--warn); }
+  .verdict.danger { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); }
+
+  .section-title {
+    font-size: 12px; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: .06em; margin-bottom: 12px;
+  }
+
+  .print-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px;
+  }
+  .print-row {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .print-size { font-size: 13px; color: var(--text-dim); }
+  .print-status { font-size: 12px; font-weight: 600; }
+  .print-status.ok { color: var(--accent); }
+  .print-status.warn { color: var(--warn); }
+  .print-status.no { color: var(--danger); }
+
+  button {
+    padding: 12px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+    background: var(--surface-2); color: var(--text-dim); transition: all .15s;
+  }
+  button:hover { background: var(--border); color: var(--text); }
+
+  @media (max-width: 500px) {
+    .card { padding: 24px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .print-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← All Tools</a>
+<div class="card">
+  <div class="icon">🖼️</div>
+  <h1>Image Resolution Checker</h1>
+  <p class="sub">Check pixel dimensions and estimate max print sizes at 300 DPI</p>
+
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">🗂️</div>
+    <div class="drop-label">Drop an image here</div>
+    <div class="drop-sub">PNG, JPG, WEBP · Stays in your browser, nothing is uploaded</div>
+  </div>
+  <input type="file" id="fileInput" accept="image/*">
+
+  <div class="results" id="results">
+    <div class="preview-wrap"><img id="preview" alt="Preview"></div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="widthPx">—</div><div class="stat-label">Width (px)</div></div>
+      <div class="stat"><div class="stat-val" id="heightPx">—</div><div class="stat-label">Height (px)</div></div>
+      <div class="stat"><div class="stat-val" id="megapx">—</div><div class="stat-label">Megapixels</div></div>
+    </div>
+
+    <div class="verdict" id="verdict"></div>
+
+    <div class="section-title">Max Print Sizes at 300 DPI</div>
+    <div class="print-grid" id="printGrid"></div>
+
+    <button onclick="reset()" style="margin-top:4px;">Check Another Image</button>
+  </div>
+</div>
+
+<script>
+  const PRINT_SIZES = [
+    { label: '4×6 in', w: 1200, h: 1800 },
+    { label: '5×7 in', w: 1500, h: 2100 },
+    { label: '8×10 in', w: 2400, h: 3000 },
+    { label: '8.5×11 in', w: 2550, h: 3300 },
+    { label: '11×14 in', w: 3300, h: 4200 },
+    { label: '12×12 in', w: 3600, h: 3600 },
+    { label: '16×20 in', w: 4800, h: 6000 },
+    { label: '18×24 in', w: 5400, h: 7200 },
+    { label: '24×36 in', w: 7200, h: 10800 },
+    { label: 'A4 (8.3×11.7)', w: 2480, h: 3508 },
+  ];
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadFile(fileInput.files[0]); });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file.'); return;
+    }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      processImage(img, url);
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
+  }
+
+  function processImage(img, url) {
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    const mp = (w * h / 1000000).toFixed(1);
+
+    document.getElementById('preview').src = url;
+    document.getElementById('widthPx').textContent = w.toLocaleString();
+    document.getElementById('heightPx').textContent = h.toLocaleString();
+    document.getElementById('megapx').textContent = mp;
+
+    // DPI estimate (assume 72ppi screen if no metadata, estimate based on size)
+    const maxDimIn = Math.max(w, h) / 300;
+
+    // Verdict — based on if it can print at 8x10 at 300dpi
+    const verdict = document.getElementById('verdict');
+    if (w >= 2400 && h >= 3000 || w >= 3000 && h >= 2400) {
+      verdict.className = 'verdict ok';
+      verdict.textContent = '✅ High resolution — suitable for professional print at common sizes.';
+    } else if (w >= 1200 && h >= 1200) {
+      verdict.className = 'verdict warn';
+      verdict.textContent = '⚠️ Medium resolution — suitable for small prints. May appear soft at larger sizes.';
+    } else {
+      verdict.className = 'verdict danger';
+      verdict.textContent = '🚫 Low resolution — may appear blurry when printed. Best used for digital/screen only.';
+    }
+
+    // Print size grid
+    const grid = document.getElementById('printGrid');
+    grid.innerHTML = '';
+    PRINT_SIZES.forEach(({ label, w: needW, h: needH }) => {
+      // Check both orientations
+      const fits = (w >= needW && h >= needH) || (w >= needH && h >= needW);
+      const close = !fits && ((w >= needW * 0.7 && h >= needH * 0.7) || (w >= needH * 0.7 && h >= needW * 0.7));
+      const row = document.createElement('div');
+      row.className = 'print-row';
+      const status = fits ? 'ok' : close ? 'warn' : 'no';
+      const label2 = fits ? '✅ Fits' : close ? '⚠️ Marginal' : '✗ Too small';
+      row.innerHTML = `<span class="print-size">${label}</span><span class="print-status ${status}">${label2}</span>`;
+      grid.appendChild(row);
+    });
+
+    dropZone.style.display = 'none';
+    document.getElementById('results').classList.add('show');
+  }
+
+  function reset() {
+    dropZone.style.display = '';
+    document.getElementById('results').classList.remove('show');
+    fileInput.value = '';
+  }
+</script>
+</body>
+</html>

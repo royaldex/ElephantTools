@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Size Checker — ElephantTools</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface-2: #1c1c1c; --border: #2a2a2a;
+    --text: #f0f0f0; --text-dim: #a0a0a0; --text-muted: #5a5a5a;
+    --accent: #10b981; --warn: #f59e0b; --danger: #ef4444;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 40px 20px;
+  }
+  .back { align-self: flex-start; margin-bottom: 32px; color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .back:hover { color: var(--accent); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px; width: 100%; max-width: 600px;
+  }
+  .icon { font-size: 36px; margin-bottom: 12px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+
+  .drop-zone {
+    border: 2px dashed var(--border); border-radius: 12px;
+    padding: 48px 24px; text-align: center; cursor: pointer;
+    transition: all .2s; margin-bottom: 28px;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--accent); background: rgba(16,185,129,.05);
+  }
+  .drop-icon { font-size: 40px; margin-bottom: 12px; }
+  .drop-label { font-size: 15px; color: var(--text-dim); margin-bottom: 6px; }
+  .drop-sub { font-size: 12px; color: var(--text-muted); }
+  input[type="file"] { display: none; }
+
+  .results { display: none; }
+  .results.show { display: block; }
+
+  .file-info {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin-bottom: 20px;
+  }
+  .file-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; word-break: break-all; }
+  .file-type { font-size: 13px; color: var(--text-muted); }
+
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .stat {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px; text-align: center;
+  }
+  .stat-val { font-size: 32px; font-weight: 700; color: var(--accent); }
+  .stat-val.warn { color: var(--warn); }
+  .stat-val.danger { color: var(--danger); }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+  .meter-wrap { margin-bottom: 20px; }
+  .meter-title { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .meter-bg { height: 10px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .meter-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width .4s, background .3s; }
+
+  .verdict {
+    padding: 16px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .verdict.ok { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3); color: var(--accent); }
+  .verdict.warn { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); color: var(--warn); }
+  .verdict.danger { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); }
+
+  .limits { margin-bottom: 20px; }
+  .limit-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  .limit-row:last-child { border-bottom: none; }
+  .limit-platform { color: var(--text-dim); }
+  .limit-val { font-weight: 600; }
+  .limit-val.ok { color: var(--accent); }
+  .limit-val.fail { color: var(--danger); }
+
+  button {
+    padding: 12px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; border: none; transition: all .15s;
+    background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border);
+  }
+  button:hover { background: var(--border); color: var(--text); }
+
+  @media (max-width: 480px) {
+    .card { padding: 24px; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← All Tools</a>
+<div class="card">
+  <div class="icon">📁</div>
+  <h1>File Size Checker</h1>
+  <p class="sub">Check if your digital file meets platform upload limits before listing</p>
+
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">📂</div>
+    <div class="drop-label">Drop any file here</div>
+    <div class="drop-sub">or click to browse · No file is uploaded — everything stays in your browser</div>
+  </div>
+  <input type="file" id="fileInput">
+
+  <div class="results" id="results">
+    <div class="file-info">
+      <div class="file-name" id="fileName">—</div>
+      <div class="file-type" id="fileType">—</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="sizeMB">—</div><div class="stat-label">Megabytes</div></div>
+      <div class="stat"><div class="stat-val" id="sizeKB">—</div><div class="stat-label">Kilobytes</div></div>
+    </div>
+
+    <div class="meter-wrap">
+      <div class="meter-title">
+        <span>Etsy 20MB Limit</span>
+        <span id="meterPct">0%</span>
+      </div>
+      <div class="meter-bg"><div class="meter-fill" id="meterFill"></div></div>
+    </div>
+
+    <div class="verdict" id="verdict"></div>
+
+    <div class="limits">
+      <div class="limit-row"><span class="limit-platform">Etsy digital download</span><span class="limit-val" id="lim-etsy">20 MB</span></div>
+      <div class="limit-row"><span class="limit-platform">Gumroad</span><span class="limit-val" id="lim-gumroad">16 GB</span></div>
+      <div class="limit-row"><span class="limit-platform">Payhip</span><span class="limit-val" id="lim-payhip">2 GB</span></div>
+      <div class="limit-row"><span class="limit-platform">Creative Market</span><span class="limit-val" id="lim-cm">500 MB</span></div>
+    </div>
+
+    <button onclick="reset()">Check Another File</button>
+  </div>
+</div>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) processFile(fileInput.files[0]); });
+
+  const LIMITS = { etsy: 20, gumroad: 16384, payhip: 2048, cm: 500 };
+
+  function processFile(file) {
+    const bytes = file.size;
+    const mb = bytes / (1024 * 1024);
+    const kb = bytes / 1024;
+
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileType').textContent = file.type || 'Unknown type · ' + (file.name.split('.').pop().toUpperCase() + ' file');
+    document.getElementById('sizeMB').textContent = mb.toFixed(2);
+    document.getElementById('sizeKB').textContent = kb > 1024 ? (kb / 1024).toFixed(1) + ' MB' : Math.round(kb) + ' KB';
+
+    // Meter vs Etsy 20MB
+    const pct = Math.min(mb / 20 * 100, 100);
+    const fill = document.getElementById('meterFill');
+    fill.style.width = pct + '%';
+    fill.style.background = mb > 20 ? 'var(--danger)' : mb > 15 ? 'var(--warn)' : 'var(--accent)';
+    document.getElementById('meterPct').textContent = Math.round(pct) + '%';
+
+    const sizeMBEl = document.getElementById('sizeMB');
+    sizeMBEl.className = 'stat-val' + (mb > 20 ? ' danger' : mb > 15 ? ' warn' : '');
+
+    // Verdict
+    const verdict = document.getElementById('verdict');
+    if (mb > 20) {
+      verdict.className = 'verdict danger';
+      verdict.innerHTML = '🚫 Too large for Etsy — compress or split your file before listing.';
+    } else if (mb > 15) {
+      verdict.className = 'verdict warn';
+      verdict.innerHTML = '⚠️ Close to Etsy\'s 20MB limit. Consider compressing if you can.';
+    } else {
+      verdict.className = 'verdict ok';
+      verdict.innerHTML = '✅ File size is within Etsy\'s 20MB limit.';
+    }
+
+    // Platform compatibility
+    const platforms = { 'lim-etsy': 20, 'lim-gumroad': 16384, 'lim-payhip': 2048, 'lim-cm': 500 };
+    Object.entries(platforms).forEach(([id, limit]) => {
+      const el = document.getElementById(id);
+      el.className = 'limit-val ' + (mb <= limit ? 'ok' : 'fail');
+      el.title = mb <= limit ? 'Within limit' : 'Exceeds limit';
+    });
+
+    dropZone.style.display = 'none';
+    document.getElementById('results').classList.add('show');
+  }
+
+  function reset() {
+    dropZone.style.display = '';
+    document.getElementById('results').classList.remove('show');
+    fileInput.value = '';
+  }
+</script>
+</body>
+</html>

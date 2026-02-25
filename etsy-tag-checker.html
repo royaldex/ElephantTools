@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etsy Tag Checker — ElephantTools</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface-2: #1c1c1c; --border: #2a2a2a;
+    --text: #f0f0f0; --text-dim: #a0a0a0; --text-muted: #5a5a5a;
+    --accent: #10b981; --warn: #f59e0b; --danger: #ef4444;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 40px 20px;
+  }
+  .back { align-self: flex-start; margin-bottom: 32px; color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .back:hover { color: var(--accent); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px; width: 100%; max-width: 680px;
+  }
+  .icon { font-size: 36px; margin-bottom: 12px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+
+  .summary {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px;
+  }
+  .stat {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; text-align: center;
+  }
+  .stat-val { font-size: 26px; font-weight: 700; color: var(--accent); }
+  .stat-val.warn { color: var(--warn); }
+  .stat-val.danger { color: var(--danger); }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+  .tags-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px;
+  }
+  .tag-wrap { position: relative; }
+  .tag-num {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; color: var(--text-muted); font-weight: 600; pointer-events: none;
+  }
+  .tag-input {
+    width: 100%; padding: 11px 48px 11px 32px;
+    background: var(--surface-2); border: 2px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 13px;
+    font-family: inherit; transition: border-color .15s;
+  }
+  .tag-input:focus { outline: none; border-color: var(--accent); }
+  .tag-input.warn { border-color: var(--warn); }
+  .tag-input.danger { border-color: var(--danger); }
+  .tag-count {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; color: var(--text-muted); pointer-events: none;
+  }
+  .tag-count.warn { color: var(--warn); }
+  .tag-count.danger { color: var(--danger); font-weight: 700; }
+
+  .alert {
+    padding: 12px 16px; border-radius: 8px; font-size: 13px;
+    margin-bottom: 20px; display: none;
+  }
+  .alert.danger { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); }
+  .alert.show { display: block; }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    padding: 12px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; border: none; transition: all .15s;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #0d9668; }
+  .btn-secondary { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); color: var(--text); }
+
+  .tips { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .tips-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .tip { font-size: 13px; color: var(--text-dim); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .tip:last-child { border-bottom: none; }
+  .tip::before { content: '→ '; color: var(--accent); }
+
+  @media (max-width: 500px) {
+    .card { padding: 20px; }
+    .tags-grid { grid-template-columns: 1fr; }
+    .summary { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← All Tools</a>
+<div class="card">
+  <div class="icon">🏷️</div>
+  <h1>Etsy Tag Checker</h1>
+  <p class="sub">13 tags max · 20 characters per tag · Multi-word phrases count as one tag</p>
+
+  <div class="summary">
+    <div class="stat"><div class="stat-val" id="usedTags">0</div><div class="stat-label">Tags Used</div></div>
+    <div class="stat"><div class="stat-val" id="overTags">0</div><div class="stat-label">Over Limit</div></div>
+    <div class="stat"><div class="stat-val" id="emptyTags">13</div><div class="stat-label">Empty Slots</div></div>
+  </div>
+
+  <div class="alert danger" id="alertDanger">🚫 One or more tags exceed 20 characters and will be rejected by Etsy.</div>
+
+  <div class="tags-grid" id="tagsGrid"></div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="copyTags()">📋 Copy All Tags</button>
+    <button class="btn-secondary" onclick="clearAll()">Clear All</button>
+  </div>
+
+  <div class="tips">
+    <div class="tips-title">Etsy Tag Tips</div>
+    <div class="tip">Use all 13 tags — every unused tag is a missed opportunity</div>
+    <div class="tip">Multi-word phrases work great: "watercolor birthday card"</div>
+    <div class="tip">Don't repeat words you already used in your title</div>
+    <div class="tip">Think like a buyer — what would they search for?</div>
+    <div class="tip">Include synonyms: "gift", "present", "for her", "for him"</div>
+  </div>
+</div>
+
+<script>
+  const MAX_TAGS = 13;
+  const MAX_CHARS = 20;
+  const grid = document.getElementById('tagsGrid');
+  const inputs = [];
+
+  // Build 13 tag fields
+  for (let i = 1; i <= MAX_TAGS; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'tag-wrap';
+
+    const num = document.createElement('span');
+    num.className = 'tag-num';
+    num.textContent = i;
+
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'tag-input';
+    inp.placeholder = `Tag ${i}`;
+    inp.maxLength = 30; // allow over so we can flag it
+    inp.addEventListener('input', () => update(inp, count));
+
+    const count = document.createElement('span');
+    count.className = 'tag-count';
+    count.textContent = '0/20';
+
+    wrap.appendChild(num);
+    wrap.appendChild(inp);
+    wrap.appendChild(count);
+    grid.appendChild(wrap);
+    inputs.push({ inp, count });
+  }
+
+  function update(inp, countEl) {
+    const len = inp.value.length;
+    const isOver = len > MAX_CHARS;
+    const isWarn = len === MAX_CHARS;
+    countEl.textContent = `${len}/20`;
+    inp.className = 'tag-input' + (isOver ? ' danger' : isWarn ? ' warn' : '');
+    countEl.className = 'tag-count' + (isOver ? ' danger' : isWarn ? ' warn' : '');
+    updateSummary();
+  }
+
+  function updateSummary() {
+    let used = 0, over = 0, empty = 0;
+    inputs.forEach(({ inp }) => {
+      const len = inp.value.trim().length;
+      if (len === 0) empty++;
+      else { used++; if (inp.value.length > MAX_CHARS) over++; }
+    });
+    document.getElementById('usedTags').textContent = used;
+    document.getElementById('overTags').textContent = over;
+    document.getElementById('overTags').className = 'stat-val' + (over > 0 ? ' danger' : '');
+    document.getElementById('emptyTags').textContent = empty;
+    document.getElementById('alertDanger').className = 'alert danger' + (over > 0 ? ' show' : '');
+  }
+
+  function copyTags() {
+    const tags = inputs.map(({ inp }) => inp.value.trim()).filter(Boolean).join(', ');
+    navigator.clipboard.writeText(tags).then(() => {
+      const btn = document.querySelector('.btn-primary');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy All Tags', 1500);
+    });
+  }
+
+  function clearAll() {
+    inputs.forEach(({ inp, count }) => {
+      inp.value = '';
+      inp.className = 'tag-input';
+      count.textContent = '0/20';
+      count.className = 'tag-count';
+    });
+    updateSummary();
+  }
+</script>
+</body>
+</html>

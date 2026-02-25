@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listing Description Formatter — ElephantTools</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface-2: #1c1c1c; --border: #2a2a2a;
+    --text: #f0f0f0; --text-dim: #a0a0a0; --text-muted: #5a5a5a;
+    --accent: #10b981; --warn: #f59e0b;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 40px 20px;
+  }
+  .back { align-self: flex-start; margin-bottom: 32px; color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .back:hover { color: var(--accent); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px; width: 100%; max-width: 860px;
+  }
+  .icon { font-size: 36px; margin-bottom: 12px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
+
+  .options {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;
+    padding: 16px; background: var(--surface-2);
+    border: 1px solid var(--border); border-radius: 10px;
+  }
+  .option-group { display: flex; align-items: center; gap: 8px; }
+  .option-group label { font-size: 12px; color: var(--text-dim); }
+  select, input[type="text"] {
+    padding: 7px 10px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); font-size: 13px;
+    font-family: inherit;
+  }
+  select:focus, input[type="text"]:focus { outline: none; border-color: var(--accent); }
+
+  .editor-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+  }
+  .pane-label {
+    font-size: 11px; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: .06em; margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .char-count { font-size: 11px; color: var(--text-muted); }
+  .char-count.warn { color: var(--warn); }
+
+  textarea {
+    width: 100%; min-height: 320px; padding: 16px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-size: 13px;
+    font-family: inherit; resize: vertical; line-height: 1.7;
+  }
+  textarea:focus { outline: none; border-color: var(--accent); }
+
+  .output-box {
+    width: 100%; min-height: 320px; padding: 16px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; font-size: 13px; line-height: 1.7;
+    white-space: pre-wrap; word-break: break-word;
+    color: var(--text); overflow-y: auto;
+  }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    padding: 12px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; border: none; transition: all .15s;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #0d9668; }
+  .btn-secondary { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); color: var(--text); }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  .tips { }
+  .tips-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .tip { font-size: 13px; color: var(--text-dim); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .tip:last-child { border-bottom: none; }
+  .tip::before { content: '→ '; color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .card { padding: 24px; }
+    .editor-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← All Tools</a>
+<div class="card">
+  <div class="icon">📝</div>
+  <h1>Listing Description Formatter</h1>
+  <p class="sub">Paste messy text, get clean bullet-point formatted copy ready to paste into Etsy</p>
+
+  <div class="options">
+    <div class="option-group">
+      <label>Bullet style</label>
+      <select id="bulletStyle">
+        <option value="•">• Bullet</option>
+        <option value="✦">✦ Star</option>
+        <option value="✔">✔ Check</option>
+        <option value="→">→ Arrow</option>
+        <option value="-">- Dash</option>
+        <option value="◆">◆ Diamond</option>
+      </select>
+    </div>
+    <div class="option-group">
+      <label>Section divider</label>
+      <select id="dividerStyle">
+        <option value="">None</option>
+        <option value="───────────────">── Line</option>
+        <option value="★ ★ ★ ★ ★">★ Stars</option>
+        <option value="• • • • •">• Dots</option>
+        <option value="✦ ✦ ✦ ✦ ✦">✦ Custom</option>
+      </select>
+    </div>
+    <div class="option-group">
+      <label>Header prefix</label>
+      <input type="text" id="headerPrefix" value="✨" maxlength="5" style="width:60px;text-align:center;">
+    </div>
+    <div class="option-group">
+      <label>Spacing</label>
+      <select id="spacing">
+        <option value="single">Compact</option>
+        <option value="double" selected>Spaced</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="editor-grid">
+    <div>
+      <div class="pane-label">
+        <span>Input — paste your raw text</span>
+        <span class="char-count" id="inputCount">0 chars</span>
+      </div>
+      <textarea id="inputText" placeholder="Paste your messy listing description here...
+
+You can paste text with:
+- Bullet points or dashes
+- ALL CAPS headers
+- Random line breaks
+- Mixed formatting
+
+The formatter will clean it up automatically."></textarea>
+    </div>
+    <div>
+      <div class="pane-label">
+        <span>Output — formatted result</span>
+        <span class="char-count" id="outputCount">0 chars</span>
+      </div>
+      <div class="output-box" id="outputBox"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="copyOutput()">📋 Copy Formatted Text</button>
+    <button class="btn-secondary" onclick="format()">↻ Reformat</button>
+    <button class="btn-secondary" onclick="clearAll()">Clear</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="tips">
+    <div class="tips-title">Description Tips for Etsy</div>
+    <div class="tip">First 160 characters appear in Google search previews — lead with the best hook</div>
+    <div class="tip">Use headers for sections: WHAT YOU GET, HOW IT WORKS, PLEASE NOTE</div>
+    <div class="tip">Etsy descriptions don't support markdown — use Unicode symbols for structure</div>
+    <div class="tip">Include file formats, dimensions, and technical details buyers need</div>
+    <div class="tip">Add care/usage instructions at the bottom — reduces support messages</div>
+  </div>
+</div>
+
+<script>
+  const inputText = document.getElementById('inputText');
+  const outputBox = document.getElementById('outputBox');
+
+  inputText.addEventListener('input', () => {
+    document.getElementById('inputCount').textContent = inputText.value.length + ' chars';
+    format();
+  });
+
+  ['bulletStyle','dividerStyle','headerPrefix','spacing'].forEach(id => {
+    document.getElementById(id).addEventListener('change', format);
+  });
+
+  function format() {
+    const raw = inputText.value;
+    if (!raw.trim()) { outputBox.textContent = ''; document.getElementById('outputCount').textContent = '0 chars'; return; }
+
+    const bullet = document.getElementById('bulletStyle').value;
+    const divider = document.getElementById('dividerStyle').value;
+    const prefix = document.getElementById('headerPrefix').value;
+    const spacing = document.getElementById('spacing').value;
+    const gap = spacing === 'double' ? '\n' : '';
+
+    const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    const out = [];
+
+    lines.forEach((line, i) => {
+      // Detect ALL CAPS header (3+ words or short line in caps)
+      const isAllCaps = line === line.toUpperCase() && line.length > 2 && /[A-Z]/.test(line);
+      // Detect lines that already start with a bullet/dash
+      const isBullet = /^[-•*✦✔→◆▸▹▸►]/.test(line);
+      // Detect lines that look like key: value (info lines)
+      const isKeyVal = /^[\w\s]+:/.test(line) && line.includes(':');
+
+      let formatted;
+      if (isAllCaps && !isBullet) {
+        // Header line
+        if (divider && i > 0) out.push(divider);
+        formatted = prefix ? `${prefix} ${titleCase(line)} ${prefix}` : titleCase(line);
+        out.push(formatted);
+        if (gap) out.push('');
+      } else if (isBullet) {
+        // Already bulleted — normalize
+        const clean = line.replace(/^[-•*✦✔→◆▸▹►]\s*/, '').trim();
+        formatted = `${bullet} ${clean}`;
+        out.push(formatted);
+      } else if (isKeyVal) {
+        // Key: value — keep as bullet
+        formatted = `${bullet} ${line}`;
+        out.push(formatted);
+      } else if (line.length < 60 && !line.endsWith('.') && i > 0) {
+        // Short line without punctuation — likely a label/header
+        formatted = `${bullet} ${line}`;
+        out.push(formatted);
+      } else {
+        // Regular paragraph or sentence
+        formatted = `${bullet} ${line}`;
+        out.push(formatted);
+      }
+    });
+
+    // Clean up: merge consecutive empty lines
+    const result = out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    outputBox.textContent = result;
+    const cnt = result.length;
+    const countEl = document.getElementById('outputCount');
+    countEl.textContent = cnt + ' chars';
+    countEl.className = 'char-count' + (cnt > 2000 ? ' warn' : '');
+  }
+
+  function titleCase(str) {
+    return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function copyOutput() {
+    const text = outputBox.textContent;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.btn-primary');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy Formatted Text', 1500);
+    });
+  }
+
+  function clearAll() {
+    inputText.value = '';
+    outputBox.textContent = '';
+    document.getElementById('inputCount').textContent = '0 chars';
+    document.getElementById('outputCount').textContent = '0 chars';
+  }
+</script>
+</body>
+</html>
