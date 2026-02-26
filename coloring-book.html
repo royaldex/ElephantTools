@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coloring Book Creator — ElephantTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080808;--surface:#111;--s2:#171717;--s3:#1e1e1e;
+  --border:#252525;--border2:#303030;
+  --text:#efefef;--dim:#909090;--muted:#505050;
+  --accent:#10b981;--accent2:rgba(16,185,129,.12);
+  --gold:#f59e0b;--danger:#ef4444;--warn:#f59e0b;
+  --sidebar:300px;
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOP BAR ── */
+.topbar{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.back{color:var(--muted);text-decoration:none;font-size:13px;transition:color .15s}
+.back:hover{color:var(--accent)}
+.topbar-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.topbar-badge{font-size:10px;background:var(--accent2);color:var(--accent);border:1px solid rgba(16,185,129,.25);border-radius:4px;padding:2px 7px;font-weight:700;letter-spacing:.04em}
+
+/* ── LAYOUT ── */
+.app{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+.sidebar{width:var(--sidebar);background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar-inner{padding:18px;display:flex;flex-direction:column;gap:0}
+
+.section{margin-bottom:20px}
+.section-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.section-label button{background:none;border:none;color:var(--accent);font-size:10px;cursor:pointer;font-family:inherit;font-weight:600}
+
+/* Upload zone */
+.upload-zone{border:2px dashed var(--border2);border-radius:10px;padding:28px 16px;text-align:center;cursor:pointer;transition:all .2s}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:var(--accent2)}
+.upload-zone .uz-icon{font-size:28px;margin-bottom:8px}
+.upload-zone .uz-text{font-size:13px;color:var(--dim)}
+.upload-zone .uz-sub{font-size:11px;color:var(--muted);margin-top:4px}
+input[type=file]{display:none}
+
+/* Presets */
+.presets{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.preset-btn{padding:9px 8px;background:var(--s2);border:1px solid var(--border);border-radius:8px;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
+.preset-btn:hover{border-color:var(--border2)}
+.preset-btn.active{border-color:var(--accent);background:var(--accent2)}
+.preset-name{font-size:12px;font-weight:600;color:var(--text)}
+.preset-desc{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* Controls */
+.ctrl{margin-bottom:12px}
+.ctrl label{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim);margin-bottom:6px}
+.ctrl label span{color:var(--accent);font-weight:600;font-size:11px}
+input[type=range]{width:100%;height:4px;accent-color:var(--accent);cursor:pointer}
+select{width:100%;padding:8px 10px;background:var(--s3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;cursor:pointer}
+select:focus{outline:none;border-color:var(--accent)}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:4px 0 16px}
+
+/* Toggle */
+.toggle-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.toggle-label{font-size:12px;color:var(--dim)}
+.toggle{position:relative;width:36px;height:20px;cursor:pointer}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:var(--s3);border:1px solid var(--border);border-radius:99px;transition:.2s}
+.toggle input:checked+.toggle-track{background:var(--accent);border-color:var(--accent)}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:12px;height:12px;background:#fff;border-radius:50%;transition:.2s}
+.toggle input:checked~.toggle-thumb{left:19px}
+
+/* Action buttons */
+.btn{padding:11px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;width:100%;text-align:center}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#0d9668}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-secondary{background:var(--s3);color:var(--dim);border:1px solid var(--border);margin-top:8px}
+.btn-secondary:hover{background:var(--border2);color:var(--text)}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.btn-row .btn{margin:0}
+
+/* Processing indicator */
+.processing{display:none;align-items:center;gap:10px;padding:12px;background:var(--s2);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;font-size:13px;color:var(--dim)}
+.processing.show{display:flex}
+.spin{width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MAIN CANVAS AREA ── */
+.canvas-area{flex:1;display:flex;align-items:center;justify-content:center;background:#0d0d0d;overflow:auto;position:relative;padding:24px}
+.canvas-wrap{position:relative;max-width:100%;max-height:100%}
+canvas{display:block;max-width:100%;max-height:calc(100vh - 180px);object-fit:contain;box-shadow:0 16px 60px rgba(0,0,0,.7)}
+#splitHandle{position:absolute;top:0;bottom:0;width:3px;background:var(--accent);cursor:ew-resize;z-index:10;display:none}
+#splitHandle::after{content:'◀▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#000;font-size:10px;padding:4px 3px;border-radius:4px;white-space:nowrap;font-weight:900}
+
+/* Bottom bar */
+.bottom-bar{height:48px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0}
+.bb-info{font-size:12px;color:var(--muted)}
+.bb-actions{display:flex;gap:8px}
+.bb-btn{padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+.bb-btn-primary{background:var(--accent);color:#000}
+.bb-btn-primary:hover{background:#0d9668}
+.bb-btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.bb-btn-secondary{background:var(--s2);color:var(--dim);border:1px solid var(--border)}
+.bb-btn-secondary:hover{background:var(--border2);color:var(--text)}
+
+/* Drop overlay */
+.drop-overlay{position:fixed;inset:0;background:rgba(16,185,129,.08);border:3px solid var(--accent);z-index:100;display:none;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:var(--accent);pointer-events:none}
+.drop-overlay.show{display:flex}
+
+/* Empty state */
+.empty-state{text-align:center;pointer-events:none}
+.empty-icon{font-size:56px;margin-bottom:16px;opacity:.3}
+.empty-title{font-size:17px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--muted);opacity:.7}
+
+@media(max-width:700px){
+  .app{flex-direction:column}
+  .sidebar{width:100%;height:auto;max-height:50vh;border-right:none;border-bottom:1px solid var(--border)}
+  .canvas-area{min-height:300px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="back">← All Tools</a>
+    <div class="topbar-title">🖍️ Coloring Book Creator <span class="topbar-badge">PRO</span></div>
+  </div>
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <!-- Upload -->
+      <div class="section">
+        <div class="section-label">Image</div>
+        <div class="upload-zone" id="uploadZone">
+          <div class="uz-icon">🗂️</div>
+          <div class="uz-text">Drop image or click to upload</div>
+          <div class="uz-sub">PNG · JPG · WEBP · GIF</div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*">
+      </div>
+
+      <!-- Style Presets -->
+      <div class="section">
+        <div class="section-label">Style Preset</div>
+        <div class="presets">
+          <button class="preset-btn active" data-preset="classic" onclick="applyPreset('classic',this)">
+            <div class="preset-name">Classic</div>
+            <div class="preset-desc">Balanced lines</div>
+          </button>
+          <button class="preset-btn" data-preset="kids" onclick="applyPreset('kids',this)">
+            <div class="preset-name">Kids</div>
+            <div class="preset-desc">Bold thick lines</div>
+          </button>
+          <button class="preset-btn" data-preset="sketch" onclick="applyPreset('sketch',this)">
+            <div class="preset-name">Sketch</div>
+            <div class="preset-desc">Soft pencil feel</div>
+          </button>
+          <button class="preset-btn" data-preset="fineart" onclick="applyPreset('fineart',this)">
+            <div class="preset-name">Fine Art</div>
+            <div class="preset-desc">Thin detail lines</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Pre-processing -->
+      <div class="section">
+        <div class="section-label">Pre-processing <button onclick="resetPreProcess()">Reset</button></div>
+
+        <div class="ctrl">
+          <label>Brightness <span id="brightVal">0</span></label>
+          <input type="range" id="brightness" min="-80" max="80" value="0" oninput="updateVal('brightVal',this.value);lazyProcess()">
+        </div>
+        <div class="ctrl">
+          <label>Contrast <span id="contrastVal">0</span></label>
+          <input type="range" id="contrast" min="-60" max="100" value="0" oninput="updateVal('contrastVal',this.value);lazyProcess()">
+        </div>
+        <div class="ctrl">
+          <label>Blur (noise reduction) <span id="blurVal">1</span></label>
+          <input type="range" id="blurAmount" min="0" max="6" step="0.5" value="1" oninput="updateVal('blurVal',this.value);lazyProcess()">
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Edge Detection -->
+      <div class="section">
+        <div class="section-label">Edge Detection</div>
+
+        <div class="ctrl" style="margin-bottom:12px">
+          <label style="margin-bottom:6px">Algorithm</label>
+          <select id="algorithm" onchange="lazyProcess()">
+            <option value="sobel">Sobel (standard)</option>
+            <option value="canny">Canny (clean)</option>
+            <option value="laplacian">Laplacian (sharp)</option>
+            <option value="dog">Sketch (soft pencil)</option>
+          </select>
+        </div>
+
+        <div class="ctrl">
+          <label>Sensitivity <span id="sensitivityVal">50</span></label>
+          <input type="range" id="sensitivity" min="5" max="120" value="50" oninput="updateVal('sensitivityVal',this.value);lazyProcess()">
+        </div>
+        <div class="ctrl">
+          <label>Line Thickness <span id="thicknessVal">1</span></label>
+          <input type="range" id="thickness" min="0" max="5" step="1" value="1" oninput="updateVal('thicknessVal',this.value);lazyProcess()">
+        </div>
+        <div class="ctrl">
+          <label>Noise Cleanup <span id="cleanupVal">10</span></label>
+          <input type="range" id="cleanup" min="0" max="60" value="10" oninput="updateVal('cleanupVal',this.value);lazyProcess()">
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Output -->
+      <div class="section">
+        <div class="section-label">Output</div>
+        <div class="toggle-row">
+          <span class="toggle-label">White background</span>
+          <label class="toggle">
+            <input type="checkbox" id="whiteBg" checked onchange="lazyProcess()">
+            <span class="toggle-track"></span>
+            <span class="toggle-thumb"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Invert (white lines)</span>
+          <label class="toggle">
+            <input type="checkbox" id="invertLines" onchange="lazyProcess()">
+            <span class="toggle-track"></span>
+            <span class="toggle-thumb"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Split preview</span>
+          <label class="toggle">
+            <input type="checkbox" id="splitToggle" onchange="toggleSplit()">
+            <span class="toggle-track"></span>
+            <span class="toggle-thumb"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Process + Download -->
+      <div class="section">
+        <div class="processing" id="processingIndicator">
+          <div class="spin"></div>
+          <span>Processing...</span>
+        </div>
+
+        <button class="btn btn-primary" id="processBtn" onclick="processNow()" disabled>Process Image</button>
+        <div class="btn-row">
+          <button class="bb-btn bb-btn-secondary" id="dlPng" onclick="download('png',1)" disabled>PNG 1×</button>
+          <button class="bb-btn bb-btn-primary" id="dlPng2x" onclick="download('png',2)" disabled>PNG 2×</button>
+        </div>
+        <button class="bb-btn bb-btn-secondary" id="dlJpg" onclick="download('jpg',2)" style="width:100%;margin-top:8px" disabled>JPG 2×</button>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="canvas-area" id="canvasArea">
+
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">🖍️</div>
+        <div class="empty-title">No image loaded</div>
+        <div class="empty-sub">Upload an image to get started</div>
+      </div>
+
+      <div class="canvas-wrap" id="canvasWrap" style="display:none">
+        <canvas id="outputCanvas"></canvas>
+        <div id="splitHandle"></div>
+      </div>
+
+    </div>
+    <div class="bottom-bar">
+      <span class="bb-info" id="bbInfo">No image loaded</span>
+      <div class="bb-actions">
+        <button class="bb-btn bb-btn-secondary" onclick="resetAll()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="drop-overlay" id="dropOverlay">Drop image to load</div>
+
+<!-- Hidden canvases for processing -->
+<canvas id="sourceCanvas" style="display:none"></canvas>
+<canvas id="preCanvas" style="display:none"></canvas>
+
+<script>
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let sourceImg = null;
+let processTimer = null;
+let splitPos = 0.5;
+let isDraggingSplit = false;
+let currentResult = null; // ImageData of the processed result
+
+const PRESETS = {
+  classic:  { blur:1,   sensitivity:50,  thickness:1, cleanup:10, algorithm:'sobel',    brightness:0,  contrast:0   },
+  kids:     { blur:2,   sensitivity:35,  thickness:3, cleanup:5,  algorithm:'canny',    brightness:10, contrast:20  },
+  sketch:   { blur:1.5, sensitivity:40,  thickness:1, cleanup:15, algorithm:'dog',      brightness:0,  contrast:10  },
+  fineart:  { blur:0.5, sensitivity:70,  thickness:0, cleanup:20, algorithm:'laplacian',brightness:0,  contrast:30  },
+};
+
+// ─────────────────────────────────────────────
+// UPLOAD
+// ─────────────────────────────────────────────
+const uploadZone = document.getElementById('uploadZone');
+const fileInput  = document.getElementById('fileInput');
+
+uploadZone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', e => { if(e.target.files[0]) loadFile(e.target.files[0]); });
+
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault(); uploadZone.classList.remove('drag');
+  if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+// Global drag-drop
+document.addEventListener('dragover', e => { e.preventDefault(); document.getElementById('dropOverlay').classList.add('show'); });
+document.addEventListener('dragleave', e => { if(e.relatedTarget===null) document.getElementById('dropOverlay').classList.remove('show'); });
+document.addEventListener('drop', e => {
+  e.preventDefault(); document.getElementById('dropOverlay').classList.remove('show');
+  if(e.dataTransfer.files[0]?.type.startsWith('image/')) loadFile(e.dataTransfer.files[0]);
+});
+
+function loadFile(file) {
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    sourceImg = img;
+    URL.revokeObjectURL(url);
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('canvasWrap').style.display = '';
+    document.getElementById('processBtn').disabled = false;
+    document.getElementById('bbInfo').textContent = `${img.naturalWidth} × ${img.naturalHeight} px`;
+    processNow();
+  };
+  img.src = url;
+}
+
+// ─────────────────────────────────────────────
+// PRESETS
+// ─────────────────────────────────────────────
+function applyPreset(name, btn) {
+  const p = PRESETS[name];
+  if(!p) return;
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  setSlider('brightness', p.brightness);
+  setSlider('contrast', p.contrast);
+  setSlider('blurAmount', p.blur);
+  setSlider('sensitivity', p.sensitivity);
+  setSlider('thickness', p.thickness);
+  setSlider('cleanup', p.cleanup);
+  document.getElementById('algorithm').value = p.algorithm;
+  if(sourceImg) processNow();
+}
+
+function setSlider(id, val) {
+  const el = document.getElementById(id);
+  el.value = val;
+  const valId = { brightness:'brightVal', contrast:'contrastVal', blurAmount:'blurVal',
+                  sensitivity:'sensitivityVal', thickness:'thicknessVal', cleanup:'cleanupVal' }[id];
+  if(valId) document.getElementById(valId).textContent = val;
+}
+
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function updateVal(id, val) { document.getElementById(id).textContent = val; }
+
+function resetPreProcess() {
+  setSlider('brightness',0); setSlider('contrast',0); setSlider('blurAmount',1);
+  if(sourceImg) lazyProcess();
+}
+
+function resetAll() {
+  sourceImg = null; currentResult = null;
+  document.getElementById('emptyState').style.display = '';
+  document.getElementById('canvasWrap').style.display = 'none';
+  document.getElementById('processBtn').disabled = true;
+  document.getElementById('dlPng').disabled = true;
+  document.getElementById('dlPng2x').disabled = true;
+  document.getElementById('dlJpg').disabled = true;
+  document.getElementById('bbInfo').textContent = 'No image loaded';
+  fileInput.value = '';
+}
+
+function lazyProcess() {
+  if(!sourceImg) return;
+  clearTimeout(processTimer);
+  processTimer = setTimeout(processNow, 120);
+}
+
+// ─────────────────────────────────────────────
+// IMAGE PROCESSING
+// ─────────────────────────────────────────────
+
+// Gaussian kernel
+function gaussianKernel(sigma, size) {
+  const k = [];
+  const half = Math.floor(size/2);
+  let sum = 0;
+  for(let y=-half; y<=half; y++) {
+    for(let x=-half; x<=half; x++) {
+      const v = Math.exp(-(x*x+y*y)/(2*sigma*sigma));
+      k.push(v); sum += v;
+    }
+  }
+  return k.map(v => v/sum);
+}
+
+function applyKernel(data, w, h, kernel, kSize) {
+  const half = Math.floor(kSize/2);
+  const out = new Float32Array(w*h);
+  for(let y=0; y<h; y++) {
+    for(let x=0; x<w; x++) {
+      let sum = 0;
+      for(let ky=0; ky<kSize; ky++) {
+        for(let kx=0; kx<kSize; kx++) {
+          const sy = Math.min(Math.max(y+ky-half,0),h-1);
+          const sx = Math.min(Math.max(x+kx-half,0),w-1);
+          sum += data[sy*w+sx] * kernel[ky*kSize+kx];
+        }
+      }
+      out[y*w+x] = sum;
+    }
+  }
+  return out;
+}
+
+function sobelGradients(gray, w, h) {
+  const gx = new Float32Array(w*h);
+  const gy = new Float32Array(w*h);
+  const mag = new Float32Array(w*h);
+  for(let y=1; y<h-1; y++) {
+    for(let x=1; x<w-1; x++) {
+      const i = y*w+x;
+      const tl=gray[(y-1)*w+(x-1)], tc=gray[(y-1)*w+x], tr=gray[(y-1)*w+(x+1)];
+      const ml=gray[y*w+(x-1)],                           mr=gray[y*w+(x+1)];
+      const bl=gray[(y+1)*w+(x-1)], bc=gray[(y+1)*w+x], br=gray[(y+1)*w+(x+1)];
+      gx[i] = -tl - 2*ml - bl + tr + 2*mr + br;
+      gy[i] = -tl - 2*tc - tr + bl + 2*bc + br;
+      mag[i] = Math.sqrt(gx[i]*gx[i]+gy[i]*gy[i]);
+    }
+  }
+  return {gx, gy, mag};
+}
+
+function laplacianEdges(gray, w, h) {
+  const out = new Float32Array(w*h);
+  for(let y=1; y<h-1; y++) {
+    for(let x=1; x<w-1; x++) {
+      const i = y*w+x;
+      out[i] = Math.abs(
+        -gray[(y-1)*w+x] - gray[(y+1)*w+x] - gray[y*w+(x-1)] - gray[y*w+(x+1)] + 4*gray[i]
+      );
+    }
+  }
+  return out;
+}
+
+// Non-maximum suppression for Canny
+function nonMaxSuppression(mag, gx, gy, w, h) {
+  const out = new Float32Array(w*h);
+  for(let y=1; y<h-1; y++) {
+    for(let x=1; x<w-1; x++) {
+      const i = y*w+x;
+      const angle = Math.atan2(gy[i], gx[i]) * 180 / Math.PI;
+      const a = ((angle % 180) + 180) % 180;
+      let n1, n2;
+      if(a < 22.5 || a >= 157.5)      { n1 = mag[y*w+(x-1)]; n2 = mag[y*w+(x+1)]; }
+      else if(a < 67.5)               { n1 = mag[(y-1)*w+(x+1)]; n2 = mag[(y+1)*w+(x-1)]; }
+      else if(a < 112.5)              { n1 = mag[(y-1)*w+x]; n2 = mag[(y+1)*w+x]; }
+      else                            { n1 = mag[(y-1)*w+(x-1)]; n2 = mag[(y+1)*w+(x+1)]; }
+      out[i] = (mag[i] >= n1 && mag[i] >= n2) ? mag[i] : 0;
+    }
+  }
+  return out;
+}
+
+// Dilation (thicken lines)
+function dilate(binary, w, h, radius) {
+  if(radius === 0) return binary;
+  const out = new Uint8Array(w*h);
+  for(let y=0; y<h; y++) {
+    for(let x=0; x<w; x++) {
+      if(!binary[y*w+x]) continue;
+      for(let dy=-radius; dy<=radius; dy++) {
+        for(let dx=-radius; dx<=radius; dx++) {
+          if(dx*dx+dy*dy > radius*radius) continue;
+          const ny=y+dy, nx=x+dx;
+          if(ny>=0&&ny<h&&nx>=0&&nx<w) out[ny*w+nx] = 1;
+        }
+      }
+    }
+  }
+  return out;
+}
+
+function processNow() {
+  if(!sourceImg) return;
+  document.getElementById('processingIndicator').classList.add('show');
+
+  // Use setTimeout to let UI update
+  setTimeout(() => {
+    try { _doProcess(); }
+    catch(e) { console.error(e); }
+    document.getElementById('processingIndicator').classList.remove('show');
+  }, 10);
+}
+
+function _doProcess() {
+  const brightness = parseInt(document.getElementById('brightness').value);
+  const contrast   = parseInt(document.getElementById('contrast').value);
+  const blurAmt    = parseFloat(document.getElementById('blurAmount').value);
+  const sensitivity= parseInt(document.getElementById('sensitivity').value);
+  const thickness  = parseInt(document.getElementById('thickness').value);
+  const cleanup    = parseInt(document.getElementById('cleanup').value);
+  const algorithm  = document.getElementById('algorithm').value;
+  const whiteBg    = document.getElementById('whiteBg').checked;
+  const invert     = document.getElementById('invertLines').checked;
+
+  const img = sourceImg;
+  const W = img.naturalWidth, H = img.naturalHeight;
+
+  // Draw source to sourceCanvas
+  const sc = document.getElementById('sourceCanvas');
+  sc.width = W; sc.height = H;
+  const sctx = sc.getContext('2d');
+  sctx.drawImage(img, 0, 0);
+  const srcData = sctx.getImageData(0, 0, W, H);
+
+  // ─ Step 1: Brightness / Contrast adjustment + grayscale
+  const gray = new Float32Array(W*H);
+  const d = srcData.data;
+  const cFactor = (259*(contrast+255))/(255*(259-contrast));
+  for(let i=0; i<W*H; i++) {
+    const pi = i*4;
+    let r = d[pi], g = d[pi+1], b = d[pi+2];
+    // brightness
+    r = Math.min(255, Math.max(0, r + brightness));
+    g = Math.min(255, Math.max(0, g + brightness));
+    b = Math.min(255, Math.max(0, b + brightness));
+    // contrast
+    r = Math.min(255, Math.max(0, cFactor*(r-128)+128));
+    g = Math.min(255, Math.max(0, cFactor*(g-128)+128));
+    b = Math.min(255, Math.max(0, cFactor*(b-128)+128));
+    gray[i] = 0.299*r + 0.587*g + 0.114*b;
+  }
+
+  // ─ Step 2: Gaussian blur
+  let blurred = gray;
+  if(blurAmt > 0) {
+    const sigma = Math.max(0.5, blurAmt);
+    const kSize = Math.min(15, Math.ceil(sigma*3)*2+1);
+    const kernel = gaussianKernel(sigma, kSize);
+    blurred = applyKernel(gray, W, H, kernel, kSize);
+  }
+
+  // ─ Step 3: Edge detection
+  let edges;
+  const thresh = sensitivity;
+
+  if(algorithm === 'sobel') {
+    const {mag} = sobelGradients(blurred, W, H);
+    edges = new Uint8Array(W*H);
+    for(let i=0; i<W*H; i++) edges[i] = mag[i] > thresh ? 1 : 0;
+
+  } else if(algorithm === 'canny') {
+    const {gx, gy, mag} = sobelGradients(blurred, W, H);
+    const suppressed = nonMaxSuppression(mag, gx, gy, W, H);
+    const hiThresh = thresh;
+    const loThresh = thresh * 0.4;
+    const strong = new Uint8Array(W*H);
+    const weak   = new Uint8Array(W*H);
+    for(let i=0; i<W*H; i++) {
+      if(suppressed[i] >= hiThresh) strong[i] = 1;
+      else if(suppressed[i] >= loThresh) weak[i] = 1;
+    }
+    // Hysteresis: connect weak to strong
+    edges = new Uint8Array(W*H);
+    for(let i=0; i<W*H; i++) { if(strong[i]) edges[i]=1; }
+    let changed = true;
+    while(changed) {
+      changed = false;
+      for(let y=1; y<H-1; y++) for(let x=1; x<W-1; x++) {
+        const i=y*W+x;
+        if(weak[i] && !edges[i]) {
+          const neighbors = [edges[(y-1)*W+x],edges[(y+1)*W+x],edges[y*W+(x-1)],edges[y*W+(x+1)],
+                             edges[(y-1)*W+(x-1)],edges[(y-1)*W+(x+1)],edges[(y+1)*W+(x-1)],edges[(y+1)*W+(x+1)]];
+          if(neighbors.some(Boolean)) { edges[i]=1; changed=true; }
+        }
+      }
+    }
+
+  } else if(algorithm === 'laplacian') {
+    // Sharper blur first
+    const sigma2 = Math.max(0.3, blurAmt*0.5);
+    const kSize2 = Math.min(9, Math.ceil(sigma2*3)*2+1);
+    const kernel2 = gaussianKernel(sigma2, kSize2);
+    const blurred2 = applyKernel(gray, W, H, kernel2, kSize2);
+    const lap = laplacianEdges(blurred2, W, H);
+    edges = new Uint8Array(W*H);
+    for(let i=0; i<W*H; i++) edges[i] = lap[i] > (thresh*0.3) ? 1 : 0;
+
+  } else if(algorithm === 'dog') {
+    // Difference of Gaussians — sketch feel
+    const s1 = Math.max(0.5, blurAmt);
+    const s2 = s1 * 1.6;
+    const k1 = gaussianKernel(s1, Math.min(15, Math.ceil(s1*4)*2+1));
+    const k2 = gaussianKernel(s2, Math.min(21, Math.ceil(s2*4)*2+1));
+    const kSize1 = Math.min(15, Math.ceil(s1*4)*2+1);
+    const kSize2 = Math.min(21, Math.ceil(s2*4)*2+1);
+    const b1 = applyKernel(gray, W, H, k1, kSize1);
+    const b2 = applyKernel(gray, W, H, k2, kSize2);
+    edges = new Uint8Array(W*H);
+    for(let i=0; i<W*H; i++) {
+      edges[i] = Math.abs(b1[i]-b2[i]) > (thresh*0.25) ? 1 : 0;
+    }
+  }
+
+  // ─ Step 4: Noise cleanup (remove isolated pixels)
+  if(cleanup > 0) {
+    const cleaned = new Uint8Array(W*H);
+    const minNeighbors = Math.max(1, Math.round(cleanup/15));
+    for(let y=1; y<H-1; y++) {
+      for(let x=1; x<W-1; x++) {
+        const i=y*W+x;
+        if(!edges[i]) continue;
+        let n = 0;
+        for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++) {
+          if(dy===0&&dx===0) continue;
+          if(edges[(y+dy)*W+(x+dx)]) n++;
+        }
+        if(n >= minNeighbors) cleaned[i]=1;
+      }
+    }
+    edges = cleaned;
+  }
+
+  // ─ Step 5: Dilation (thicken lines)
+  if(thickness > 0) {
+    edges = dilate(edges, W, H, thickness);
+  }
+
+  // ─ Step 6: Render to output canvas
+  const oc = document.getElementById('outputCanvas');
+  oc.width = W; oc.height = H;
+  const octx = oc.getContext('2d');
+  const outData = octx.createImageData(W, H);
+  const od = outData.data;
+
+  for(let i=0; i<W*H; i++) {
+    const pi=i*4;
+    let isEdge = edges[i]===1;
+    if(invert) isEdge = !isEdge;
+
+    if(whiteBg) {
+      od[pi]   = isEdge ? 0 : 255;
+      od[pi+1] = isEdge ? 0 : 255;
+      od[pi+2] = isEdge ? 0 : 255;
+      od[pi+3] = 255;
+    } else {
+      od[pi]=od[pi+1]=od[pi+2] = isEdge ? 0 : 255;
+      od[pi+3] = isEdge ? 255 : 0; // transparent background
+    }
+  }
+
+  octx.putImageData(outData, 0, 0);
+  currentResult = true;
+
+  // Store reference image for split view
+  oc._sourceImg = sourceImg;
+
+  updateSplitPreview();
+  enableDownloads();
+  document.getElementById('bbInfo').textContent = `${W} × ${H} px · ${algorithm} · thickness ${thickness}`;
+}
+
+// ─────────────────────────────────────────────
+// SPLIT PREVIEW
+// ─────────────────────────────────────────────
+function toggleSplit() {
+  const on = document.getElementById('splitToggle').checked;
+  const handle = document.getElementById('splitHandle');
+  handle.style.display = on ? 'block' : 'none';
+  if(on) updateSplitPreview();
+}
+
+function updateSplitPreview() {
+  const on = document.getElementById('splitToggle').checked;
+  if(!on || !sourceImg) return;
+
+  const oc = document.getElementById('outputCanvas');
+  const W = oc.width, H = oc.height;
+  const ctx = oc.getContext('2d');
+
+  // Get processed result
+  const processed = ctx.getImageData(0, 0, W, H);
+
+  // Draw source on left half
+  const splitX = Math.round(W * splitPos);
+  ctx.drawImage(sourceImg, 0, 0, splitX, H, 0, 0, splitX, H);
+
+  // Restore processed on right half
+  ctx.putImageData(processed, 0, 0, splitX, 0, W-splitX, H);
+
+  // Draw split line
+  ctx.strokeStyle = '#10b981';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(splitX, 0);
+  ctx.lineTo(splitX, H);
+  ctx.stroke();
+
+  // Handle position
+  const canvasRect = oc.getBoundingClientRect();
+  const handle = document.getElementById('splitHandle');
+  const displaySplitX = splitX * (canvasRect.width / W);
+  handle.style.left = displaySplitX + 'px';
+}
+
+// Split handle drag
+const splitHandle = document.getElementById('splitHandle');
+splitHandle.addEventListener('mousedown', e => { isDraggingSplit = true; e.preventDefault(); });
+document.addEventListener('mousemove', e => {
+  if(!isDraggingSplit) return;
+  const oc = document.getElementById('outputCanvas');
+  const rect = oc.getBoundingClientRect();
+  splitPos = Math.min(0.95, Math.max(0.05, (e.clientX - rect.left) / rect.width));
+  if(sourceImg) processNow();
+});
+document.addEventListener('mouseup', () => { isDraggingSplit = false; });
+
+// ─────────────────────────────────────────────
+// DOWNLOAD
+// ─────────────────────────────────────────────
+function enableDownloads() {
+  ['dlPng','dlPng2x','dlJpg'].forEach(id => document.getElementById(id).disabled = false);
+}
+
+function download(fmt, scale) {
+  if(!sourceImg) return;
+  const src = document.getElementById('outputCanvas');
+  const W = src.width * scale, H = src.height * scale;
+  const oc = document.createElement('canvas');
+  oc.width = W; oc.height = H;
+  const ctx = oc.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(src, 0, 0, W, H);
+  const mime = fmt==='jpg' ? 'image/jpeg' : 'image/png';
+  const q = fmt==='jpg' ? 0.95 : undefined;
+  oc.toBlob(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `coloring-page-${W}x${H}.${fmt}`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }, mime, q);
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+// Keyboard shortcut: P to process
+document.addEventListener('keydown', e => {
+  if(e.key==='p'||e.key==='P') { if(sourceImg) processNow(); }
+});
+</script>
+</body>
+</html>
