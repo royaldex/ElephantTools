@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etsy Image Optimizer — ElephantTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080808;--surface:#111;--s2:#171717;--s3:#1e1e1e;
+  --border:#252525;--border2:#303030;
+  --text:#efefef;--dim:#909090;--muted:#505050;
+  --accent:#10b981;--accent2:rgba(16,185,129,.12);
+  --gold:#f59e0b;--danger:#ef4444;--warn:#f59e0b;
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px}
+
+.back{align-self:flex-start;color:var(--muted);text-decoration:none;font-size:13px;transition:color .15s;margin-bottom:32px}
+.back:hover{color:var(--accent)}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:40px;width:100%;max-width:660px}
+
+.title-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.title-icon{font-size:36px}
+h1{font-size:24px;font-weight:700}
+.sub{color:var(--dim);font-size:14px;margin-bottom:32px}
+
+/* Drop zone */
+.drop-zone{border:2px dashed var(--border2);border-radius:12px;padding:48px 24px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:28px}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:var(--accent2)}
+.dz-icon{font-size:40px;margin-bottom:12px}
+.dz-text{font-size:15px;color:var(--dim);margin-bottom:4px}
+.dz-sub{font-size:12px;color:var(--muted)}
+input[type=file]{display:none}
+
+/* File info */
+.file-info{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:none}
+.file-info.show{display:block}
+.fi-name{font-size:14px;font-weight:600;margin-bottom:4px;word-break:break-all}
+.fi-meta{font-size:12px;color:var(--muted)}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
+.stat{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.stat-val{font-size:24px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-val.danger{color:var(--danger)}
+.stat-val.warn{color:var(--warn)}
+.stat-val.ok{color:var(--accent)}
+.stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* Options */
+.options{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:20px}
+.opt-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px}
+.opt-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.opt-row:last-child{margin-bottom:0}
+.opt-label{font-size:13px;color:var(--dim)}
+.opt-val{font-size:12px;color:var(--accent);font-weight:600;min-width:40px;text-align:right}
+input[type=range]{flex:1;margin:0 14px;accent-color:var(--accent)}
+
+.format-row{display:flex;gap:8px}
+.format-btn{flex:1;padding:8px;background:var(--s3);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;color:var(--dim);font-family:inherit;transition:all .15s}
+.format-btn.active{background:var(--accent2);border-color:var(--accent);color:var(--accent)}
+
+/* Progress */
+.progress-wrap{margin-bottom:20px;display:none}
+.progress-wrap.show{display:block}
+.progress-label{font-size:13px;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between}
+.progress-bar-bg{height:8px;background:var(--border);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;background:var(--accent);border-radius:99px;transition:width .2s;width:0%}
+
+/* Verdict */
+.verdict{padding:14px 18px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:20px;display:none;align-items:center;gap:10px}
+.verdict.show{display:flex}
+.verdict.ok{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--accent)}
+.verdict.warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--warn)}
+.verdict.danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--danger)}
+
+/* Result comparison */
+.comparison{display:none;gap:12px;margin-bottom:24px}
+.comparison.show{display:grid;grid-template-columns:1fr 1fr}
+.cmp-box{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.cmp-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.cmp-val{font-size:20px;font-weight:700}
+.cmp-val.danger{color:var(--danger)}
+.cmp-val.ok{color:var(--accent)}
+.cmp-sub{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* Buttons */
+.btn{padding:13px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:inherit;width:100%}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#0d9668}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-secondary{background:var(--s2);color:var(--dim);border:1px solid var(--border);margin-top:10px}
+.btn-secondary:hover{background:var(--border2);color:var(--text)}
+
+.dl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+
+/* Tips */
+.tips{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+.tips-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.tip{font-size:13px;color:var(--dim);padding:5px 0;border-bottom:1px solid var(--border)}
+.tip:last-child{border-bottom:none}
+.tip::before{content:'→ ';color:var(--accent)}
+
+@media(max-width:500px){
+  .card{padding:24px}
+  .stats{grid-template-columns:1fr 1fr}
+  .comparison{grid-template-columns:1fr}
+  .dl-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">← All Tools</a>
+
+<div class="card">
+  <div class="title-row">
+    <span class="title-icon">🗜️</span>
+    <h1>Etsy Image Optimizer</h1>
+  </div>
+  <p class="sub">Compress any image to under 20MB for Etsy upload — maximum quality preserved</p>
+
+  <div class="drop-zone" id="dropZone">
+    <div class="dz-icon">📂</div>
+    <div class="dz-text">Drop your image here or click to browse</div>
+    <div class="dz-sub">PNG · JPG · WEBP · All sizes accepted · Nothing uploaded — stays in your browser</div>
+  </div>
+  <input type="file" id="fileInput" accept="image/*">
+
+  <div class="file-info" id="fileInfo">
+    <div class="fi-name" id="fiName">—</div>
+    <div class="fi-meta" id="fiMeta">—</div>
+  </div>
+
+  <div class="stats" id="statsWrap" style="display:none">
+    <div class="stat"><div class="stat-val" id="statOrigSize">—</div><div class="stat-label">Original Size</div></div>
+    <div class="stat"><div class="stat-val" id="statDims">—</div><div class="stat-label">Dimensions</div></div>
+    <div class="stat"><div class="stat-val" id="statOverBy">—</div><div class="stat-label">Over Limit By</div></div>
+  </div>
+
+  <div class="options" id="optionsWrap" style="display:none">
+    <div class="opt-title">Output Settings</div>
+
+    <div class="opt-row" style="margin-bottom:14px">
+      <span class="opt-label">Output format</span>
+      <div class="format-row" style="width:200px">
+        <button class="format-btn active" id="fmtJpg" onclick="setFormat('jpg')">JPG</button>
+        <button class="format-btn" id="fmtPng" onclick="setFormat('png')">PNG</button>
+        <button class="format-btn" id="fmtWebp" onclick="setFormat('webp')">WEBP</button>
+      </div>
+    </div>
+
+    <div class="opt-row" id="qualityRow">
+      <span class="opt-label">Min quality floor</span>
+      <input type="range" id="qualityFloor" min="50" max="95" value="82">
+      <span class="opt-val" id="qualityVal">82%</span>
+    </div>
+
+    <div class="opt-row">
+      <span class="opt-label">Size target</span>
+      <input type="range" id="targetMB" min="5" max="19.9" step="0.1" value="19.5">
+      <span class="opt-val" id="targetVal">19.5 MB</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label"><span id="progressLabel">Optimizing...</span><span id="progressPct">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <div class="verdict" id="verdict"></div>
+
+  <div class="comparison" id="comparison">
+    <div class="cmp-box">
+      <div class="cmp-label">Original</div>
+      <div class="cmp-val danger" id="cmpOrig">—</div>
+      <div class="cmp-sub" id="cmpOrigDims">—</div>
+    </div>
+    <div class="cmp-box">
+      <div class="cmp-label">Optimized</div>
+      <div class="cmp-val ok" id="cmpNew">—</div>
+      <div class="cmp-sub" id="cmpNewDims">—</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="optimizeBtn" onclick="startOptimize()" style="display:none">Optimize to Under 20MB</button>
+
+  <div class="dl-row" id="dlRow" style="display:none">
+    <button class="btn btn-primary" id="dlBtn" onclick="doDownload()">⬇️ Download Optimized</button>
+    <button class="btn btn-secondary" onclick="resetTool()" style="margin-top:0">Try Another Image</button>
+  </div>
+
+  <button class="btn btn-secondary" id="resetBtn" onclick="resetTool()" style="display:none">Reset</button>
+
+  <div class="tips">
+    <div class="tips-title">How This Works</div>
+    <div class="tip">Uses binary search to find the exact quality/scale that fits under your target size</div>
+    <div class="tip">JPG gives the smallest file size — best for photos and detailed wall art</div>
+    <div class="tip">PNG is lossless compression — file sizes will be larger than JPG</div>
+    <div class="tip">WEBP is the most efficient — but check your buyer's software supports it</div>
+    <div class="tip">For print products, JPG at 90%+ quality at 300 DPI is visually indistinguishable from raw</div>
+  </div>
+</div>
+
+<script>
+let sourceImg = null;
+let sourceFile = null;
+let outputBlob = null;
+let outputFormat = 'jpg';
+let optimizedW = 0, optimizedH = 0;
+
+const TARGET_MB = () => parseFloat(document.getElementById('targetMB').value);
+const TARGET_BYTES = () => TARGET_MB() * 1024 * 1024;
+const QUALITY_FLOOR = () => parseInt(document.getElementById('qualityFloor').value) / 100;
+
+// ── UPLOAD ──
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('drag');
+  if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => { if(e.target.files[0]) loadFile(e.target.files[0]); });
+
+document.getElementById('qualityFloor').addEventListener('input', e => {
+  document.getElementById('qualityVal').textContent = e.target.value + '%';
+});
+document.getElementById('targetMB').addEventListener('input', e => {
+  document.getElementById('targetVal').textContent = parseFloat(e.target.value).toFixed(1) + ' MB';
+});
+
+function setFormat(fmt) {
+  outputFormat = fmt;
+  ['jpg','png','webp'].forEach(f => {
+    document.getElementById('fmt'+f.charAt(0).toUpperCase()+f.slice(1)).classList.toggle('active', f===fmt);
+  });
+  const showQuality = fmt !== 'png';
+  document.getElementById('qualityRow').style.display = showQuality ? '' : 'none';
+}
+
+function loadFile(file) {
+  if(!file.type.startsWith('image/')) { alert('Please upload an image file.'); return; }
+  sourceFile = file;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    sourceImg = img;
+    URL.revokeObjectURL(url);
+    showFileInfo(file, img);
+  };
+  img.src = url;
+}
+
+function showFileInfo(file, img) {
+  const mb = file.size / (1024*1024);
+  const overBy = mb - 20;
+
+  document.getElementById('fiName').textContent = file.name;
+  document.getElementById('fiMeta').textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${mb.toFixed(2)} MB · ${file.type || 'unknown'}`;
+  document.getElementById('fileInfo').classList.add('show');
+
+  // Stats
+  document.getElementById('statOrigSize').textContent = mb.toFixed(1) + ' MB';
+  document.getElementById('statOrigSize').className = 'stat-val ' + (mb > 20 ? 'danger' : 'ok');
+  document.getElementById('statDims').textContent = img.naturalWidth + '×' + img.naturalHeight;
+  document.getElementById('statOverBy').textContent = overBy > 0 ? '+' + overBy.toFixed(1) + ' MB' : 'Under limit';
+  document.getElementById('statOverBy').className = 'stat-val ' + (overBy > 0 ? 'danger' : 'ok');
+
+  document.getElementById('statsWrap').style.display = '';
+  document.getElementById('optionsWrap').style.display = '';
+  document.getElementById('dropZone').style.display = 'none';
+
+  if(mb <= 20) {
+    showVerdict('ok', `✅ This image is already ${mb.toFixed(2)} MB — under Etsy's 20MB limit. You can still optimize it if you want a smaller file.`);
+  } else {
+    hideVerdict();
+  }
+
+  document.getElementById('optimizeBtn').style.display = '';
+  document.getElementById('resetBtn').style.display = '';
+}
+
+// ── OPTIMIZE ──
+async function startOptimize() {
+  if(!sourceImg) return;
+
+  document.getElementById('optimizeBtn').style.display = 'none';
+  document.getElementById('dlRow').style.display = 'none';
+  document.getElementById('comparison').classList.remove('show');
+  hideVerdict();
+  showProgress('Starting optimization...', 0);
+
+  const targetBytes = TARGET_BYTES();
+  const qualityFloor = QUALITY_FLOOR();
+  const fmt = outputFormat;
+
+  try {
+    outputBlob = await optimize(sourceImg, targetBytes, qualityFloor, fmt);
+
+    const origMB = sourceFile.size / (1024*1024);
+    const newMB  = outputBlob.size / (1024*1024);
+
+    hideProgress();
+
+    // Show comparison
+    document.getElementById('cmpOrig').textContent = origMB.toFixed(2) + ' MB';
+    document.getElementById('cmpOrigDims').textContent = `${sourceImg.naturalWidth} × ${sourceImg.naturalHeight}`;
+    document.getElementById('cmpNew').textContent = newMB.toFixed(2) + ' MB';
+    document.getElementById('cmpNewDims').textContent = `${optimizedW} × ${optimizedH} · ${fmt.toUpperCase()}`;
+    document.getElementById('comparison').classList.add('show');
+
+    const saved = ((1 - outputBlob.size/sourceFile.size)*100).toFixed(1);
+    showVerdict('ok', `✅ Done! Reduced from ${origMB.toFixed(2)} MB → ${newMB.toFixed(2)} MB (${saved}% smaller). Ready to upload to Etsy.`);
+
+    document.getElementById('dlRow').style.display = '';
+
+  } catch(e) {
+    hideProgress();
+    showVerdict('danger', '🚫 Could not compress to target size. Try lowering the size target or switching to JPG format.');
+    document.getElementById('optimizeBtn').style.display = '';
+    console.error(e);
+  }
+}
+
+async function optimize(img, targetBytes, qualityFloor, fmt) {
+  const W = img.naturalWidth, H = img.naturalHeight;
+
+  // Strategy:
+  // 1. Try full resolution with binary search on quality (JPG/WEBP)
+  // 2. If quality hits floor and still too big, scale dimensions down
+  // 3. For PNG: binary search on scale only
+
+  const mime = fmt === 'jpg' ? 'image/jpeg' : fmt === 'webp' ? 'image/webp' : 'image/png';
+
+  if(fmt === 'png') {
+    // For PNG: binary search on scale
+    return await binarySearchScale(img, W, H, targetBytes, mime, 1.0);
+  }
+
+  // Step 1: binary search quality at full res
+  setProgress('Searching optimal quality...', 20);
+  let blob = await tryEncode(img, W, H, 0.95, mime);
+
+  if(blob.size <= targetBytes) {
+    optimizedW = W; optimizedH = H;
+    return blob; // Full res already fits
+  }
+
+  // Binary search quality
+  let lo = qualityFloor, hi = 0.95, bestBlob = null;
+  for(let i=0; i<12; i++) {
+    const mid = (lo+hi)/2;
+    setProgress(`Testing quality ${Math.round(mid*100)}%...`, 20 + i*4);
+    blob = await tryEncode(img, W, H, mid, mime);
+    if(blob.size <= targetBytes) {
+      bestBlob = blob; lo = mid;
+    } else {
+      hi = mid;
+    }
+    if(hi - lo < 0.005) break;
+  }
+
+  if(bestBlob && bestBlob.size <= targetBytes) {
+    optimizedW = W; optimizedH = H;
+    return bestBlob;
+  }
+
+  // Step 2: quality hit floor, need to scale dimensions
+  setProgress('Scaling dimensions...', 70);
+  return await binarySearchScale(img, W, H, targetBytes, mime, qualityFloor);
+}
+
+async function binarySearchScale(img, W, H, targetBytes, mime, quality) {
+  const isPng = mime === 'image/png';
+  let lo = 0.3, hi = 1.0, bestBlob = null, bestScale = 1.0;
+
+  for(let i=0; i<16; i++) {
+    const mid = (lo+hi)/2;
+    const nw = Math.round(W*mid), nh = Math.round(H*mid);
+    setProgress(`Testing ${nw}×${nh}...`, 70 + i*1.5);
+    const q = isPng ? undefined : quality;
+    const blob = await tryEncode(img, nw, nh, q, mime);
+    if(blob.size <= targetBytes) {
+      bestBlob = blob; bestScale = mid; lo = mid;
+    } else {
+      hi = mid;
+    }
+    if(hi - lo < 0.005) break;
+  }
+
+  if(!bestBlob) throw new Error('Cannot reach target size');
+
+  optimizedW = Math.round(W*bestScale);
+  optimizedH = Math.round(H*bestScale);
+  return bestBlob;
+}
+
+function tryEncode(img, w, h, quality, mime) {
+  return new Promise(resolve => {
+    const oc = document.createElement('canvas');
+    oc.width = w; oc.height = h;
+    const ctx = oc.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, 0, 0, w, h);
+    oc.toBlob(blob => resolve(blob), mime, quality);
+  });
+}
+
+// ── DOWNLOAD ──
+function doDownload() {
+  if(!outputBlob) return;
+  const ext = outputFormat;
+  const base = sourceFile.name.replace(/\.[^.]+$/, '');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(outputBlob);
+  a.download = `${base}-optimized.${ext}`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── UI HELPERS ──
+function showProgress(label, pct) {
+  document.getElementById('progressWrap').classList.add('show');
+  document.getElementById('progressLabel').textContent = label;
+  document.getElementById('progressPct').textContent = Math.round(pct) + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+function setProgress(label, pct) { showProgress(label, pct); }
+function hideProgress() { document.getElementById('progressWrap').classList.remove('show'); }
+
+function showVerdict(type, msg) {
+  const v = document.getElementById('verdict');
+  v.className = 'verdict show ' + type;
+  v.textContent = msg;
+}
+function hideVerdict() {
+  document.getElementById('verdict').className = 'verdict';
+}
+
+function resetTool() {
+  sourceImg = null; sourceFile = null; outputBlob = null;
+  fileInput.value = '';
+  document.getElementById('dropZone').style.display = '';
+  document.getElementById('fileInfo').classList.remove('show');
+  document.getElementById('statsWrap').style.display = 'none';
+  document.getElementById('optionsWrap').style.display = 'none';
+  document.getElementById('optimizeBtn').style.display = 'none';
+  document.getElementById('resetBtn').style.display = 'none';
+  document.getElementById('dlRow').style.display = 'none';
+  document.getElementById('comparison').classList.remove('show');
+  hideVerdict();
+  hideProgress();
+}
+</script>
+</body>
+</html>
