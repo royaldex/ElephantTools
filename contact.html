@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Autofire Genetics</title>
+<meta name="description" content="Get in touch with Autofire Genetics. Questions about strains, orders, or wholesale inquiries.">
+
+<style>
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 72px);
+}
+
+.contact-left {
+  background: var(--deep);
+  padding: 140px 64px 80px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contact-hero-tag {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.contact-hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+
+.contact-left h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6vw, 80px); font-weight: 300;
+  line-height: 0.95; color: var(--cream); margin-bottom: 32px;
+}
+.contact-left h1 em { font-style: italic; color: var(--gold-light); }
+
+.contact-left p { font-size: 15px; line-height: 1.8; color: var(--cream-muted); max-width: 380px; margin-bottom: 56px; }
+
+.contact-details { list-style: none; }
+.contact-details li {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 0; border-top: 1px solid var(--border);
+}
+.contact-details li:last-child { border-bottom: 1px solid var(--border); }
+
+.contact-detail-icon { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.contact-detail-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 4px;
+}
+.contact-detail-value { font-size: 14px; color: var(--cream-muted); }
+.contact-detail-value a { color: var(--gold-light); text-decoration: none; }
+.contact-detail-value a:hover { text-decoration: underline; }
+
+.contact-right {
+  background: var(--black);
+  padding: 140px 64px 80px;
+}
+
+.contact-right h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 300; color: var(--cream);
+  margin-bottom: 40px;
+}
+.contact-right h2 em { font-style: italic; color: var(--gold-light); }
+
+.form-group { margin-bottom: 24px; }
+
+.form-label {
+  display: block;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cream-muted); margin-bottom: 8px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 13px 18px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  color: var(--text); outline: none; border-radius: 2px;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold-muted);
+}
+
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7268' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.form-select option { background: var(--surface); }
+
+.form-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-submit {
+  width: 100%; padding: 16px;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--gold); color: var(--black);
+  border: none; border-radius: 2px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.success-message {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--gold-muted);
+  padding: 24px;
+  border-radius: 2px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.success-message .checkmark { font-size: 32px; color: var(--gold); margin-bottom: 12px; }
+.success-message h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--cream); margin-bottom: 8px; }
+.success-message p { font-size: 13px; color: var(--text-dim); }
+
+/* FAQ */
+.faq-section {
+  padding: 80px 64px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 80px;
+  margin-top: 56px;
+}
+
+.faq-item {}
+.faq-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400; color: var(--cream);
+  margin-bottom: 10px;
+}
+.faq-a { font-size: 13px; line-height: 1.8; color: var(--text-dim); }
+
+
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+  footer { padding: 48px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  .contact-layout { grid-template-columns: 1fr; min-height: auto; }
+  .contact-left { padding: 90px 24px 48px; border-right: none; border-bottom: 1px solid var(--border); }
+  .contact-right { padding: 48px 24px; }
+  .contact-left h1 { font-size: clamp(40px, 10vw, 64px); }
+  .form-row { grid-template-columns: 1fr; }
+  .faq-section { padding: 56px 24px; }
+  .faq-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 768px) {
+  /* NAV */
+  nav { padding: 0 16px; height: 64px; }
+  .nav-links { gap: 12px; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+  .nav-cta { padding: 8px 14px; font-size: 10px; }
+
+  /* FOOTER */
+  footer { padding: 48px 20px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal { justify-content: center; }
+
+  .contact-layout { grid-template-columns: 1fr; min-height: auto; }
+  .contact-left { padding: 90px 20px 40px; border-right: none; border-bottom: 1px solid var(--border); }
+  .contact-right { padding: 40px 20px 48px; }
+  .contact-left h1 { font-size: clamp(38px, 10vw, 60px); }
+  .contact-left p { font-size: 13px; margin-bottom: 32px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .faq-section { padding: 56px 20px; }
+  .faq-grid { grid-template-columns: 1fr; gap: 24px; }
+  .faq-q { font-size: 18px; }
+}
+</style>
+<style>
+/* ─── AUTOFIRE GENETICS — GLOBAL STYLES ─────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+  --black:       #08090a;
+  --deep:        #0d110e;
+  --surface:     #131a14;
+  --border:      #1e2a1f;
+  --gold:        #b8892a;
+  --gold-light:  #d4a84b;
+  --gold-muted:  #7a5c1e;
+  --sage:        #5a7a5c;
+  --sage-light:  #8aaa8c;
+  --cream:       #f0ece3;
+  --cream-muted: #a89f8f;
+  --text:        #e8e4db;
+  --text-dim:    #7a7268;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ─── NAVIGATION ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(8,9,10,0.95) 0%, rgba(8,9,10,0) 100%);
+  transition: background 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+nav.scrolled {
+  background: rgba(8,9,10,0.97);
+  border-bottom-color: var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 52px; height: 52px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.nav-logo-text {
+  display: none; /* Name is part of the logo itself */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold-light); }
+
+.nav-cta {
+  color: var(--black) !important;
+  background: var(--gold);
+  padding: 9px 22px;
+  border-radius: 2px;
+  transition: background 0.2s !important;
+}
+
+.nav-cta:hover { background: var(--gold-light) !important; }
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────────────── */
+.btn-primary {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  background: transparent;
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.btn-ghost:hover { border-color: var(--sage); color: var(--sage-light); }
+
+/* ─── SECTION TYPOGRAPHY ─────────────────────────────────────────────────── */
+.section-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+}
+
+.section-title em { font-style: italic; color: var(--gold-light); }
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--deep);
+  padding: 64px 64px 32px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand img {
+  width: 80px; height: 80px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+
+.footer-brand-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+}
+
+.footer-col-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  margin-bottom: 20px;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col ul li a:hover { color: var(--gold-light); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover { color: var(--gold-light); }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── AGE GATE ───────────────────────────────────────────────────────────── */
+.age-gate {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.age-gate-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.age-gate h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--cream);
+  text-align: center;
+  line-height: 1.1;
+}
+
+.age-gate h2 em { font-style: italic; color: var(--gold-light); }
+
+.age-gate p {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 360px;
+}
+
+.age-gate-actions { display: flex; gap: 16px; }
+
+.age-gate-deny {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 14px 24px;
+  transition: color 0.2s;
+}
+
+.age-gate-deny:hover { color: var(--cream); }
+
+.age-gate-legal {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 360px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-logo">✦ Autofire Genetics</div>
+  <h2>Are you <em>21 or older?</em></h2>
+  <p>This website contains cannabis-related products. Please confirm your age to continue.</p>
+  <div class="age-gate-actions">
+    <button class="btn-primary" onclick="enterSite()">Yes, I'm 21+</button>
+    <button class="age-gate-deny" onclick="alert('You must be 21 or older to enter.')">No, exit</button>
+  </div>
+  <div class="age-gate-legal">By entering, you confirm you are of legal age in your jurisdiction.</div>
+</div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Autofire Genetics">
+    <span class="nav-logo-text">Autofire Genetics</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="catalog.html" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<div class="contact-layout">
+  <!-- LEFT -->
+  <div class="contact-left reveal">
+    <div>
+      <div class="contact-hero-tag">Get in Touch</div>
+      <h1>Let's <em>talk</em><br>genetics.</h1>
+      <p>Questions about a strain, a recent order, or wholesale inquiries — reach out directly. We're growers too, and we respond to every message personally.</p>
+    </div>
+    <ul class="contact-details">
+      <li>
+        <div class="contact-detail-icon">◉</div>
+        <div>
+          <div class="contact-detail-label">Telegram (Orders)</div>
+          <div class="contact-detail-value"><a href="https://t.me/AutofireGeneticsBot" target="_blank">@AutofireGeneticsBot</a> — automated orders<br><a href="https://t.me/KnotEhEye" target="_blank">@KnotEhEye</a> — direct support</div>
+        </div>
+      </li>
+      <li>
+        <div class="contact-detail-icon">◉</div>
+        <div>
+          <div class="contact-detail-label">Response Time</div>
+          <div class="contact-detail-value">Within 24–48 hours</div>
+        </div>
+      </li>
+      <li>
+        <div class="contact-detail-icon">◉</div>
+        <div>
+          <div class="contact-detail-label">Shipping</div>
+          <div class="contact-detail-value">Discreet packaging on all orders</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="contact-right reveal">
+    <h2>Send a <em>message</em></h2>
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="First name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Last name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-select">
+          <option value="">Select a topic...</option>
+          <option>Order question</option>
+          <option>Strain information</option>
+          <option>Wholesale / bulk inquiry</option>
+          <option>Shipping question</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="What's on your mind?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+
+    <div class="success-message" id="successMsg">
+      <div class="checkmark">✦</div>
+      <h4>Message received.</h4>
+      <p>We'll get back to you within 24–48 hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="reveal">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Common <em>Questions</em></h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <div class="faq-q">Do you ship discreetly?</div>
+      <p class="faq-a">Yes. All orders ship in plain, unmarked packaging with no external indication of the contents. Nothing on the outside references Autofire Genetics or cannabis.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Are all seeds feminized?</div>
+      <p class="faq-a">Yes — every strain in our catalog is 100% feminized. No males, no guesswork. You grow females from seed, every time.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What growing experience do I need?</div>
+      <p class="faq-a">Our genetics are selected for vigour and adaptability, making them suitable for both beginner and experienced growers. That said, better technique always yields better results.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Do you offer wholesale pricing?</div>
+      <p class="faq-a">Yes. Use the contact form above to inquire about bulk and wholesale pricing. We work with dispensaries, grow stores, and commercial cultivators.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What if I have a problem with my order?</div>
+      <p class="faq-a">Contact us directly via the form above or on Instagram. We stand behind every pack we ship and will work with you to make it right.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">When are new strains dropping?</div>
+      <p class="faq-a">New releases are announced on Instagram first. Follow @autofiregenetics and subscribe to our email list to be the first to know about new drops.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="logo.jpg" alt="Autofire Genetics">
+      <p>Connoisseur-grade autoflower genetics for the dedicated grower. Bred with obsession. Released with confidence.</p>
+      <div class="footer-brand-name">✦ AUTOFIRE GENETICS</div>
+    </div>
+    <div class="footer-col"><div class="footer-col-title">Shop</div><ul><li><a href="catalog.html">All Strains</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Info</div><ul><li><a href="about.html">About Us</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Support</div><ul><li><a href="contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Autofire Genetics. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script ></script>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+<script>
+/* ─── AUTOFIRE GENETICS — GLOBAL JS ─────────────────────────────────────── */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── Age Gate ──────────────────────────────────────────────────────────────
+  const ageGate = document.getElementById('ageGate');
+  if (ageGate) {
+    const entered = sessionStorage.getItem('ag_entered');
+    if (entered) {
+      ageGate.style.display = 'none';
+    }
+  }
+
+  window.enterSite = function () {
+    sessionStorage.setItem('ag_entered', '1');
+    ageGate.style.opacity = '0';
+    ageGate.style.transition = 'opacity 0.6s ease';
+    setTimeout(() => ageGate.style.display = 'none', 600);
+  };
+
+  // ── Sticky Nav ────────────────────────────────────────────────────────────
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ── Active Nav Link ───────────────────────────────────────────────────────
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const href = link.getAttribute('href').split('/').pop();
+    if (href === currentPage) link.classList.add('active');
+  });
+
+  // ── Scroll Reveal ─────────────────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+});
+
+</script>
+</body>
+</html>

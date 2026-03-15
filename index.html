@@ -1,687 +1,724 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ElephantTools — Free & Pro Tools for Etsy Sellers</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vmwp3cef6n");
-  </script>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autofire Genetics — Connoisseur-Grade Autoflower Seeds</title>
+<meta name="description" content="Premium autoflower seeds engineered for potency, exotic terpene profiles, and consistent high-yield performance.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#08090a; --deep:#0d110e; --surface:#131a14; --border:#1e2a1f;
+  --gold:#b8892a; --gold-light:#d4a84b; --gold-muted:#7a5c1e;
+  --sage:#5a7a5c; --sage-light:#8aaa8c;
+  --cream:#f0ece3; --cream-muted:#a89f8f; --text:#e8e4db; --text-dim:#7a7268;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:999}
 
-    :root {
-      --bg: #070707;
-      --surface: #0f0f0f;
-      --s2: #161616;
-      --s3: #1c1c1c;
-      --border: #202020;
-      --border2: #2c2c2c;
-      --text: #f0f0f0;
-      --dim: #959595;
-      --muted: #4a4a4a;
-      --accent: #10b981;
-      --accent-glow: rgba(16,185,129,0.15);
-      --gold: #f59e0b;
-      --gold-glow: rgba(245,158,11,0.12);
-      --purple: #a78bfa;
-      --danger: #ef4444;
-    }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(8,9,10,.95) 0%,rgba(8,9,10,0) 100%);transition:background .4s ease,border-color .4s ease;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(8,9,10,.97);border-bottom-color:var(--border)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{width:52px;height:52px;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-light)}
+.nav-cta{color:var(--black)!important;background:var(--gold);padding:9px 22px;border-radius:2px;transition:background .2s!important}
+.nav-cta:hover{background:var(--gold-light)!important}
 
-    html { scroll-behavior: smooth; }
+/* BUTTONS */
+.btn-primary{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:14px 32px;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-block}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-ghost{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-muted);background:transparent;padding:14px 32px;border-radius:2px;text-decoration:none;border:1px solid var(--border);cursor:pointer;transition:border-color .2s,color .2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--sage);color:var(--sage-light)}
 
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+/* AGE GATE */
+.age-gate{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:32px}
+.age-gate-logo{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.age-gate h2{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--cream);text-align:center;line-height:1.1}
+.age-gate h2 em{font-style:italic;color:var(--gold-light)}
+.age-gate p{font-size:13px;color:var(--text-dim);text-align:center;max-width:360px}
+.age-gate-actions{display:flex;gap:16px}
+.age-gate-deny{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);background:transparent;border:none;cursor:pointer;padding:14px 24px;transition:color .2s}
+.age-gate-deny:hover{color:var(--cream)}
+.age-gate-legal{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--text-dim);text-align:center;max-width:360px}
 
-    /* ── HEADER ── */
-    .header {
-      position: relative;
-      padding: 64px 24px 56px;
-      text-align: center;
-      overflow: hidden;
-    }
+/* HERO */
+.hero{position:relative;display:grid;grid-template-columns:1fr;overflow:hidden}
+.hero-left{position:relative;display:flex;flex-direction:column;padding:120px 64px 60px;background:var(--deep);z-index:2;gap:0}
 
-    /* Subtle grid background */
-    .header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px;
-      opacity: 0.3;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
-    }
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:12px;animation:fadeUp .8s ease .2s both}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.hero-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,96px);font-weight:300;line-height:.95;letter-spacing:-.02em;color:var(--cream);margin-bottom:32px;animation:fadeUp .8s ease .35s both}
+.hero-heading em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-size:14px;font-weight:300;color:var(--cream-muted);line-height:1.7;max-width:380px;margin-bottom:48px;animation:fadeUp .8s ease .5s both}
+.hero-actions{display:flex;gap:16px;align-items:center;animation:fadeUp .8s ease .65s both;margin-bottom:8px}
+.hero-stats{display:flex;gap:40px;border-top:1px solid var(--border);padding-top:24px;margin-top:40px;animation:fadeUp .8s ease .8s both}
+.hero-stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px}
+.hero-stat-value{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--cream)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);animation:zoomIn 8s ease-out both}
+.hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(13,17,14,.5) 0%,transparent 40%),linear-gradient(to top,rgba(8,9,10,.4) 0%,transparent 30%)}
+.scroll-indicator{position:absolute;right:40px;bottom:40px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:10;animation:fadeIn 1s ease 1.2s both}
+.scroll-indicator span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);writing-mode:vertical-rl}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold-muted),transparent);animation:scrollPulse 2s ease infinite}
 
-    /* Green glow orb */
-    .header::after {
-      content: '';
-      position: absolute;
-      top: -60px; left: 50%; transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
+/* MARQUEE */
+.marquee-band{background:var(--gold);padding:14px 0;overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-block;animation:marquee 24s linear infinite}
+.marquee-inner span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--black);padding:0 40px}
+.marquee-inner span::before{content:'✦';margin-right:40px}
 
-    .header-inner { position: relative; z-index: 1; }
+/* PHILOSOPHY */
+.philosophy{padding:120px 64px;display:block;background:var(--deep);max-width:860px;margin:0 auto}
+.philosophy-image{position:relative}
+.philosophy-image img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.philosophy-image::before{content:'';position:absolute;inset:-12px -12px 12px 12px;border:1px solid var(--gold-muted);border-radius:2px;z-index:-1}
+.philosophy-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.philosophy-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.philosophy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:24px}
+.philosophy h2 em{font-style:italic;color:var(--gold-light)}
+.philosophy p{font-size:14px;line-height:1.8;color:var(--cream-muted);margin-bottom:16px}
+.trait-list{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.trait{display:flex;align-items:flex-start;gap:12px}
+.trait-icon{color:var(--gold);font-size:18px;line-height:1;margin-top:2px;flex-shrink:0}
+.trait-name{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--cream);margin-bottom:3px}
+.trait-desc{font-size:12px;color:var(--text-dim)}
 
-    .logo-wrap {
-      display: inline-flex; align-items: center; gap: 14px;
-      margin-bottom: 20px;
-    }
-    .logo-emoji {
-      font-size: 48px; line-height: 1;
-      filter: drop-shadow(0 0 20px rgba(16,185,129,0.4));
-    }
-    .brand {
-      font-size: 38px; font-weight: 800;
-      letter-spacing: -1px; line-height: 1;
-    }
-    .brand span { color: var(--accent); }
+/* PRODUCTS */
+.products{padding:120px 64px;background:var(--black)}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+.section-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.section-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.1;color:var(--cream)}
+.section-title em{font-style:italic;color:var(--gold-light)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.product-card{background:var(--surface);cursor:pointer;overflow:hidden;transition:transform .3s ease;text-decoration:none;display:block}
+.product-card:hover{transform:translateY(-4px)}
+.product-card:hover .product-image img{transform:scale(1.06)}
+.product-image{aspect-ratio:3/4;overflow:hidden;position:relative}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.product-badge{position:absolute;top:16px;left:16px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:5px 10px;border-radius:1px}
+.product-info{padding:24px;border-top:1px solid var(--border)}
+.product-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8aaa8c;margin-bottom:8px}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--cream);margin-bottom:8px;line-height:1.1}
+.product-traits{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.trait-pill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--text-dim);padding:4px 9px;border-radius:1px}
+.product-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.product-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--gold-light)}
+.product-add{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:9px 18px;border-radius:2px;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-block}
+.product-add:hover{background:var(--gold-light)}
+.product-card.coming-soon .product-image::after{content:'Coming Soon';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);background:rgba(8,9,10,.55)}
 
-    .tagline {
-      font-size: 16px; color: var(--dim);
-      max-width: 520px; margin: 0 auto 32px;
-      font-weight: 400;
-    }
+/* PROCESS */
+.process{padding:120px 64px;background:var(--surface);position:relative;overflow:hidden}
+.process::before{content:'AUTOFIRE';position:absolute;font-family:'Cormorant Garamond',serif;font-size:220px;font-weight:300;color:transparent;-webkit-text-stroke:1px rgba(184,137,42,.07);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:80px}
+.process-step{background:var(--surface);padding:40px 32px}
+.step-number{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:transparent;-webkit-text-stroke:1px var(--gold-muted);line-height:1;margin-bottom:20px}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:12px}
+.step-desc{font-size:13px;line-height:1.7;color:var(--text-dim)}
 
-    .header-btns {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
-    }
+/* FEATURE BANNER */
+.feature-banner{position:relative;padding:100px 64px;display:flex;align-items:center;justify-content:center;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.feature-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
 
-    .btn-unlock {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      border-radius: 8px; font-size: 14px; font-weight: 600;
-      cursor: pointer; font-family: inherit; transition: all .2s;
-    }
-    .btn-unlock:hover { background: var(--accent); color: #000; }
-    .btn-unlock.unlocked { opacity: .6; cursor: default; }
-    .btn-unlock.unlocked:hover { background: transparent; color: var(--accent); }
+.feature-content{position:relative;z-index:2;text-align:center;padding:0 64px}
+.feature-content .section-tag{justify-content:center}
+.feature-content .section-tag::before{display:none}
+.feature-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.2;color:var(--cream);max-width:800px;margin:0 auto 32px}
+.feature-quote em{font-style:italic;color:var(--gold-light)}
 
-    .btn-etsy {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px;
-      background: var(--gold); color: #000;
-      border: none; border-radius: 8px;
-      font-size: 14px; font-weight: 700;
-      cursor: pointer; font-family: inherit;
-      text-decoration: none; transition: background .2s;
-    }
-    .btn-etsy:hover { background: #e08e00; }
+/* INSTAGRAM */
+.instagram{padding:120px 64px;background:var(--deep);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.instagram-image{position:relative;overflow:hidden;border-radius:2px}
+.instagram-image img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .6s ease}
+.instagram-image:hover img{transform:scale(1.04)}
+.instagram-handle{position:absolute;bottom:24px;left:24px;z-index:2;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--cream);background:rgba(8,9,10,.7);padding:8px 14px;border-radius:2px;border:1px solid rgba(184,137,42,.3)}
+.instagram-text h3{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:20px}
+.instagram-text h3 em{font-style:italic;color:var(--gold-light)}
+.instagram-text p{font-size:14px;line-height:1.8;color:var(--cream-muted);margin-bottom:32px}
 
-    /* Stats bar */
-    .stats-bar {
-      display: inline-flex;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .stat-cell {
-      padding: 14px 24px;
-      border-right: 1px solid var(--border);
-      text-align: center;
-    }
-    .stat-cell:last-child { border-right: none; }
-    .stat-num {
-      font-size: 24px; font-weight: 800; line-height: 1;
-      margin-bottom: 3px;
-    }
-    .stat-num.green { color: var(--accent); }
-    .stat-num.gold { color: var(--gold); }
-    .stat-lbl {
-      font-size: 10px; color: var(--muted);
-      text-transform: uppercase; letter-spacing: .07em;
-    }
+/* EMAIL */
+.email-signup{padding:80px 64px;background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.signup-text h4{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--cream);margin-bottom:12px}
+.signup-text h4 em{font-style:italic;color:var(--gold-light)}
+.signup-text p{font-size:13px;color:var(--text-dim)}
+.signup-form{display:flex}
+.signup-form input{flex:1;background:var(--surface);border:1px solid var(--border);border-right:none;padding:14px 20px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;border-radius:2px 0 0 2px;transition:border-color .2s}
+.signup-form input:focus{border-color:var(--gold-muted)}
+.signup-form input::placeholder{color:var(--text-dim)}
+.signup-form button{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--black);border:none;padding:14px 28px;cursor:pointer;border-radius:0 2px 2px 0;transition:background .2s;white-space:nowrap}
+.signup-form button:hover{background:var(--gold-light)}
 
-    /* ── SALE BANNER ── */
-    .sale-banner {
-      background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(245,158,11,.04));
-      border-top: 1px solid rgba(245,158,11,.2);
-      border-bottom: 1px solid rgba(245,158,11,.2);
-      padding: 18px 24px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 20px; flex-wrap: wrap;
-    }
-    .sale-left { display: flex; align-items: center; gap: 12px; }
-    .sale-badge {
-      background: var(--gold); color: #000;
-      font-size: 11px; font-weight: 800;
-      padding: 3px 9px; border-radius: 4px;
-      letter-spacing: .04em;
-    }
-    .sale-text { font-size: 15px; font-weight: 700; }
-    .sale-sub { font-size: 13px; color: var(--dim); }
-    .sale-price {
-      font-size: 28px; font-weight: 800; color: var(--gold);
-      line-height: 1;
-    }
-    .sale-price-orig {
-      font-size: 13px; color: var(--muted);
-      text-decoration: line-through; margin-left: 4px;
-    }
-    .sale-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 12px 24px;
-      background: var(--gold); color: #000;
-      font-size: 14px; font-weight: 700;
-      border-radius: 8px; text-decoration: none;
-      transition: background .2s; white-space: nowrap;
-    }
-    .sale-cta:hover { background: #e08e00; }
+/* FOOTER */
+footer{background:var(--deep);padding:64px 64px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+.footer-brand img{width:80px;height:80px;object-fit:contain;margin-bottom:16px}
+.footer-brand p{font-size:13px;line-height:1.7;color:var(--text-dim);max-width:260px;margin-bottom:24px}
+.footer-brand-name{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--gold)}
+.footer-col-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-muted);margin-bottom:20px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--gold-light)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text-dim)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.footer-legal a:hover{color:var(--gold-light)}
 
-    /* ── MAIN CONTAINER ── */
-    .container {
-      max-width: 1280px; margin: 0 auto;
-      padding: 56px 24px 80px;
-    }
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{transform:scale(1.1)}to{transform:scale(1)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
 
-    /* ── SECTION HEADER ── */
-    .section-head {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 24px;
-    }
-    .section-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 13px; border-radius: 99px;
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .pill-free {
-      background: var(--accent-glow); color: var(--accent);
-      border: 1px solid rgba(16,185,129,.22);
-    }
-    .pill-pro {
-      background: var(--gold-glow); color: var(--gold);
-      border: 1px solid rgba(245,158,11,.22);
-    }
-    .section-name { font-size: 19px; font-weight: 700; }
-    .section-rule { flex: 1; height: 1px; background: var(--border); }
-    .section-count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+/* ─── MOBILE RESPONSIVE ─────────────────────────────────────────────────── */
 
-    /* ── TOOL GRID ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-      margin-bottom: 60px;
-    }
+  .nav-links { gap: 16px; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
-      text-decoration: none;
-      color: var(--text);
-      display: block;
-      position: relative;
-      overflow: hidden;
-      transition: border-color .18s, transform .18s, box-shadow .18s;
-    }
+  /* HERO */
+  .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+  .hero-left { padding: 100px 24px 80px; justify-content: center; }
+  .hero-heading { font-size: clamp(48px, 12vw, 72px); }
+  .hero-sub { max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .hero-actions a { width: 100%; text-align: center; }
+  .hero-stats { left: 24px; right: 24px; bottom: 24px; gap: 20px; }
+  .hero-stat-value { font-size: 22px; }
+  .scroll-indicator { display: none; }
 
-    /* Free card accent */
-    .card:not(.pro)::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 20px; bottom: 20px;
-      width: 3px;
-      background: var(--accent);
-      border-radius: 0 3px 3px 0;
-      opacity: 0.45;
-    }
-    .card:not(.pro):hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 40px var(--accent-glow);
-    }
-    .card.pro:hover {
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 40px var(--gold-glow);
-    }
+  /* MARQUEE */
+  .marquee-inner span { font-size: 10px; padding: 0 20px; }
 
-    .card-lock {
-      position: absolute; top: 14px; right: 14px;
-      font-size: 13px; opacity: 0.3;
-    }
+  /* PHILOSOPHY */
+  .philosophy { grid-template-columns: 1fr; padding: 64px 24px; gap: 40px; }
+  .philosophy-image::before { display: none; }
+  .philosophy-image img { aspect-ratio: 16/9; }
 
-    .card-icon { font-size: 30px; margin-bottom: 12px; display: block; }
+  /* PRODUCTS */
+  .products { padding: 64px 24px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .products-grid { grid-template-columns: 1fr; gap: 2px; }
 
-    .card-name {
-      font-size: 14px; font-weight: 700;
-      margin-bottom: 5px; line-height: 1.3;
-    }
+  /* PROCESS */
+  .process { padding: 64px 24px; }
+  .process::before { font-size: 80px; }
+  .process-grid { grid-template-columns: 1fr; }
+  .step-number { font-size: 48px; }
 
-    .card-desc {
-      font-size: 12px; color: var(--dim);
-      line-height: 1.55;
-    }
+  /* FEATURE BANNER */
+  .feature-banner { height: 360px; }
+  .feature-content { padding: 0 24px; }
+  .feature-quote { font-size: clamp(22px, 6vw, 36px); }
 
-    .badge {
-      display: inline-block;
-      font-size: 9px; font-weight: 700;
-      padding: 2px 6px; border-radius: 3px;
-      margin-left: 5px; vertical-align: middle;
-      letter-spacing: .04em;
-    }
-    .badge-free { background: rgba(16,185,129,.18); color: var(--accent); }
-    .badge-pro  { background: rgba(245,158,11,.18); color: var(--gold); }
-    .badge-new  { background: rgba(167,139,250,.18); color: var(--purple); }
+  /* INSTAGRAM */
+  .instagram { grid-template-columns: 1fr; padding: 64px 24px; gap: 40px; }
 
-    /* ── FOOTER ── */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .footer a { color: var(--accent); text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
+  /* EMAIL */
+  .email-signup { grid-template-columns: 1fr; padding: 48px 24px; gap: 24px; }
+  .signup-form { flex-direction: column; }
+  .signup-form input { border-right: 1px solid var(--border); border-radius: 2px; border-bottom: none; border-radius: 2px 2px 0 0; }
+  .signup-form button { border-radius: 0 0 2px 2px; padding: 14px; }
 
-    /* ── MODAL ── */
-    .overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.88);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 1000; padding: 20px;
-      backdrop-filter: blur(6px);
-    }
-    .overlay.hidden { display: none; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 400px; width: 100%;
-      text-align: center;
-    }
-    .modal-icon { font-size: 48px; margin-bottom: 16px; }
-    .modal h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .modal p { color: var(--dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-    .modal input {
-      width: 100%; padding: 14px;
-      background: var(--s2); border: 1px solid var(--border2);
-      border-radius: 8px; color: var(--text);
-      font-size: 17px; text-align: center;
-      letter-spacing: 4px; font-family: inherit;
-      margin-bottom: 12px;
-    }
-    .modal input:focus { outline: none; border-color: var(--accent); }
-    .modal .modal-btn {
-      width: 100%; padding: 14px;
-      background: var(--accent); color: #000;
-      border: none; border-radius: 8px;
-      font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: inherit;
-      transition: background .2s;
-    }
-    .modal .modal-btn:hover { background: #0d9668; }
-    .modal .modal-close {
-      width: 100%; padding: 12px;
-      background: transparent; border: 1px solid var(--border);
-      color: var(--dim); border-radius: 8px;
-      font-size: 14px; font-weight: 500;
-      cursor: pointer; font-family: inherit;
-      margin-top: 10px; transition: all .15s;
-    }
-    .modal .modal-close:hover { background: var(--s2); color: var(--text); }
-    .modal .modal-error {
-      color: var(--danger); font-size: 13px;
-      margin-top: 8px; display: none;
-    }
-    .modal .modal-error.show { display: block; }
-    .modal .modal-link {
-      margin-top: 20px; font-size: 13px; color: var(--muted);
-    }
-    .modal .modal-link a { color: var(--accent); text-decoration: none; }
-    .modal .modal-link a:hover { text-decoration: underline; }
+  /* FOOTER */
+  footer { padding: 48px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 680px) {
-      .header { padding: 48px 20px 44px; }
-      .brand { font-size: 30px; }
-      .stats-bar { flex-wrap: wrap; }
-      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); flex: 1 1 40%; }
-      .sale-banner { flex-direction: column; text-align: center; }
-      .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .modal { padding: 32px 24px; }
-      .section-count { display: none; }
-    }
-    @media (max-width: 420px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+
+
+.hero { grid-template-columns: 1fr; }
+.hero-left { min-height: 100vh; }
+
+
+/* ─── MOBILE ──────────────────────────────────────────────────────────────── */
+
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+
+  .hero { grid-template-columns: 1fr; min-height: 100vh; height: auto; }
+  .hero-left { padding: 90px 24px 48px; }
+  .hero-heading { font-size: clamp(44px, 11vw, 68px); }
+  .hero-sub { max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions a { text-align: center; }
+  .hero-stats { gap: 16px; }
+  .hero-stat-value { font-size: 20px; }
+
+  .philosophy { padding: 56px 24px; }
+  .trait-list { grid-template-columns: 1fr; }
+
+  .products { padding: 56px 24px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .products-grid { grid-template-columns: 1fr; }
+
+  .process { padding: 56px 24px; }
+  .process::before { display: none; }
+  .process-grid { grid-template-columns: 1fr; }
+  .step-number { font-size: 48px; }
+
+  .feature-banner { padding: 64px 24px; }
+  .feature-quote { font-size: clamp(22px, 6vw, 34px); }
+
+  .instagram { grid-template-columns: 1fr; padding: 56px 24px; gap: 40px; }
+
+  .email-signup { grid-template-columns: 1fr; padding: 48px 24px; gap: 20px; }
+  .signup-form { flex-direction: column; }
+  .signup-form input { border-right: 1px solid var(--border); border-bottom: none; border-radius: 2px 2px 0 0; }
+  .signup-form button { border-radius: 0 0 2px 2px; }
+
+  footer { padding: 48px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 768px) {
+  /* NAV */
+  nav { padding: 0 16px; height: 64px; }
+  .nav-links { gap: 12px; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+  .nav-cta { padding: 8px 14px; font-size: 10px; }
+
+  /* FOOTER */
+  footer { padding: 48px 20px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal { justify-content: center; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 90px 20px 48px; }
+  .hero-heading { font-size: clamp(42px, 11vw, 64px); }
+  .hero-sub { max-width: 100%; font-size: 13px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-actions a { text-align: center; padding: 14px 20px; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+  .hero-stat-value { font-size: 20px; }
+
+  .marquee-inner span { font-size: 9px; padding: 0 16px; }
+
+  .philosophy { padding: 56px 20px; }
+  .trait-list { grid-template-columns: 1fr; gap: 12px; }
+  .philosophy h2 { font-size: clamp(28px, 8vw, 44px); }
+
+  .products { padding: 56px 20px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .section-title { font-size: clamp(28px, 8vw, 44px); }
+  .products-grid { grid-template-columns: 1fr; }
+  .product-name { font-size: 28px; }
+
+  .process { padding: 56px 20px; }
+  .process::before { display: none; }
+  .process-grid { grid-template-columns: 1fr; }
+  .process-step { padding: 28px 20px; }
+  .step-number { font-size: 48px; }
+
+  .feature-banner { padding: 64px 20px; }
+  .feature-quote { font-size: clamp(20px, 6vw, 32px); }
+  .feature-content .btn-primary { width: 100%; text-align: center; }
+
+  .instagram { grid-template-columns: 1fr; padding: 56px 20px; gap: 32px; }
+  .instagram-text h3 { font-size: clamp(28px, 8vw, 44px); }
+
+  .email-signup { grid-template-columns: 1fr; padding: 48px 20px; gap: 20px; }
+  .signup-form { flex-direction: column; }
+  .signup-form input { border-right: 1px solid var(--border); border-radius: 2px 2px 0 0; border-bottom: none; }
+  .signup-form button { border-radius: 0 0 2px 2px; }
+}
+
+.product-image-blank {
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.product-image-blank-inner {
+  text-align: center;
+}
+.pib-icon {
+  color: var(--gold-muted);
+  font-size: 24px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.pib-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  color: var(--text-dim);
+  border: 1px dashed var(--border);
+  padding: 12px 16px;
+  border-radius: 2px;
+}
+
+
+.products-grid .product-image img,
+.catalog-grid .product-image img {
+  object-fit: contain;
+  background: var(--deep);
+}
+
+
+.catalog-grid .product-image,
+.products-grid .product-image {
+  aspect-ratio: 1 / 1;
+  max-height: 320px;
+}
+@media (max-width: 768px) {
+  .catalog-grid .product-image,
+  .products-grid .product-image {
+    max-height: 260px;
+  }
+}
+
+
+.catalog-grid .product-image img,
+.products-grid .product-image img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+.catalog-grid .product-info,
+.products-grid .product-info {
+  text-align: center;
+}
+.catalog-grid .product-traits,
+.products-grid .product-traits {
+  justify-content: center;
+}
+.catalog-grid .product-meta,
+.products-grid .product-meta {
+  justify-content: center;
+  gap: 16px;
+}
+
+
+
+.catalog-grid,
+.products-grid {
+  grid-template-columns: 1fr !important;
+}
+
+.product-image {
+  aspect-ratio: 1 / 1 !important;
+  max-height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--deep);
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  display: block;
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-traits {
+  justify-content: center;
+}
+
+.product-meta {
+  justify-content: center;
+  gap: 16px;
+}
+
+@media (min-width: 769px) {
+  .catalog-grid,
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .product-image {
+    max-height: 360px;
+  }
+}
+
+
+/* ── CARD LAYOUT OVERRIDE ─────────────────────────────────────── */
+.catalog-grid { display: flex !important; flex-direction: column !important; gap: 2px !important; }
+.products-grid { display: flex !important; flex-direction: column !important; gap: 2px !important; }
+
+.catalog-grid .product-card,
+.products-grid .product-card { width: 100% !important; display: block !important; }
+
+.catalog-grid .product-image,
+.products-grid .product-image {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  max-height: 320px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--deep) !important;
+  overflow: hidden !important;
+}
+
+.catalog-grid .product-image img,
+.products-grid .product-image img {
+  width: auto !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+.catalog-grid .product-info,
+.products-grid .product-info { text-align: center !important; }
+
+.catalog-grid .product-traits,
+.products-grid .product-traits { justify-content: center !important; }
+
+.catalog-grid .product-meta,
+.products-grid .product-meta { justify-content: center !important; gap: 16px !important; }
+
+@media (min-width: 900px) {
+  .catalog-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; }
+  .products-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+
+/* ── CARD TYPOGRAPHY FIXES ────────────────────────────────────── */
+.catalog-grid .product-name,
+.products-grid .product-name {
+  font-size: 32px !important;
+}
+
+.catalog-grid .product-price,
+.products-grid .product-price {
+  font-size: 28px !important;
+}
+
+.catalog-grid .product-cta,
+.products-grid .product-cta,
+.catalog-grid .product-add,
+.products-grid .product-add {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  padding: 12px 24px !important;
+  background: var(--gold) !important;
+  color: #000 !important;
+}
+
+.catalog-grid .trait-pill,
+.products-grid .trait-pill {
+  font-size: 10px !important;
+  padding: 5px 12px !important;
+}
+
+.catalog-grid .product-type,
+.products-grid .product-type {
+  font-size: 11px !important;
+}
+
+</style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo-wrap">
-      <span class="logo-emoji">🐘</span>
-      <div class="brand">Elephant<span>Tools</span></div>
-    </div>
-    <p class="tagline">Free and Pro browser tools built for Etsy sellers. No installs. No account. Everything runs in your browser.</p>
-    <div class="header-btns">
-      <button class="btn-unlock" id="unlockBtn" onclick="openModal()">🔓 I Have a Pro Code</button>
-      <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="btn-etsy">⭐ Get Pro — $5 on Etsy</a>
-    </div>
-    <div class="stats-bar">
-      <div class="stat-cell"><div class="stat-num">25</div><div class="stat-lbl">Total Tools</div></div>
-      <div class="stat-cell"><div class="stat-num green">11</div><div class="stat-lbl">Free</div></div>
-      <div class="stat-cell"><div class="stat-num gold">14</div><div class="stat-lbl">Pro</div></div>
-      <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
-    </div>
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-logo">✦ Autofire Genetics</div>
+  <h2>Are you <em>21 or older?</em></h2>
+  <p>This website contains cannabis-related products. Please confirm your age to continue.</p>
+  <div class="age-gate-actions">
+    <button class="btn-primary" onclick="enterSite()">Yes, I'm 21+</button>
+    <button class="age-gate-deny" onclick="alert('You must be 21 or older to enter.')">No, exit</button>
   </div>
-</header>
-
-<!-- PRO CTA -->
-<div class="sale-banner">
-  <div class="sale-left">
-    <span class="sale-badge">⭐ Pro</span>
-    <div>
-      <div class="sale-text">Unlock All 14 Pro Tools</div>
-      <div class="sale-sub">One purchase · Lifetime access · No subscriptions</div>
-    </div>
-  </div>
-  <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="sale-cta">Get Pro Access on Etsy →</a>
+  <div class="age-gate-legal">By entering, you confirm you are of legal age in your jurisdiction.</div>
 </div>
 
-<!-- MAIN -->
-<main class="container">
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Autofire Genetics">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://t.me/AutofireGeneticsBot" target="_blank" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
 
-  <!-- FREE TOOLS -->
-  <div class="section-head">
-    <span class="section-pill pill-free">✦ Free</span>
-    <span class="section-name">Free Tools</span>
-    <div class="section-rule"></div>
-    <span class="section-count">11 tools · No code needed</span>
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Connoisseur-Grade Genetics</div>
+    <h1 class="hero-heading">Bred for<br>the <em>exceptional.</em></h1>
+    <p class="hero-sub">Premium autoflower seeds engineered for potency, exotic terpene profiles, and consistent high-yield performance — for the dedicated grower.</p>
+    <div class="hero-actions">
+      <a href="catalog.html" class="btn-primary">Explore the Catalog</a>
+      <a href="about.html" class="btn-ghost">Our Process</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-label">Seed Type</div><div class="hero-stat-value">Auto</div></div>
+      <div><div class="hero-stat-label">Feminized</div><div class="hero-stat-value">100%</div></div>
+      <div><div class="hero-stat-label">Ship Discrete</div><div class="hero-stat-value">Yes</div></div>
+    </div>
+  </div><span>Scroll</span></div>
+</section>
+
+<div class="marquee-band">
+  <div class="marquee-inner">
+    <span>Premium Autoflower</span><span>Feminized Seeds</span><span>Exceptional Terpenes</span>
+    <span>Connoisseur Grade</span><span>High Yield Performance</span><span>Autofire Genetics</span>
+    <span>Premium Autoflower</span><span>Feminized Seeds</span><span>Exceptional Terpenes</span>
+    <span>Connoisseur Grade</span><span>High Yield Performance</span><span>Autofire Genetics</span>
   </div>
+</div>
 
-  <div class="grid">
-
-    <a href="color-palette.html" class="card">
-      <span class="card-icon">🎨</span>
-      <div class="card-name">Color Palette Generator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Extract color palettes from any image for your design projects.</div>
-    </a>
-
-    <a href="etsy-thumbnail-creator.html" class="card">
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Thumbnail Creator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Pad images to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
-    </a>
-
-    <a href="simple-frames.html" class="card">
-      <span class="card-icon">🪟</span>
-      <div class="card-name">Simple Frames <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Add elegant borders and frames to your images in seconds.</div>
-    </a>
-
-    <a href="wall-art-resizer.html" class="card">
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Wall Art Resizer <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Resize images to standard print sizes at 300 DPI, ready to sell.</div>
-    </a>
-
-    <a href="etsy-title-optimizer.html" class="card">
-      <span class="card-icon">✏️</span>
-      <div class="card-name">Title Optimizer <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Live 140-character counter with warnings to perfect your Etsy title.</div>
-    </a>
-
-    <a href="etsy-tag-checker.html" class="card">
-      <span class="card-icon">🏷️</span>
-      <div class="card-name">Tag Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">All 13 tag fields with 20-character limits and live validation.</div>
-    </a>
-
-    <a href="file-size-checker.html" class="card">
-      <span class="card-icon">📁</span>
-      <div class="card-name">File Size Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Instantly check if your file is under Etsy's 20MB upload limit.</div>
-    </a>
-
-    <a href="image-resolution-checker.html" class="card">
-      <span class="card-icon">🔎</span>
-      <div class="card-name">Resolution Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Check pixel dimensions and max print sizes at 300 DPI.</div>
-    </a>
-
-    <a href="listing-description-formatter.html" class="card">
-      <span class="card-icon">📝</span>
-      <div class="card-name">Description Formatter <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Paste messy text, get clean bullet-formatted listing copy for Etsy.</div>
-    </a>
-
-    <a href="etsy-image-optimizer.html" class="card">
-      <span class="card-icon">🗜️</span>
-      <div class="card-name">Image Optimizer <span class="badge badge-free">FREE</span> <span class="badge badge-new">NEW</span></div>
-      <div class="card-desc">Compress any image to under 20MB for Etsy — maximum quality preserved using binary search optimization.</div>
-    </a>
-
-    <a href="shop-banner.html" class="card">
-      <span class="card-icon">🏪</span>
-      <div class="card-name">Banner Creator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Design banners for Etsy, social media, and the web with 26 size presets and 2× export.</div>
-    </a>
-
+<section class="philosophy">
+  </div></div>
+      <div class="trait"><div class="trait-icon">◈</div><div><div class="trait-name">Unique Terpenes</div><div class="trait-desc">Complex, memorable profiles</div></div></div>
+      <div class="trait"><div class="trait-icon">◈</div><div><div class="trait-name">Robust Structure</div><div class="trait-desc">Built to thrive anywhere</div></div></div>
+      <div class="trait"><div class="trait-icon">◈</div><div><div class="trait-name">Consistent Yields</div><div class="trait-desc">Reliable results, every run</div></div></div>
+    </div>
   </div>
+</section>
 
-  <!-- PRO TOOLS -->
-  <div class="section-head">
-    <span class="section-pill pill-pro">🔒 Pro</span>
-    <span class="section-name">Pro Tools</span>
-    <div class="section-rule"></div>
-    <span class="section-count">14 tools · Access code required</span>
+<section class="products">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">Current Catalog</div>
+      <h2 class="section-title">What's <em>Available</em></h2>
+    </div>
+    <a href="catalog.html" class="btn-ghost">View All Strains</a>
   </div>
-
-  <div class="grid">
-
-    <a href="gate.html?tool=bundle-creator.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📦</span>
-      <div class="card-name">Bundle Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
+  <div class="products-grid">
+    <a href="grape-escape.html" class="product-card reveal">
+      <div class="product-image">
+        <img src="grape-escape.png" alt="Grape Escape">
+        <div class="product-badge">New Drop</div>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Feminized Auto</div>
+        <div class="product-name">Grape Escape</div>
+        <div class="product-traits"><span class="trait-pill">Grape</span><span class="trait-pill">Indica</span><span class="trait-pill">~75 Days</span></div>
+        <div class="product-meta"><span class="product-price">$50</span><a href="grape-escape.html" class="product-add">View Strain</a></div>
+      </div>
     </a>
-
-    <a href="gate.html?tool=clip-art-packager.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🎨</span>
-      <div class="card-name">Clip Art Packager <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Package and download curated clipart collections for your creative projects.</div>
+    <a href="vipers-treat.html" class="product-card reveal">
+      <div class="product-image">
+        <img src="vipers-treat.jpg" alt="Viper's Treat">
+        <div class="product-badge">New Drop</div>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Feminized Auto</div>
+        <div class="product-name">Viper's Treat</div>
+        <div class="product-traits"><span class="trait-pill">Fuel</span><span class="trait-pill">Sweet</span><span class="trait-pill">~70 Days</span></div>
+        <div class="product-meta"><span class="product-price">$50</span><a href="vipers-treat.html" class="product-add">View Strain</a></div>
+      </div>
     </a>
-
-    <a href="gate.html?tool=coloring-book.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🖍️</span>
-      <div class="card-name">Coloring Book Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Convert photos into professional coloring pages with 4 edge detection algorithms.</div>
+    <a href="tropical-dream-cake.html" class="product-card reveal">
+      <div class="product-image">
+        <img src="tropical-dream-cake.jpg" alt="Tropical Dream Cake">
+        <div class="product-badge">New Drop</div>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Feminized Auto</div>
+        <div class="product-name">Tropical Dream Cake</div>
+        <div class="product-traits"><span class="trait-pill">Tropical</span><span class="trait-pill">Hybrid</span><span class="trait-pill">~70 Days</span></div>
+        <div class="product-meta"><span class="product-price">$50</span><a href="tropical-dream-cake.html" class="product-add">View Strain</a></div>
+      </div>
     </a>
-
-    <a href="gate.html?tool=color-variants.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🌈</span>
-      <div class="card-name">Color Variants Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Generate multiple color variations of your designs instantly.</div>
-    </a>
-
-    <a href="gate.html?tool=greeting-cards.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">💌</span>
-      <div class="card-name">Greeting Cards Designer <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Design beautiful greeting cards with custom text and layouts.</div>
-    </a>
-
-    <a href="gate.html?tool=invitations.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">✉️</span>
-      <div class="card-name">Invitation Maker <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create stunning invitations for events, parties, and special occasions.</div>
-    </a>
-
-    <a href="gate.html?tool=journal-builder.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📓</span>
-      <div class="card-name">Journal Builder <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Design custom journal pages and planners with templates and layouts.</div>
-    </a>
-
-    <a href="gate.html?tool=kids-cards.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🎈</span>
-      <div class="card-name">Kids Cards Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Make fun, colorful cards for children's events and activities.</div>
-    </a>
-
-    <a href="gate.html?tool=photo-composer.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🗂️</span>
-      <div class="card-name">Image Grid Maker <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Combine multiple photos into beautiful grid compositions and collages.</div>
-    </a>
-
-    <a href="gate.html?tool=png-upscaler.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🔍</span>
-      <div class="card-name">PNG Upscaler <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Upscale PNG images to higher resolutions while maintaining quality.</div>
-    </a>
-
-    <a href="gate.html?tool=png-upscaler-pro-1.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🔬</span>
-      <div class="card-name">PNG Upscaler Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Advanced upscaling with transparency preservation and exact 20MB output control.</div>
-    </a>
-
-
-    <a href="gate.html?tool=sticker-builder.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">⭐</span>
-      <div class="card-name">Sticker Sheet Builder <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create printable sticker sheets with custom designs and layouts.</div>
-    </a>
-
-    <a href="gate.html?tool=WatermarkStudioPro.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">💧</span>
-      <div class="card-name">Watermark Studio Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Protect your images with custom text and logo watermarks in bulk.</div>
-    </a>
-
-    <a href="gate.html?tool=wall-art-sizer-pro.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Wall Art Sizer Pro <span class="badge badge-pro">PRO</span> <span class="badge badge-new">NEW</span></div>
-      <div class="card-desc">Resize any image to exact print sizes at 300 DPI with fit, crop, or pad modes — max 20MB output, Etsy-ready.</div>
-    </a>
-
   </div>
+</section>
 
-</main>
+<section class="process">
+  <div class="reveal">
+    <div class="section-tag">How We Work</div>
+    <h2 class="section-title">The <em>Autofire</em> Process</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal"><div class="step-number">01</div><div class="step-title">Selection</div><p class="step-desc">We start with the most elite genetics available — sourcing from proven lines with documented performance histories.</p></div>
+    <div class="process-step reveal"><div class="step-number">02</div><div class="step-title">Breeding</div><p class="step-desc">Careful crossing and backcrossing over multiple generations to stabilize and amplify the traits that matter most.</p></div>
+    <div class="process-step reveal"><div class="step-number">03</div><div class="step-title">Testing</div><p class="step-desc">Every line is grown out and rigorously phenotype-hunted before it ever reaches our catalog. No shortcuts.</p></div>
+    <div class="process-step reveal"><div class="step-number">04</div><div class="step-title">Release</div><p class="step-desc">When a strain meets our standards — in potency, terpenes, yield, and consistency — it earns a spot in the catalog.</p></div>
+  </div>
+</section>
 
-<footer class="footer">
-  © 2024 ElephantTools by RoyalDex &nbsp;·&nbsp;
-  <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank">Get Pro Access on Etsy</a>
+<div class="feature-banner reveal">
+  <div class="feature-content">
+    <div class="section-tag">The Standard</div>
+    <p class="feature-quote">"We relentlessly select for <em>exceptional</em> — because mediocre genetics aren't worth your time or your grow."</p>
+    <a href="catalog.html" class="btn-primary">Shop the Catalog</a>
+  </div>
+</div>
+
+<section class="instagram">
+  <div class="instagram-image reveal">
+    <a href="https://www.instagram.com/autofiregenetics" target="_blank">
+      <img src="https://autofiregenetics.com/cdn/shop/files/IMG_2481.jpg?v=1758998487&width=3840" alt="Instagram">
+    </a>
+    <div class="instagram-handle">@autofiregenetics</div>
+  </div>
+  <div class="instagram-text reveal">
+    <div class="section-tag">Follow Along</div>
+    <h3>See the <em>grow in progress.</em></h3>
+    <p>Follow us on Instagram for grow journals, new strain previews, behind-the-scenes breeding content, and early access to upcoming drops.</p>
+    <a href="https://www.instagram.com/autofiregenetics" target="_blank" class="btn-primary">Follow on Instagram</a>
+  </div>
+</section>
+
+<section class="email-signup">
+  <div class="signup-text">
+    <h4>Get <em>early access</em> to new drops.</h4>
+    <p>Join the list for exclusive restocks, new strain announcements, and grower discounts.</p>
+  </div>
+  <div class="signup-form">
+    <input type="email" placeholder="your@email.com">
+    <button type="submit">Subscribe</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="logo.jpg" alt="Autofire Genetics">
+      <p>Connoisseur-grade autoflower genetics for the dedicated grower. Bred with obsession. Released with confidence.</p>
+      <div class="footer-brand-name">✦ AUTOFIRE GENETICS</div>
+    </div>
+    <div class="footer-col"><div class="footer-col-title">Shop</div><ul><li><a href="catalog.html">All Strains</a></li><li><a href="catalog.html">New Releases</a></li><li><a href="catalog.html">Coming Soon</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Info</div><ul><li><a href="about.html">About Us</a></li><li><a href="about.html">Our Process</a></li><li><a href="contact.html">FAQ</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Support</div><ul><li><a href="contact.html">Contact</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Autofire Genetics. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
 </footer>
 
-<!-- MODAL -->
-<div class="overlay hidden" id="modal">
-  <div class="modal">
-    <div class="modal-icon">🐘</div>
-    <h2>Unlock Pro Tools</h2>
-    <p>Enter your access code to unlock all 14 pro tools instantly.<br><span style="font-size:12px;color:var(--muted)">Provided with your Etsy purchase</span></p>
-    <input type="text" id="codeInput" placeholder="ENTER CODE" maxlength="20" autocomplete="off">
-    <button class="modal-btn" id="submitBtn">Unlock Pro Tools</button>
-    <button class="modal-close" onclick="closeModal()">Cancel</button>
-    <div class="modal-error" id="modalError">Invalid code — please check your Etsy purchase email.</div>
-    <div class="modal-link">
-      Don't have a code? <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank">Purchase Pro on Etsy →</a>
-    </div>
-  </div>
-</div>
-
 <script>
-  const VALID_CODES = ['ELEPHANT2024','TOOLKIT2024','ETSY2024','ROYAL2024'];
-  const KEY = 'elephanttools_access';
-  const modal = document.getElementById('modal');
-  const codeInput = document.getElementById('codeInput');
-  const submitBtn = document.getElementById('submitBtn');
-  const modalError = document.getElementById('modalError');
-  const unlockBtn = document.getElementById('unlockBtn');
-
-  function isUnlocked() {
-    const v = localStorage.getItem(KEY);
-    return v && VALID_CODES.includes(v);
-  }
-
-  function applyUnlocked() {
-    document.querySelectorAll('.card.pro').forEach(card => {
-      try {
-        const url = new URL(card.href);
-        const tool = url.searchParams.get('tool');
-        if (tool) card.href = tool;
-      } catch(e) {}
-      const lock = card.querySelector('.card-lock');
-      if (lock) lock.style.display = 'none';
-    });
-    unlockBtn.textContent = '✅ Pro Unlocked';
-    unlockBtn.classList.add('unlocked');
-    unlockBtn.onclick = null;
-  }
-
-  function openModal() {
-    if (isUnlocked()) return;
-    modal.classList.remove('hidden');
-    codeInput.focus();
-  }
-
-  function closeModal() {
-    modal.classList.add('hidden');
-    modalError.classList.remove('show');
-    codeInput.value = '';
-    codeInput.style.borderColor = '';
-  }
-
-  submitBtn.addEventListener('click', () => {
-    const code = codeInput.value.trim().toUpperCase();
-    if (VALID_CODES.includes(code)) {
-      localStorage.setItem(KEY, code);
-      closeModal();
-      applyUnlocked();
-    } else {
-      modalError.classList.add('show');
-      codeInput.style.borderColor = 'var(--danger)';
-    }
-  });
-
-  codeInput.addEventListener('keypress', e => { if (e.key === 'Enter') submitBtn.click(); });
-  codeInput.addEventListener('input', () => { modalError.classList.remove('show'); codeInput.style.borderColor = ''; });
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-
-  if (isUnlocked()) applyUnlocked();
+document.addEventListener('DOMContentLoaded',()=>{
+  const ag=document.getElementById('ageGate');
+  if(ag&&sessionStorage.getItem('ag_entered'))ag.style.display='none';
+  window.enterSite=function(){sessionStorage.setItem('ag_entered','1');ag.style.opacity='0';ag.style.transition='opacity .6s ease';setTimeout(()=>ag.style.display='none',600)};
+  const nav=document.getElementById('mainNav');
+  if(nav){const s=()=>nav.classList.toggle('scrolled',window.scrollY>60);window.addEventListener('scroll',s,{passive:true});s()}
+  const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+});
 </script>
 </body>
 </html>

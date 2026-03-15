@@ -1,0 +1,12 @@
+{
+  "name": "autofire-genetics-bot",
+  "version": "1.0.0",
+  "description": "Autofire Genetics Telegram ordering bot with TON payments",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0"
+  }
+}

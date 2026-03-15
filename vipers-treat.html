@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viper's Treat — Autofire Genetics</title>
+<meta name="description" content="Viper's Treat by Autofire Genetics. Feminized autoflower. Sweet tropical terpene profile, high yield, ~70 days from seed.">
+
+<style>
+.product-layout {
+  padding: 120px 64px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  background: var(--deep);
+}
+
+/* GALLERY */
+
+
+
+
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+
+
+
+
+
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* PRODUCT INFO */
+.product-breadcrumb {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 20px;
+  display: flex; gap: 8px; align-items: center;
+}
+.product-breadcrumb a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+.product-breadcrumb a:hover { color: var(--gold-light); }
+.product-breadcrumb span { color: var(--border); }
+
+.product-type-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--sage-light); margin-bottom: 12px;
+}
+
+.product-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 68px); font-weight: 300;
+  line-height: 0.95; color: var(--cream); margin-bottom: 8px;
+}
+
+.product-title em { font-style: italic; color: var(--gold-light); }
+
+.product-lineage {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; color: var(--text-dim);
+  margin-bottom: 24px; font-style: italic;
+}
+
+.product-price-block {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 300; color: var(--gold-light);
+  margin-bottom: 28px;
+}
+
+/* Stat grid */
+.stat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  margin-bottom: 32px;
+}
+
+.stat-cell {
+  background: var(--surface); padding: 16px 20px;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300; color: var(--cream);
+}
+
+/* Variant selector */
+.variant-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cream-muted); margin-bottom: 12px;
+}
+
+.variant-options { display: flex; gap: 10px; margin-bottom: 28px; }
+
+.variant-btn {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; padding: 10px 20px;
+  border: 1px solid var(--border); border-radius: 2px;
+  background: transparent; color: var(--cream-muted);
+  cursor: pointer; transition: all 0.2s;
+}
+
+.variant-btn:hover, .variant-btn.active {
+  border-color: var(--gold); color: var(--gold);
+}
+
+.add-to-cart {
+  width: 100%; padding: 18px;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--gold); color: var(--black);
+  border: none; border-radius: 2px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 12px;
+}
+
+.add-to-cart:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.shipping-note {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim); text-align: center;
+  padding: 12px; border: 1px solid var(--border);
+  border-radius: 2px; margin-bottom: 32px;
+}
+
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* Description */
+.desc-heading {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+
+.desc-body {
+  font-size: 14px; line-height: 1.8; color: var(--cream-muted);
+  margin-bottom: 16px;
+}
+
+/* Terpene profile */
+.terpene-section { margin-top: 32px; }
+
+.terpene-bar { margin-bottom: 14px; }
+
+.terpene-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
+}
+
+.terpene-name {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-muted);
+}
+
+.terpene-pct {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: var(--text-dim);
+}
+
+.terpene-track {
+  height: 3px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+
+.terpene-fill {
+  height: 100%; background: var(--gold);
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* Related */
+.related-section {
+  padding: 80px 64px;
+  background: var(--black);
+  border-top: 1px solid var(--border);
+}
+
+
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+  footer { padding: 48px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  .product-layout { grid-template-columns: 1fr; padding: 90px 24px 48px; gap: 40px; }
+  
+  
+  .product-title { font-size: clamp(40px, 10vw, 60px); }
+  .stat-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .variant-options { flex-wrap: wrap; }
+  .variant-btn { flex: 1; text-align: center; }
+  .terpene-section { margin-top: 24px; }
+}
+
+@media (max-width: 768px) {
+  /* NAV */
+  nav { padding: 0 16px; height: 64px; }
+  .nav-links { gap: 12px; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .nav-logo img { width: 44px; height: 44px; }
+  .nav-cta { padding: 8px 14px; font-size: 10px; }
+
+  /* FOOTER */
+  footer { padding: 48px 20px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal { justify-content: center; }
+
+  .product-layout { grid-template-columns: 1fr; padding: 90px 20px 48px; gap: 36px; }
+  
+  
+  .product-title { font-size: clamp(38px, 10vw, 56px); }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .stat-value { font-size: 18px; }
+  .variant-options { flex-wrap: wrap; }
+  .variant-btn { flex: 1; min-width: 120px; text-align: center; }
+  .add-to-cart { font-size: 11px; }
+}
+
+/* ─── STRAIN INFO CARD ───────────────────────────────────────────────────── */
+.strain-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin-top: 32px;
+  overflow: hidden;
+}
+
+.strain-card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+
+.sc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+
+.sc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 300; color: var(--cream);
+}
+
+.strain-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.sc-cell {
+  background: var(--surface);
+  padding: 16px 20px;
+}
+
+.sc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 6px;
+}
+
+.sc-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; color: var(--cream);
+}
+
+.sc-lineage {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.sc-lineage-chart {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.sc-parent {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--cream-muted);
+  display: flex; flex-direction: column; gap: 3px;
+}
+
+.sc-parent span {
+  font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+.sc-cross {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; color: var(--gold); flex-shrink: 0;
+}
+
+.sc-arrow {
+  font-size: 18px; color: var(--gold-muted); flex-shrink: 0;
+}
+
+.sc-result {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic; color: var(--gold-light);
+}
+
+.sc-effects, .sc-flavors {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.sc-effect-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+}
+
+.sc-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 1px;
+  border: 1px solid var(--border); color: var(--text-dim);
+}
+
+.sc-pill-primary {
+  border-color: var(--sage); color: var(--sage-light);
+  background: rgba(90,122,92,0.08);
+}
+
+.sc-pill-gold {
+  border-color: var(--gold-muted); color: var(--gold-light);
+  background: rgba(184,137,42,0.08);
+}
+
+@media (max-width: 768px) {
+  .strain-card-grid { grid-template-columns: repeat(2, 1fr); }
+  .sc-lineage-chart { flex-direction: column; align-items: flex-start; }
+  .sc-cross, .sc-arrow { transform: rotate(90deg); }
+}
+
+
+.product-artwork {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+.product-artwork img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--deep);
+  border-radius: 2px;
+  display: block;
+  border: 1px solid var(--border);
+}
+.artwork-credit {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+@media (max-width: 768px) {
+  .product-artwork { position: static; }
+}
+
+</style>
+<style>
+/* ─── AUTOFIRE GENETICS — GLOBAL STYLES ─────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+  --black:       #08090a;
+  --deep:        #0d110e;
+  --surface:     #131a14;
+  --border:      #1e2a1f;
+  --gold:        #b8892a;
+  --gold-light:  #d4a84b;
+  --gold-muted:  #7a5c1e;
+  --sage:        #5a7a5c;
+  --sage-light:  #8aaa8c;
+  --cream:       #f0ece3;
+  --cream-muted: #a89f8f;
+  --text:        #e8e4db;
+  --text-dim:    #7a7268;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ─── NAVIGATION ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(8,9,10,0.95) 0%, rgba(8,9,10,0) 100%);
+  transition: background 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+nav.scrolled {
+  background: rgba(8,9,10,0.97);
+  border-bottom-color: var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 52px; height: 52px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.nav-logo-text {
+  display: none; /* Name is part of the logo itself */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold-light); }
+
+.nav-cta {
+  color: var(--black) !important;
+  background: var(--gold);
+  padding: 9px 22px;
+  border-radius: 2px;
+  transition: background 0.2s !important;
+}
+
+.nav-cta:hover { background: var(--gold-light) !important; }
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────────────── */
+.btn-primary {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  background: transparent;
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.btn-ghost:hover { border-color: var(--sage); color: var(--sage-light); }
+
+/* ─── SECTION TYPOGRAPHY ─────────────────────────────────────────────────── */
+.section-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+}
+
+.section-title em { font-style: italic; color: var(--gold-light); }
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--deep);
+  padding: 64px 64px 32px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand img {
+  width: 80px; height: 80px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+
+.footer-brand-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+}
+
+.footer-col-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  margin-bottom: 20px;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col ul li a:hover { color: var(--gold-light); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover { color: var(--gold-light); }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── AGE GATE ───────────────────────────────────────────────────────────── */
+.age-gate {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.age-gate-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.age-gate h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--cream);
+  text-align: center;
+  line-height: 1.1;
+}
+
+.age-gate h2 em { font-style: italic; color: var(--gold-light); }
+
+.age-gate p {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 360px;
+}
+
+.age-gate-actions { display: flex; gap: 16px; }
+
+.age-gate-deny {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 14px 24px;
+  transition: color 0.2s;
+}
+
+.age-gate-deny:hover { color: var(--cream); }
+
+.age-gate-legal {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 360px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-logo">✦ Autofire Genetics</div>
+  <h2>Are you <em>21 or older?</em></h2>
+  <p>This website contains cannabis-related products. Please confirm your age to continue.</p>
+  <div class="age-gate-actions">
+    <button class="btn-primary" onclick="enterSite()">Yes, I'm 21+</button>
+    <button class="age-gate-deny" onclick="alert('You must be 21 or older to enter.')">No, exit</button>
+  </div>
+  <div class="age-gate-legal">By entering, you confirm you are of legal age in your jurisdiction.</div>
+</div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Autofire Genetics">
+    <span class="nav-logo-text">Autofire Genetics</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="catalog.html" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<div class="product-layout">
+  <!-- ARTWORK -->
+  <div class="product-artwork reveal">
+    <img src="vipers-treat.jpg" alt="Viper's Treat">
+  </div>
+  <!-- PRODUCT INFO -->
+  <div class="reveal">
+    <div class="product-breadcrumb">
+      <a href="catalog.html">Catalog</a>
+      <span>›</span>
+      <span>Viper's Treat</span>
+    </div>
+
+    <div class="product-type-label">Feminized Autoflower</div>
+    <h1 class="product-title">Viper's <em>Treat</em></h1>
+    <div class="product-lineage">Black Mamba × Cosmic Cupcake</div>
+    <div class="product-price-block">$50.00</div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Flower Time</div>
+        <div class="stat-value">~70 Days</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Yield</div>
+        <div class="stat-value">High</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Type</div>
+        <div class="stat-value">Autoflower</div>
+      </div>
+    </div>
+
+    <div class="variant-label">Pack Size</div>
+    <div class="variant-options">
+      <button class="variant-btn active">8 Seeds — $50</button>
+    </div>
+
+    <a href="https://t.me/AutofireGeneticsBot" target="_blank" class="add-to-cart" style="display:block;text-align:center;text-decoration:none;">🌿 Order on Telegram</a>
+    <div class="shipping-note">✦ Discreet Shipping &nbsp;|&nbsp; Join the list to be notified on restock</div>
+
+    <div class="divider"></div>
+
+    <div class="desc-heading">About This Strain</div>
+    <p class="desc-body">Viper's Treat is a feminized autoflower cross of Black Mamba and Cosmic Cupcake — two heavy-hitting lines brought together for a unique hybrid experience. The Black Mamba side brings a dark, fuel-forward bite while Cosmic Cupcake rounds it out with sweet, dessert-like depth.</p>
+    <p class="desc-body">Expect a complex terpene profile that opens sharp and finishes sweet. Fast finishing, vigorous growth structure, and the kind of bag appeal that makes this one stand out in the tent. Full details and grow data coming as we release run results.</p>
+
+    <div class="terpene-section">
+      <div class="desc-heading">Terpene Profile</div>
+      <div class="terpene-bar">
+        <div class="terpene-row"><span class="terpene-name">Fuel / Diesel</span><span class="terpene-pct">Dominant</span></div>
+        <div class="terpene-track"><div class="terpene-fill" style="width:88%"></div></div>
+      </div>
+      <div class="terpene-bar">
+        <div class="terpene-row"><span class="terpene-name">Sweet / Dessert</span><span class="terpene-pct">High</span></div>
+        <div class="terpene-track"><div class="terpene-fill" style="width:74%"></div></div>
+      </div>
+      <div class="terpene-bar">
+        <div class="terpene-row"><span class="terpene-name">Dark Fruit</span><span class="terpene-pct">Moderate</span></div>
+        <div class="terpene-track"><div class="terpene-fill" style="width:55%"></div></div>
+      </div>
+      <div class="terpene-bar">
+        <div class="terpene-row"><span class="terpene-name">Spice</span><span class="terpene-pct">Subtle</span></div>
+        <div class="terpene-track"><div class="terpene-fill" style="width:30%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="logo.jpg" alt="Autofire Genetics">
+      <p>Connoisseur-grade autoflower genetics for the dedicated grower. Bred with obsession. Released with confidence.</p>
+      <div class="footer-brand-name">✦ AUTOFIRE GENETICS</div>
+    </div>
+    <div class="footer-col"><div class="footer-col-title">Shop</div><ul><li><a href="catalog.html">All Strains</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Info</div><ul><li><a href="about.html">About Us</a></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Support</div><ul><li><a href="contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Autofire Genetics. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script ></script>
+<script>
+  
+
+  document.querySelectorAll('.variant-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+<script>
+/* ─── AUTOFIRE GENETICS — GLOBAL JS ─────────────────────────────────────── */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── Age Gate ──────────────────────────────────────────────────────────────
+  const ageGate = document.getElementById('ageGate');
+  if (ageGate) {
+    const entered = sessionStorage.getItem('ag_entered');
+    if (entered) {
+      ageGate.style.display = 'none';
+    }
+  }
+
+  window.enterSite = function () {
+    sessionStorage.setItem('ag_entered', '1');
+    ageGate.style.opacity = '0';
+    ageGate.style.transition = 'opacity 0.6s ease';
+    setTimeout(() => ageGate.style.display = 'none', 600);
+  };
+
+  // ── Sticky Nav ────────────────────────────────────────────────────────────
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ── Active Nav Link ───────────────────────────────────────────────────────
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const href = link.getAttribute('href').split('/').pop();
+    if (href === currentPage) link.classList.add('active');
+  });
+
+  // ── Scroll Reveal ─────────────────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+});
+
+</script>
+</body>
+</html>
