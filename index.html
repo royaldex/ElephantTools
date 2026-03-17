@@ -16,366 +16,110 @@
   </script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --bg: #070707;
-      --surface: #0f0f0f;
-      --s2: #161616;
-      --s3: #1c1c1c;
-      --border: #202020;
-      --border2: #2c2c2c;
-      --text: #f0f0f0;
-      --dim: #959595;
-      --muted: #4a4a4a;
-      --accent: #10b981;
-      --accent-glow: rgba(16,185,129,0.15);
-      --gold: #f59e0b;
-      --gold-glow: rgba(245,158,11,0.12);
-      --purple: #a78bfa;
-      --danger: #ef4444;
+      --bg: #070707; --surface: #0f0f0f; --s2: #161616;
+      --border: #202020; --border2: #2c2c2c;
+      --text: #f0f0f0; --dim: #959595; --muted: #4a4a4a;
+      --accent: #10b981; --accent-glow: rgba(16,185,129,0.15);
+      --gold: #f59e0b; --gold-glow: rgba(245,158,11,0.12);
+      --purple: #a78bfa; --danger: #ef4444;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* ── HEADER ── */
-    .header {
-      position: relative;
-      padding: 64px 24px 56px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    /* Subtle grid background */
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .header { position: relative; padding: 64px 24px 56px; text-align: center; overflow: hidden; }
     .header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px;
-      opacity: 0.3;
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.3;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
     }
-
-    /* Green glow orb */
     .header::after {
-      content: '';
-      position: absolute;
-      top: -60px; left: 50%; transform: translateX(-50%);
+      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
       width: 500px; height: 300px;
       background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .header-inner { position: relative; z-index: 1; }
-
-    .logo-wrap {
-      display: inline-flex; align-items: center; gap: 14px;
-      margin-bottom: 20px;
-    }
-    .logo-emoji {
-      font-size: 48px; line-height: 1;
-      filter: drop-shadow(0 0 20px rgba(16,185,129,0.4));
-    }
-    .brand {
-      font-size: 38px; font-weight: 800;
-      letter-spacing: -1px; line-height: 1;
-    }
+    .logo-wrap { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .logo-emoji { font-size: 48px; line-height: 1; filter: drop-shadow(0 0 20px rgba(16,185,129,0.4)); }
+    .brand { font-size: 38px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
     .brand span { color: var(--accent); }
-
-    .tagline {
-      font-size: 16px; color: var(--dim);
-      max-width: 520px; margin: 0 auto 32px;
-      font-weight: 400;
-    }
-
-    .header-btns {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
-    }
-
-    .btn-unlock {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      border-radius: 8px; font-size: 14px; font-weight: 600;
-      cursor: pointer; font-family: inherit; transition: all .2s;
-    }
+    .tagline { font-size: 16px; color: var(--dim); max-width: 520px; margin: 0 auto 32px; }
+    .header-btns { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-unlock { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; border: 1px solid var(--accent); color: var(--accent); background: transparent; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .2s; }
     .btn-unlock:hover { background: var(--accent); color: #000; }
     .btn-unlock.unlocked { opacity: .6; cursor: default; }
     .btn-unlock.unlocked:hover { background: transparent; color: var(--accent); }
-
-    .btn-etsy {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px;
-      background: var(--gold); color: #000;
-      border: none; border-radius: 8px;
-      font-size: 14px; font-weight: 700;
-      cursor: pointer; font-family: inherit;
-      text-decoration: none; transition: background .2s;
-    }
+    .btn-etsy { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; text-decoration: none; transition: background .2s; }
     .btn-etsy:hover { background: #e08e00; }
-
-    /* Stats bar */
-    .stats-bar {
-      display: inline-flex;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .stat-cell {
-      padding: 14px 24px;
-      border-right: 1px solid var(--border);
-      text-align: center;
-    }
+    .stats-bar { display: inline-flex; background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; overflow: hidden; }
+    .stat-cell { padding: 14px 24px; border-right: 1px solid var(--border); text-align: center; }
     .stat-cell:last-child { border-right: none; }
-    .stat-num {
-      font-size: 24px; font-weight: 800; line-height: 1;
-      margin-bottom: 3px;
-    }
+    .stat-num { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 3px; }
     .stat-num.green { color: var(--accent); }
     .stat-num.gold { color: var(--gold); }
-    .stat-lbl {
-      font-size: 10px; color: var(--muted);
-      text-transform: uppercase; letter-spacing: .07em;
-    }
-
-    /* ── SALE BANNER ── */
-    .sale-banner {
-      background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(245,158,11,.04));
-      border-top: 1px solid rgba(245,158,11,.2);
-      border-bottom: 1px solid rgba(245,158,11,.2);
-      padding: 18px 24px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 20px; flex-wrap: wrap;
-    }
+    .stat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+    .sale-banner { background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(245,158,11,.04)); border-top: 1px solid rgba(245,158,11,.2); border-bottom: 1px solid rgba(245,158,11,.2); padding: 18px 24px; display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
     .sale-left { display: flex; align-items: center; gap: 12px; }
-    .sale-badge {
-      background: var(--gold); color: #000;
-      font-size: 11px; font-weight: 800;
-      padding: 3px 9px; border-radius: 4px;
-      letter-spacing: .04em;
-    }
+    .sale-badge { background: var(--gold); color: #000; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 4px; }
     .sale-text { font-size: 15px; font-weight: 700; }
     .sale-sub { font-size: 13px; color: var(--dim); }
-    .sale-price {
-      font-size: 28px; font-weight: 800; color: var(--gold);
-      line-height: 1;
-    }
-    .sale-price-orig {
-      font-size: 13px; color: var(--muted);
-      text-decoration: line-through; margin-left: 4px;
-    }
-    .sale-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 12px 24px;
-      background: var(--gold); color: #000;
-      font-size: 14px; font-weight: 700;
-      border-radius: 8px; text-decoration: none;
-      transition: background .2s; white-space: nowrap;
-    }
+    .sale-cta { display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px; background: var(--gold); color: #000; font-size: 14px; font-weight: 700; border-radius: 8px; text-decoration: none; transition: background .2s; white-space: nowrap; }
     .sale-cta:hover { background: #e08e00; }
-
-    /* ── MAIN CONTAINER ── */
-    .container {
-      max-width: 1280px; margin: 0 auto;
-      padding: 56px 24px 80px;
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-head {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 24px;
-    }
-    .section-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 13px; border-radius: 99px;
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .pill-free {
-      background: var(--accent-glow); color: var(--accent);
-      border: 1px solid rgba(16,185,129,.22);
-    }
-    .pill-pro {
-      background: var(--gold-glow); color: var(--gold);
-      border: 1px solid rgba(245,158,11,.22);
-    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 56px 24px 80px; }
+    .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .section-pill { display: inline-flex; align-items: center; gap: 5px; padding: 5px 13px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; flex-shrink: 0; }
+    .pill-free { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(16,185,129,.22); }
+    .pill-pro { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(245,158,11,.22); }
     .section-name { font-size: 19px; font-weight: 700; }
     .section-rule { flex: 1; height: 1px; background: var(--border); }
     .section-count { font-size: 13px; color: var(--muted); white-space: nowrap; }
-
-    /* ── TOOL GRID ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-      margin-bottom: 60px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
-      text-decoration: none;
-      color: var(--text);
-      display: block;
-      position: relative;
-      overflow: hidden;
-      transition: border-color .18s, transform .18s, box-shadow .18s;
-    }
-
-    /* Free card accent */
-    .card:not(.pro)::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 20px; bottom: 20px;
-      width: 3px;
-      background: var(--accent);
-      border-radius: 0 3px 3px 0;
-      opacity: 0.45;
-    }
-    .card:not(.pro):hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 40px var(--accent-glow);
-    }
-    .card.pro:hover {
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 40px var(--gold-glow);
-    }
-
-    .card-lock {
-      position: absolute; top: 14px; right: 14px;
-      font-size: 13px; opacity: 0.3;
-    }
-
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 60px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; text-decoration: none; color: var(--text); display: block; position: relative; overflow: hidden; transition: border-color .18s, transform .18s, box-shadow .18s; }
+    .card:not(.pro)::after { content: ''; position: absolute; left: 0; top: 20px; bottom: 20px; width: 3px; background: var(--accent); border-radius: 0 3px 3px 0; opacity: 0.45; }
+    .card:not(.pro):hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 40px var(--accent-glow); }
+    .card.pro:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 40px var(--gold-glow); }
+    .card-lock { position: absolute; top: 14px; right: 14px; font-size: 13px; opacity: 0.3; }
     .card-icon { font-size: 30px; margin-bottom: 12px; display: block; }
-
-    .card-name {
-      font-size: 14px; font-weight: 700;
-      margin-bottom: 5px; line-height: 1.3;
-    }
-
-    .card-desc {
-      font-size: 12px; color: var(--dim);
-      line-height: 1.55;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 9px; font-weight: 700;
-      padding: 2px 6px; border-radius: 3px;
-      margin-left: 5px; vertical-align: middle;
-      letter-spacing: .04em;
-    }
+    .card-name { font-size: 14px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
+    .card-desc { font-size: 12px; color: var(--dim); line-height: 1.55; }
+    .badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle; letter-spacing: .04em; }
     .badge-free { background: rgba(16,185,129,.18); color: var(--accent); }
     .badge-pro  { background: rgba(245,158,11,.18); color: var(--gold); }
     .badge-new  { background: rgba(167,139,250,.18); color: var(--purple); }
-
-    /* ── FOOTER ── */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--muted); }
     .footer a { color: var(--accent); text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
-
-    /* ── MODAL ── */
-    .overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.88);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 1000; padding: 20px;
-      backdrop-filter: blur(6px);
-    }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); }
     .overlay.hidden { display: none; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 400px; width: 100%;
-      text-align: center;
-    }
+    .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 48px 40px; max-width: 400px; width: 100%; text-align: center; }
     .modal-icon { font-size: 48px; margin-bottom: 16px; }
     .modal h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
     .modal p { color: var(--dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-    .modal input {
-      width: 100%; padding: 14px;
-      background: var(--s2); border: 1px solid var(--border2);
-      border-radius: 8px; color: var(--text);
-      font-size: 17px; text-align: center;
-      letter-spacing: 4px; font-family: inherit;
-      margin-bottom: 12px;
-    }
+    .modal input { width: 100%; padding: 14px; background: var(--s2); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); font-size: 17px; text-align: center; letter-spacing: 4px; font-family: inherit; margin-bottom: 12px; }
     .modal input:focus { outline: none; border-color: var(--accent); }
-    .modal .modal-btn {
-      width: 100%; padding: 14px;
-      background: var(--accent); color: #000;
-      border: none; border-radius: 8px;
-      font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: inherit;
-      transition: background .2s;
-    }
+    .modal .modal-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
     .modal .modal-btn:hover { background: #0d9668; }
-    .modal .modal-close {
-      width: 100%; padding: 12px;
-      background: transparent; border: 1px solid var(--border);
-      color: var(--dim); border-radius: 8px;
-      font-size: 14px; font-weight: 500;
-      cursor: pointer; font-family: inherit;
-      margin-top: 10px; transition: all .15s;
-    }
+    .modal .modal-close { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--border); color: var(--dim); border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 10px; transition: all .15s; }
     .modal .modal-close:hover { background: var(--s2); color: var(--text); }
-    .modal .modal-error {
-      color: var(--danger); font-size: 13px;
-      margin-top: 8px; display: none;
-    }
+    .modal .modal-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
     .modal .modal-error.show { display: block; }
-    .modal .modal-link {
-      margin-top: 20px; font-size: 13px; color: var(--muted);
-    }
+    .modal .modal-link { margin-top: 20px; font-size: 13px; color: var(--muted); }
     .modal .modal-link a { color: var(--accent); text-decoration: none; }
     .modal .modal-link a:hover { text-decoration: underline; }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 680px) {
-      .header { padding: 48px 20px 44px; }
-      .brand { font-size: 30px; }
+      .header { padding: 48px 20px 44px; } .brand { font-size: 30px; }
       .stats-bar { flex-wrap: wrap; }
       .stat-cell { border-right: none; border-bottom: 1px solid var(--border); flex: 1 1 40%; }
       .sale-banner { flex-direction: column; text-align: center; }
       .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .modal { padding: 32px 24px; }
-      .section-count { display: none; }
+      .modal { padding: 32px 24px; } .section-count { display: none; }
     }
-    @media (max-width: 420px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <div class="logo-wrap">
@@ -388,37 +132,34 @@
       <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="btn-etsy">⭐ Get Pro — $5 on Etsy</a>
     </div>
     <div class="stats-bar">
-      <div class="stat-cell"><div class="stat-num">23</div><div class="stat-lbl">Total Tools</div></div>
+      <div class="stat-cell"><div class="stat-num">25</div><div class="stat-lbl">Total Tools</div></div>
       <div class="stat-cell"><div class="stat-num green">11</div><div class="stat-lbl">Free</div></div>
-      <div class="stat-cell"><div class="stat-num gold">12</div><div class="stat-lbl">Pro</div></div>
+      <div class="stat-cell"><div class="stat-num gold">14</div><div class="stat-lbl">Pro</div></div>
       <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
     </div>
   </div>
 </header>
 
-<!-- PRO CTA -->
 <div class="sale-banner">
   <div class="sale-left">
     <span class="sale-badge">⭐ Pro</span>
     <div>
-      <div class="sale-text">Unlock All 12 Pro Tools</div>
+      <div class="sale-text">Unlock All 14 Pro Tools</div>
       <div class="sale-sub">One purchase · Lifetime access · No subscriptions</div>
     </div>
   </div>
   <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="sale-cta">Get Pro Access on Etsy →</a>
 </div>
 
-<!-- MAIN -->
 <main class="container">
 
-  <!-- FREE TOOLS -->
+  <!-- FREE TOOLS — royaldex root repo -->
   <div class="section-head">
     <span class="section-pill pill-free">✦ Free</span>
     <span class="section-name">Free Tools</span>
     <div class="section-rule"></div>
     <span class="section-count">11 tools · No code needed</span>
   </div>
-
   <div class="grid">
 
     <a href="https://royaldex.github.io/color-palette.html" class="card">
@@ -478,13 +219,13 @@
     <a href="https://royaldex.github.io/etsy-image-optimizer.html" class="card">
       <span class="card-icon">🗜️</span>
       <div class="card-name">Image Optimizer <span class="badge badge-free">FREE</span> <span class="badge badge-new">NEW</span></div>
-      <div class="card-desc">Compress any image to under 20MB for Etsy — maximum quality preserved using binary search optimization.</div>
+      <div class="card-desc">Compress any image to under 20MB for Etsy — maximum quality preserved.</div>
     </a>
 
     <a href="https://royaldex.github.io/ElephantTools/shop-banner.html" class="card">
       <span class="card-icon">🏪</span>
       <div class="card-name">Banner Creator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Design banners for Etsy, social media, and the web with 26 size presets and 2× export.</div>
+      <div class="card-desc">Design banners for Etsy, social media, and the web with 26 size presets.</div>
     </a>
 
   </div>
@@ -494,120 +235,116 @@
     <span class="section-pill pill-pro">🔒 Pro</span>
     <span class="section-name">Pro Tools</span>
     <div class="section-rule"></div>
-    <span class="section-count">12 tools · Access code required</span>
+    <span class="section-count">14 tools · Access code required</span>
   </div>
-
   <div class="grid">
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/bundle-creator.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/bundle-creator.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">📦</span>
       <div class="card-name">Bundle Creator <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/clip-art-packager.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/clip-art-packager.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">🎨</span>
       <div class="card-name">Clip Art Packager <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Package and download curated clipart collections for your creative projects.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/coloring-book.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/coloring-book.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">🖍️</span>
       <div class="card-name">Coloring Book Creator <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Convert photos into professional coloring pages with 4 edge detection algorithms.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/color-variants.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/color-variants.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">🌈</span>
       <div class="card-name">Color Variants Creator <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Generate multiple color variations of your designs instantly.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/greeting-cards.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/greeting-cards.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">💌</span>
       <div class="card-name">Greeting Cards Designer <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Design beautiful greeting cards with custom text and layouts.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/invitations.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/invitations.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">✉️</span>
       <div class="card-name">Invitation Maker <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Create stunning invitations for events, parties, and special occasions.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/journal-builder.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/journal-builder.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">📓</span>
       <div class="card-name">Journal Builder <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Design custom journal pages and planners with professional layouts.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/mockup-creator.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/kids-cards.html" class="card pro">
       <div class="card-lock">🔒</div>
-      <span class="card-icon">👕</span>
-      <div class="card-name">Mockup Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Place your designs on product mockups for professional listings.</div>
+      <span class="card-icon">🎈</span>
+      <div class="card-name">Kids Cards Creator <span class="badge badge-pro">PRO</span></div>
+      <div class="card-desc">Create fun, colorful cards designed specifically for kids and families.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">⬆️</span>
       <div class="card-name">PNG Upscaler <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Upscale PNG files while preserving transparency — up to 20MB output.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler-pro.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler-pro-1.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">🚀</span>
       <div class="card-name">PNG Upscaler Pro <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Advanced upscaling with batch processing and custom size targets.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/ai-prompt-generator.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/sticker-builder.html" class="card pro">
       <div class="card-lock">🔒</div>
-      <span class="card-icon">🤖</span>
-      <div class="card-name">AI Prompt Generator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Generate optimized prompts for AI image tools to create sellable designs.</div>
+      <span class="card-icon">⭐</span>
+      <div class="card-name">Sticker Builder <span class="badge badge-pro">PRO</span></div>
+      <div class="card-desc">Design and export sticker sheets ready for print-on-demand.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/etsy-listing-copy.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📋</span>
-      <div class="card-name">Listing Copy Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Generate SEO-optimized titles, tags, and descriptions for Etsy listings.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/watermark-studio.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/WatermarkStudioProPro.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">💧</span>
       <div class="card-name">Watermark Studio Pro <span class="badge badge-pro">PRO</span></div>
       <div class="card-desc">Add tiled or single watermarks to protect your digital products.</div>
     </a>
 
-    <a href="https://royaldex.github.io/ElephantTools/gate.html?tool=https://royaldex.github.io/ElephantTools/wall-art-bundle.html" class="card pro">
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/wall-art-sizer-pro.html" class="card pro">
       <div class="card-lock">🔒</div>
       <span class="card-icon">🖼️</span>
-      <div class="card-name">Wall Art Bundle Maker <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Package wall art into print-ready bundles with size guides included.</div>
+      <div class="card-name">Wall Art Sizer Pro <span class="badge badge-pro">PRO</span></div>
+      <div class="card-desc">Advanced wall art resizing with batch output and custom size presets.</div>
+    </a>
+
+    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/photo-composer.html" class="card pro">
+      <div class="card-lock">🔒</div>
+      <span class="card-icon">📸</span>
+      <div class="card-name">Photo Composer <span class="badge badge-pro">PRO</span></div>
+      <div class="card-desc">Compose and arrange multiple photos into professional layouts.</div>
     </a>
 
   </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="footer">
   Built for Etsy sellers by <a href="https://elephantshoespopshop.etsy.com" target="_blank">ElephantShoes</a> ·
   <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank">Get Pro Access</a>
 </footer>
 
-<!-- MODAL -->
 <div class="overlay hidden" id="overlay">
   <div class="modal">
     <div class="modal-icon">🔓</div>
@@ -622,9 +359,8 @@
 </div>
 
 <script>
-  const VALID_CODES = ['ELEPHANT2024', 'TOOLKIT2024', 'ETSY2024', 'ROYAL2024'];
+  const VALID_CODES = ['ELEPHANT2024','TOOLKIT2024','ETSY2024','ROYAL2024'];
   const STORAGE_KEY = 'elephanttools_access';
-
   const overlay = document.getElementById('overlay');
   const codeInput = document.getElementById('codeInput');
   const modalError = document.getElementById('modalError');
@@ -634,7 +370,6 @@
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved && VALID_CODES.includes(saved);
   }
-
   function applyUnlockedState() {
     document.querySelectorAll('.card.pro').forEach(card => {
       const url = new URL(card.href);
@@ -647,19 +382,8 @@
     unlockBtn.classList.add('unlocked');
     unlockBtn.onclick = null;
   }
-
-  function openModal() {
-    if (isUnlocked()) return;
-    overlay.classList.remove('hidden');
-    codeInput.focus();
-  }
-
-  function closeModal() {
-    overlay.classList.add('hidden');
-    modalError.classList.remove('show');
-    codeInput.value = '';
-    codeInput.style.borderColor = '';
-  }
+  function openModal() { if (isUnlocked()) return; overlay.classList.remove('hidden'); codeInput.focus(); }
+  function closeModal() { overlay.classList.add('hidden'); modalError.classList.remove('show'); codeInput.value = ''; codeInput.style.borderColor = ''; }
 
   document.getElementById('modalSubmit').addEventListener('click', () => {
     const code = codeInput.value.trim().toUpperCase();
@@ -672,13 +396,10 @@
       codeInput.style.borderColor = '#ef4444';
     }
   });
-
   codeInput.addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('modalSubmit').click(); });
   codeInput.addEventListener('input', () => { modalError.classList.remove('show'); codeInput.style.borderColor = ''; });
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-
   if (isUnlocked()) applyUnlockedState();
 </script>
-
 </body>
 </html>
