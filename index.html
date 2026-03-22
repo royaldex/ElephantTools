@@ -3,403 +3,367 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ElephantTools — Free & Pro Tools for Etsy Sellers</title>
+  <meta name="description" content="26 free browser tools built for Etsy sellers. Resize art, optimize listings, build bundles, watermark designs. No installs. No account needed.">
+  <title>ElephantTools — Free Browser Tools for Etsy Sellers</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vmwp3cef6n");
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vmwp3cef6n");</script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --bg: #070707; --surface: #0f0f0f; --s2: #161616;
-      --border: #202020; --border2: #2c2c2c;
-      --text: #f0f0f0; --dim: #959595; --muted: #4a4a4a;
-      --accent: #10b981; --accent-glow: rgba(16,185,129,0.15);
-      --gold: #f59e0b; --gold-glow: rgba(245,158,11,0.12);
-      --purple: #a78bfa; --danger: #ef4444;
+      --bg:     #05050a;
+      --s1:     #0b0b12;
+      --s2:     #10101a;
+      --s3:     #17172a;
+      --border: #1c1c2e;
+      --b2:     #252540;
+      --text:   #e8e8f0;
+      --dim:    #7878a0;
+      --muted:  #3a3a5a;
+      --green:  #00e599;
+      --glow:   rgba(0,229,153,0.15);
+      --glow2:  rgba(0,229,153,0.08);
     }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
-    .header { position: relative; padding: 64px 24px 56px; text-align: center; overflow: hidden; }
-    .header::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px; opacity: 0.3;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .header::after {
-      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
-      pointer-events: none;
+
+    /* Grid background on hero */
+    .hero-wrap {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -5%, rgba(0,229,153,0.07) 0%, transparent 65%),
+        var(--bg);
     }
-    .header-inner { position: relative; z-index: 1; }
-    .logo-wrap { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-    .logo-emoji { font-size: 48px; line-height: 1; filter: drop-shadow(0 0 20px rgba(16,185,129,0.4)); }
-    .brand { font-size: 38px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
-    .brand span { color: var(--accent); }
-    .tagline { font-size: 16px; color: var(--dim); max-width: 520px; margin: 0 auto 32px; }
-    .header-btns { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-    .btn-unlock { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; border: 1px solid var(--accent); color: var(--accent); background: transparent; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .2s; }
-    .btn-unlock:hover { background: var(--accent); color: #000; }
-    .btn-unlock.unlocked { opacity: .6; cursor: default; }
-    .btn-unlock.unlocked:hover { background: transparent; color: var(--accent); }
-    .btn-etsy { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; text-decoration: none; transition: background .2s; }
-    .btn-etsy:hover { background: #e08e00; }
-    .stats-bar { display: inline-flex; background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; overflow: hidden; }
-    .stat-cell { padding: 14px 24px; border-right: 1px solid var(--border); text-align: center; }
-    .stat-cell:last-child { border-right: none; }
-    .stat-num { font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 3px; }
-    .stat-num.green { color: var(--accent); }
-    .stat-num.gold { color: var(--gold); }
-    .stat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
-    .sale-banner { background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(245,158,11,.04)); border-top: 1px solid rgba(245,158,11,.2); border-bottom: 1px solid rgba(245,158,11,.2); padding: 18px 24px; display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .sale-left { display: flex; align-items: center; gap: 12px; }
-    .sale-badge { background: var(--gold); color: #000; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 4px; }
-    .sale-text { font-size: 15px; font-weight: 700; }
-    .sale-sub { font-size: 13px; color: var(--dim); }
-    .sale-cta { display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px; background: var(--gold); color: #000; font-size: 14px; font-weight: 700; border-radius: 8px; text-decoration: none; transition: background .2s; white-space: nowrap; }
-    .sale-cta:hover { background: #e08e00; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 56px 24px 80px; }
-    .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .section-pill { display: inline-flex; align-items: center; gap: 5px; padding: 5px 13px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; flex-shrink: 0; }
-    .pill-free { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(16,185,129,.22); }
-    .pill-pro { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(245,158,11,.22); }
-    .section-name { font-size: 19px; font-weight: 700; }
-    .section-rule { flex: 1; height: 1px; background: var(--border); }
-    .section-count { font-size: 13px; color: var(--muted); white-space: nowrap; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 60px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; text-decoration: none; color: var(--text); display: block; position: relative; overflow: hidden; transition: border-color .18s, transform .18s, box-shadow .18s; }
-    .card:not(.pro)::after { content: ''; position: absolute; left: 0; top: 20px; bottom: 20px; width: 3px; background: var(--accent); border-radius: 0 3px 3px 0; opacity: 0.45; }
-    .card:not(.pro):hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 40px var(--accent-glow); }
-    .card.pro:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 40px var(--gold-glow); }
-    .card-lock { position: absolute; top: 14px; right: 14px; font-size: 13px; opacity: 0.3; }
-    .card-icon { font-size: 30px; margin-bottom: 12px; display: block; }
-    .card-name { font-size: 14px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
-    .card-desc { font-size: 12px; color: var(--dim); line-height: 1.55; }
-    .badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle; letter-spacing: .04em; }
-    .badge-free { background: rgba(16,185,129,.18); color: var(--accent); }
-    .badge-pro  { background: rgba(245,158,11,.18); color: var(--gold); }
-    .badge-new  { background: rgba(167,139,250,.18); color: var(--purple); }
-    .footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--muted); }
-    .footer a { color: var(--accent); text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); }
-    .overlay.hidden { display: none; }
-    .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 48px 40px; max-width: 400px; width: 100%; text-align: center; }
-    .modal-icon { font-size: 48px; margin-bottom: 16px; }
-    .modal h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .modal p { color: var(--dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-    .modal input { width: 100%; padding: 14px; background: var(--s2); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); font-size: 17px; text-align: center; letter-spacing: 4px; font-family: inherit; margin-bottom: 12px; }
-    .modal input:focus { outline: none; border-color: var(--accent); }
-    .modal .modal-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
-    .modal .modal-btn:hover { background: #0d9668; }
-    .modal .modal-close { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--border); color: var(--dim); border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 10px; transition: all .15s; }
-    .modal .modal-close:hover { background: var(--s2); color: var(--text); }
-    .modal .modal-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
-    .modal .modal-error.show { display: block; }
-    .modal .modal-link { margin-top: 20px; font-size: 13px; color: var(--muted); }
-    .modal .modal-link a { color: var(--accent); text-decoration: none; }
-    .modal .modal-link a:hover { text-decoration: underline; }
-    @media (max-width: 680px) {
-      .header { padding: 48px 20px 44px; } .brand { font-size: 30px; }
-      .stats-bar { flex-wrap: wrap; }
-      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); flex: 1 1 40%; }
-      .sale-banner { flex-direction: column; text-align: center; }
-      .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .modal { padding: 32px 24px; } .section-count { display: none; }
+    .hero-wrap::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 90%);
     }
-    @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,5,10,0.92);
+      backdrop-filter: blur(16px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-size: 19px; font-weight: 800; letter-spacing: -0.3px;
+    }
+    .nav-brand .dot { color: var(--green); }
+    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .nav-link {
+      padding: 7px 14px; border-radius: 8px;
+      font-size: 13px; font-weight: 500; color: var(--dim);
+      text-decoration: none; transition: color .15s, background .15s;
+      border: none; background: none; cursor: pointer; font-family: inherit;
+    }
+    .nav-link:hover { color: var(--text); background: var(--s3); }
+    .nav-badge {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 700;
+      background: var(--glow2); color: var(--green);
+      border: 1px solid rgba(0,229,153,.2);
+      letter-spacing: .03em;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 96px 24px 80px;
+      text-align: center;
+      max-width: 860px; margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 16px; border-radius: 99px;
+      border: 1px solid rgba(0,229,153,.22);
+      background: rgba(0,229,153,.06);
+      font-size: 12px; font-weight: 600; color: var(--green);
+      letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(38px, 6.5vw, 76px);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -2.5px;
+      margin-bottom: 22px;
+    }
+    .hero h1 .accent { color: var(--green); }
+    .hero-sub {
+      font-size: 17px; color: var(--dim); line-height: 1.7;
+      max-width: 540px; margin: 0 auto 44px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 32px; border-radius: 12px;
+      background: var(--green); color: #000;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      margin-bottom: 56px;
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 48px var(--glow); }
+
+    /* Stat strip */
+    .stats {
+      display: inline-flex; flex-wrap: wrap; justify-content: center;
+      background: var(--s1); border: 1px solid var(--b2);
+      border-radius: 18px; overflow: hidden;
+    }
+    .stat { padding: 18px 32px; border-right: 1px solid var(--border); text-align: center; }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px; font-weight: 800; line-height: 1;
+      color: var(--green); margin-bottom: 5px;
+    }
+    .stat-l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ─── MAIN ─── */
+    .main { max-width: 1320px; margin: 0 auto; padding: 72px 28px 80px; }
+
+    /* Section header */
+    .sh {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sh-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.3px;
+    }
+    .sh-count {
+      font-size: 12px; color: var(--muted); font-weight: 600;
+      background: var(--s2); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .sh-rule { flex: 1; height: 1px; background: transparent; }
+
+    /* ─── SEARCH ─── */
+    .search-wrap {
+      position: relative; margin-bottom: 32px;
+      max-width: 420px;
+    }
+    .search-wrap input {
+      width: 100%; padding: 12px 16px 12px 42px;
+      background: var(--s1); border: 1px solid var(--b2);
+      border-radius: 10px; color: var(--text);
+      font-size: 14px; font-family: inherit;
+      transition: border-color .15s;
+    }
+    .search-wrap input:focus { outline: none; border-color: var(--green); }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-size: 15px; pointer-events: none;
+    }
+
+    /* ─── GRID ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 22px;
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: border-color .18s, transform .18s, box-shadow .18s;
+    }
+    .card::after {
+      content: '';
+      position: absolute; left: 0; top: 22px; bottom: 22px;
+      width: 2px; background: var(--green);
+      border-radius: 0 2px 2px 0; opacity: 0;
+      transition: opacity .18s;
+    }
+    .card:hover {
+      border-color: rgba(0,229,153,.35);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--glow);
+    }
+    .card:hover::after { opacity: .6; }
+    .card-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 700;
+      margin-bottom: 6px; line-height: 1.3;
+      letter-spacing: -0.1px;
+    }
+    .card-desc { font-size: 12px; color: var(--dim); line-height: 1.65; }
+    .card-arrow {
+      position: absolute; top: 22px; right: 18px;
+      font-size: 12px; color: var(--muted);
+      transition: color .18s, transform .18s;
+    }
+    .card:hover .card-arrow { color: var(--green); transform: translate(2px,-2px); }
+
+    /* no-results */
+    .no-results {
+      grid-column: 1/-1; text-align: center;
+      padding: 64px 24px; color: var(--muted); font-size: 15px;
+      display: none;
+    }
+    .no-results.show { display: block; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px; text-align: center;
+      font-size: 13px; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 14px; color: var(--text);
+    }
+    .footer-brand span { color: var(--green); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      nav { padding: 14px 18px; }
+      .nav-right .nav-link { display: none; }
+      .hero { padding: 64px 20px 56px; }
+      .hero h1 { letter-spacing: -1.5px; }
+      .stat { padding: 14px 20px; }
+      .main { padding: 48px 16px 60px; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .card { padding: 18px 16px; }
+    }
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <div class="logo-wrap">
-      <span class="logo-emoji">🐘</span>
-      <div class="brand">Elephant<span>Tools</span></div>
-    </div>
-    <p class="tagline">Free and Pro browser tools built for Etsy sellers. No installs. No account. Everything runs in your browser.</p>
-    <div class="header-btns">
-      <button class="btn-unlock" id="unlockBtn" onclick="openModal()">🔓 I Have a Pro Code</button>
-      <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="btn-etsy">⭐ Get Pro — $5 on Etsy</a>
-    </div>
-    <div class="stats-bar">
-      <div class="stat-cell"><div class="stat-num">25</div><div class="stat-lbl">Total Tools</div></div>
-      <div class="stat-cell"><div class="stat-num green">11</div><div class="stat-lbl">Free</div></div>
-      <div class="stat-cell"><div class="stat-num gold">14</div><div class="stat-lbl">Pro</div></div>
-      <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
-    </div>
+<!-- NAV -->
+<nav>
+  <a href="https://royaldex.github.io/ElephantTools/" class="nav-brand">
+    🐘 Elephant<span class="dot">Tools</span>
+  </a>
+  <div class="nav-right">
+    <a href="#tools" class="nav-link">Tools</a>
+    <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener" class="nav-link">Etsy Shop</a>
+    <span class="nav-badge">✦ 26 Free Tools</span>
   </div>
-</header>
+</nav>
 
-<div class="sale-banner">
-  <div class="sale-left">
-    <span class="sale-badge">⭐ Pro</span>
-    <div>
-      <div class="sale-text">Unlock All 14 Pro Tools</div>
-      <div class="sale-sub">One purchase · Lifetime access · No subscriptions</div>
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero">
+    <div class="hero-tag">🐘 Built for Etsy Sellers</div>
+    <h1>Every tool your<br>shop needs,<br><span class="accent">completely free.</span></h1>
+    <p class="hero-sub">26 browser-based tools — resize art, optimize listings, build bundles, watermark designs. No installs, no accounts, no limits.</p>
+    <a href="#tools" class="hero-cta">Browse All Tools ↓</a>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">26</div><div class="stat-l">Tools</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+      <div class="stat"><div class="stat-n">0</div><div class="stat-l">Installs</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Uses</div></div>
     </div>
   </div>
-  <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank" class="sale-cta">Get Pro Access on Etsy →</a>
 </div>
 
-<main class="container">
+<!-- TOOLS -->
+<main class="main" id="tools">
 
-  <!-- FREE TOOLS — royaldex root repo -->
-  <div class="section-head">
-    <span class="section-pill pill-free">✦ Free</span>
-    <span class="section-name">Free Tools</span>
-    <div class="section-rule"></div>
-    <span class="section-count">11 tools · No code needed</span>
-  </div>
-  <div class="grid">
-
-    <a href="https://royaldex.github.io/color-palette.html" class="card">
-      <span class="card-icon">🎨</span>
-      <div class="card-name">Color Palette Generator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Extract color palettes from any image for your design projects.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/etsy-thumbnail-creator.html" class="card">
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Thumbnail Creator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Pad images to fit Etsy aspect ratios with solid, gradient, or blur backgrounds.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/ElephantTools/simple-frames.html" class="card">
-      <span class="card-icon">🪟</span>
-      <div class="card-name">Simple Frames <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Add elegant borders and frames to your images in seconds.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/ElephantTools/wall-art-resizer.html" class="card">
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Wall Art Resizer <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Resize images to standard print sizes at 300 DPI, ready to sell.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/etsy-title-optimizer.html" class="card">
-      <span class="card-icon">✏️</span>
-      <div class="card-name">Title Optimizer <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Live 140-character counter with warnings to perfect your Etsy title.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/etsy-tag-checker.html" class="card">
-      <span class="card-icon">🏷️</span>
-      <div class="card-name">Tag Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">All 13 tag fields with 20-character limits and live validation.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/file-size-checker.html" class="card">
-      <span class="card-icon">📁</span>
-      <div class="card-name">File Size Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Instantly check if your file is under Etsy's 20MB upload limit.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/image-resolution-checker.html" class="card">
-      <span class="card-icon">🔎</span>
-      <div class="card-name">Resolution Checker <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Check pixel dimensions and max print sizes at 300 DPI.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/ElephantTools/listing-description-formatter.html" class="card">
-      <span class="card-icon">📝</span>
-      <div class="card-name">Description Formatter <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Paste messy text, get clean bullet-formatted listing copy for Etsy.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/etsy-image-optimizer.html" class="card">
-      <span class="card-icon">🗜️</span>
-      <div class="card-name">Image Optimizer <span class="badge badge-free">FREE</span> <span class="badge badge-new">NEW</span></div>
-      <div class="card-desc">Compress any image to under 20MB for Etsy — maximum quality preserved.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/ElephantTools/shop-banner.html" class="card">
-      <span class="card-icon">🏪</span>
-      <div class="card-name">Banner Creator <span class="badge badge-free">FREE</span></div>
-      <div class="card-desc">Design banners for Etsy, social media, and the web with 26 size presets.</div>
-    </a>
-
+  <div class="sh">
+    <div class="sh-title">All Tools</div>
+    <span class="sh-count">26 tools</span>
+    <div class="sh-rule"></div>
   </div>
 
-  <!-- PRO TOOLS -->
-  <div class="section-head">
-    <span class="section-pill pill-pro">🔒 Pro</span>
-    <span class="section-name">Pro Tools</span>
-    <div class="section-rule"></div>
-    <span class="section-count">14 tools · Access code required</span>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Search tools…" autocomplete="off">
   </div>
-  <div class="grid">
 
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/bundle-creator.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📦</span>
-      <div class="card-name">Bundle Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create product bundles with multiple images and layouts for maximum sales impact.</div>
-    </a>
+  <div class="grid" id="grid">
 
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/clip-art-packager.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🎨</span>
-      <div class="card-name">Clip Art Packager <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Package and download curated clipart collections for your creative projects.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/coloring-book.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🖍️</span>
-      <div class="card-name">Coloring Book Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Convert photos into professional coloring pages with 4 edge detection algorithms.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/color-variants.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🌈</span>
-      <div class="card-name">Color Variants Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Generate multiple color variations of your designs instantly.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/greeting-cards.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">💌</span>
-      <div class="card-name">Greeting Cards Designer <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Design beautiful greeting cards with custom text and layouts.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/invitations.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">✉️</span>
-      <div class="card-name">Invitation Maker <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create stunning invitations for events, parties, and special occasions.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/journal-builder.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📓</span>
-      <div class="card-name">Journal Builder <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Design custom journal pages and planners with professional layouts.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/kids-cards.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🎈</span>
-      <div class="card-name">Kids Cards Creator <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Create fun, colorful cards designed specifically for kids and families.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">⬆️</span>
-      <div class="card-name">PNG Upscaler <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Upscale PNG files while preserving transparency — up to 20MB output.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/png-upscaler-pro-1.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🚀</span>
-      <div class="card-name">PNG Upscaler Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Advanced upscaling with batch processing and custom size targets.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/sticker-builder.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">⭐</span>
-      <div class="card-name">Sticker Builder <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Design and export sticker sheets ready for print-on-demand.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/WatermarkStudioProPro.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">💧</span>
-      <div class="card-name">Watermark Studio Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Add tiled or single watermarks to protect your digital products.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/wall-art-sizer-pro.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">🖼️</span>
-      <div class="card-name">Wall Art Sizer Pro <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Advanced wall art resizing with batch output and custom size presets.</div>
-    </a>
-
-    <a href="https://royaldex.github.io/gate.html?tool=https://royaldex.github.io/ElephantTools/photo-composer.html" class="card pro">
-      <div class="card-lock">🔒</div>
-      <span class="card-icon">📸</span>
-      <div class="card-name">Photo Composer <span class="badge badge-pro">PRO</span></div>
-      <div class="card-desc">Compose and arrange multiple photos into professional layouts.</div>
-    </a>
-
+      <a href="https://royaldex.github.io/etsy-title-optimizer.html" class="card" target="_blank" rel="noopener"><span class="card-icon">✏️</span><div class="card-name">Title Optimizer</div><div class="card-desc">Live 140-char counter to perfect your Etsy listing title.</div></a>
+      <a href="https://royaldex.github.io/etsy-tag-checker.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🏷️</span><div class="card-name">Tag Checker</div><div class="card-desc">13 tag fields with 20-char limits and live validation.</div></a>
+      <a href="https://royaldex.github.io/etsy-thumbnail-creator.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🖼️</span><div class="card-name">Thumbnail Creator</div><div class="card-desc">Pad images to any Etsy ratio with custom backgrounds.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/wall-art-resizer.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📐</span><div class="card-name">Wall Art Resizer</div><div class="card-desc">Resize to standard print sizes at 300 DPI instantly.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/simple-frames.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🪟</span><div class="card-name">Simple Frames</div><div class="card-desc">Add elegant borders and frames to any image.</div></a>
+      <a href="https://royaldex.github.io/etsy-image-optimizer.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🗜️</span><div class="card-name">Image Optimizer</div><div class="card-desc">Compress images under 20MB — maximum quality kept.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/shop-banner.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🏪</span><div class="card-name">Banner Creator</div><div class="card-desc">Design shop banners with 26 size presets and 2× export.</div></a>
+      <a href="https://royaldex.github.io/color-palette.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🎨</span><div class="card-name">Color Palette</div><div class="card-desc">Extract color palettes from any uploaded image.</div></a>
+      <a href="https://royaldex.github.io/file-size-checker.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📁</span><div class="card-name">File Size Checker</div><div class="card-desc">Instantly verify files are under Etsy's 20MB limit.</div></a>
+      <a href="https://royaldex.github.io/image-resolution-checker.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🔎</span><div class="card-name">Resolution Checker</div><div class="card-desc">Check pixel dimensions and max print sizes at 300 DPI.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/listing-description-formatter.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📝</span><div class="card-name">Description Formatter</div><div class="card-desc">Clean up messy text into polished Etsy listing copy.</div></a>
+      <a href="https://royaldex.github.io/bundle-creator.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📦</span><div class="card-name">Bundle Creator</div><div class="card-desc">Combine multiple designs into one sellable product bundle.</div></a>
+      <a href="https://royaldex.github.io/clip-art-packager.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🎨</span><div class="card-name">Clip Art Packager</div><div class="card-desc">Package and export clipart collections for instant download.</div></a>
+      <a href="https://royaldex.github.io/coloring-book.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🖍️</span><div class="card-name">Coloring Book Creator</div><div class="card-desc">Turn any photo into a coloring page with 4 edge algorithms.</div></a>
+      <a href="https://royaldex.github.io/color-variants.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🌈</span><div class="card-name">Color Variants</div><div class="card-desc">Generate multiple color versions of any design instantly.</div></a>
+      <a href="https://royaldex.github.io/greeting-cards.html" class="card" target="_blank" rel="noopener"><span class="card-icon">💌</span><div class="card-name">Greeting Cards</div><div class="card-desc">Design print-ready greeting cards with custom layouts.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/invitations.html" class="card" target="_blank" rel="noopener"><span class="card-icon">✉️</span><div class="card-name">Invitation Maker</div><div class="card-desc">Create event invitations for parties and special occasions.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/journal-builder.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📓</span><div class="card-name">Journal Builder</div><div class="card-desc">Build custom journal and planner pages professionally.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/kids-cards.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🎈</span><div class="card-name">Kids Cards Creator</div><div class="card-desc">Fun colorful cards designed for kids and families.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/png-upscaler.html" class="card" target="_blank" rel="noopener"><span class="card-icon">⬆️</span><div class="card-name">PNG Upscaler</div><div class="card-desc">Upscale PNGs with full transparency preserved.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/png-upscaler-pro-1.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🚀</span><div class="card-name">PNG Upscaler Pro</div><div class="card-desc">Batch upscaling with custom size targets.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/sticker-builder.html" class="card" target="_blank" rel="noopener"><span class="card-icon">⭐</span><div class="card-name">Sticker Builder</div><div class="card-desc">Design sticker sheets ready for POD and print.</div></a>
+      <a href="https://royaldex.github.io/WatermarkStudioProPro.html" class="card" target="_blank" rel="noopener"><span class="card-icon">💧</span><div class="card-name">Watermark Studio Pro</div><div class="card-desc">Tile or single watermarks to protect your work.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/wall-art-sizer-pro.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🖼️</span><div class="card-name">Wall Art Sizer Pro</div><div class="card-desc">Batch resize wall art with custom size presets.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/photo-composer.html" class="card" target="_blank" rel="noopener"><span class="card-icon">📸</span><div class="card-name">Photo Composer</div><div class="card-desc">Compose and arrange multiple photos into professional layouts.</div></a>
+      <a href="https://royaldex.github.io/ElephantTools/svg-to-png-converter.html" class="card" target="_blank" rel="noopener"><span class="card-icon">🔄</span><div class="card-name">SVG to PNG Converter</div><div class="card-desc">Convert any SVG to a high-resolution PNG at any size.</div></a>
+    <div class="no-results" id="noResults">No tools match your search.</div>
   </div>
+
 </main>
 
-<footer class="footer">
-  Built for Etsy sellers by <a href="https://elephantshoespopshop.etsy.com" target="_blank">ElephantShoes</a> ·
-  <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank">Get Pro Access</a>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Elephant<span>Tools</span></span>
+  <span>Free browser tools for Etsy sellers</span>
+  <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener">ElephantShoes on Etsy</a>
 </footer>
 
-<div class="overlay hidden" id="overlay">
-  <div class="modal">
-    <div class="modal-icon">🔓</div>
-    <h2>Unlock Pro Tools</h2>
-    <p>Enter your access code from your Etsy purchase to unlock all 14 Pro tools.</p>
-    <input type="text" id="codeInput" placeholder="ENTER CODE" autocomplete="off" spellcheck="false">
-    <div class="modal-error" id="modalError">Invalid code. Please check your purchase email.</div>
-    <button class="modal-btn" id="modalSubmit">Unlock Pro Access</button>
-    <button class="modal-close" onclick="closeModal()">Cancel</button>
-    <div class="modal-link">Don't have a code? <a href="https://www.etsy.com/listing/4462671188/free-browser-tools-for-etsy-sellers" target="_blank">Get Pro on Etsy →</a></div>
-  </div>
-</div>
-
 <script>
-  const VALID_CODES = ['ELEPHANT2024','TOOLKIT2024','ETSY2024','ROYAL2024'];
-  const STORAGE_KEY = 'elephanttools_access';
-  const overlay = document.getElementById('overlay');
-  const codeInput = document.getElementById('codeInput');
-  const modalError = document.getElementById('modalError');
-  const unlockBtn = document.getElementById('unlockBtn');
+  /* Search filter */
+  const searchInput = document.getElementById('search');
+  const cards = document.querySelectorAll('.card');
+  const noResults = document.getElementById('noResults');
 
-  function isUnlocked() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved && VALID_CODES.includes(saved);
-  }
-  function applyUnlockedState() {
-    document.querySelectorAll('.card.pro').forEach(card => {
-      const url = new URL(card.href);
-      const toolParam = url.searchParams.get('tool');
-      if (toolParam) card.href = toolParam;
-      const lock = card.querySelector('.card-lock');
-      if (lock) lock.style.display = 'none';
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
     });
-    unlockBtn.textContent = '✅ Pro Unlocked';
-    unlockBtn.classList.add('unlocked');
-    unlockBtn.onclick = null;
-  }
-  function openModal() { if (isUnlocked()) return; overlay.classList.remove('hidden'); codeInput.focus(); }
-  function closeModal() { overlay.classList.add('hidden'); modalError.classList.remove('show'); codeInput.value = ''; codeInput.style.borderColor = ''; }
-
-  document.getElementById('modalSubmit').addEventListener('click', () => {
-    const code = codeInput.value.trim().toUpperCase();
-    if (VALID_CODES.includes(code)) {
-      localStorage.setItem(STORAGE_KEY, code);
-      closeModal();
-      applyUnlockedState();
-    } else {
-      modalError.classList.add('show');
-      codeInput.style.borderColor = '#ef4444';
-    }
+    noResults.classList.toggle('show', visible === 0 && q.length > 0);
   });
-  codeInput.addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('modalSubmit').click(); });
-  codeInput.addEventListener('input', () => { modalError.classList.remove('show'); codeInput.style.borderColor = ''; });
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  if (isUnlocked()) applyUnlockedState();
 </script>
 </body>
 </html>
