@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG to PNG Converter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #1a1a1a;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  h1 {
+    font-size: 1.8rem;
+    color: #B15C01;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  p.sub { color: #888; font-size: 0.9rem; margin-bottom: 30px; }
+
+  .drop-zone {
+    width: 100%;
+    max-width: 600px;
+    border: 2px dashed #B15C01;
+    border-radius: 12px;
+    padding: 50px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    background: #222;
+  }
+  .drop-zone:hover, .drop-zone.drag-over { background: #2a1e10; }
+  .drop-zone p { color: #aaa; font-size: 1rem; }
+  .drop-zone span { color: #B15C01; font-weight: bold; }
+
+  input[type="file"] { display: none; }
+
+  .controls {
+    width: 100%;
+    max-width: 600px;
+    background: #222;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    display: none;
+  }
+  .controls.visible { display: block; }
+
+  label { font-size: 0.85rem; color: #aaa; display: block; margin-bottom: 6px; }
+  .row { display: flex; gap: 12px; margin-bottom: 16px; }
+  .field { flex: 1; }
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+  }
+  .scale-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .scale-btn {
+    padding: 8px 16px;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.15s;
+  }
+  .scale-btn:hover, .scale-btn.active {
+    background: #B15C01;
+    border-color: #B15C01;
+    color: white;
+  }
+
+  .preview-wrap {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    background: #222;
+    border-radius: 12px;
+    padding: 16px;
+    display: none;
+    text-align: center;
+  }
+  .preview-wrap.visible { display: block; }
+  .preview-wrap img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    background: repeating-conic-gradient(#333 0% 25%, #2a2a2a 0% 50%) 0 0 / 16px 16px;
+  }
+  .info { font-size: 0.8rem; color: #666; margin-top: 8px; }
+
+  .btn {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 16px;
+    padding: 14px;
+    background: #B15C01;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: #d47000; }
+  .btn.visible { display: block; }
+
+  .file-name {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #B15C01;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>SVG → PNG Converter</h1>
+<p class="sub">Drop an SVG, set your size, download as PNG</p>
+
+<div class="drop-zone" id="dropZone">
+  <p>Drag & drop your <span>.svg</span> file here<br>or <span>click to browse</span></p>
+  <input type="file" id="fileInput" accept=".svg,image/svg+xml">
+</div>
+<div class="file-name" id="fileName"></div>
+
+<div class="controls" id="controls">
+  <div class="row">
+    <div class="field">
+      <label>Width (px)</label>
+      <input type="number" id="widthInput" value="1000" min="1" max="10000">
+    </div>
+    <div class="field">
+      <label>Height (px)</label>
+      <input type="number" id="heightInput" value="1000" min="1" max="10000">
+    </div>
+  </div>
+  <label>Quick sizes</label>
+  <div class="scale-btns">
+    <button class="scale-btn" data-w="500" data-h="500">500×500</button>
+    <button class="scale-btn active" data-w="1000" data-h="1000">1000×1000</button>
+    <button class="scale-btn" data-w="2000" data-h="2000">2000×2000</button>
+    <button class="scale-btn" data-w="3000" data-h="3000">3000×3000</button>
+    <button class="scale-btn" data-w="4500" data-h="5400">4500×5400</button>
+    <button class="scale-btn" data-w="custom">Custom</button>
+  </div>
+</div>
+
+<div class="preview-wrap" id="previewWrap">
+  <img id="preview" alt="Preview">
+  <div class="info" id="info"></div>
+</div>
+
+<button class="btn" id="downloadBtn">⬇ Download PNG</button>
+
+<canvas id="canvas" style="display:none"></canvas>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const controls = document.getElementById('controls');
+  const previewWrap = document.getElementById('previewWrap');
+  const preview = document.getElementById('preview');
+  const info = document.getElementById('info');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const widthInput = document.getElementById('widthInput');
+  const heightInput = document.getElementById('heightInput');
+  const fileName = document.getElementById('fileName');
+
+  let svgDataUrl = null;
+  let originalName = 'converted';
+  let svgNativeW = 100, svgNativeH = 100;
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadFile(fileInput.files[0]); });
+
+  function loadFile(file) {
+    originalName = file.name.replace(/\.svg$/i, '');
+    fileName.textContent = '📄 ' + file.name;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const svgText = e.target.result;
+      // Parse native dimensions
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgText, 'image/svg+xml');
+      const svgEl = doc.querySelector('svg');
+      const vb = svgEl?.getAttribute('viewBox');
+      if (vb) {
+        const parts = vb.split(/[\s,]+/);
+        svgNativeW = parseFloat(parts[2]) || 100;
+        svgNativeH = parseFloat(parts[3]) || 100;
+      } else {
+        svgNativeW = parseFloat(svgEl?.getAttribute('width')) || 100;
+        svgNativeH = parseFloat(svgEl?.getAttribute('height')) || 100;
+      }
+      // Keep aspect ratio for default
+      const ratio = svgNativeH / svgNativeW;
+      const w = parseInt(widthInput.value);
+      heightInput.value = Math.round(w * ratio);
+
+      svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgText)));
+      controls.classList.add('visible');
+      renderPreview();
+    };
+    reader.readAsText(file);
+  }
+
+  function renderPreview() {
+    if (!svgDataUrl) return;
+    const w = parseInt(widthInput.value) || 1000;
+    const h = parseInt(heightInput.value) || 1000;
+    canvas.width = w;
+    canvas.height = h;
+    const img = new Image();
+    img.onload = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      preview.src = canvas.toDataURL('image/png');
+      info.textContent = `${w} × ${h} px`;
+      previewWrap.classList.add('visible');
+      downloadBtn.classList.add('visible');
+    };
+    img.src = svgDataUrl;
+  }
+
+  widthInput.addEventListener('change', () => {
+    document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+    renderPreview();
+  });
+  heightInput.addEventListener('change', () => {
+    document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+    renderPreview();
+  });
+
+  document.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (btn.dataset.w === 'custom') return;
+      widthInput.value = btn.dataset.w;
+      heightInput.value = btn.dataset.h;
+      renderPreview();
+    });
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = originalName + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+</script>
+</body>
+</html>
