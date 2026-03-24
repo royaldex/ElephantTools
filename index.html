@@ -365,6 +365,7 @@
   </a>
   <div class="nav-right">
     <a href="#tools" class="nav-link">Tools</a>
+    <a href="services.html" class="nav-link">Services</a>
     <a href="https://elephantshoespopshop.etsy.com" class="nav-link">Etsy Shop</a>
     <span class="nav-badge"><span class="pulse"></span>26 Free Tools</span>
   </div>
@@ -469,6 +470,7 @@
 <footer>
   <span class="footer-brand"><span class="e">E</span><span class="rest">LEPHAST</span><span class="com">.com</span></span>
   <span>Free browser tools for Etsy sellers</span>
+  <a href="services.html">Services</a>
   <a href="https://elephantshoespopshop.etsy.com">ElephantShoes on Etsy</a>
 </footer>
 
@@ -477,13 +479,7 @@
   const cards = document.querySelectorAll('.card');
   const noResults = document.getElementById('noResults');
 
-  // Set all common gate/access localStorage keys so tool pages don't redirect
-  const gateKeys = [
-    'accessGranted','access_granted','gateCleared','gate_cleared',
-    'pro_unlocked','proUnlocked','unlocked','allowed','hasAccess',
-    'elephanttools_access','elephast_access','visited','authenticated'
-  ];
-  gateKeys.forEach(k => localStorage.setItem(k, 'true'));
+
 
   searchInput.addEventListener('input', () => {
     const q = searchInput.value.toLowerCase().trim();
