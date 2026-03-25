@@ -1232,19 +1232,7 @@ body { padding: 0; }
 </head>
 <body>
 
-<!-- Access Control -->
-<script>
-  const ACCESS_KEY = 'ELEPHANT2024';
-  const STORAGE_KEY = 'elephantToolsAccess';
-  
-  // Check access on page load
-  (function() {
-    const storedKey = localStorage.getItem(STORAGE_KEY);
-    if (storedKey !== ACCESS_KEY) {
-      window.location.href = 'index.html';
-    }
-  })();
-</script>
+
 
 <!-- Back to Dashboard Link -->
 <div style="position: fixed; top: 10px; left: 10px; z-index: 1000;">
