@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Compress JPEG and PNG images in your browser. Free image compression tool — no uploads, no signup needed.">
+<title>Free Image Compressor — Compress JPEG PNG Online — Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
+  --yellow:#fbbf24;--blue:#3b82f6;--radius:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none;white-space:nowrap}
+.logo span{color:var(--muted);font-weight:400}
+.header-tool{font-size:13px;color:var(--dim);font-weight:500}
+.main{max-width:980px;margin:0 auto;padding:32px 20px 64px}
+h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px;line-height:1.6}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input[type=text],input[type=url],input[type=number],select,textarea{
+  width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;
+  transition:border-color .15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.field{margin-bottom:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-primary{background:var(--green);color:#000}
+.btn-primary:hover{background:var(--green-d)}
+.btn-secondary{background:var(--border);color:var(--dim)}
+.btn-secondary:hover{background:var(--border-h);color:var(--text)}
+.btn-orange{background:var(--orange);color:#000}
+.btn-orange:hover{opacity:.88}
+.btn-full{width:100%;justify-content:center}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.result-box{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:400px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.tags-box{display:flex;flex-wrap:wrap;gap:7px;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;min-height:50px}
+.tag{padding:5px 11px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--orange);color:var(--orange)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
+.chip.active{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
+.related h2{font-size:14px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.related-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.related-card:hover{border-color:var(--orange);transform:translateY(-1px)}
+.related-card-icon{font-size:20px;margin-bottom:6px}
+.related-card-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.related-card-desc{font-size:11px;color:var(--muted)}
+.copy-btn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.copy-btn:hover{background:var(--border-h);color:var(--text)}
+.copy-btn.copied{background:rgba(16,185,129,.2);color:var(--green)}
+.action-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:100px;text-align:center}
+.stat-val{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--green)}
+.stat-label{font-size:11px;color:var(--muted);margin-top:2px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
+.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
+footer{max-width:980px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--orange);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="header-tool">/ Image Compressor</span>
+  </div>
+</header>
+<div class="main">
+
+<h1>🗜️ Image Compressor</h1>
+<p class="subtitle">Compress JPEG and PNG images in your browser. Reduce file size without losing too much quality. No uploads to any server.</p>
+<div class="card">
+  <div class="card-title">Upload Images</div>
+  <div id="compDropZone" style="border:2px dashed var(--border);border-radius:10px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px" onclick="document.getElementById('compInput').click()" ondragover="event.preventDefault();this.style.borderColor='var(--green)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleCompDrop(event)">
+    <div style="font-size:36px;margin-bottom:10px">🗜️</div>
+    <div style="font-size:14px;color:var(--dim)">Drop images here or click to upload</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px">JPEG, PNG, WebP • Multiple files OK</div>
+    <input type="file" id="compInput" accept="image/*" multiple style="display:none" onchange="handleCompFiles(this.files)">
+  </div>
+  <div class="field">
+    <label>Quality: <span id="compQualLabel">80</span>%</label>
+    <input type="range" id="compQuality" min="10" max="100" value="80" oninput="document.getElementById('compQualLabel').textContent=this.value">
+  </div>
+  <div class="field">
+    <label>Output Format</label>
+    <select id="compFormat">
+      <option value="same">Same as input</option>
+      <option value="image/jpeg">JPEG</option>
+      <option value="image/png">PNG</option>
+      <option value="image/webp">WebP</option>
+    </select>
+  </div>
+</div>
+<div id="compResults" style="display:none">
+  <div class="card">
+    <div class="card-title">Results</div>
+    <div id="compList"></div>
+    <div class="action-row" style="margin-top:12px">
+      <button class="btn btn-primary" onclick="downloadAllComp()">⬇ Download All</button>
+      <button class="btn btn-secondary" onclick="clearComp()">🗑 Clear</button>
+    </div>
+  </div>
+</div>
+<script>
+let compFiles=[];
+function handleCompDrop(e){e.preventDefault();e.target.style.borderColor='var(--border)';handleCompFiles(e.dataTransfer.files);}
+function handleCompFiles(flist){
+  compFiles=[...flist];
+  compressAll();
+}
+let compOutputs=[];
+async function compressAll(){
+  const q=parseInt(document.getElementById('compQuality').value)/100;
+  const fmt=document.getElementById('compFormat').value;
+  const list=document.getElementById('compList');list.innerHTML='';compOutputs=[];
+  for(const file of compFiles){
+    const url=URL.createObjectURL(file);
+    const img=new Image();
+    await new Promise(res=>{img.onload=res;img.src=url;});
+    const canvas=document.createElement('canvas');
+    canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+    const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
+    const outFmt=fmt==='same'?file.type||'image/jpeg':fmt;
+    const ext=outFmt==='image/png'?'.png':outFmt==='image/webp'?'.webp':'.jpg';
+    const blob=await new Promise(res=>canvas.toBlob(res,outFmt,q));
+    const ratio=((1-blob.size/file.size)*100).toFixed(1);
+    const orig=(file.size/1024).toFixed(1);
+    const comp=(blob.size/1024).toFixed(1);
+    const color=parseFloat(ratio)>0?'var(--green)':parseFloat(ratio)<-5?'var(--red)':'var(--yellow)';
+    const idx=compOutputs.length;
+    compOutputs.push({blob,ext,name:file.name});
+    const objUrl=URL.createObjectURL(blob);
+    list.innerHTML+=`<div style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px">
+      <img src="${objUrl}" style="width:48px;height:48px;object-fit:contain;border-radius:4px;background:#222">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${file.name}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace">${orig}KB → ${comp}KB <span style="color:${color}">${ratio>0?'-':''}${Math.abs(ratio)}%</span></div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="downloadOne(${idx})">⬇</button>
+    </div>`;
+  }
+  document.getElementById('compResults').style.display='block';
+}
+function downloadOne(i){
+  const {blob,ext,name}=compOutputs[i];
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=name.replace(/\.[^.]+$/,'')+'-compressed'+ext;a.click();
+}
+function downloadAllComp(){compOutputs.forEach((_,i)=>downloadOne(i));}
+function clearComp(){compFiles=[];compOutputs=[];document.getElementById('compList').innerHTML='';document.getElementById('compResults').style.display='none';}
+document.getElementById('compQuality').addEventListener('change',()=>{if(compFiles.length)compressAll();});
+document.getElementById('compFormat').addEventListener('change',()=>{if(compFiles.length)compressAll();});
+</script>
+
+<div class="related">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a class="related-card" href="webp-converter.html"><div class="related-card-icon">🔄</div><div class="related-card-name">WebP Converter</div><div class="related-card-desc">Convert to WebP</div></a>
+<a class="related-card" href="bulk-image-resizer.html"><div class="related-card-icon">📐</div><div class="related-card-name">Bulk Image Resizer</div><div class="related-card-desc">Resize multiple images</div></a>
+<a class="related-card" href="png-to-svg.html"><div class="related-card-icon">✏️</div><div class="related-card-name">PNG to SVG</div><div class="related-card-desc">Convert PNG to SVG</div></a>
+<a class="related-card" href="image-resolution-checker.html"><div class="related-card-icon">🔎</div><div class="related-card-name">Resolution Checker</div><div class="related-card-desc">Check image DPI</div></a>
+    <a class="related-card" href="index.html"><div class="related-card-icon">🏠</div><div class="related-card-name">All Tools</div><div class="related-card-desc">Browse all 46 free tools</div></a>
+  </div>
+</div>
+</div>
+<footer><a href="index.html">← Back to Elephast.com</a> · Free tools for Etsy sellers &amp; creators</footer>
+</body>
+</html>

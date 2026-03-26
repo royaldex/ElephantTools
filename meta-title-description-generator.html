@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generate SEO meta titles and descriptions instantly. Free meta tag generator for websites and blogs.">
+<title>Free Meta Title & Description Generator — SEO Tool — Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
+  --yellow:#fbbf24;--blue:#3b82f6;--radius:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none;white-space:nowrap}
+.logo span{color:var(--muted);font-weight:400}
+.header-tool{font-size:13px;color:var(--dim);font-weight:500}
+.main{max-width:980px;margin:0 auto;padding:32px 20px 64px}
+h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px;line-height:1.6}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input[type=text],input[type=url],input[type=number],select,textarea{
+  width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;
+  transition:border-color .15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.field{margin-bottom:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-primary{background:var(--green);color:#000}
+.btn-primary:hover{background:var(--green-d)}
+.btn-secondary{background:var(--border);color:var(--dim)}
+.btn-secondary:hover{background:var(--border-h);color:var(--text)}
+.btn-orange{background:var(--orange);color:#000}
+.btn-orange:hover{opacity:.88}
+.btn-full{width:100%;justify-content:center}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.result-box{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:400px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.tags-box{display:flex;flex-wrap:wrap;gap:7px;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;min-height:50px}
+.tag{padding:5px 11px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--orange);color:var(--orange)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
+.chip.active{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
+.related h2{font-size:14px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.related-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.related-card:hover{border-color:var(--orange);transform:translateY(-1px)}
+.related-card-icon{font-size:20px;margin-bottom:6px}
+.related-card-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.related-card-desc{font-size:11px;color:var(--muted)}
+.copy-btn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.copy-btn:hover{background:var(--border-h);color:var(--text)}
+.copy-btn.copied{background:rgba(16,185,129,.2);color:var(--green)}
+.action-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:100px;text-align:center}
+.stat-val{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--green)}
+.stat-label{font-size:11px;color:var(--muted);margin-top:2px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
+.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
+footer{max-width:980px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--orange);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="header-tool">/ Meta Tag Generator</span>
+  </div>
+</header>
+<div class="main">
+
+<h1>🧩 Meta Title & Description Generator</h1>
+<p class="subtitle">Generate SEO-optimized meta titles and descriptions for any page. Includes character counters and Google preview.</p>
+<div class="card">
+  <div class="card-title">Page Info</div>
+  <div class="field">
+    <label>What is this page about?</label>
+    <input type="text" id="metaTopic" placeholder="e.g. printable wall art for living room">
+  </div>
+  <div class="field">
+    <label>Brand / Site Name <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+    <input type="text" id="metaBrand" placeholder="e.g. Elephast">
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label>Page Type</label>
+      <select id="metaType">
+        <option value="product">Product / Listing</option>
+        <option value="blog">Blog Post</option>
+        <option value="category">Category / Collection</option>
+        <option value="home">Homepage</option>
+        <option value="tool">Tool / App</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Primary Keyword</label>
+      <input type="text" id="metaKw" placeholder="e.g. printable wall art">
+    </div>
+  </div>
+  <button class="btn btn-primary btn-full" onclick="genMeta()">⚡ Generate Meta Tags</button>
+</div>
+<div id="metaResults" style="display:none">
+  <div class="card">
+    <div class="card-title">Generated Meta Tags</div>
+    <div id="metaVariants"></div>
+    <div style="margin-top:16px">
+      <div class="card-title">HTML Code</div>
+      <div class="result-box" id="metaCode"></div>
+      <div class="action-row">
+        <button class="copy-btn" onclick="copyEl('metaCode')">📋 Copy HTML</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const META_TEMPLATES={
+  product:{
+    titles:['Buy {kw} — {brand}','{kw} | Shop Online — {brand}','Best {kw} — Free Shipping | {brand}','Custom {kw} — {brand}','{kw} for Sale — {brand}'],
+    descs:['Shop our {kw}. High quality, fast shipping. {brand} — trusted by thousands of customers.','Discover our {kw} collection. Perfect for any occasion. Buy online at {brand}.','Looking for {kw}? Find the best selection at {brand}. Fast download, instant access.']
+  },
+  blog:{
+    titles:['How to {topic} — Complete Guide','The Ultimate Guide to {topic} ({year})','Everything You Need to Know About {topic}','{topic}: Tips, Tricks & Strategies','{number} Best Ways to {topic}'],
+    descs:['Learn everything about {topic} in this comprehensive guide. Step-by-step instructions, expert tips, and real examples.','Discover the best strategies for {topic}. Read our in-depth guide with actionable tips and examples.','Complete guide to {topic}. Includes tips, tools, and strategies to get started today.']
+  },
+  category:{
+    titles:['{kw} Collection — {brand}','Best {kw} — Browse All | {brand}','Shop {kw} — {brand}','{kw} — All Styles & Sizes | {brand}'],
+    descs:['Browse our full collection of {kw}. Filter by style, size, and price. Free shipping on orders over $35.','Explore all {kw} at {brand}. New arrivals added weekly. Shop now and save.','Shop the best {kw} online. Compare styles, read reviews, and find your perfect match at {brand}.']
+  },
+  home:{
+    titles:['{brand} — {topic}','{brand}: {topic}','Welcome to {brand} | {topic}'],
+    descs:['{brand} — {topic}. Trusted by thousands. Start for free today.','Discover {brand}. We help you with {topic}. Fast, free, and easy to use.','The best place for {topic}. Join thousands of users at {brand} — 100% free.']
+  },
+  tool:{
+    titles:['{kw} Tool — Free Online | {brand}','Free {kw} Generator — {brand}','{kw} Checker — 100% Free | {brand}'],
+    descs:['Free {kw} tool. Use our {topic} instantly — no signup required. Fast, free, and easy to use.','The best free {kw} tool online. {brand} helps you {topic} in seconds. No download needed.','Generate {topic} for free with our {kw} tool. Works in your browser — no signup required.']
+  }
+};
+function genMeta(){
+  const topic=document.getElementById('metaTopic').value.trim();
+  const brand=document.getElementById('metaBrand').value.trim()||'YourBrand';
+  const type=document.getElementById('metaType').value;
+  const kw=document.getElementById('metaKw').value.trim()||topic;
+  if(!topic){alert('Enter a topic first.');return;}
+  const T=META_TEMPLATES[type];
+  const year=new Date().getFullYear();
+  function fill(s){return s.replace(/{kw}/g,kw).replace(/{topic}/g,topic).replace(/{brand}/g,brand).replace(/{year}/g,year).replace(/{number}/g,'10');}
+  const titles=T.titles.map(fill);
+  const descs=T.descs.map(fill);
+  let html='';
+  titles.slice(0,3).forEach((t,i)=>{
+    const d=descs[i%descs.length];
+    const tLen=t.length,dLen=d.length;
+    const tColor=tLen>60?'var(--red)':tLen>50?'var(--yellow)':'var(--green)';
+    const dColor=dLen>160?'var(--red)':dLen>130?'var(--yellow)':'var(--green)';
+    html+=`<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px">Option ${i+1}</div>
+      <div style="margin-bottom:8px">
+        <span style="font-size:11px;color:var(--muted)">Title</span>
+        <span style="font-size:11px;float:right;color:${tColor};font-family:'Space Mono',monospace">${tLen}/60</span>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-top:4px">${t}</div>
+      </div>
+      <div>
+        <span style="font-size:11px;color:var(--muted)">Description</span>
+        <span style="font-size:11px;float:right;color:${dColor};font-family:'Space Mono',monospace">${dLen}/160</span>
+        <div style="font-size:13px;color:var(--dim);margin-top:4px">${d}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('metaVariants').innerHTML=html;
+  const bestTitle=titles[0],bestDesc=descs[0];
+  document.getElementById('metaCode').textContent=`<title>${bestTitle}</title>\n<meta name="description" content="${bestDesc}">\n<meta property="og:title" content="${bestTitle}">\n<meta property="og:description" content="${bestDesc}">`;
+  document.getElementById('metaResults').style.display='block';
+}
+function copyEl(id){
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  event.target.textContent='✓ Copied!';event.target.classList.add('copied');
+  setTimeout(()=>{event.target.textContent='📋 Copy HTML';event.target.classList.remove('copied')},2000);
+}
+</script>
+
+<div class="related">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a class="related-card" href="serp-preview-tool.html"><div class="related-card-icon">👁️</div><div class="related-card-name">SERP Preview</div><div class="related-card-desc">Preview Google listing</div></a>
+<a class="related-card" href="keyword-generator.html"><div class="related-card-icon">🔍</div><div class="related-card-name">Keyword Generator</div><div class="related-card-desc">Keyword ideas</div></a>
+<a class="related-card" href="robots-txt-generator.html"><div class="related-card-icon">🤖</div><div class="related-card-name">Robots.txt</div><div class="related-card-desc">Control crawlers</div></a>
+<a class="related-card" href="xml-sitemap-generator.html"><div class="related-card-icon">🗺️</div><div class="related-card-name">Sitemap Generator</div><div class="related-card-desc">XML sitemap builder</div></a>
+    <a class="related-card" href="index.html"><div class="related-card-icon">🏠</div><div class="related-card-name">All Tools</div><div class="related-card-desc">Browse all 46 free tools</div></a>
+  </div>
+</div>
+</div>
+<footer><a href="index.html">← Back to Elephast.com</a> · Free tools for Etsy sellers &amp; creators</footer>
+</body>
+</html>

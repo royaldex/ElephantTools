@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generate a valid robots.txt file for your website. Control what search engines crawl with our free tool.">
+<title>Free Robots.txt Generator — SEO Tool — Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
+  --yellow:#fbbf24;--blue:#3b82f6;--radius:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none;white-space:nowrap}
+.logo span{color:var(--muted);font-weight:400}
+.header-tool{font-size:13px;color:var(--dim);font-weight:500}
+.main{max-width:980px;margin:0 auto;padding:32px 20px 64px}
+h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px;line-height:1.6}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input[type=text],input[type=url],input[type=number],select,textarea{
+  width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;
+  transition:border-color .15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.field{margin-bottom:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-primary{background:var(--green);color:#000}
+.btn-primary:hover{background:var(--green-d)}
+.btn-secondary{background:var(--border);color:var(--dim)}
+.btn-secondary:hover{background:var(--border-h);color:var(--text)}
+.btn-orange{background:var(--orange);color:#000}
+.btn-orange:hover{opacity:.88}
+.btn-full{width:100%;justify-content:center}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.result-box{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:400px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.tags-box{display:flex;flex-wrap:wrap;gap:7px;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;min-height:50px}
+.tag{padding:5px 11px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--orange);color:var(--orange)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
+.chip.active{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
+.related h2{font-size:14px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.related-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.related-card:hover{border-color:var(--orange);transform:translateY(-1px)}
+.related-card-icon{font-size:20px;margin-bottom:6px}
+.related-card-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.related-card-desc{font-size:11px;color:var(--muted)}
+.copy-btn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.copy-btn:hover{background:var(--border-h);color:var(--text)}
+.copy-btn.copied{background:rgba(16,185,129,.2);color:var(--green)}
+.action-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:100px;text-align:center}
+.stat-val{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--green)}
+.stat-label{font-size:11px;color:var(--muted);margin-top:2px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
+.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
+footer{max-width:980px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--orange);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="header-tool">/ Robots.txt Generator</span>
+  </div>
+</header>
+<div class="main">
+
+<h1>🤖 Robots.txt Generator</h1>
+<p class="subtitle">Build a valid robots.txt file to tell search engines what to crawl or ignore. No coding needed.</p>
+<div class="card">
+  <div class="card-title">Bot Rules</div>
+  <div class="notice">💡 robots.txt goes in your site root: <code>https://yourdomain.com/robots.txt</code></div>
+
+  <div id="rulesContainer">
+    <div class="rule-block" style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">
+      <div class="row2">
+        <div class="field" style="margin-bottom:8px">
+          <label>User-agent (bot)</label>
+          <input type="text" class="ua-input" value="*" placeholder="* = all bots">
+        </div>
+        <div class="field" style="margin-bottom:8px">
+          <label>Action</label>
+          <select class="action-input">
+            <option value="allow-all">Allow all</option>
+            <option value="block-all">Block all</option>
+            <option value="custom">Custom paths</option>
+          </select>
+        </div>
+      </div>
+      <div class="custom-paths" style="display:none">
+        <div class="field" style="margin-bottom:6px">
+          <label>Disallow paths <span style="font-weight:400;color:var(--muted)">(one per line)</span></label>
+          <textarea class="disallow-input" rows="3" placeholder="/admin/&#10;/private/&#10;/checkout/"></textarea>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Allow paths <span style="font-weight:400;color:var(--muted)">(override disallow)</span></label>
+          <textarea class="allow-input" rows="2" placeholder="/public/"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-secondary btn-sm" style="margin-bottom:14px" onclick="addRule()">+ Add Another Bot</button>
+
+  <div class="field">
+    <label>Sitemap URL <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+    <input type="url" id="sitemapUrl" placeholder="https://yourdomain.com/sitemap.xml">
+  </div>
+  <button class="btn btn-primary btn-full" onclick="genRobots()">⚡ Generate robots.txt</button>
+</div>
+<div id="robotsResults" style="display:none">
+  <div class="card">
+    <div class="card-title">robots.txt Output</div>
+    <div class="action-row" style="margin-bottom:12px">
+      <button class="copy-btn" onclick="copyEl('robotsOutput')">📋 Copy</button>
+      <button class="btn btn-secondary btn-sm" onclick="downloadRobots()">⬇ Download robots.txt</button>
+    </div>
+    <div class="result-box" id="robotsOutput"></div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.action-input').forEach(sel=>{
+  sel.addEventListener('change',function(){
+    this.closest('.rule-block').querySelector('.custom-paths').style.display=this.value==='custom'?'block':'none';
+  });
+});
+function addRule(){
+  const container=document.getElementById('rulesContainer');
+  const div=document.createElement('div');div.className='rule-block';
+  div.style.cssText='background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;position:relative';
+  div.innerHTML=`<button onclick="this.parentElement.remove()" style="position:absolute;top:8px;right:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px">×</button>
+    <div class="row2">
+      <div class="field" style="margin-bottom:8px"><label>User-agent</label><input type="text" class="ua-input" placeholder="Googlebot"></div>
+      <div class="field" style="margin-bottom:8px"><label>Action</label>
+        <select class="action-input" onchange="this.closest('.rule-block').querySelector('.custom-paths').style.display=this.value==='custom'?'block':'none'">
+          <option value="allow-all">Allow all</option><option value="block-all">Block all</option><option value="custom">Custom paths</option>
+        </select>
+      </div>
+    </div>
+    <div class="custom-paths" style="display:none">
+      <div class="field" style="margin-bottom:6px"><label>Disallow paths</label><textarea class="disallow-input" rows="3" placeholder="/admin/&#10;/private/"></textarea></div>
+      <div class="field" style="margin-bottom:0"><label>Allow paths</label><textarea class="allow-input" rows="2" placeholder="/public/"></textarea></div>
+    </div>`;
+  container.appendChild(div);
+}
+function genRobots(){
+  let out='';
+  document.querySelectorAll('.rule-block').forEach(block=>{
+    const ua=block.querySelector('.ua-input').value.trim()||'*';
+    const action=block.querySelector('.action-input').value;
+    out+=`User-agent: ${ua}\n`;
+    if(action==='allow-all'){out+='Allow: /\n';}
+    else if(action==='block-all'){out+='Disallow: /\n';}
+    else{
+      const dis=block.querySelector('.disallow-input').value.trim().split('\n').filter(l=>l.trim());
+      const all=block.querySelector('.allow-input').value.trim().split('\n').filter(l=>l.trim());
+      all.forEach(p=>out+=`Allow: ${p.trim()}\n`);
+      dis.forEach(p=>out+=`Disallow: ${p.trim()}\n`);
+      if(!dis.length&&!all.length)out+='Allow: /\n';
+    }
+    out+='\n';
+  });
+  const sm=document.getElementById('sitemapUrl').value.trim();
+  if(sm) out+=`Sitemap: ${sm}\n`;
+  document.getElementById('robotsOutput').textContent=out.trim();
+  document.getElementById('robotsResults').style.display='block';
+}
+function copyEl(id){
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  event.target.textContent='✓ Copied!';event.target.classList.add('copied');
+  setTimeout(()=>{event.target.textContent='📋 Copy';event.target.classList.remove('copied')},2000);
+}
+function downloadRobots(){
+  const t=document.getElementById('robotsOutput').textContent;if(!t)return;
+  const a=document.createElement('a');a.href='data:text/plain,'+encodeURIComponent(t);a.download='robots.txt';a.click();
+}
+</script>
+
+<div class="related">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a class="related-card" href="xml-sitemap-generator.html"><div class="related-card-icon">🗺️</div><div class="related-card-name">Sitemap Generator</div><div class="related-card-desc">XML sitemap builder</div></a>
+<a class="related-card" href="meta-title-description-generator.html"><div class="related-card-icon">🧩</div><div class="related-card-name">Meta Generator</div><div class="related-card-desc">SEO meta tags</div></a>
+<a class="related-card" href="serp-preview-tool.html"><div class="related-card-icon">👁️</div><div class="related-card-name">SERP Preview</div><div class="related-card-desc">Google listing preview</div></a>
+<a class="related-card" href="keyword-generator.html"><div class="related-card-icon">🔍</div><div class="related-card-name">Keyword Generator</div><div class="related-card-desc">Find keywords</div></a>
+    <a class="related-card" href="index.html"><div class="related-card-icon">🏠</div><div class="related-card-name">All Tools</div><div class="related-card-desc">Browse all 46 free tools</div></a>
+  </div>
+</div>
+</div>
+<footer><a href="index.html">← Back to Elephast.com</a> · Free tools for Etsy sellers &amp; creators</footer>
+</body>
+</html>
