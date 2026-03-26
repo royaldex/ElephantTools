@@ -3,283 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="46 free browser-based tools for Etsy sellers, digital creators, and SEO beginners. Keyword generators, image tools, Etsy listing tools, and more. No signup required.">
-<title>Elephast.com — 46 Free Tools for Etsy Sellers & Creators</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="description" content="67 free browser-based tools for Etsy sellers, digital creators, influencers, and crypto users. SEO tools, image tools, keyword generators, crypto calculators, and more. No signup required.">
+<meta property="og:title" content="Elephast.com — 67 Free Tools for Creators & Sellers">
+<meta property="og:description" content="Free SEO tools, Etsy tools, image converters, crypto calculators, and influencer tools. All browser-based, no signup.">
+<title>Elephast.com — 67 Free Tools for Etsy Sellers, Creators & Developers</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAAoklEQVRoge3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAABHgAAAABJRU5ErkJggg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a09;--s1:#111110;--s2:#181816;--s3:#1e1e1b;
-  --border:#252520;--b2:#2e2e28;--text:#f0ede8;--dim:#857f74;--muted:#3d3a34;
-  --green:#3cb82e;--green-d:#2a8c20;--orange:#f5820a;--orange-l:#f5c200;
+  --bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--s4:#27272a;
+  --border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--orange-l:#fbbf24;
+  --blue:#3b82f6;--purple:#a371f7;--red:#ef4444;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-/* ── NAV ── */
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:62px;border-bottom:1px solid var(--border);background:rgba(10,10,9,.96);backdrop-filter:blur(18px);position:sticky;top:0;z-index:100}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1px solid var(--border);background:rgba(9,9,11,.96);backdrop-filter:blur(18px);position:sticky;top:0;z-index:100}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
-.brand-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.3px}
-.brand-name .e{color:var(--green)}.brand-name .com{color:var(--green);font-size:15px}
-.nav-sub{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;line-height:1}
-.nav-right{display:flex;align-items:center;gap:4px}
-.nav-link{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .15s}
-.nav-link:hover{color:var(--text);background:var(--s3)}
-.nav-count{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:7px;font-size:11px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;background:rgba(60,184,46,.08);color:var(--green);border:1px solid rgba(60,184,46,.2)}
+.bn{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.3px}
+.bn .e{color:var(--green)}.bn .c{color:var(--green);font-size:14px}
+.ns{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px;line-height:1}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nl{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .15s}
+.nl:hover{color:var(--text);background:var(--s3)}
+.nbadge{padding:6px 14px;border-radius:7px;font-size:11px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2)}
 
-/* ── HERO ── */
-.hero{position:relative;overflow:hidden;padding:70px 24px 60px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% -5%,rgba(60,184,46,.06) 0%,transparent 60%)}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.5;z-index:0}
-.hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:99px;border:1px solid rgba(60,184,46,.22);background:rgba(60,184,46,.06);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
-.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,8vw,90px);font-weight:900;line-height:.92;letter-spacing:-2px;text-transform:uppercase;margin-bottom:20px}
-.hero h1 .l1{color:var(--text)}.hero h1 .l2{background:linear-gradient(90deg,var(--orange),var(--orange-l),var(--orange));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.hero{position:relative;overflow:hidden;padding:64px 24px 52px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% -5%,rgba(16,185,129,.06) 0%,transparent 60%)}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.45;z-index:0}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.htag{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:99px;border:1px solid rgba(16,185,129,.22);background:rgba(16,185,129,.06);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,8vw,88px);font-weight:900;line-height:.92;letter-spacing:-2px;text-transform:uppercase;margin-bottom:18px}
+.l1{color:var(--text);display:block}.l2{display:block;background:linear-gradient(90deg,var(--orange),var(--orange-l),var(--orange));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}.l3{color:var(--green);display:block}
 @keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
-.hero h1 .l3{color:var(--green)}
-.hero-p{font-size:16px;color:var(--dim);max-width:480px;margin:0 auto 32px;line-height:1.7}
-.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:9px;background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;font-size:14px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(60,184,46,.2)}
-.hero-cta:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(60,184,46,.32)}
-.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:32px}
-.hstat{text-align:center}.hstat-n{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:var(--green);display:block}.hstat-l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
+.hero-p{font-size:16px;color:var(--dim);max-width:520px;margin:0 auto 28px;line-height:1.7}
+.hcta{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:9px;background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;font-size:14px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(16,185,129,.2)}
+.hcta:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(16,185,129,.32)}
+.hstats{display:flex;gap:28px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.hs{text-align:center}.hs-n{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--green);display:block}.hs-l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
 
-/* ── SEARCH ── */
-.search-wrap{max-width:560px;margin:0 auto 40px;padding:0 20px}
-.search-inner{position:relative}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--dim)}
+.search-wrap{max-width:540px;margin:0 auto 36px;padding:0 20px}
+.si{position:relative}
+.sicon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
 #searchInput{width:100%;padding:13px 16px 13px 42px;background:var(--s2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:'Barlow',sans-serif;transition:border-color .15s}
 #searchInput:focus{outline:none;border-color:var(--green)}
-#searchInput::placeholder{color:var(--dim)}
+#searchInput::placeholder{color:var(--muted)}
 
-/* ── CONTENT ── */
-.content{max-width:1200px;margin:0 auto;padding:0 24px 80px}
+.content{max-width:1280px;margin:0 auto;padding:0 20px 80px}
 .section{margin-bottom:44px}
-.section-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-.section-icon{font-size:18px}
-.section-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
-.section-count{font-size:11px;color:var(--dim);background:var(--s3);padding:3px 8px;border-radius:20px;margin-left:auto}
-.section-line{flex:1;height:1px;background:var(--border)}
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.si2{font-size:18px}.stitle{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
+.scount{font-size:11px;color:var(--dim);background:var(--s3);padding:3px 9px;border-radius:20px;margin-left:auto}
+.sline{flex:1;height:1px;background:var(--border)}
 
-/* ── CARDS ── */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
-.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;color:var(--text);transition:all .18s;display:flex;flex-direction:column;gap:8px;position:relative}
-.card:hover{border-color:rgba(245,130,10,.5);background:var(--s3);transform:translateY(-2px)}
-.card-icon{font-size:24px;line-height:1}
-.card-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.3px;line-height:1.2}
-.card-desc{font-size:12px;color:var(--dim);line-height:1.4}
-.card-tag{position:absolute;top:10px;right:10px;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.tag-new{background:rgba(245,130,10,.15);color:var(--orange);border:1px solid rgba(245,130,10,.25)}
-.tag-hot{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
-.tag-seo{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;color:var(--text);transition:all .18s;display:flex;flex-direction:column;gap:7px;position:relative}
+.card:hover{border-color:rgba(249,115,22,.5);background:var(--s3);transform:translateY(-2px)}
+.ci{font-size:22px;line-height:1}
+.cn{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.2px;line-height:1.2}
+.cd{font-size:12px;color:var(--dim);line-height:1.4}
+.ctag{position:absolute;top:10px;right:10px;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.tnew{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid rgba(249,115,22,.25)}
+.thot{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.tseo{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
+.tcrypto{background:rgba(251,191,36,.12);color:var(--orange-l);border:1px solid rgba(251,191,36,.2)}
+.tinfluencer{background:rgba(163,113,247,.12);color:#c4a5fd;border:1px solid rgba(163,113,247,.2)}
 .no-results{text-align:center;padding:60px 20px;color:var(--dim);font-size:14px;display:none}
-footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--dim)}
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted)}
 footer a{color:var(--orange);text-decoration:none}
-@media(max-width:600px){.hero-stats{gap:20px}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+@media(max-width:600px){.hstats{gap:16px}.grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}}
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html" class="nav-brand">
-    <div>
-      <div class="brand-name"><span class="e">E</span>lephast<span class="com">.com</span></div>
-      <div class="nav-sub">Hella Fast Tools</div>
-    </div>
+    <div><div class="bn"><span class="e">E</span>lephast<span class="c">.com</span></div><div class="ns">Hella Fast Tools</div></div>
   </a>
   <div class="nav-right">
-    <a href="https://elephantshoespopshop.etsy.com" class="nav-link" target="_blank">Etsy Shop</a>
-    <span class="nav-count">46 Free Tools</span>
+    <a href="https://elephantshoespopshop.etsy.com" class="nl" target="_blank">Etsy Shop</a>
+    <span class="nbadge">⚡ 67 Free Tools</span>
   </div>
 </nav>
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">⚡ Free · No Signup · Instant Results</div>
-    <h1>
-      <span class="l1 d-block">Hella Fast</span>
-      <span class="l2 d-block">Browser Tools</span>
-      <span class="l3 d-block">Zero Fluff</span>
-    </h1>
-    <p class="hero-p">46 tools for Etsy sellers, SEO beginners, and digital creators. Resize art, generate keywords, optimize listings, and more.</p>
-    <a href="#tools" class="hero-cta">Browse All Tools ↓</a>
-    <div class="hero-stats">
-      <div class="hstat"><span class="hstat-n">46</span><span class="hstat-l">Tools</span></div>
-      <div class="hstat"><span class="hstat-n">100%</span><span class="hstat-l">Free</span></div>
-      <div class="hstat"><span class="hstat-n">0</span><span class="hstat-l">Installs</span></div>
-      <div class="hstat"><span class="hstat-n">∞</span><span class="hstat-l">Uses</span></div>
+    <div class="htag">⚡ Free · No Signup · Instant Results</div>
+    <h1><span class="l1">Hella Fast</span><span class="l2">Browser Tools</span><span class="l3">Zero Fluff</span></h1>
+    <p class="hero-p">67 tools for Etsy sellers, SEO beginners, digital creators, influencers, and crypto users. No installs. No accounts. Just results.</p>
+    <a href="#tools" class="hcta">Browse All 67 Tools ↓</a>
+    <div class="hstats">
+      <div class="hs"><span class="hs-n">67</span><span class="hs-l">Tools</span></div>
+      <div class="hs"><span class="hs-n">100%</span><span class="hs-l">Free</span></div>
+      <div class="hs"><span class="hs-n">0</span><span class="hs-l">Installs</span></div>
+      <div class="hs"><span class="hs-n">∞</span><span class="hs-l">Uses</span></div>
     </div>
   </div>
 </section>
 
 <div class="search-wrap" id="tools">
-  <div class="search-inner">
-    <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Search 46 tools…" oninput="filterTools(this.value)">
+  <div class="si">
+    <svg class="sicon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search 67 tools…" oninput="filterTools(this.value)">
   </div>
 </div>
 
 <div class="content">
-<div class="no-results" id="noResults">No tools found. Try a different search.</div>
+<div class="no-results" id="noResults">No tools match your search.</div>
 
 <!-- 🔥 POPULAR -->
-<div class="section" data-section="popular">
-  <div class="section-header">
-    <span class="section-icon">🔥</span>
-    <span class="section-title">Popular Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">8 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="keyword-generator.html" data-name="Keyword Generator keyword seo research"><div class="card-tag tag-hot">HOT</div><div class="card-icon">🔍</div><div class="card-name">Keyword Generator</div><div class="card-desc">Generate hundreds of keyword ideas from a seed term.</div></a>
-    <a class="card" href="etsy-title-generator.html" data-name="Etsy Title Generator listing seo"><div class="card-tag tag-new">NEW</div><div class="card-icon">🏷️</div><div class="card-name">Etsy Title Generator</div><div class="card-desc">SEO-optimized Etsy titles up to 140 characters.</div></a>
-    <a class="card" href="etsy-tag-generator.html" data-name="Etsy Tag Generator tags seo"><div class="card-tag tag-new">NEW</div><div class="card-icon">🔖</div><div class="card-name">Etsy Tag Generator</div><div class="card-desc">13 perfect Etsy tags under 20 characters each.</div></a>
-    <a class="card" href="word-counter.html" data-name="Word Counter characters sentences"><div class="card-tag tag-new">NEW</div><div class="card-icon">📊</div><div class="card-name">Word Counter</div><div class="card-desc">Count words, characters, sentences, reading time.</div></a>
-    <a class="card" href="serp-preview-tool.html" data-name="SERP Preview Google search result"><div class="card-tag tag-new">NEW</div><div class="card-icon">👁️</div><div class="card-name">SERP Preview Tool</div><div class="card-desc">See your Google result before you publish.</div></a>
-    <a class="card" href="image-compressor.html" data-name="Image Compressor compress jpg png reduce size"><div class="card-tag tag-new">NEW</div><div class="card-icon">🗜️</div><div class="card-name">Image Compressor</div><div class="card-desc">Compress JPEG and PNG in your browser.</div></a>
-    <a class="card" href="etsy-profit-calculator.html" data-name="Profit Calculator Etsy fees Printify"><div class="card-icon">💰</div><div class="card-name">Profit Calculator</div><div class="card-desc">Calculate exact Etsy + Printify profit with 2025 fees.</div></a>
-    <a class="card" href="json-formatter.html" data-name="JSON Formatter Validator prettify"><div class="card-tag tag-new">NEW</div><div class="card-icon">{ }</div><div class="card-name">JSON Formatter</div><div class="card-desc">Format, validate, and minify JSON instantly.</div></a>
-  </div>
-</div>
+<div class="section"><div class="sh"><span class="si2">🔥</span><span class="stitle">Popular Tools</span><div class="sline"></div><span class="scount">10 tools</span></div>
+<div class="grid">
+  <a class="card" href="keyword-generator.html" data-k="keyword generator seo research ideas"><div class="ctag thot">HOT</div><div class="ci">🔍</div><div class="cn">Keyword Generator</div><div class="cd">Hundreds of keyword ideas from one seed term.</div></a>
+  <a class="card" href="word-counter.html" data-k="word counter characters sentences paragraphs"><div class="ctag thot">HOT</div><div class="ci">📊</div><div class="cn">Word Counter</div><div class="cd">Count words, characters, and reading time.</div></a>
+  <a class="card" href="password-generator.html" data-k="password generator secure random strong"><div class="ctag tnew">NEW</div><div class="ci">🔒</div><div class="cn">Password Generator</div><div class="cd">Strong, secure passwords with custom options.</div></a>
+  <a class="card" href="image-compressor.html" data-k="image compressor compress jpg png reduce size"><div class="ci">🗜️</div><div class="cn">Image Compressor</div><div class="cd">Compress JPEG/PNG in your browser.</div></a>
+  <a class="card" href="color-converter.html" data-k="color converter hex rgb hsl cmyk"><div class="ctag tnew">NEW</div><div class="ci">🎨</div><div class="cn">Color Converter</div><div class="cd">Convert HEX, RGB, HSL, CMYK with preview.</div></a>
+  <a class="card" href="json-formatter.html" data-k="json formatter validator prettify minify"><div class="ci">{ }</div><div class="cn">JSON Formatter</div><div class="cd">Format, validate, and minify JSON.</div></a>
+  <a class="card" href="uuid-generator.html" data-k="uuid generator unique id v4"><div class="ctag tnew">NEW</div><div class="ci">🔑</div><div class="cn">UUID Generator</div><div class="cd">Bulk generate UUID v4 strings.</div></a>
+  <a class="card" href="crypto-profit-calculator.html" data-k="crypto profit loss calculator pnl"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💰</div><div class="cn">Crypto P&amp;L Calc</div><div class="cd">Calculate profit or loss on any crypto trade.</div></a>
+  <a class="card" href="serp-preview-tool.html" data-k="serp preview google search result listing"><div class="ci">👁️</div><div class="cn">SERP Preview</div><div class="cd">See your page in Google results live.</div></a>
+  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees printify margin"><div class="ci">🛍️</div><div class="cn">Etsy Profit Calc</div><div class="cd">2025 Etsy + Printify fee breakdown.</div></a>
+</div></div>
 
-<!-- 🧠 SEO TOOLS -->
-<div class="section" data-section="seo">
-  <div class="section-header">
-    <span class="section-icon">🧠</span>
-    <span class="section-title">SEO Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">6 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="keyword-generator.html" data-name="Keyword Generator seo research ideas"><div class="card-tag tag-seo">SEO</div><div class="card-icon">🔍</div><div class="card-name">Keyword Generator</div><div class="card-desc">Hundreds of keyword ideas from a single seed term.</div></a>
-    <a class="card" href="keyword-question-generator.html" data-name="Question Keyword Generator who what why how"><div class="card-tag tag-seo">SEO</div><div class="card-icon">❓</div><div class="card-name">Question Keywords</div><div class="card-desc">Generate who/what/why/how keyword questions.</div></a>
-    <a class="card" href="serp-preview-tool.html" data-name="SERP Preview Google search listing title"><div class="card-tag tag-seo">SEO</div><div class="card-icon">👁️</div><div class="card-name">SERP Preview Tool</div><div class="card-desc">See your page in Google search results live.</div></a>
-    <a class="card" href="meta-title-description-generator.html" data-name="Meta Title Description Generator SEO tags"><div class="card-tag tag-seo">SEO</div><div class="card-icon">🧩</div><div class="card-name">Meta Tag Generator</div><div class="card-desc">Generate SEO meta titles and descriptions.</div></a>
-    <a class="card" href="xml-sitemap-generator.html" data-name="XML Sitemap Generator Google Search Console"><div class="card-tag tag-seo">SEO</div><div class="card-icon">🗺️</div><div class="card-name">Sitemap Generator</div><div class="card-desc">Build a valid XML sitemap for your website.</div></a>
-    <a class="card" href="robots-txt-generator.html" data-name="Robots txt Generator SEO crawl disallow"><div class="card-tag tag-seo">SEO</div><div class="card-icon">🤖</div><div class="card-name">Robots.txt Generator</div><div class="card-desc">Control search engine crawlers with robots.txt.</div></a>
-  </div>
-</div>
+<!-- 🧠 SEO -->
+<div class="section"><div class="sh"><span class="si2">🧠</span><span class="stitle">SEO Tools</span><div class="sline"></div><span class="scount">6 tools</span></div>
+<div class="grid">
+  <a class="card" href="keyword-generator.html" data-k="keyword generator seo ideas seed term"><div class="ctag tseo">SEO</div><div class="ci">🔍</div><div class="cn">Keyword Generator</div><div class="cd">Hundreds of keyword ideas from a seed term.</div></a>
+  <a class="card" href="keyword-question-generator.html" data-k="question keyword who what why how generate"><div class="ctag tseo">SEO</div><div class="ci">❓</div><div class="cn">Question Keywords</div><div class="cd">Who/what/why/how keyword questions.</div></a>
+  <a class="card" href="serp-preview-tool.html" data-k="serp preview google search listing title description"><div class="ctag tseo">SEO</div><div class="ci">👁️</div><div class="cn">SERP Preview Tool</div><div class="cd">Preview your Google listing before publishing.</div></a>
+  <a class="card" href="meta-title-description-generator.html" data-k="meta title description generator seo tags og"><div class="ctag tseo">SEO</div><div class="ci">🧩</div><div class="cn">Meta Tag Generator</div><div class="cd">SEO meta titles and descriptions.</div></a>
+  <a class="card" href="xml-sitemap-generator.html" data-k="xml sitemap generator google search console submit"><div class="ctag tseo">SEO</div><div class="ci">🗺️</div><div class="cn">Sitemap Generator</div><div class="cd">Build a valid XML sitemap for your site.</div></a>
+  <a class="card" href="robots-txt-generator.html" data-k="robots txt generator crawl disallow seo bot"><div class="ctag tseo">SEO</div><div class="ci">🤖</div><div class="cn">Robots.txt Generator</div><div class="cd">Control search engine crawlers.</div></a>
+</div></div>
 
-<!-- 🛍 ETSY TOOLS -->
-<div class="section" data-section="etsy">
-  <div class="section-header">
-    <span class="section-icon">🛍️</span>
-    <span class="section-title">Etsy Seller Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">16 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="etsy-title-generator.html" data-name="Etsy Title Generator SEO listing 140 chars"><div class="card-icon">🏷️</div><div class="card-name">Title Generator</div><div class="card-desc">Generate SEO-optimized Etsy titles up to 140 chars.</div></a>
-    <a class="card" href="etsy-title-optimizer.html" data-name="Title Optimizer Etsy listing 140 character counter"><div class="card-icon">✏️</div><div class="card-name">Title Optimizer</div><div class="card-desc">Live 140-char counter to perfect your title.</div></a>
-    <a class="card" href="etsy-tag-generator.html" data-name="Etsy Tag Generator 13 tags 20 characters"><div class="card-icon">🔖</div><div class="card-name">Tag Generator</div><div class="card-desc">13 SEO Etsy tags under 20 characters each.</div></a>
-    <a class="card" href="etsy-tag-checker.html" data-name="Tag Checker 13 tags 20 character limit validation"><div class="card-icon">✔️</div><div class="card-name">Tag Checker</div><div class="card-desc">Validate 13 tags with 20-char limits.</div></a>
-    <a class="card" href="product-description-generator.html" data-name="Product Description Generator Etsy copy"><div class="card-icon">📝</div><div class="card-name">Description Generator</div><div class="card-desc">Generate compelling product descriptions.</div></a>
-    <a class="card" href="listing-description-formatter.html" data-name="Description Formatter Etsy listing copy"><div class="card-icon">📋</div><div class="card-name">Description Formatter</div><div class="card-desc">Clean up messy text into polished listing copy.</div></a>
-    <a class="card" href="etsy-profit-calculator.html" data-name="Profit Calculator Etsy Printify fees 2025"><div class="card-icon">💰</div><div class="card-name">Profit Calculator</div><div class="card-desc">Exact Etsy + Printify profit with 2025 fees.</div></a>
-    <a class="card" href="etsy-thumbnail-creator.html" data-name="Thumbnail Creator pad image ratio background"><div class="card-icon">🖼️</div><div class="card-name">Thumbnail Creator</div><div class="card-desc">Pad images to Etsy ratio with custom backgrounds.</div></a>
-    <a class="card" href="headline-generator.html" data-name="Headline Generator blog ad title catchy"><div class="card-icon">📰</div><div class="card-name">Headline Generator</div><div class="card-desc">Click-worthy headlines from proven formulas.</div></a>
-    <a class="card" href="hashtag-generator.html" data-name="Hashtag Generator Instagram TikTok Pinterest"><div class="card-icon">#️⃣</div><div class="card-name">Hashtag Generator</div><div class="card-desc">Best hashtags for Instagram, TikTok, and Pinterest.</div></a>
-    <a class="card" href="bundle-creator.html" data-name="Bundle Creator combine designs product"><div class="card-icon">📦</div><div class="card-name">Bundle Creator</div><div class="card-desc">Combine multiple designs into one product bundle.</div></a>
-    <a class="card" href="clip-art-packager.html" data-name="Clip Art Packager clipart collection export"><div class="card-icon">🎭</div><div class="card-name">Clip Art Packager</div><div class="card-desc">Package clipart collections for instant download.</div></a>
-    <a class="card" href="shop-banner.html" data-name="Shop Banner Creator Etsy banner design size"><div class="card-icon">🏪</div><div class="card-name">Shop Banner</div><div class="card-desc">Design Etsy shop banners with 26 size presets.</div></a>
-    <a class="card" href="etsy-image-optimizer.html" data-name="Image Optimizer compress 20MB Etsy limit"><div class="card-icon">🗜️</div><div class="card-name">Image Optimizer</div><div class="card-desc">Compress images under Etsy's 20MB limit.</div></a>
-    <a class="card" href="file-size-checker.html" data-name="File Size Checker 20MB Etsy limit verify"><div class="card-icon">📁</div><div class="card-name">File Size Checker</div><div class="card-desc">Verify files are under Etsy's 20MB limit.</div></a>
-    <a class="card" href="image-resolution-checker.html" data-name="Resolution Checker DPI 300 print size pixel"><div class="card-icon">🔎</div><div class="card-name">Resolution Checker</div><div class="card-desc">Check pixel dimensions and max print size at 300 DPI.</div></a>
-  </div>
-</div>
+<!-- 🛍 ETSY -->
+<div class="section"><div class="sh"><span class="si2">🛍️</span><span class="stitle">Etsy Seller Tools</span><div class="sline"></div><span class="scount">16 tools</span></div>
+<div class="grid">
+  <a class="card" href="etsy-title-generator.html" data-k="etsy title generator seo listing 140 chars"><div class="ci">🏷️</div><div class="cn">Title Generator</div><div class="cd">SEO-optimized Etsy titles up to 140 chars.</div></a>
+  <a class="card" href="etsy-title-optimizer.html" data-k="etsy title optimizer 140 character counter check"><div class="ci">✏️</div><div class="cn">Title Optimizer</div><div class="cd">Live 140-char counter for your titles.</div></a>
+  <a class="card" href="etsy-tag-generator.html" data-k="etsy tag generator 13 tags 20 character seo"><div class="ci">🔖</div><div class="cn">Tag Generator</div><div class="cd">13 SEO tags under 20 characters each.</div></a>
+  <a class="card" href="etsy-tag-checker.html" data-k="etsy tag checker 13 tags 20 char validate"><div class="ci">✔️</div><div class="cn">Tag Checker</div><div class="cd">Validate 13 Etsy tags with 20-char limits.</div></a>
+  <a class="card" href="product-description-generator.html" data-k="product description generator etsy copy listing"><div class="ci">📝</div><div class="cn">Description Generator</div><div class="cd">Compelling product descriptions instantly.</div></a>
+  <a class="card" href="listing-description-formatter.html" data-k="etsy listing description formatter clean polish copy"><div class="ci">📋</div><div class="cn">Description Formatter</div><div class="cd">Clean up messy Etsy listing copy.</div></a>
+  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees printify 2025 margin"><div class="ci">💰</div><div class="cn">Profit Calculator</div><div class="cd">Exact Etsy + Printify profit with 2025 fees.</div></a>
+  <a class="card" href="etsy-thumbnail-creator.html" data-k="etsy thumbnail creator pad image ratio background 2000"><div class="ci">🖼️</div><div class="cn">Thumbnail Creator</div><div class="cd">Pad images to Etsy ratio with custom background.</div></a>
+  <a class="card" href="headline-generator.html" data-k="headline generator click-worthy blog ad title catchy"><div class="ci">📰</div><div class="cn">Headline Generator</div><div class="cd">Click-worthy headlines from proven formulas.</div></a>
+  <a class="card" href="hashtag-generator.html" data-k="hashtag generator instagram tiktok pinterest social"><div class="ci">#️⃣</div><div class="cn">Hashtag Generator</div><div class="cd">Best hashtags for Instagram, TikTok, Pinterest.</div></a>
+  <a class="card" href="bundle-creator.html" data-k="bundle creator combine designs product etsy digital"><div class="ci">📦</div><div class="cn">Bundle Creator</div><div class="cd">Combine designs into one sellable bundle.</div></a>
+  <a class="card" href="clip-art-packager.html" data-k="clip art packager clipart collection export etsy"><div class="ci">🎭</div><div class="cn">Clip Art Packager</div><div class="cd">Package clipart collections for download.</div></a>
+  <a class="card" href="shop-banner.html" data-k="etsy shop banner creator design size presets"><div class="ci">🏪</div><div class="cn">Shop Banner</div><div class="cd">Design shop banners with 26 size presets.</div></a>
+  <a class="card" href="etsy-image-optimizer.html" data-k="etsy image optimizer compress 20mb limit"><div class="ci">🗜️</div><div class="cn">Image Optimizer</div><div class="cd">Compress images under Etsy's 20MB limit.</div></a>
+  <a class="card" href="file-size-checker.html" data-k="file size checker 20mb etsy limit verify upload"><div class="ci">📁</div><div class="cn">File Size Checker</div><div class="cd">Verify files are under Etsy's 20MB limit.</div></a>
+  <a class="card" href="image-resolution-checker.html" data-k="resolution checker dpi 300 print size pixel dimensions"><div class="ci">🔎</div><div class="cn">Resolution Checker</div><div class="cd">Check DPI and max print size at 300 DPI.</div></a>
+</div></div>
 
-<!-- 🎨 IMAGE TOOLS -->
-<div class="section" data-section="image">
-  <div class="section-header">
-    <span class="section-icon">🎨</span>
-    <span class="section-title">Image Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">16 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="image-compressor.html" data-name="Image Compressor JPEG PNG reduce file size"><div class="card-tag tag-new">NEW</div><div class="card-icon">🗜️</div><div class="card-name">Image Compressor</div><div class="card-desc">Compress JPEG/PNG images in your browser.</div></a>
-    <a class="card" href="bulk-image-resizer.html" data-name="Bulk Image Resizer multiple images resize dimensions"><div class="card-tag tag-new">NEW</div><div class="card-icon">📐</div><div class="card-name">Bulk Image Resizer</div><div class="card-desc">Resize multiple images to exact pixel dimensions.</div></a>
-    <a class="card" href="webp-converter.html" data-name="WebP Converter JPEG PNG to WebP smaller"><div class="card-tag tag-new">NEW</div><div class="card-icon">🔄</div><div class="card-name">WebP Converter</div><div class="card-desc">Convert images to WebP format — 30% smaller.</div></a>
-    <a class="card" href="png-to-svg.html" data-name="PNG to SVG Converter Cricut design vector"><div class="card-tag tag-new">NEW</div><div class="card-icon">✏️</div><div class="card-name">PNG to SVG</div><div class="card-desc">Convert PNG to SVG for Cricut and web use.</div></a>
-    <a class="card" href="svg-to-png-converter.html" data-name="SVG to PNG Converter vector raster high resolution"><div class="card-icon">🔄</div><div class="card-name">SVG to PNG</div><div class="card-desc">Convert SVG to high-resolution PNG at any size.</div></a>
-    <a class="card" href="wall-art-resizer.html" data-name="Wall Art Resizer print size 300 DPI standard"><div class="card-icon">📐</div><div class="card-name">Wall Art Resizer</div><div class="card-desc">Resize to standard print sizes at 300 DPI.</div></a>
-    <a class="card" href="wall-art-sizer-pro.html" data-name="Wall Art Sizer Pro batch custom preset resize"><div class="card-icon">🖼️</div><div class="card-name">Wall Art Sizer Pro</div><div class="card-desc">Batch resize with custom size presets.</div></a>
-    <a class="card" href="png-upscaler.html" data-name="PNG Upscaler transparency alpha channel preserve"><div class="card-icon">⬆️</div><div class="card-name">PNG Upscaler</div><div class="card-desc">Upscale PNGs with transparency preserved.</div></a>
-    <a class="card" href="png-upscaler-pro-1.html" data-name="PNG Upscaler Pro batch custom size target upscale"><div class="card-icon">🚀</div><div class="card-name">PNG Upscaler Pro</div><div class="card-desc">Batch upscaling with custom size targets.</div></a>
-    <a class="card" href="WatermarkStudioPro.html" data-name="Watermark Studio Pro tile protect design copyright"><div class="card-icon">💧</div><div class="card-name">Watermark Studio Pro</div><div class="card-desc">Tile or single watermarks to protect your work.</div></a>
-    <a class="card" href="color-palette.html" data-name="Color Palette Extractor image colors hex"><div class="card-icon">🎨</div><div class="card-name">Color Palette</div><div class="card-desc">Extract color palettes from any image.</div></a>
-    <a class="card" href="color-variants.html" data-name="Color Variants multiple versions design recolor"><div class="card-icon">🌈</div><div class="card-name">Color Variants</div><div class="card-desc">Generate multiple color versions of any design.</div></a>
-    <a class="card" href="coloring-book.html" data-name="Coloring Book Creator photo edge algorithm convert"><div class="card-icon">🖍️</div><div class="card-name">Coloring Book Creator</div><div class="card-desc">Turn photos into coloring pages in seconds.</div></a>
-    <a class="card" href="simple-frames.html" data-name="Simple Frames border elegant image frame add"><div class="card-icon">🪟</div><div class="card-name">Simple Frames</div><div class="card-desc">Add elegant borders and frames to any image.</div></a>
-    <a class="card" href="photo-composer.html" data-name="Photo Composer grid layout multiple photos arrange"><div class="card-icon">📸</div><div class="card-name">Photo Composer</div><div class="card-desc">Arrange multiple photos into grid layouts.</div></a>
-    <a class="card" href="sticker-builder.html" data-name="Sticker Builder sticker sheet POD print design"><div class="card-icon">⭐</div><div class="card-name">Sticker Builder</div><div class="card-desc">Design sticker sheets for POD and print.</div></a>
-  </div>
-</div>
+<!-- 🎨 IMAGE -->
+<div class="section"><div class="sh"><span class="si2">🎨</span><span class="stitle">Image Tools</span><div class="sline"></div><span class="scount">19 tools</span></div>
+<div class="grid">
+  <a class="card" href="image-compressor.html" data-k="image compressor compress jpeg png reduce file size"><div class="ci">🗜️</div><div class="cn">Image Compressor</div><div class="cd">Compress JPEG/PNG in your browser.</div></a>
+  <a class="card" href="bulk-image-resizer.html" data-k="bulk image resizer multiple images resize dimensions pixels"><div class="ci">📐</div><div class="cn">Bulk Image Resizer</div><div class="cd">Resize multiple images to exact dimensions.</div></a>
+  <a class="card" href="png-to-jpg.html" data-k="png to jpg converter convert jpeg background"><div class="ctag tnew">NEW</div><div class="ci">🖼️</div><div class="cn">PNG → JPG</div><div class="cd">Convert PNG to JPG with quality control.</div></a>
+  <a class="card" href="jpg-to-png.html" data-k="jpg to png converter convert jpeg transparent"><div class="ctag tnew">NEW</div><div class="ci">🔄</div><div class="cn">JPG → PNG</div><div class="cd">Convert JPG to PNG with transparency.</div></a>
+  <a class="card" href="webp-converter.html" data-k="webp converter png jpg to webp smaller format"><div class="ci">🔄</div><div class="cn">WebP Converter</div><div class="cd">Convert images to WebP — 30% smaller.</div></a>
+  <a class="card" href="image-cropper.html" data-k="image cropper crop online aspect ratio free"><div class="ctag tnew">NEW</div><div class="ci">✂️</div><div class="cn">Image Cropper</div><div class="cd">Crop images to any size or aspect ratio.</div></a>
+  <a class="card" href="svg-to-png-converter.html" data-k="svg to png converter vector raster high resolution"><div class="ci">🔄</div><div class="cn">SVG to PNG</div><div class="cd">Convert SVG to high-res PNG at any size.</div></a>
+  <a class="card" href="png-to-svg.html" data-k="png to svg converter cricut design space wrap"><div class="ci">✏️</div><div class="cn">PNG to SVG</div><div class="cd">Wrap PNG inside SVG for Cricut workflows.</div></a>
+  <a class="card" href="wall-art-resizer.html" data-k="wall art resizer print size 300 dpi standard"><div class="ci">📐</div><div class="cn">Wall Art Resizer</div><div class="cd">Resize to standard print sizes at 300 DPI.</div></a>
+  <a class="card" href="wall-art-sizer-pro.html" data-k="wall art sizer pro batch custom preset resize"><div class="ci">🖼️</div><div class="cn">Wall Art Sizer Pro</div><div class="cd">Batch resize with custom size presets.</div></a>
+  <a class="card" href="png-upscaler.html" data-k="png upscaler upscale transparency alpha channel"><div class="ci">⬆️</div><div class="cn">PNG Upscaler</div><div class="cd">Upscale PNGs with transparency preserved.</div></a>
+  <a class="card" href="png-upscaler-pro-1.html" data-k="png upscaler pro batch custom size target upscale"><div class="ci">🚀</div><div class="cn">PNG Upscaler Pro</div><div class="cd">Batch upscaling with custom size targets.</div></a>
+  <a class="card" href="WatermarkStudioPro.html" data-k="watermark studio pro tile protect design copyright"><div class="ci">💧</div><div class="cn">Watermark Studio Pro</div><div class="cd">Tile or single watermarks to protect work.</div></a>
+  <a class="card" href="color-palette.html" data-k="color palette extractor image colors hex rgb"><div class="ci">🎨</div><div class="cn">Color Palette</div><div class="cd">Extract color palettes from any image.</div></a>
+  <a class="card" href="color-variants.html" data-k="color variants multiple versions design recolor hue"><div class="ci">🌈</div><div class="cn">Color Variants</div><div class="cd">Generate multiple color versions of a design.</div></a>
+  <a class="card" href="coloring-book.html" data-k="coloring book creator photo edge convert algorithm"><div class="ci">🖍️</div><div class="cn">Coloring Book Creator</div><div class="cd">Turn photos into coloring pages.</div></a>
+  <a class="card" href="simple-frames.html" data-k="simple frames border elegant image frame add"><div class="ci">🪟</div><div class="cn">Simple Frames</div><div class="cd">Add elegant borders to any image.</div></a>
+  <a class="card" href="photo-composer.html" data-k="photo composer grid layout multiple photos arrange listing"><div class="ci">📸</div><div class="cn">Photo Composer</div><div class="cd">Arrange photos into grid layouts.</div></a>
+  <a class="card" href="sticker-builder.html" data-k="sticker builder sticker sheet pod print design"><div class="ci">⭐</div><div class="cn">Sticker Builder</div><div class="cd">Design sticker sheets for POD and print.</div></a>
+</div></div>
 
-<!-- 📄 PRINTABLE / CARD TOOLS -->
-<div class="section" data-section="printable">
-  <div class="section-header">
-    <span class="section-icon">📄</span>
-    <span class="section-title">Printable & Card Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">5 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="greeting-cards.html" data-name="Greeting Cards print ready custom layout fold"><div class="card-icon">💌</div><div class="card-name">Greeting Cards</div><div class="card-desc">Design print-ready greeting cards with custom layouts.</div></a>
-    <a class="card" href="invitations.html" data-name="Invitation Maker event party special occasion design"><div class="card-icon">✉️</div><div class="card-name">Invitation Maker</div><div class="card-desc">Create event invitations for parties and occasions.</div></a>
-    <a class="card" href="journal-builder.html" data-name="Journal Builder planner pages professional custom"><div class="card-icon">📓</div><div class="card-name">Journal Builder</div><div class="card-desc">Build custom journal and planner pages.</div></a>
-    <a class="card" href="kids-cards.html" data-name="Kids Cards colorful fun family children design"><div class="card-icon">🎈</div><div class="card-name">Kids Cards Creator</div><div class="card-desc">Fun colorful cards for kids and families.</div></a>
-    <a class="card" href="etsy-thumbnail-creator.html" data-name="Thumbnail Creator Etsy listing image pad ratio"><div class="card-icon">🖼️</div><div class="card-name">Thumbnail Creator</div><div class="card-desc">Pad images to any Etsy ratio with custom backgrounds.</div></a>
-  </div>
-</div>
+<!-- 🛠 UTILITY -->
+<div class="section"><div class="sh"><span class="si2">🛠️</span><span class="stitle">Utility & Developer Tools</span><div class="sline"></div><span class="scount">12 tools</span></div>
+<div class="grid">
+  <a class="card" href="json-formatter.html" data-k="json formatter validator prettify minify"><div class="ci">{ }</div><div class="cn">JSON Formatter</div><div class="cd">Format, validate, and minify JSON.</div></a>
+  <a class="card" href="base64-encoder-decoder.html" data-k="base64 encoder decoder text file image convert"><div class="ci">🔐</div><div class="cn">Base64 Encoder</div><div class="cd">Encode/decode text and files to Base64.</div></a>
+  <a class="card" href="word-counter.html" data-k="word counter characters sentences paragraphs reading time"><div class="ci">📊</div><div class="cn">Word Counter</div><div class="cd">Count words, chars, sentences, reading time.</div></a>
+  <a class="card" href="case-converter.html" data-k="case converter lowercase uppercase title camelcase snake"><div class="ci">Aa</div><div class="cn">Case Converter</div><div class="cd">Convert to lowercase, UPPER, camelCase + more.</div></a>
+  <a class="card" href="uuid-generator.html" data-k="uuid generator unique id v4 bulk database token"><div class="ctag tnew">NEW</div><div class="ci">🔑</div><div class="cn">UUID Generator</div><div class="cd">Bulk generate UUID v4 strings instantly.</div></a>
+  <a class="card" href="hash-generator.html" data-k="hash generator md5 sha-1 sha-256 sha-512 checksum"><div class="ctag tnew">NEW</div><div class="ci">#️⃣</div><div class="cn">Hash Generator</div><div class="cd">MD5, SHA-1, SHA-256, SHA-512 hashes.</div></a>
+  <a class="card" href="csv-json-converter.html" data-k="csv json converter convert data format spreadsheet"><div class="ctag tnew">NEW</div><div class="ci">⇄</div><div class="cn">CSV ↔ JSON Converter</div><div class="cd">Convert CSV to JSON and back instantly.</div></a>
+  <a class="card" href="timestamp-converter.html" data-k="timestamp converter unix epoch human date time"><div class="ctag tnew">NEW</div><div class="ci">🕐</div><div class="cn">Timestamp Converter</div><div class="cd">Convert Unix timestamps to human dates.</div></a>
+  <a class="card" href="regex-tester.html" data-k="regex tester regular expression test debug match"><div class="ctag tnew">NEW</div><div class="ci">🔎</div><div class="cn">Regex Tester</div><div class="cd">Test regex with live highlighting and groups.</div></a>
+  <a class="card" href="password-generator.html" data-k="password generator secure random strong custom"><div class="ctag tnew">NEW</div><div class="ci">🔒</div><div class="cn">Password Generator</div><div class="cd">Cryptographically strong passwords.</div></a>
+  <a class="card" href="color-converter.html" data-k="color converter hex rgb hsl cmyk shades preview"><div class="ctag tnew">NEW</div><div class="ci">🎨</div><div class="cn">Color Converter</div><div class="cd">Convert HEX, RGB, HSL, CMYK with shades.</div></a>
+  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees 2025 printify margin monthly"><div class="ci">💰</div><div class="cn">Profit Calculator</div><div class="cd">Etsy + Printify 2025 fee breakdown.</div></a>
+</div></div>
 
-<!-- 🛠 UTILITY TOOLS -->
-<div class="section" data-section="utility">
-  <div class="section-header">
-    <span class="section-icon">🛠️</span>
-    <span class="section-title">Utility Tools</span>
-    <div class="section-line"></div>
-    <span class="section-count">5 tools</span>
-  </div>
-  <div class="grid">
-    <a class="card" href="json-formatter.html" data-name="JSON Formatter Validator Prettify Minify"><div class="card-tag tag-new">NEW</div><div class="card-icon">{ }</div><div class="card-name">JSON Formatter</div><div class="card-desc">Format, validate, and minify JSON instantly.</div></a>
-    <a class="card" href="base64-encoder-decoder.html" data-name="Base64 Encoder Decoder text file image convert"><div class="card-tag tag-new">NEW</div><div class="card-icon">🔐</div><div class="card-name">Base64 Encoder</div><div class="card-desc">Encode/decode text and files to Base64.</div></a>
-    <a class="card" href="word-counter.html" data-name="Word Counter characters sentences paragraphs reading time"><div class="card-tag tag-new">NEW</div><div class="card-icon">📊</div><div class="card-name">Word Counter</div><div class="card-desc">Count words, characters, sentences, reading time.</div></a>
-    <a class="card" href="case-converter.html" data-name="Case Converter lowercase UPPERCASE Title camelCase snake"><div class="card-tag tag-new">NEW</div><div class="card-icon">Aa</div><div class="card-name">Case Converter</div><div class="card-desc">Convert text to lowercase, UPPER, Title, camelCase +.</div></a>
-    <a class="card" href="etsy-profit-calculator.html" data-name="Profit Calculator Etsy Printify fees margin monthly"><div class="card-icon">💰</div><div class="card-name">Profit Calculator</div><div class="card-desc">Etsy + Printify fees, margins, and monthly projections.</div></a>
-  </div>
-</div>
+<!-- 📱 INFLUENCER -->
+<div class="section"><div class="sh"><span class="si2">📱</span><span class="stitle">Influencer & Creator Tools</span><div class="sline"></div><span class="scount">5 tools</span></div>
+<div class="grid">
+  <a class="card" href="instagram-caption-generator.html" data-k="instagram caption generator post social media tone"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📸</div><div class="cn">Instagram Captions</div><div class="cd">Engaging captions for any Instagram post.</div></a>
+  <a class="card" href="tiktok-idea-generator.html" data-k="tiktok idea generator video content viral niche"><div class="ctag tinfluencer">CREATOR</div><div class="ci">🎵</div><div class="cn">TikTok Idea Generator</div><div class="cd">Viral TikTok video ideas for any niche.</div></a>
+  <a class="card" href="youtube-title-generator.html" data-k="youtube title description generator seo video channel"><div class="ctag tinfluencer">CREATOR</div><div class="ci">▶️</div><div class="cn">YouTube Title Generator</div><div class="cd">Click-worthy titles and SEO descriptions.</div></a>
+  <a class="card" href="engagement-estimator.html" data-k="instagram engagement rate earnings estimator influencer"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📊</div><div class="cn">Engagement Estimator</div><div class="cd">Estimate engagement rate and earnings/post.</div></a>
+  <a class="card" href="social-media-post-generator.html" data-k="social media post generator instagram twitter linkedin facebook"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📣</div><div class="cn">Social Post Generator</div><div class="cd">Posts for Instagram, Twitter, LinkedIn, Facebook.</div></a>
+</div></div>
+
+<!-- 💎 CRYPTO -->
+<div class="section"><div class="sh"><span class="si2">💎</span><span class="stitle">Crypto Tools</span><div class="sline"></div><span class="scount">5 tools</span></div>
+<div class="grid">
+  <a class="card" href="crypto-profit-calculator.html" data-k="crypto profit loss calculator pnl trade fee bitcoin"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💰</div><div class="cn">Crypto P&amp;L Calculator</div><div class="cd">Calculate profit/loss on any crypto trade.</div></a>
+  <a class="card" href="crypto-roi-calculator.html" data-k="crypto roi calculator return on investment annual bitcoin"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📈</div><div class="cn">Crypto ROI Calculator</div><div class="cd">ROI, annualized returns, and investment multiple.</div></a>
+  <a class="card" href="dca-calculator.html" data-k="dca calculator dollar cost averaging bitcoin crypto monthly"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📅</div><div class="cn">DCA Calculator</div><div class="cd">Dollar cost averaging results and comparison.</div></a>
+  <a class="card" href="crypto-portfolio-calculator.html" data-k="crypto portfolio calculator tracker holdings value pnl allocation"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💼</div><div class="cn">Portfolio Calculator</div><div class="cd">Track all your crypto holdings and total P&amp;L.</div></a>
+  <a class="card" href="position-size-calculator.html" data-k="position size calculator crypto risk management stop loss rr"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📐</div><div class="cn">Position Size Calc</div><div class="cd">Risk-based position sizing with R:R ratio.</div></a>
+</div></div>
+
+<!-- 📄 PRINTABLE -->
+<div class="section"><div class="sh"><span class="si2">📄</span><span class="stitle">Printable & Card Tools</span><div class="sline"></div><span class="scount">4 tools</span></div>
+<div class="grid">
+  <a class="card" href="greeting-cards.html" data-k="greeting card print ready custom layout fold design"><div class="ci">💌</div><div class="cn">Greeting Cards</div><div class="cd">Print-ready greeting cards with custom layouts.</div></a>
+  <a class="card" href="invitations.html" data-k="invitation maker event party occasion design printable"><div class="ci">✉️</div><div class="cn">Invitation Maker</div><div class="cd">Create event invitations for any occasion.</div></a>
+  <a class="card" href="journal-builder.html" data-k="journal builder planner pages professional custom printable"><div class="ci">📓</div><div class="cn">Journal Builder</div><div class="cd">Build custom journal and planner pages.</div></a>
+  <a class="card" href="kids-cards.html" data-k="kids cards colorful fun family children design printable"><div class="ci">🎈</div><div class="cn">Kids Cards Creator</div><div class="cd">Fun colorful cards for kids and families.</div></a>
+</div></div>
 
 </div><!-- /content -->
 
 <footer>
-  <div>© 2025 <a href="index.html">Elephast.com</a> — Free tools for Etsy sellers &amp; digital creators. No login. No limits.</div>
-  <div style="margin-top:8px"><a href="https://elephantshoespopshop.etsy.com" target="_blank">Visit ElephantShoes on Etsy</a></div>
+  <div>© 2025 <a href="index.html">Elephast.com</a> — Free tools for Etsy sellers, creators, and developers. No login. No limits.</div>
+  <div style="margin-top:8px"><a href="https://elephantshoespopshop.etsy.com" target="_blank">Visit ElephantShoes on Etsy →</a></div>
 </footer>
 
 <script>
-function filterTools(query) {
-  const q = query.toLowerCase().trim();
-  const cards = document.querySelectorAll('.card');
-  const sections = document.querySelectorAll('.section');
-  let total = 0;
-  if (!q) {
-    cards.forEach(c => c.style.display = '');
-    sections.forEach(s => s.style.display = '');
-    document.getElementById('noResults').style.display = 'none';
-    return;
-  }
-  sections.forEach(section => {
-    const sCards = section.querySelectorAll('.card');
-    let visible = 0;
-    sCards.forEach(card => {
-      const name = (card.dataset.name || card.textContent).toLowerCase();
-      if (name.includes(q)) { card.style.display = ''; visible++; total++; }
-      else card.style.display = 'none';
+function filterTools(q){
+  q=q.toLowerCase().trim();
+  const cards=document.querySelectorAll('.card');
+  const sections=document.querySelectorAll('.section');
+  let total=0;
+  if(!q){cards.forEach(c=>c.style.display='');sections.forEach(s=>s.style.display='');document.getElementById('noResults').style.display='none';return;}
+  sections.forEach(section=>{
+    const sc=section.querySelectorAll('.card');
+    let vis=0;
+    sc.forEach(card=>{
+      const kw=(card.dataset.k||card.textContent).toLowerCase();
+      if(kw.includes(q)){card.style.display='';vis++;total++;}
+      else card.style.display='none';
     });
-    section.style.display = visible > 0 ? '' : 'none';
+    section.style.display=vis>0?'':'none';
   });
-  document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+  document.getElementById('noResults').style.display=total===0?'block':'none';
 }
 </script>
 </body>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Convert colors between HEX, RGB, HSL, and CMYK formats. Free online color converter tool.">
+<title>Free Color Converter — HEX RGB HSL Converter Online — Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
+  --yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none}
+.logo span{color:var(--muted);font-weight:400}
+.htool{font-size:13px;color:var(--dim)}
+.main{max-width:960px;margin:0 auto;padding:32px 20px 72px}
+h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;max-width:600px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ctitle{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:90px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.f:last-child{margin-bottom:0}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-p:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-o{background:var(--orange);color:#000}.btn-o:hover{opacity:.88}
+.btn-full{width:100%;justify-content:center}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}
+.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}
+.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
+.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px}
+.row:hover{background:var(--surface-2)}
+.rl{color:var(--dim);display:flex;align-items:center;gap:8px}
+.rv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
+.rv.pos{color:var(--green)}.rv.neg{color:var(--red)}.rv.neu{color:var(--dim)}
+.div{height:1px;background:var(--border);margin:8px 0}
+.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
+.related h2{font-size:13px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-1px)}
+.ri{font-size:20px;margin-bottom:6px}
+.rn{font-size:13px;font-weight:600;margin-bottom:3px}
+.rd{font-size:11px;color:var(--muted)}
+footer{max-width:960px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--orange);text-decoration:none}
+input[type=range]{accent-color:var(--green)}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="htool">/ Color Converter</span>
+  </div>
+</header>
+<div class="main">
+
+<h1>🎨 Color Converter</h1>
+<p class="sub">Convert colors between HEX, RGB, HSL, and CMYK formats instantly. Preview your color live as you type.</p>
+<div class="card">
+  <div class="ctitle">Color Input</div>
+  <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px">
+    <div style="width:80px;height:80px;border-radius:10px;border:1px solid var(--border);flex-shrink:0" id="colorSwatch"></div>
+    <div style="flex:1;min-width:200px">
+      <div class="f"><label>Pick a Color</label><input type="color" id="colorPicker" style="height:42px;padding:4px 8px;cursor:pointer;width:100%" oninput="fromPicker()"></div>
+    </div>
+  </div>
+  <div class="r2">
+    <div class="f"><label>HEX</label><input type="text" id="hexInput" placeholder="#ff5500" oninput="fromHex()" maxlength="9"></div>
+    <div class="f"><label>RGB</label><input type="text" id="rgbInput" placeholder="rgb(255, 85, 0)" oninput="fromRgb()"></div>
+  </div>
+  <div class="r2">
+    <div class="f"><label>HSL</label><input type="text" id="hslInput" placeholder="hsl(20, 100%, 50%)" oninput="fromHsl()"></div>
+    <div class="f"><label>CMYK</label><input type="text" id="cmykInput" placeholder="cmyk(0, 67, 100, 0)" readonly style="color:var(--muted)"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">Color Shades</div>
+  <div id="shadesRow" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+</div>
+<script>
+function hexToRgb(hex){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');const n=parseInt(hex,16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255};}
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+function hslToRgb(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l);const f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return{r:Math.round(f(0)*255),g:Math.round(f(8)*255),b:Math.round(f(4)*255)};}
+function rgbToCmyk(r,g,b){r/=255;g/=255;b/=255;const k=1-Math.max(r,g,b);if(k===1)return{c:0,m:0,y:0,k:100};return{c:Math.round((1-r-k)/(1-k)*100),m:Math.round((1-g-k)/(1-k)*100),y:Math.round((1-b-k)/(1-k)*100),k:Math.round(k*100)};}
+function updateAll(r,g,b){
+  const hex=rgbToHex(r,g,b);
+  const hsl=rgbToHsl(r,g,b);
+  const cmyk=rgbToCmyk(r,g,b);
+  document.getElementById('hexInput').value=hex;
+  document.getElementById('rgbInput').value='rgb('+r+', '+g+', '+b+')';
+  document.getElementById('hslInput').value='hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)';
+  document.getElementById('cmykInput').value='cmyk('+cmyk.c+', '+cmyk.m+', '+cmyk.y+', '+cmyk.k+')';
+  document.getElementById('colorPicker').value=hex;
+  document.getElementById('colorSwatch').style.background=hex;
+  genShades(r,g,b);
+}
+function fromPicker(){const hex=document.getElementById('colorPicker').value;const{r,g,b}=hexToRgb(hex);updateAll(r,g,b);}
+function fromHex(){
+  let hex=document.getElementById('hexInput').value.trim();
+  if(!hex.startsWith('#'))hex='#'+hex;
+  if(!/^#[0-9a-fA-F]{3}$|^#[0-9a-fA-F]{6}$/.test(hex))return;
+  const{r,g,b}=hexToRgb(hex);updateAll(r,g,b);
+}
+function fromRgb(){
+  const m=document.getElementById('rgbInput').value.match(/(\d+)/g);
+  if(!m||m.length<3)return;
+  updateAll(parseInt(m[0]),parseInt(m[1]),parseInt(m[2]));
+}
+function fromHsl(){
+  const m=document.getElementById('hslInput').value.match(/(\d+)/g);
+  if(!m||m.length<3)return;
+  const{r,g,b}=hslToRgb(parseInt(m[0]),parseInt(m[1]),parseInt(m[2]));
+  updateAll(r,g,b);
+}
+function genShades(r,g,b){
+  const hsl=rgbToHsl(r,g,b);
+  const row=document.getElementById('shadesRow');row.innerHTML='';
+  [10,20,30,40,50,60,70,80,90].forEach(l=>{
+    const{r:sr,g:sg,b:sb}=hslToRgb(hsl.h,hsl.s,l);
+    const hex=rgbToHex(sr,sg,sb);
+    const textColor=l>55?'#000':'#fff';
+    row.innerHTML+=`<div onclick="updateAll(${sr},${sg},${sb})" style="flex:1;min-width:60px;height:56px;background:${hex};border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .15s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      <span style="font-size:9px;font-weight:700;color:${textColor};font-family:'Space Mono',monospace">${hex}</span>
+      <span style="font-size:8px;color:${textColor};opacity:.7">${l}%</span>
+    </div>`;
+  });
+}
+// Init with orange
+updateAll(249,115,22);
+</script>
+
+<div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="color-palette.html"><div class="ri">🎨</div><div class="rn">Color Palette</div><div class="rd">Extract colors from images</div></a>
+<a class="rc" href="color-variants.html"><div class="ri">🌈</div><div class="rn">Color Variants</div><div class="rd">Generate color versions</div></a>
+<a class="rc" href="hash-generator.html"><div class="ri">#️⃣</div><div class="rn">Hash Generator</div><div class="rd">Generate hashes</div></a>
+<a class="rc" href="image-compressor.html"><div class="ri">🗜️</div><div class="rn">Image Compressor</div><div class="rd">Compress images</div></a>
+<a class="rc" href="index.html"><div class="ri">🏠</div><div class="rn">All Tools</div><div class="rd">Browse all tools</div></a></div></div>
+</div>
+<footer><a href="index.html">← All Tools</a> · Free tools for creators &amp; sellers · Elephast.com</footer>
+</body>
+</html>
