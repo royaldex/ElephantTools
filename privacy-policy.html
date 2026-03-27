@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Policy for Elephast.com — learn how we collect, use, and protect your data when you use our free online tools.">
+  <title>Privacy Policy — Elephast.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #1f1f23;
+      --border: #2d2d30;
+      --text: #f4f4f5;
+      --dim: #a1a1aa;
+      --muted: #71717a;
+      --orange: #f97316;
+      --green: #10b981;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 58px;
+    }
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .logo span { color: var(--muted); font-weight: 400; }
+    .page-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── HERO STRIP ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px 36px;
+      text-align: center;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; }
+    .page-hero h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .page-hero p {
+      font-size: 14px;
+      color: var(--dim);
+    }
+    .updated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 4px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 44px;
+    }
+    .section h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: rgba(249,115,22,.15);
+      border: 1px solid rgba(249,115,22,.3);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .section p {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+    .section p:last-child { margin-bottom: 0; }
+    .section ul, .section ol {
+      padding-left: 20px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .section li {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .section a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .section a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--dim);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--dim);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: color .15s, background .15s;
+    }
+    .footer-links a:hover { color: var(--text); background: var(--surface); }
+    .footer-links .sep { color: var(--muted); font-size: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-copy a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="page-label">/ Privacy Policy</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>🔒 Privacy Policy</h1>
+    <p>How Elephast.com collects, uses, and protects your information.</p>
+    <div class="updated-badge">Last updated: March 2025</div>
+  </div>
+</div>
+
+<main>
+
+  <div class="highlight-box">
+    <strong style="color:var(--text)">Plain-English Summary:</strong> Elephast.com provides free browser-based tools. We use Google Analytics to understand how our site is used. We may display ads via Google AdSense. We do not sell your personal data — ever.
+  </div>
+
+  <div class="section">
+    <h2><span class="num">1</span> Who We Are</h2>
+    <p>Elephast.com ("we," "us," or "our") is a free web tools platform built for Etsy sellers, digital creators, SEO beginners, developers, and influencers. Our tools run entirely in your browser — no account creation is required to use them.</p>
+    <p>By using Elephast.com, you agree to the practices described in this Privacy Policy. If you have questions, please <a href="contact.html">contact us</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">2</span> Information We Collect</h2>
+    <p>We collect minimal information to operate and improve our website. We do not require you to create an account, and we do not ask for your name, email address, or payment information unless you voluntarily contact us.</p>
+    <p>The information we may collect includes:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Usage Data:</strong> Pages visited, time spent on pages, and how you navigate the site. This is collected automatically via Google Analytics.</li>
+      <li><strong style="color:var(--text)">Device &amp; Browser Data:</strong> Browser type, operating system, screen resolution, and general geographic region (country/city level).</li>
+      <li><strong style="color:var(--text)">Referral Data:</strong> The website or search engine that directed you to Elephast.com.</li>
+      <li><strong style="color:var(--text)">Cookies:</strong> Small text files placed on your device by us or by third-party services (described below).</li>
+    </ul>
+    <p>All tool processing (image editing, text generation, file conversion, etc.) happens locally in your browser. Files and text you upload or input are <strong style="color:var(--text)">never sent to our servers</strong>.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">3</span> Google Analytics</h2>
+    <p>We use <strong style="color:var(--text)">Google Analytics</strong> to understand how visitors use Elephast.com. This service collects anonymized data such as page views, session duration, traffic sources, and general location.</p>
+    <p>Google Analytics uses cookies to track and report website traffic. The data collected is aggregated and does not personally identify you.</p>
+    <ul>
+      <li>Google Analytics cookies may be stored on your device for up to 2 years.</li>
+      <li>You can opt out of Google Analytics tracking by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-Out Browser Add-on</a>.</li>
+      <li>Google's privacy policy is available at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">4</span> Advertising &amp; Google AdSense</h2>
+    <p>Elephast.com may display advertisements served by <strong style="color:var(--text)">Google AdSense</strong> and other third-party ad networks. These services use cookies and similar technologies to serve ads that may be relevant to your interests based on your browsing activity.</p>
+    <ul>
+      <li>Third-party vendors, including Google, may use cookies to serve ads based on your prior visits to our site or other sites on the Internet.</li>
+      <li>Google's use of advertising cookies enables it and its partners to serve ads based on your visit to Elephast.com and/or other websites.</li>
+      <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</li>
+      <li>You can also opt out via the <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">Network Advertising Initiative opt-out page</a>.</li>
+    </ul>
+    <p>We do not control the cookies placed by third-party advertisers and are not responsible for their privacy practices. We encourage you to review the privacy policies of any third-party service you interact with.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">5</span> Cookies</h2>
+    <p>Cookies are small text files stored on your device when you visit a website. Elephast.com uses the following types of cookies:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Essential Cookies:</strong> Required for basic site functionality. These cannot be disabled.</li>
+      <li><strong style="color:var(--text)">Analytics Cookies:</strong> Set by Google Analytics to collect anonymized usage data.</li>
+      <li><strong style="color:var(--text)">Advertising Cookies:</strong> Set by Google AdSense and partner ad networks to serve relevant ads.</li>
+      <li><strong style="color:var(--text)">Preference Cookies:</strong> May be used to remember your settings (e.g., theme preferences) for future visits.</li>
+    </ul>
+    <p>Most browsers allow you to control or delete cookies through their settings. Disabling cookies may affect some website functionality. For more information, visit <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener">allaboutcookies.org</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">6</span> How We Use Your Information</h2>
+    <p>The information we collect is used solely to:</p>
+    <ul>
+      <li>Understand how our tools and pages are used so we can improve them.</li>
+      <li>Monitor website performance, uptime, and error rates.</li>
+      <li>Display relevant advertisements to support the free operation of this site.</li>
+      <li>Respond to contact form submissions or support requests.</li>
+    </ul>
+    <p>We do <strong style="color:var(--text)">not</strong> use your data for email marketing, automated profiling, or any purpose beyond what is listed above.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">7</span> Data Sharing &amp; Third Parties</h2>
+    <p>We do not sell, trade, rent, or otherwise share your personal information with third parties for their own marketing purposes.</p>
+    <p>We may share anonymized, aggregated data (such as total page views or browser statistics) that cannot be used to identify any individual. The only third-party services that may receive data about your visit are:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Google LLC</strong> — via Google Analytics and Google AdSense, as described above.</li>
+      <li><strong style="color:var(--text)">GitHub Pages</strong> — our hosting provider. GitHub may log IP addresses and request metadata as part of standard server operations.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">8</span> Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Access:</strong> Request a copy of any personal data we hold about you.</li>
+      <li><strong style="color:var(--text)">Correction:</strong> Request that we correct inaccurate or incomplete data.</li>
+      <li><strong style="color:var(--text)">Deletion:</strong> Request that we delete your personal data, where applicable.</li>
+      <li><strong style="color:var(--text)">Opt-Out:</strong> Opt out of analytics tracking or personalized advertising as described in sections 3 and 4.</li>
+      <li><strong style="color:var(--text)">Complaints:</strong> If you are in the EU/EEA, you have the right to lodge a complaint with your local data protection authority.</li>
+    </ul>
+    <p>To exercise any of these rights, please <a href="contact.html">contact us</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">9</span> Children's Privacy</h2>
+    <p>Elephast.com is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has submitted personal information to us, please <a href="contact.html">contact us</a> immediately and we will take steps to remove it.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">10</span> Data Security</h2>
+    <p>We take reasonable measures to protect the information associated with your use of our site. As noted above, our tools process data locally in your browser — your files and inputs are never transmitted to or stored on our servers.</p>
+    <p>No method of transmission over the Internet is 100% secure. While we strive to use commercially acceptable means to protect data, we cannot guarantee absolute security.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">11</span> Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this page periodically. Continued use of Elephast.com after changes are posted constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">12</span> Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please reach out:</p>
+    <ul>
+      <li>Email: <a href="mailto:support@elephast.com">support@elephast.com</a></li>
+      <li>Contact form: <a href="contact.html">elephast.com/contact</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">🏠 All Tools</a>
+      <span class="sep">·</span>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="sep">·</span>
+      <a href="terms.html">Terms of Use</a>
+      <span class="sep">·</span>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 <a href="index.html">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+  </div>
+</footer>
+
+</body>
+</html>

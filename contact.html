@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Elephast.com — get in touch with questions, feedback, tool suggestions, or bug reports. We'd love to hear from you.">
+  <title>Contact — Elephast.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #1f1f23;
+      --border: #2d2d30;
+      --border-h: #3f3f46;
+      --text: #f4f4f5;
+      --dim: #a1a1aa;
+      --muted: #71717a;
+      --orange: #f97316;
+      --orange-d: #ea6c0a;
+      --green: #10b981;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 58px;
+    }
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .logo span { color: var(--muted); font-weight: 400; }
+    .page-label { font-size: 13px; color: var(--muted); }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 44px 24px 40px;
+      text-align: center;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; }
+    .page-hero h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 15px;
+      color: var(--dim);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      main { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .form-card h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dim);
+      margin-bottom: 7px;
+    }
+    .field label .req {
+      color: var(--orange);
+      margin-left: 2px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(249,115,22,.12);
+    }
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--muted);
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+    .field select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+
+    .submit-btn {
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--orange);
+      color: #000;
+      border: none;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background .18s, transform .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .submit-btn:hover {
+      background: var(--orange-d);
+      transform: translateY(-1px);
+    }
+    .submit-btn:active { transform: translateY(0); }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+    .form-note a { color: var(--orange); text-decoration: none; }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .success-state h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .success-state p { font-size: 14px; color: var(--dim); }
+
+    /* ── SIDEBAR ── */
+    .sidebar {}
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .info-card h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .info-item:last-child { margin-bottom: 0; }
+    .info-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .info-text {}
+    .info-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .info-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .info-desc a { color: var(--orange); text-decoration: none; }
+    .info-desc a:hover { text-decoration: underline; }
+
+    .response-card {
+      background: rgba(16,185,129,.07);
+      border: 1px solid rgba(16,185,129,.2);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .response-card p {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+    .response-card strong { color: #6ee7b7; }
+
+    .quick-links {}
+    .quick-links h3 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .quick-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--dim);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 7px;
+      transition: all .15s;
+    }
+    .quick-link:hover { border-color: var(--orange); color: var(--text); }
+    .quick-link span { font-size: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--dim);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: color .15s, background .15s;
+    }
+    .footer-links a:hover { color: var(--text); background: var(--surface); }
+    .footer-links .sep { color: var(--muted); font-size: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-copy a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="page-label">/ Contact</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>✉️ Get in Touch</h1>
+    <p>Have a question, found a bug, or want to suggest a new tool? We'd love to hear from you. We read every message.</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── CONTACT FORM ── -->
+  <div>
+    <div class="form-card">
+      <h2>Send Us a Message</h2>
+
+      <div id="contactForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="fname">First Name <span class="req">*</span></label>
+            <input type="text" id="fname" name="fname" placeholder="Jane" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Smith" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject <span class="req">*</span></label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Select a topic…</option>
+            <option value="bug">🐛 Bug Report — something isn't working</option>
+            <option value="suggestion">💡 Tool Suggestion — I'd love to see…</option>
+            <option value="question">❓ General Question</option>
+            <option value="feedback">💬 Feedback — general thoughts</option>
+            <option value="business">🤝 Business / Partnership Inquiry</option>
+            <option value="other">📩 Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span class="req">*</span></label>
+          <textarea id="message" name="message" placeholder="Tell us what's on your mind. The more detail you include, the faster we can help!" required></textarea>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="handleSubmit()">
+          ✉️ Send Message
+        </button>
+
+        <p class="form-note">
+          You can also email us directly at
+          <a href="mailto:support@elephast.com">support@elephast.com</a><br>
+          By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- Success State -->
+      <div class="success-state" id="successState">
+        <span class="success-icon">🎉</span>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out. We'll get back to you at the email address you provided, usually within 1–2 business days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SIDEBAR ── -->
+  <div class="sidebar">
+
+    <div class="response-card">
+      <p><strong>⚡ Typical response time:</strong> 1–2 business days. We read every message and genuinely appreciate your feedback.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Ways to Reach Us</h3>
+      <div class="info-item">
+        <div class="info-icon">📧</div>
+        <div class="info-text">
+          <div class="info-title">Email</div>
+          <div class="info-desc"><a href="mailto:support@elephast.com">support@elephast.com</a><br>For all enquiries and support.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🛍️</div>
+        <div class="info-text">
+          <div class="info-title">Etsy Shop</div>
+          <div class="info-desc"><a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener">ElephantShoes on Etsy</a><br>Browse our digital downloads.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>Common Questions</h3>
+      <div class="info-item">
+        <div class="info-icon">🔧</div>
+        <div class="info-text">
+          <div class="info-title">A tool isn't working</div>
+          <div class="info-desc">Tell us which tool, your browser, and what happened. A screenshot helps.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">💡</div>
+        <div class="info-text">
+          <div class="info-title">Suggest a new tool</div>
+          <div class="info-desc">We take suggestions seriously. If enough people want it, we'll build it.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🔒</div>
+        <div class="info-text">
+          <div class="info-title">Privacy concerns</div>
+          <div class="info-desc">See our <a href="privacy-policy.html">Privacy Policy</a>. Our tools process data in your browser only.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <h3>Quick Links</h3>
+      <a class="quick-link" href="index.html"><span>🏠</span> All Tools</a>
+      <a class="quick-link" href="privacy-policy.html"><span>🔒</span> Privacy Policy</a>
+      <a class="quick-link" href="terms.html"><span>📄</span> Terms of Use</a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">🏠 All Tools</a>
+      <span class="sep">·</span>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="sep">·</span>
+      <a href="terms.html">Terms of Use</a>
+      <span class="sep">·</span>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 <a href="index.html">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit() {
+    const fname  = document.getElementById('fname').value.trim();
+    const email  = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!fname) { alert('Please enter your first name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!subject) { alert('Please select a subject.'); return; }
+    if (!message || message.length < 10) { alert('Please enter a message (at least 10 characters).'); return; }
+
+    // Build mailto link as a no-backend fallback
+    const subjectLine = encodeURIComponent('[Elephast Contact] ' + subject);
+    const body = encodeURIComponent(
+      'Name: ' + fname + ' ' + document.getElementById('lname').value + '\n' +
+      'Email: ' + email + '\n' +
+      'Subject: ' + subject + '\n\n' +
+      'Message:\n' + message
+    );
+    const mailtoLink = 'mailto:support@elephast.com?subject=' + subjectLine + '&body=' + body;
+
+    // Show success state
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+
+    // Open mailto as fallback (opens email client)
+    setTimeout(() => { window.location.href = mailtoLink; }, 400);
+  }
+
+  // Allow Enter in fields to tab to next, but not submit
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const fields = Array.from(document.querySelectorAll('input, select, textarea, button'));
+        const idx = fields.indexOf(e.target);
+        if (idx > -1 && idx < fields.length - 1) fields[idx + 1].focus();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

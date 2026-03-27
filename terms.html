@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Terms of Use for Elephast.com — understand the conditions for using our free online tools for creators and Etsy sellers.">
+  <title>Terms of Use — Elephast.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #1f1f23;
+      --border: #2d2d30;
+      --text: #f4f4f5;
+      --dim: #a1a1aa;
+      --muted: #71717a;
+      --orange: #f97316;
+      --green: #10b981;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 58px;
+    }
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .logo span { color: var(--muted); font-weight: 400; }
+    .page-label { font-size: 13px; color: var(--muted); }
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px 36px;
+      text-align: center;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; }
+    .page-hero h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .page-hero p { font-size: 14px; color: var(--dim); }
+    .updated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 4px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .section { margin-bottom: 44px; }
+    .section h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: rgba(249,115,22,.15);
+      border: 1px solid rgba(249,115,22,.3);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .section p {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+    .section p:last-child { margin-bottom: 0; }
+    .section ul, .section ol {
+      padding-left: 20px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .section li {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .section a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .section a:hover { text-decoration: underline; }
+    .highlight-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--dim);
+    }
+    .warning-box {
+      background: rgba(249,115,22,.07);
+      border: 1px solid rgba(249,115,22,.25);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #fdba74;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--dim);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: color .15s, background .15s;
+    }
+    .footer-links a:hover { color: var(--text); background: var(--surface); }
+    .footer-links .sep { color: var(--muted); font-size: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-copy a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <span class="page-label">/ Terms of Use</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>📄 Terms of Use</h1>
+    <p>The rules and guidelines for using Elephast.com and all of its tools.</p>
+    <div class="updated-badge">Last updated: March 2025</div>
+  </div>
+</div>
+
+<main>
+
+  <div class="highlight-box">
+    <strong style="color:var(--text)">Summary:</strong> Elephast.com provides free tools in good faith for personal and commercial use. By using our site, you agree not to misuse it. All tools are provided "as-is" with no guarantees. We retain rights to our content and branding.
+  </div>
+
+  <div class="section">
+    <h2><span class="num">1</span> Acceptance of Terms</h2>
+    <p>By accessing or using Elephast.com (the "Site") and any tools, pages, or content it provides (collectively, the "Services"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the Site.</p>
+    <p>These Terms apply to all visitors and users of the Site. We reserve the right to update or modify these Terms at any time. Continued use of the Site after changes are posted constitutes your acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">2</span> Description of Services</h2>
+    <p>Elephast.com provides a collection of free, browser-based tools designed for Etsy sellers, digital creators, SEO beginners, developers, influencers, and general users. These tools include but are not limited to:</p>
+    <ul>
+      <li>Image editing, conversion, and compression tools</li>
+      <li>SEO and keyword research tools</li>
+      <li>Etsy listing optimization tools</li>
+      <li>Utility and developer tools (JSON formatters, password generators, etc.)</li>
+      <li>Creator tools (caption generators, hashtag generators, etc.)</li>
+      <li>Crypto calculators and financial estimators</li>
+    </ul>
+    <p>All tools run entirely within your web browser. No account, login, or payment is required to use them.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">3</span> Disclaimer — Tools Provided "As-Is"</h2>
+    <div class="warning-box">
+      ⚠ <strong>Important:</strong> All tools and content on Elephast.com are provided <strong>"as-is"</strong> and <strong>"as available"</strong> without warranties of any kind, either express or implied.
+    </div>
+    <p>We make no representations or warranties regarding:</p>
+    <ul>
+      <li>The accuracy, completeness, or reliability of any tool output or generated content.</li>
+      <li>The fitness of any tool for a particular purpose or use case.</li>
+      <li>The uninterrupted or error-free operation of the Site or its tools.</li>
+      <li>The compatibility of our tools with all browsers, devices, or file formats.</li>
+    </ul>
+    <p>Tool outputs — including generated keywords, titles, descriptions, captions, calculations, and converted files — are provided for reference and inspiration only. You are solely responsible for reviewing and verifying any output before relying on it for business, legal, financial, or personal decisions.</p>
+    <p>Crypto calculators and financial tools on this site are for educational and estimation purposes only. They do not constitute financial or investment advice.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">4</span> Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Elephast.com and its owner(s) shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages arising from:</p>
+    <ul>
+      <li>Your use of or inability to use the Site or any of its tools.</li>
+      <li>Any errors or inaccuracies in tool outputs or generated content.</li>
+      <li>Any loss of data, files, profits, or business opportunities.</li>
+      <li>Any unauthorized access to or alteration of your data.</li>
+      <li>Any third-party content, services, or websites linked from this Site.</li>
+    </ul>
+    <p>This limitation applies regardless of whether we have been advised of the possibility of such damages, and regardless of the legal theory (contract, tort, strict liability, or otherwise) on which the claim is based.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">5</span> Acceptable Use</h2>
+    <p>You agree to use Elephast.com only for lawful purposes and in a manner that does not infringe the rights of others or restrict their use and enjoyment of the Site. Specifically, you agree <strong style="color:var(--text)">not</strong> to:</p>
+    <ul>
+      <li>Use the Site in any way that violates applicable local, national, or international laws or regulations.</li>
+      <li>Attempt to gain unauthorized access to any part of the Site or its infrastructure.</li>
+      <li>Use automated tools, bots, scrapers, or scripts to bulk-access, copy, or extract content from the Site without prior written permission.</li>
+      <li>Transmit any malicious code, viruses, or harmful software through the Site.</li>
+      <li>Use the Site to generate content that is fraudulent, misleading, defamatory, harassing, or harmful to others.</li>
+      <li>Interfere with or disrupt the operation of the Site or servers or networks connected to it.</li>
+      <li>Attempt to reverse-engineer, decompile, or extract source code from any part of the Site.</li>
+      <li>Reproduce or resell the Site's tools or content as your own product without permission.</li>
+    </ul>
+    <p>We reserve the right to restrict or block access to the Site for users who violate these conditions, at our sole discretion and without notice.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">6</span> Intellectual Property</h2>
+    <p>All original content on Elephast.com — including but not limited to the site design, branding, logo, tool interfaces, written content, and code — is the intellectual property of Elephast.com and is protected under applicable copyright and intellectual property laws.</p>
+    <p>You are granted a limited, non-exclusive, non-transferable license to:</p>
+    <ul>
+      <li>Access and use the Site and its tools for personal or commercial purposes.</li>
+      <li>Use the <em>outputs</em> generated by our tools (e.g., resized images, generated titles, formatted JSON) for your own projects, including commercial ones.</li>
+    </ul>
+    <p>You may <strong style="color:var(--text)">not</strong>:</p>
+    <ul>
+      <li>Copy, redistribute, or republish the Site's design, interface, or source code without written permission.</li>
+      <li>Use the Elephast.com name, logo, or branding without prior written consent.</li>
+      <li>Claim ownership of tools, interfaces, or systems built by Elephast.com.</li>
+    </ul>
+    <p>If you believe any content on Elephast.com infringes your intellectual property rights, please <a href="contact.html">contact us</a> with details and we will respond promptly.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">7</span> Third-Party Links &amp; Services</h2>
+    <p>The Site may contain links to third-party websites, tools, or services (such as Etsy, Google, or font providers). These links are provided for convenience only. We do not endorse, control, or take responsibility for the content, privacy practices, or availability of any third-party site.</p>
+    <p>Your use of third-party services is subject to their own terms and privacy policies.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">8</span> Advertising</h2>
+    <p>Elephast.com is a free service supported in part by advertising. We may display ads served by Google AdSense or other advertising networks. We do not control the content of ads displayed and are not responsible for advertiser claims or linked websites.</p>
+    <p>The presence of advertising on Elephast.com does not constitute an endorsement of any advertised product or service.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">9</span> Availability &amp; Changes</h2>
+    <p>We reserve the right to modify, suspend, or discontinue any tool, feature, or part of the Site at any time without prior notice. We will not be liable to you or any third party for any such changes.</p>
+    <p>We aim to keep the Site available at all times but cannot guarantee uninterrupted access. Downtime may occur due to maintenance, updates, or factors beyond our control.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">10</span> Governing Law</h2>
+    <p>These Terms of Use shall be governed by and construed in accordance with applicable law. Any disputes arising in connection with these Terms shall be subject to the exclusive jurisdiction of the relevant courts in the applicable jurisdiction.</p>
+    <p>If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">11</span> Contact</h2>
+    <p>If you have any questions about these Terms of Use, please reach out:</p>
+    <ul>
+      <li>Email: <a href="mailto:support@elephast.com">support@elephast.com</a></li>
+      <li>Contact form: <a href="contact.html">elephast.com/contact</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">🏠 All Tools</a>
+      <span class="sep">·</span>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="sep">·</span>
+      <a href="terms.html">Terms of Use</a>
+      <span class="sep">·</span>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 <a href="index.html">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+  </div>
+</footer>
+
+</body>
+</html>
