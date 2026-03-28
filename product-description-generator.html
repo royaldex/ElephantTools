@@ -4,96 +4,70 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Generate compelling product descriptions for Etsy, Shopify, and online stores. Free tool, instant results.">
-<title>Free Product Description Generator — Etsy & Online Stores — Elephast</title>
+<title>Free Product Description Generator - Etsy and Online Stores &mdash; Elephast</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
-  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
-  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
-  --yellow:#fbbf24;--blue:#3b82f6;--radius:10px;
-}
+:root{--bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
-.header-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
-.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none;white-space:nowrap}
+.hi{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none}
 .logo span{color:var(--muted);font-weight:400}
-.header-tool{font-size:13px;color:var(--dim);font-weight:500}
-.main{max-width:980px;margin:0 auto;padding:32px 20px 64px}
+.htool{font-size:13px;color:var(--dim)}
+.main{max-width:960px;margin:0 auto;padding:32px 20px 72px}
 h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
-.subtitle{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px;line-height:1.6}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;max-width:600px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
-input[type=text],input[type=url],input[type=number],select,textarea{
-  width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);
-  border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;
-  transition:border-color .15s;
-}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
-textarea{resize:vertical;min-height:100px}
+textarea{resize:vertical;min-height:90px}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.field{margin-bottom:14px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.f{margin-bottom:14px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:580px){.r2{grid-template-columns:1fr}}
 .btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
-.btn-primary{background:var(--green);color:#000}
-.btn-primary:hover{background:var(--green-d)}
-.btn-secondary{background:var(--border);color:var(--dim)}
-.btn-secondary:hover{background:var(--border-h);color:var(--text)}
-.btn-orange{background:var(--orange);color:#000}
-.btn-orange:hover{opacity:.88}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
 .btn-full{width:100%;justify-content:center}
 .btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
-.result-box{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:400px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
-.tags-box{display:flex;flex-wrap:wrap;gap:7px;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;min-height:50px}
-.tag{padding:5px 11px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .15s;user-select:none}
-.tag:hover{border-color:var(--orange);color:var(--orange)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:460px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}
+.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
-.chip.active{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
-.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
-.related h2{font-size:14px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
-.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.related-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
-.related-card:hover{border-color:var(--orange);transform:translateY(-1px)}
-.related-card-icon{font-size:20px;margin-bottom:6px}
-.related-card-name{font-size:13px;font-weight:600;margin-bottom:3px}
-.related-card-desc{font-size:11px;color:var(--muted)}
-.copy-btn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
-.copy-btn:hover{background:var(--border-h);color:var(--text)}
-.copy-btn.copied{background:rgba(16,185,129,.2);color:var(--green)}
-.action-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
-.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:100px;text-align:center}
-.stat-val{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--green)}
-.stat-label{font-size:11px;color:var(--muted);margin-top:2px}
-.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
-.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
-.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
-footer{max-width:980px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
-footer a{color:var(--orange);text-decoration:none}
+.chip:hover{border-color:var(--border-h);color:var(--text)}
+.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface)}
+.fl{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--dim);text-decoration:none;padding:4px 10px;border-radius:6px}
+.fl a:hover{color:var(--text)}
+.fl .sep{color:var(--muted);font-size:12px}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
 </style>
 </head>
 <body>
 <header>
-  <div class="header-inner">
+  <div class="hi">
     <a href="index.html" class="logo">Elephast<span>.com</span></a>
-    <span class="header-tool">/ Product Description Generator</span>
+    <span class="htool">/ Product Description Generator</span>
   </div>
 </header>
 <div class="main">
 
-<h1>📝 Product Description Generator</h1>
-<p class="subtitle">Generate compelling product descriptions for Etsy listings, online stores, and marketplaces. Instantly.</p>
+<h1>&#128221; Product Description Generator</h1>
+<p class="sub">Generate compelling product descriptions for Etsy listings, online stores, and marketplaces instantly.</p>
 <div class="card">
-  <div class="card-title">Product Details</div>
-  <div class="field"><label>Product Name</label><input type="text" id="pdProduct" placeholder="e.g. Boho Floral Watercolor Clipart Bundle"></div>
-  <div class="row2">
-    <div class="field">
-      <label>Product Type</label>
+  <div class="ct">Product Details</div>
+  <div class="f"><label>Product Name</label><input type="text" id="pdProduct" placeholder="e.g. Boho Floral Watercolor Clipart Bundle"></div>
+  <div class="r2">
+    <div class="f"><label>Product Type</label>
       <select id="pdType">
         <option value="digital">Digital Download</option>
         <option value="physical">Physical Product</option>
@@ -102,8 +76,7 @@ footer a{color:var(--orange);text-decoration:none}
         <option value="template">Template</option>
       </select>
     </div>
-    <div class="field">
-      <label>Tone</label>
+    <div class="f"><label>Tone</label>
       <select id="pdTone">
         <option value="friendly">Friendly &amp; Warm</option>
         <option value="professional">Professional</option>
@@ -112,95 +85,89 @@ footer a{color:var(--orange);text-decoration:none}
       </select>
     </div>
   </div>
-  <div class="field"><label>Key Features <span style="font-weight:400;color:var(--muted)">(comma separated)</span></label><input type="text" id="pdFeatures" placeholder="e.g. 300 DPI, transparent background, commercial use OK"></div>
-  <div class="field"><label>Who is it for?</label><input type="text" id="pdFor" placeholder="e.g. crafters, small businesses, Cricut users"></div>
-  <button class="btn btn-primary btn-full" onclick="genProdDesc()">⚡ Generate Description</button>
+  <div class="f"><label>Key Features <span style="font-weight:400;color:var(--muted)">(comma separated)</span></label><input type="text" id="pdFeatures" placeholder="e.g. 300 DPI, transparent background, commercial use OK"></div>
+  <div class="f"><label>Who is it for?</label><input type="text" id="pdFor" placeholder="e.g. crafters, small businesses, Cricut users"></div>
+  <button class="btn btn-p btn-full" onclick="genProdDesc()">&#9889; Generate Description</button>
 </div>
 <div id="pdResults" style="display:none">
   <div class="card">
-    <div class="card-title">Product Description</div>
-    <div class="action-row" style="margin-bottom:12px"><button class="copy-btn" onclick="copyEl('pdOutput')">📋 Copy</button></div>
-    <div class="result-box" id="pdOutput" style="white-space:pre-wrap;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.7"></div>
+    <div class="ct">Product Description</div>
+    <div class="arow" style="margin-bottom:12px"><button class="cpbtn" onclick="copyDesc()">&#128203; Copy</button></div>
+    <div class="rbox" id="pdOutput" style="white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.8"></div>
   </div>
 </div>
 <script>
-const PD_INTROS={
-  friendly:{digital:["You're going to LOVE this {product}!","Meet your new creative essential — {product}","Say hello to {product} — perfect for your next project!"],physical:["Introducing {product} — handcrafted with love!","This {product} is everything you didn't know you needed."]},
-  professional:{digital:["Introducing {product} — a high-quality digital resource for creative professionals.","Elevate your projects with {product}."],physical:["Presenting {product} — crafted to the highest standards."]},
-  playful:{digital:["Woohoo! {product} is here and it's SO fun to use!","Get ready to unleash your creativity with {product}!"],physical:["How cute is this?! Say hi to {product}!"]},
-  luxury:{digital:["Elevate your work with the exquisite {product}.","Introducing the premium {product} — designed for discerning creatives."],physical:["Presenting the luxurious {product} — an investment in quality."]}
+var INTROS = {
+  friendly: {
+    digital: ["You are going to LOVE this!", "Meet your new creative essential!", "Say hello to exactly what your projects need!"],
+    physical: ["Introducing something made with love!", "This is everything you did not know you needed."]
+  },
+  professional: {
+    digital: ["Introducing a high-quality digital resource for creative professionals.", "Elevate your projects with this premium digital download."],
+    physical: ["Presenting a product crafted to the highest standards.", "Quality and precision in every detail."]
+  },
+  playful: {
+    digital: ["Get ready to unleash your creativity!", "This is SO fun to use and you are going to love it!"],
+    physical: ["How cute is this?! You are going to love it!", "Fun, functional, and totally your new favourite thing."]
+  },
+  luxury: {
+    digital: ["Elevate your work with this exquisite digital collection.", "Introducing the premium option for discerning creatives."],
+    physical: ["Presenting a luxurious piece crafted for those who appreciate quality.", "An investment in excellence."]
+  }
 };
-const PD_WHAT={digital:"This instant digital download includes {features}.",printable:"This printable set includes {features}.",svg:"This SVG/clipart bundle includes {features}.",template:"This ready-to-use template includes {features}.",physical:"This {product} features {features}."};
-const PD_USE="Perfect for {for}";
-const PD_CTA={digital:["Simply purchase, download, and create — no waiting, no shipping!","Instant access after purchase. Download immediately and start creating."],physical:["Order today and receive it fresh, packed with care.","Add to cart now and get it delivered right to your door."]};
-const PD_GUARANTEE="I stand behind every purchase. If you have any questions, I'm here to help!";
-
-function genProdDesc(){
-  const product=document.getElementById('pdProduct').value.trim()||'this digital product';
-  const type=document.getElementById('pdType').value;
-  const tone=document.getElementById('pdTone').value;
-  const features=document.getElementById('pdFeatures').value.trim()||'high-resolution files, commercial use license, instant download';
-  const forWho=document.getElementById('pdFor').value.trim()||'crafters and creative entrepreneurs';
-  
-  const introArr=PD_INTROS[tone][type==='physical'?'physical':'digital']||PD_INTROS[tone]['digital'];
-  const intro=introArr[0].replace('{product}',product);
-  const whatRaw=PD_WHAT[type]||PD_WHAT['digital'];
-  const what=whatRaw.replace('{features}',features).replace('{product}',product);
-  const use=(PD_USE+'.').replace('{for}',forWho);
-  const isPhys=type==='physical';
-  const cta=PD_CTA[isPhys?'physical':'digital'][0];
-  const desc=`${intro}
-
-${what}
-
-${use}
-
-${cta}
-
-${PD_GUARANTEE}
-
----
-WHAT YOU GET:
-• ${features.split(',').join('
-• ')}
-
-PERFECT FOR:
-• ${forWho.split(',').join('
-• ')}`;
-  document.getElementById('pdOutput').textContent=desc;
-  document.getElementById('pdResults').style.display='block';
+var WHAT = {
+  digital: "This instant digital download includes: ",
+  printable: "This printable set includes: ",
+  svg: "This SVG and clipart bundle includes: ",
+  template: "This ready-to-use template includes: ",
+  physical: "This product features: "
+};
+var CTA = {
+  digital: ["Simply purchase, download, and create. No waiting, no shipping, instant access!", "Instant access after purchase. Download immediately and start creating right away."],
+  physical: ["Order today and receive it packed with care.", "Add to cart now and have it delivered right to your door."]
+};
+function genProdDesc() {
+  var product = document.getElementById("pdProduct").value.trim() || "this product";
+  var type = document.getElementById("pdType").value;
+  var tone = document.getElementById("pdTone").value;
+  var features = document.getElementById("pdFeatures").value.trim() || "high-resolution files, commercial use license, instant download";
+  var forWho = document.getElementById("pdFor").value.trim() || "crafters and creative entrepreneurs";
+  var isPhys = type === "physical";
+  var introArr = INTROS[tone][isPhys ? "physical" : "digital"];
+  var intro = introArr[0] + " " + product;
+  var whatBase = WHAT[type] || WHAT["digital"];
+  var featureList = features.split(",").map(function(f) { return f.trim(); });
+  var forList = forWho.split(",").map(function(f) { return f.trim(); });
+  var ctaText = CTA[isPhys ? "physical" : "digital"][0];
+  var desc = intro + "\n\n" +
+    whatBase + "\n" + featureList.map(function(f) { return "* " + f; }).join("\n") + "\n\n" +
+    "Perfect for: " + forList.join(", ") + ".\n\n" +
+    ctaText + "\n\n" +
+    "I stand behind every purchase. If you have any questions, I am here to help!\n\n" +
+    "---\nWHAT YOU GET:\n" + featureList.map(function(f) { return "- " + f; }).join("\n") + "\n\n" +
+    "PERFECT FOR:\n" + forList.map(function(f) { return "- " + f; }).join("\n");
+  document.getElementById("pdOutput").textContent = desc;
+  document.getElementById("pdResults").style.display = "block";
 }
-function copyEl(id){
-  navigator.clipboard.writeText(document.getElementById(id).textContent);
-  event.target.textContent='✓ Copied!';event.target.classList.add('copied');
-  setTimeout(()=>{event.target.textContent='📋 Copy';event.target.classList.remove('copied')},2000);
+function copyDesc() {
+  navigator.clipboard.writeText(document.getElementById("pdOutput").textContent);
+  event.target.textContent = "&#10003; Copied!"; event.target.classList.add("done");
+  setTimeout(function() { event.target.textContent = "&#128203; Copy"; event.target.classList.remove("done"); }, 2000);
 }
 </script>
 
-<div class="related">
-  <h2>Related Tools</h2>
-  <div class="related-grid">
-    <a class="related-card" href="etsy-title-generator.html"><div class="related-card-icon">🏷️</div><div class="related-card-name">Etsy Title Generator</div><div class="related-card-desc">SEO listing titles</div></a>
-<a class="related-card" href="etsy-tag-generator.html"><div class="related-card-icon">🔖</div><div class="related-card-name">Etsy Tag Generator</div><div class="related-card-desc">13 Etsy tags</div></a>
-<a class="related-card" href="headline-generator.html"><div class="related-card-icon">📰</div><div class="related-card-name">Headline Generator</div><div class="related-card-desc">Catchy headlines</div></a>
-<a class="related-card" href="hashtag-generator.html"><div class="related-card-icon">#️⃣</div><div class="related-card-name">Hashtag Generator</div><div class="related-card-desc">Social media tags</div></a>
-    <a class="related-card" href="index.html"><div class="related-card-icon">🏠</div><div class="related-card-name">All Tools</div><div class="related-card-desc">Browse all 46 free tools</div></a>
-  </div>
 </div>
-</div>
-<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b">
-  <div style="max-width:960px;margin:0 auto">
-    <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">🏠 All Tools</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Privacy Policy</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Terms of Use</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Contact</a>
-    </div>
-    <p style="font-size:12px;color:#71717a">© 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a>
+    <span class="sep">&middot;</span>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <span class="sep">&middot;</span>
+    <a href="terms.html">Terms of Use</a>
+    <span class="sep">&middot;</span>
+    <a href="contact.html">Contact</a>
   </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
 </footer>
 </body>
 </html>

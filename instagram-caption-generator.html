@@ -3,21 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Generate engaging Instagram captions for any post. Free Instagram caption generator with tone options and hashtags.">
-<title>Free Instagram Caption Generator — Captions for Posts — Elephast</title>
+<meta name="description" content="Generate engaging Instagram captions for any post. Free Instagram caption generator with tone options.">
+<title>Free Instagram Caption Generator - Captions for Posts &mdash; Elephast</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
-  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
-  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
-  --yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;
-}
+:root{--bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
-.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.hi{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
 .logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none}
 .logo span{color:var(--muted);font-weight:400}
 .htool{font-size:13px;color:var(--dim)}
@@ -25,24 +20,21 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
 .sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;max-width:600px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.ctitle{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
 input,select,textarea{width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
 textarea{resize:vertical;min-height:90px}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.f{margin-bottom:14px}.f:last-child{margin-bottom:0}
+.f{margin-bottom:14px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+@media(max-width:580px){.r2{grid-template-columns:1fr}}
 .btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
 .btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
-.btn-p:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
 .btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
-.btn-o{background:var(--orange);color:#000}.btn-o:hover{opacity:.88}
 .btn-full{width:100%;justify-content:center}
 .btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
-.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:460px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
 .arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
 .cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
 .cpbtn:hover{background:var(--border-h);color:var(--text)}
@@ -51,49 +43,32 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
 .chip:hover{border-color:var(--border-h);color:var(--text)}
 .chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
-.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
-.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
-.sl{font-size:11px;color:var(--muted);margin-top:2px}
-.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
-.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
-.row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px}
-.row:hover{background:var(--surface-2)}
-.rl{color:var(--dim);display:flex;align-items:center;gap:8px}
-.rv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
-.rv.pos{color:var(--green)}.rv.neg{color:var(--red)}.rv.neu{color:var(--dim)}
-.div{height:1px;background:var(--border);margin:8px 0}
-.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
-.related h2{font-size:13px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
-.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
-.rc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
-.rc:hover{border-color:var(--orange);transform:translateY(-1px)}
-.ri{font-size:20px;margin-bottom:6px}
-.rn{font-size:13px;font-weight:600;margin-bottom:3px}
-.rd{font-size:11px;color:var(--muted)}
-footer{max-width:960px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
-footer a{color:var(--orange);text-decoration:none}
-input[type=range]{accent-color:var(--green)}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface)}
+.fl{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--dim);text-decoration:none;padding:4px 10px;border-radius:6px}
+.fl a:hover{color:var(--text)}
+.fl .sep{color:var(--muted);font-size:12px}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
 </style>
 </head>
 <body>
 <header>
-  <div class="header-inner">
+  <div class="hi">
     <a href="index.html" class="logo">Elephast<span>.com</span></a>
     <span class="htool">/ Instagram Caption Generator</span>
   </div>
 </header>
 <div class="main">
 
-<h1>📸 Instagram Caption Generator</h1>
-<p class="sub">Generate engaging Instagram captions for any post. Choose your tone, add your topic, and get multiple ready-to-use options.</p>
+<h1>&#128247; Instagram Caption Generator</h1>
+<p class="sub">Generate engaging Instagram captions for any post. Choose your tone and get multiple ready-to-use options instantly.</p>
 <div class="card">
-  <div class="ctitle">Your Post Details</div>
+  <div class="ct">Your Post Details</div>
   <div class="f"><label>What is your post about?</label><input type="text" id="igTopic" placeholder="e.g. my new handmade candles, a beach sunset, my Etsy shop launch"></div>
   <div class="f"><label>Your Niche / Brand</label><input type="text" id="igNiche" placeholder="e.g. small business owner, artist, lifestyle creator"></div>
   <div class="r2">
-    <div class="f">
-      <label>Tone</label>
+    <div class="f"><label>Tone</label>
       <select id="igTone">
         <option value="friendly">Friendly &amp; Warm</option>
         <option value="funny">Funny &amp; Playful</option>
@@ -102,8 +77,7 @@ input[type=range]{accent-color:var(--green)}
         <option value="relatable">Relatable &amp; Casual</option>
       </select>
     </div>
-    <div class="f">
-      <label>Include CTA?</label>
+    <div class="f"><label>Call to Action</label>
       <select id="igCta">
         <option value="shop">Shop link in bio</option>
         <option value="comment">Ask to comment</option>
@@ -113,73 +87,133 @@ input[type=range]{accent-color:var(--green)}
       </select>
     </div>
   </div>
-  <button class="btn btn-p btn-full" onclick="genIgCaptions()">⚡ Generate Captions</button>
+  <button class="btn btn-p btn-full" onclick="genIgCaptions()">&#9889; Generate Captions</button>
 </div>
 <div id="igResults" style="display:none">
   <div class="card">
-    <div class="ctitle">Your Captions</div>
+    <div class="ct">Your Captions</div>
     <div id="igList"></div>
   </div>
 </div>
 <script>
-const IG={
-  friendly:{opens:['Obsessed with this ✨','This just made my whole day 🙌','Can we talk about how much I love this? 💛','Not me being absolutely in love with {topic} 🥹','Y'all… {topic} just happened and I'm not okay 😍'],mids:['Every detail feels so intentional and real.','This is what passion looks like, and I'm here for it.','Small things like this make every day so much better.','This right here is exactly why I do what I do.']},
-  funny:{opens:['Me, pretending I have my life together while posting about {topic} 😂','Nobody asked but here's {topic} because it lives in my head rent free 💀','Plot twist: {topic} is the answer to all my problems 🤣','Warning: this post about {topic} may cause excessive happiness 🚨','My therapist told me to find joy. I found {topic}. Close enough. 😌'],mids:['Absolutely nobody is surprised this ended up on my feed.','This is peak me, honestly.','I regret nothing.','10/10, would do again.']},
-  inspiring:{opens:['Every big dream starts with a single step ✨','Your story matters. Your work matters. Never forget that. 💪','This is for everyone building something from scratch 🛠️','Proof that consistency beats perfection every time 🔥','If you're reading this: keep going. The journey is the destination 🌱'],mids:['It hasn't always been easy, but it's always been worth it.','Real growth happens in the quiet moments no one sees.','You don't need perfect conditions. You need to start.']},
-  professional:{opens:['Excited to share {topic} with you today.','Introducing something I've been working on: {topic}','Here's a closer look at {topic} — the details speak for themselves.','Proud to present {topic}. Built with care, made to last.'],mids:['Quality and intention behind every single piece.','This is what we stand for as a brand.','Designed to make your life easier and more beautiful.']},
-  relatable:{opens:['Be honest, who else does this? 👀','No filter needed when {topic} looks this good 😩','Living my best life via {topic} 🙌','This is my love language and I'm not sorry about it 💅','Tell me you love {topic} without telling me you love {topic} 😌'],mids:['We don't talk about it enough honestly.','This is SO me and I'm owning it completely.','If you know, you know.']}
+var IG = {
+  friendly: {
+    opens: [
+      "Obsessed with this and I cannot stop thinking about it",
+      "This just made my whole day and I had to share it with you",
+      "Can we talk about how much I love this?",
+      "Not me being absolutely in love with TOPIC right now"
+    ],
+    mids: [
+      "Every detail feels so intentional and real.",
+      "This is what passion looks like and I am here for it.",
+      "Small things like this make every day so much better.",
+      "This right here is exactly why I do what I do."
+    ]
+  },
+  funny: {
+    opens: [
+      "Me pretending I have my life together while posting about TOPIC",
+      "Nobody asked but here is TOPIC because it lives in my head rent free",
+      "Plot twist: TOPIC is the answer to all my problems",
+      "Warning: this post about TOPIC may cause excessive happiness"
+    ],
+    mids: [
+      "Absolutely nobody is surprised this ended up on my feed.",
+      "This is peak me, honestly.",
+      "I regret nothing.",
+      "10 out of 10, would do again."
+    ]
+  },
+  inspiring: {
+    opens: [
+      "Every big dream starts with a single step",
+      "Your story matters. Your work matters. Never forget that.",
+      "This is for everyone building something from scratch",
+      "Proof that consistency beats perfection every time"
+    ],
+    mids: [
+      "It has not always been easy, but it has always been worth it.",
+      "Real growth happens in the quiet moments no one sees.",
+      "You do not need perfect conditions. You need to start.",
+      "The only way out is through, and you are doing it."
+    ]
+  },
+  professional: {
+    opens: [
+      "Excited to share this with you today.",
+      "Introducing something I have been working on.",
+      "Here is a closer look at what we have been building.",
+      "Proud to present this. Built with care, made to last."
+    ],
+    mids: [
+      "Quality and intention behind every single piece.",
+      "This is what we stand for as a brand.",
+      "Designed to make your life easier and more beautiful.",
+      "Every decision was made with our community in mind."
+    ]
+  },
+  relatable: {
+    opens: [
+      "Be honest, who else does this?",
+      "No filter needed when TOPIC looks this good",
+      "Living my best life and I am not sorry about it",
+      "Tell me you love TOPIC without telling me you love it"
+    ],
+    mids: [
+      "We do not talk about this enough honestly.",
+      "This is so me and I am owning it completely.",
+      "If you know, you know.",
+      "Normalise talking about TOPIC more."
+    ]
+  }
 };
-const CTA={
-  shop:['Link in bio to shop! 🛒','Get yours — link in bio 🔗','Tap the link in my bio to shop!'],
-  comment:['Drop a 🔥 in the comments if you agree!','Comment below — would you try this?','What do you think? Tell me in the comments! 👇'],
-  save:['Save this post for later! 📌','Double tap if this resonates with you ❤️','Save this so you don't forget it!'],
-  follow:['Follow for more! ✨','Follow along for daily content like this 🌟','Hit follow so you never miss a post!'],
-  none:['']
+var CTA_TEXT = {
+  shop: "Link in bio to shop! Tap it before it is gone.",
+  comment: "Drop a comment below — would you try this?",
+  save: "Save this post so you do not forget it!",
+  follow: "Follow along for more content like this every week.",
+  none: ""
 };
-function genIgCaptions(){
-  const topic=document.getElementById('igTopic').value.trim()||'my latest creation';
-  const niche=document.getElementById('igNiche').value.trim()||'creator';
-  const tone=document.getElementById('igTone').value;
-  const cta=document.getElementById('igCta').value;
-  const T=IG[tone];
-  const list=document.getElementById('igList');list.innerHTML='';
-  T.opens.slice(0,4).forEach((open,i)=>{
-    const o=open.replace(/{topic}/g,topic);
-    const mid=T.mids[i%T.mids.length];
-    const ctaText=CTA[cta][i%CTA[cta].length];
-    const caption=o+'
-
-'+mid+(ctaText?'
-
-'+ctaText:'');
-    list.innerHTML+=`<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">
-      <div style="font-size:13px;color:var(--text);line-height:1.7;white-space:pre-line;margin-bottom:10px">${caption}</div>
-      <button class="cpbtn" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='✓ Copied!';this.classList.add('done');setTimeout(()=>{this.textContent='📋 Copy';this.classList.remove('done')},2000)">📋 Copy</button>
-    </div>`;
-  });
-  document.getElementById('igResults').style.display='block';
+function genIgCaptions() {
+  var topic = document.getElementById("igTopic").value.trim() || "my latest creation";
+  var tone = document.getElementById("igTone").value;
+  var cta = document.getElementById("igCta").value;
+  var T = IG[tone];
+  var ctaLine = CTA_TEXT[cta];
+  var list = document.getElementById("igList");
+  list.innerHTML = "";
+  for (var i = 0; i < 4; i++) {
+    var open = T.opens[i % T.opens.length].replace(/TOPIC/g, topic);
+    var mid = T.mids[i % T.mids.length].replace(/TOPIC/g, topic);
+    var caption = open + " \u2728\n\n" + mid + (ctaLine ? "\n\n" + ctaLine : "");
+    list.innerHTML += '<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">' +
+      '<div style="font-size:13px;color:var(--text);line-height:1.7;white-space:pre-line;margin-bottom:10px">' + caption + "</div>" +
+      '<button class="cpbtn" data-cap="' + caption.replace(/"/g,"&quot;").replace(/\n/g,"&#10;") + '" onclick="cpCaption(this)">&#128203; Copy</button>' +
+      "</div>";
+  }
+  document.getElementById("igResults").style.display = "block";
+}
+function cpCaption(btn) {
+  var text = btn.dataset.cap.replace(/&#10;/g,"\n").replace(/&quot;/g,'"');
+  navigator.clipboard.writeText(text);
+  btn.textContent = "&#10003; Copied!"; btn.classList.add("done");
+  setTimeout(function() { btn.textContent = "&#128203; Copy"; btn.classList.remove("done"); }, 2000);
 }
 </script>
 
-<div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Generate hashtags</div></a>
-<a class="rc" href="tiktok-idea-generator.html"><div class="ri">🎵</div><div class="rn">TikTok Ideas</div><div class="rd">TikTok content ideas</div></a>
-<a class="rc" href="social-media-post-generator.html"><div class="ri">📣</div><div class="rn">Social Post Generator</div><div class="rd">Multi-platform posts</div></a>
-<a class="rc" href="headline-generator.html"><div class="ri">📰</div><div class="rn">Headline Generator</div><div class="rd">Catchy headlines</div></a>
-<a class="rc" href="index.html"><div class="ri">🏠</div><div class="rn">All Tools</div><div class="rd">Browse all tools</div></a></div></div>
 </div>
-<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b">
-  <div style="max-width:960px;margin:0 auto">
-    <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">🏠 All Tools</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Privacy Policy</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Terms of Use</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Contact</a>
-    </div>
-    <p style="font-size:12px;color:#71717a">© 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a>
+    <span class="sep">&middot;</span>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <span class="sep">&middot;</span>
+    <a href="terms.html">Terms of Use</a>
+    <span class="sep">&middot;</span>
+    <a href="contact.html">Contact</a>
   </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
 </footer>
 </body>
 </html>
