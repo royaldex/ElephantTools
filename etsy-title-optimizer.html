@@ -3,9 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free Etsy title optimizer with live 140-character counter. Front-load keywords and maximize your Etsy search visibility.">
-<title>Etsy Title Optimizer &mdash; Elephast</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="description" content="Free Etsy title optimizer with live 140-character counter. Front-load keywords and maximize your Etsy shop search visibility.">
+<meta property="og:title" content="Etsy Title Optimizer &mdash; Elephast.com">
+<meta property="og:description" content="Free Etsy title optimizer with live 140-character counter. Front-load keywords and maximize your Etsy shop search visibility.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Etsy Title Optimizer &mdash; Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -13,15 +16,120 @@
   --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
   --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
   --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;
+  --orange-faint:rgba(249,115,22,.08);
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;display:flex;flex-direction:column}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;flex-shrink:0}
+
+/* NAV */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:8px;height:62px}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:8px}
+.nav-logo img{height:44px;width:auto;display:block}
+.nav-spacer{flex:1}
+.nav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-services{background:rgba(249,115,22,.12);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.nav-services:hover{background:rgba(249,115,22,.18);color:var(--orange)}
+
+/* MAIN */
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+
+/* PAGE INTRO CARD */
+.intro{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-text{}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+
+/* HOW TO STEPS */
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:170px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+
+/* TOOL AREA */
+.tool-area{margin-bottom:24px}
+
+/* TIPS SECTION */
+.tips-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+
+/* RELATED TOOLS */
+.related{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.related-card{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.related-card:hover{border-color:var(--orange);transform:translateY(-2px);background:var(--surface)}
+.rc-icon{font-size:22px;margin-bottom:6px}
+.rc-name{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--text)}
+.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface);flex-shrink:0}
+.fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
+.fl a:hover{color:var(--text)}
+.fl .sep{color:var(--border-h);font-size:11px}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
+
+/* TOOL CARD STYLING (shared for tools) */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:90px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-p:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-o{background:var(--orange);color:#000}.btn-o:hover{opacity:.88}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:460px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px}
+.row:hover{background:var(--surface-2)}
+.rl{color:var(--dim);display:flex;align-items:center;gap:8px}
+.rv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
+.rv.pos{color:var(--green)}.rv.neg{color:var(--red)}.rv.neu{color:var(--dim)}
+.divider{height:1px;background:var(--border);margin:8px 0}
+@media(max-width:640px){.intro-top{flex-direction:column;gap:10px}.intro-icon{font-size:28px}}
+
+/* ── Tool-specific styles ── */
+*{margin:0;padding:0;box-sizing:border-box}
+
+
+
+
 .hi{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:16px;height:60px}
 .hi a.logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
 .hi a.logo img{height:42px;width:auto;display:block}
 .htool{font-size:13px;color:var(--muted)}
-.hnav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.h
 .hnav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:7px;transition:color .15s}
 .hnav a:hover{color:var(--text)}
 .main{max-width:980px;margin:0 auto;padding:36px 24px 72px;flex:1;width:100%}
@@ -32,7 +140,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .step{display:flex;align-items:flex-start;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;flex:1;min-width:160px}
 .step-num{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-text{font-size:12px;color:var(--dim);line-height:1.5}
-footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface);flex-shrink:0}
+
 .fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
 .fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
 .fl a:hover{color:var(--text)}
@@ -123,26 +231,34 @@ footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;ba
     .card { padding: 24px; }
     .stats { grid-template-columns: 1fr 1fr; }
   }
-
 </style>
 </head>
 <body>
-<header>
-  <div class="hi">
-    <a href="index.html" class="logo"><img src="logo-nav.png" alt="Elephast.com"></a>
-    <span class="htool">/ Etsy Title Optimizer</span>
-    <div class="hnav">
-      <a href="index.html">All Tools</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-nav.png" alt="Elephast.com — Hella Fast Tools"></a>
+    <div class="nav-spacer"></div>
+    <a href="index.html" class="nav-link">All Tools</a>
+    <a href="services.html" class="nav-link nav-services">&#9889; Services</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+<div class="main">
+<div class="intro">
+  <div class="intro-top">
+    <div class="intro-icon">✏️</div>
+    <div class="intro-text">
+      <div class="intro-cat">Etsy Tools</div>
+      <h1>Etsy Title Optimizer</h1>
+      <p class="intro-desc">Your Etsy listing title is one of the most critical ranking factors in Etsy search. This tool gives you a live counter capped at 140 characters so you can craft titles that front-load your most important keywords and drive more organic traffic to your listings.</p>
     </div>
   </div>
-</header>
+  <div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Type or paste your listing title into the box</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Watch the live counter — aim for 130–140 characters</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Put your most important keyword first</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Use commas to separate keyword phrases naturally</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Copy the final title and paste directly into Etsy</div></div></div>
+</div>
+<div class="tool-area">
 <div class="main">
-<div class="page-intro">
-  <h1><span>✏️</span> Etsy Title Optimizer</h1>
-  <div class="desc">Your Etsy listing title is one of the most important SEO factors in your shop. This tool gives you a live character counter capped at 140, helping you front-load your most important keywords while staying within Etsy's limit.</div>
-  <div class="how-to"><div class="step"><div class="step-num">1</div><div class="step-text">Type or paste your listing title</div></div><div class="step"><div class="step-num">2</div><div class="step-text">Watch the counter — green means good</div></div><div class="step"><div class="step-num">3</div><div class="step-text">Front-load your top 3 keywords</div></div><div class="step"><div class="step-num">4</div><div class="step-text">Copy when ready</div></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Watch the counter — green means good</div></div><div class="step"><div class="step-num">3</div><div class="step-text">Front-load your top 3 keywords</div></div><div class="step"><div class="step-num">4</div><div class="step-text">Copy when ready</div></div></div>
 </div>
 <div class="card">
   <div class="icon">✏️</div>
@@ -247,16 +363,26 @@ footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;ba
   }
 </script>
 </div>
+</div>
+<div class="tips-section">
+  <h2>&#128161; Pro Tips &amp; Best Practices</h2>
+  <div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Front-load your primary keyword — Etsy weights the beginning of your title most heavily in search.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use all 140 characters whenever possible. Unused characters are missed SEO opportunities.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Separate keyword phrases with commas or pipe characters (|) for better readability.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Avoid filler words like 'a', 'the', 'and' at the start — put a keyword there instead.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Include your file format (PNG, SVG, PDF) if selling digital products — buyers search for this.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Research what terms buyers actually use. Think like a customer, not a creator.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Update your titles seasonally — add 'Christmas Gift' or 'Birthday Present' when relevant.</div></div></div>
+</div>
+<div class="related">
+  <h2>&#128279; Related Tools</h2>
+  <div class="related-grid"><a class="related-card" href="etsy-tag-generator.html"><div class="rc-icon">🔖</div><div class="rc-name">Etsy Tag Generator</div><div class="rc-desc">13 SEO-optimized tags</div></a><a class="related-card" href="etsy-tag-checker.html"><div class="rc-icon">✔️</div><div class="rc-name">Tag Checker</div><div class="rc-desc">Validate your 13 tags</div></a><a class="related-card" href="keyword-generator.html"><div class="rc-icon">🔍</div><div class="rc-name">Keyword Generator</div><div class="rc-desc">Find high-traffic keywords</div></a><a class="related-card" href="product-description-generator.html"><div class="rc-icon">📝</div><div class="rc-name">Description Generator</div><div class="rc-desc">Write compelling copy</div></a><a class="related-card" href="etsy-profit-calculator.html"><div class="rc-icon">💰</div><div class="rc-name">Profit Calculator</div><div class="rc-desc">Calculate your margins</div></a><a class="related-card" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 67 free tools</div></a></div>
+</div>
+</div>
 <footer>
   <div class="fl">
     <a href="index.html">&#127968; All Tools</a><span class="sep">&middot;</span>
     <a href="services.html">Services</a><span class="sep">&middot;</span>
     <a href="about.html">About</a><span class="sep">&middot;</span>
     <a href="privacy-policy.html">Privacy Policy</a><span class="sep">&middot;</span>
-    <a href="terms.html">Terms</a><span class="sep">&middot;</span>
+    <a href="terms.html">Terms of Use</a><span class="sep">&middot;</span>
     <a href="contact.html">Contact</a>
   </div>
-  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free browser tools for Etsy sellers, creators &amp; developers. No login. No installs.</p>
 </footer>
 </body>
 </html>
