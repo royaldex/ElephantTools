@@ -329,10 +329,12 @@
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="index.html" class="logo">Elephast<span>.com</span></a>
-    <span class="page-label">/ Contact</span>
+<header style="background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100">
+  <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;gap:14px;height:58px">
+    <a href="index.html" style="display:flex;align-items:center;text-decoration:none;flex-shrink:0">
+      <img src="logo-nav.png" alt="Elephast.com" style="height:40px;width:auto;display:block">
+    </a>
+    <span style="font-size:13px;color:var(--muted)">/ Contact</span>
   </div>
 </header>
 
@@ -391,7 +393,7 @@
 
         <p class="form-note">
           You can also email us directly at
-          <a href="mailto:support@elephast.com">support@elephast.com</a><br>
+          <a href="/cdn-cgi/l/email-protection#473432373728353307222b22372f2634336924282a"><span class="__cf_email__" data-cfemail="473432373728353307222b22372f2634336924282a">[email&#160;protected]</span></a><br>
           By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a>.
         </p>
       </div>
@@ -418,7 +420,7 @@
         <div class="info-icon">📧</div>
         <div class="info-text">
           <div class="info-title">Email</div>
-          <div class="info-desc"><a href="mailto:support@elephast.com">support@elephast.com</a><br>For all enquiries and support.</div>
+          <div class="info-desc"><a href="/cdn-cgi/l/email-protection#cebdbbbebea1bcba8eaba2abbea6afbdbae0ada1a3"><span class="__cf_email__" data-cfemail="8cfff9fcfce3fef8cce9e0e9fce4edfff8a2efe3e1">[email&#160;protected]</span></a><br>For all enquiries and support.</div>
         </div>
       </div>
       <div class="info-item">
@@ -481,7 +483,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function handleSubmit() {
     const fname  = document.getElementById('fname').value.trim();
     const email  = document.getElementById('email').value.trim();
@@ -512,17 +514,4 @@
   }
 
   // Allow Enter in fields to tab to next, but not submit
-  document.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const fields = Array.from(document.querySelectorAll('input, select, textarea, button'));
-        const idx = fields.indexOf(e.target);
-        if (idx > -1 && idx < fields.length - 1) fields[idx + 1].focus();
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
+  document.querySelectorAll('input, select').f

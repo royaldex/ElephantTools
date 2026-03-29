@@ -164,7 +164,9 @@ function genEtsyTags(){
   // Pick 13 unique, trim to 20 chars
   const seen=new Set();const tags=[];
   for(const c of candidates){
-    const t=c.toLowerCase().slice(0,20).trim();
+    var t=c.toLowerCase().trim();
+    // Smart trim: cut at word boundary under 20 chars
+    if(t.length>20){var words=t.split(' ');var out='';for(var wi=0;wi<words.length;wi++){if((out+(out?' ':'')+words[wi]).length<=20){out+=(out?' ':'')+words[wi];}else{break;}} t=out||t.slice(0,20);}
     if(!seen.has(t)){seen.add(t);tags.push(t);}
     if(tags.length===13)break;
   }

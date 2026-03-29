@@ -4,15 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Generate viral TikTok video ideas for any niche. Free TikTok content idea generator for creators.">
-<title>Free TikTok Video Idea Generator - Content Ideas Instantly &mdash; Elephast</title>
+<title>Free TikTok Video Idea Generator — Content Ideas Instantly — Elephast</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;
+  --yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;
+}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
-.hi{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:14px;height:56px}
 .logo{font-family:'Space Mono',monospace;font-size:14px;color:var(--orange);text-decoration:none}
 .logo span{color:var(--muted);font-weight:400}
 .htool{font-size:13px;color:var(--dim)}
@@ -20,21 +25,24 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
 .sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;max-width:600px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.ctitle{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
 input,select,textarea{width:100%;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
 textarea{resize:vertical;min-height:90px}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.f{margin-bottom:14px}
+.f{margin-bottom:14px}.f:last-child{margin-bottom:0}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:580px){.r2{grid-template-columns:1fr}}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
 .btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
 .btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-p:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
 .btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-o{background:var(--orange);color:#000}.btn-o:hover{opacity:.88}
 .btn-full{width:100%;justify-content:center}
 .btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
-.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:460px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.rbox{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
 .arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
 .cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
 .cpbtn:hover{background:var(--border-h);color:var(--text)}
@@ -43,197 +51,103 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--surface-2);color:var(--dim)}
 .chip:hover{border-color:var(--border-h);color:var(--text)}
 .chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
-footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface)}
-.fl{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.fl a{font-size:13px;color:var(--dim);text-decoration:none;padding:4px 10px;border-radius:6px}
-.fl a:hover{color:var(--text)}
-.fl .sep{color:var(--muted);font-size:12px}
-.fc{font-size:12px;color:var(--muted)}
-.fc a{color:var(--orange);text-decoration:none}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.notice{padding:10px 14px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;font-size:12px;color:#fdba74;margin-bottom:14px}
+.success{padding:10px 14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:12px;color:#6ee7b7;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px}
+.row:hover{background:var(--surface-2)}
+.rl{color:var(--dim);display:flex;align-items:center;gap:8px}
+.rv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
+.rv.pos{color:var(--green)}.rv.neg{color:var(--red)}.rv.neu{color:var(--dim)}
+.div{height:1px;background:var(--border);margin:8px 0}
+.related{margin-top:40px;border-top:1px solid var(--border);padding-top:28px}
+.related h2{font-size:13px;font-weight:700;color:var(--dim);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-1px)}
+.ri{font-size:20px;margin-bottom:6px}
+.rn{font-size:13px;font-weight:600;margin-bottom:3px}
+.rd{font-size:11px;color:var(--muted)}
+footer{max-width:960px;margin:0 auto;padding:0 20px 32px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--orange);text-decoration:none}
+input[type=range]{accent-color:var(--green)}
 </style>
 </head>
 <body>
 <header>
-  <div class="hi">
+  <div class="header-inner">
     <a href="index.html" class="logo">Elephast<span>.com</span></a>
     <span class="htool">/ TikTok Idea Generator</span>
   </div>
 </header>
 <div class="main">
 
-<h1>&#127925; TikTok Video Idea Generator</h1>
-<p class="sub">Generate viral TikTok video ideas based on your niche and content style. Beat creator block in seconds.</p>
+<h1>🎵 TikTok Video Idea Generator</h1>
+<p class="sub">Generate viral TikTok video ideas based on your niche and content style. Beat creator's block in seconds.</p>
 <div class="card">
-  <div class="ct">Your TikTok Profile</div>
+  <div class="ctitle">Your TikTok Profile</div>
   <div class="f"><label>Your Niche / Topic</label><input type="text" id="ttNiche" placeholder="e.g. Etsy seller, digital art, home decor, fitness, cooking"></div>
   <div class="r2">
-    <div class="f"><label>Content Style</label>
+    <div class="f">
+      <label>Content Style</label>
       <select id="ttStyle">
         <option value="educational">Educational / How-To</option>
         <option value="entertaining">Entertaining / Funny</option>
-        <option value="bts">Behind the Scenes</option>
+        <option value="behind-scenes">Behind the Scenes</option>
         <option value="trending">Trending Formats</option>
         <option value="promotional">Promotional / Sales</option>
       </select>
     </div>
-    <div class="f"><label>How many ideas?</label>
+    <div class="f">
+      <label>How many ideas?</label>
       <select id="ttCount">
         <option value="10" selected>10 ideas</option>
         <option value="20">20 ideas</option>
       </select>
     </div>
   </div>
-  <button class="btn btn-p btn-full" onclick="genTTIdeas()">&#9889; Generate Ideas</button>
+  <button class="btn btn-p btn-full" onclick="genTTIdeas()">⚡ Generate Ideas</button>
 </div>
 <div id="ttResults" style="display:none">
   <div class="card">
-    <div class="ct">TikTok Video Ideas</div>
-    <div class="arow" style="margin-bottom:12px"><button class="cpbtn" onclick="copyTT()">&#128203; Copy All</button></div>
+    <div class="ctitle">TikTok Video Ideas</div>
+    <div class="arow" style="margin-bottom:12px"><button class="cpbtn" onclick="cpEl('ttOutput')">📋 Copy All</button></div>
     <div class="rbox" id="ttOutput"></div>
   </div>
 </div>
 <script>
-var TT = {
-  educational: [
-    "How I make money with NICHE (step by step)",
-    "3 things I wish I knew before starting NICHE",
-    "The real reason NICHE creators fail and how to fix it",
-    "Watch me turn my NICHE idea into income",
-    "A day in my life as a NICHE creator",
-    "NICHE beginner to intermediate in 60 seconds",
-    "The hack that 10x my NICHE results",
-    "Stop making these NICHE mistakes (no one tells you this)",
-    "How to start NICHE with no experience",
-    "My exact NICHE process from start to finish",
-    "The NICHE tool that changed everything for me",
-    "5 free resources every NICHE beginner needs",
-    "How I learned NICHE in 30 days",
-    "What NICHE tutorials do not tell you",
-    "The truth about making money with NICHE",
-    "Why most people quit NICHE (and how to not be one of them)",
-    "My NICHE income breakdown this month",
-    "The one NICHE mistake I will never make again",
-    "NICHE for beginners: everything you need to know",
-    "How to get your first NICHE sale"
-  ],
-  entertaining: [
-    "POV: you just discovered NICHE for the first time",
-    "Me trying NICHE for the first time vs now",
-    "When your NICHE idea is actually genius",
-    "NICHE but make it chaotic (it worked though)",
-    "Replying to: is NICHE worth it? (honest answer)",
-    "That one NICHE hack nobody talks about",
-    "The NICHE glow up nobody asked for",
-    "What I thought NICHE was vs what it actually is",
-    "My reaction when NICHE finally clicks",
-    "When the NICHE algorithm actually works",
-    "Rating NICHE advice I found online",
-    "Things NICHE people say vs what they mean",
-    "The unhinged side of NICHE that I love",
-    "NICHE expectations vs reality",
-    "Things only NICHE people will understand",
-    "Answering the most ridiculous NICHE questions",
-    "NICHE red flags to watch out for",
-    "Reacting to my first NICHE attempt",
-    "The NICHE journey nobody shows you",
-    "Why I could not stop laughing at this NICHE moment"
-  ],
-  bts: [
-    "Pack an order with me: NICHE edition",
-    "How I set up my NICHE workspace for free",
-    "The reality of running a NICHE business alone",
-    "Making my best-selling NICHE product from scratch",
-    "What my NICHE workday actually looks like",
-    "Unboxing my NICHE supplies haul",
-    "Come to a NICHE market with me",
-    "My NICHE studio tour: small space edition",
-    "How I photograph my NICHE products at home",
-    "The honest numbers behind my NICHE business",
-    "A week in my life running a NICHE side hustle",
-    "How I manage NICHE and a full-time job",
-    "The tools I use every day for NICHE",
-    "My NICHE morning routine",
-    "Behind the scenes of a NICHE launch day",
-    "What nobody shows you about NICHE",
-    "How much time NICHE actually takes per week",
-    "My NICHE failures and what I learned",
-    "Setting up my NICHE shop: the beginning",
-    "Honest review of my first NICHE month"
-  ],
-  trending: [
-    "Things that hit different when you love NICHE",
-    "Green flag vs red flag in NICHE",
-    "Tell me you love NICHE without telling me",
-    "The NICHE version of this viral trend",
-    "No because why does NICHE work like this",
-    "Rating NICHE content I have seen this week",
-    "The unhinged NICHE side of the internet",
-    "NICHE girlies rise up",
-    "Signs you are obsessed with NICHE",
-    "NICHE but make it a vibe",
-    "NICHE things that just make sense",
-    "Things I do because I love NICHE",
-    "Stitch this if you are in the NICHE community",
-    "POV your obsession is NICHE",
-    "NICHE people will understand this",
-    "Hot take: NICHE is better than people think",
-    "Soft life version of NICHE",
-    "Main character energy for NICHE lovers",
-    "Healing your relationship with NICHE",
-    "NICHE aesthetic unlocked"
-  ],
-  promotional: [
-    "What I create with NICHE (and where to find it)",
-    "New drop just landed: NICHE edition",
-    "Why I started my NICHE shop (the real story)",
-    "Customer reaction to my NICHE product",
-    "Behind the brand: my NICHE journey",
-    "The NICHE product I am most proud of",
-    "How to find me and my NICHE content",
-    "New NICHE collection coming soon",
-    "Answering your questions about my NICHE shop",
-    "The NICHE product everyone keeps asking about",
-    "What makes my NICHE different",
-    "My NICHE bestsellers and why they sell",
-    "The story behind my NICHE brand",
-    "NICHE shop tour: everything I sell",
-    "How I price my NICHE products",
-    "Why customers love my NICHE",
-    "Sneak peek of my next NICHE drop",
-    "How to order from my NICHE shop",
-    "My NICHE refund and review policy",
-    "Thank you for 1000 NICHE sales"
-  ]
+const TT={
+  educational:['How I make {n} in {niche} (step by step)','3 things I wish I knew before starting {niche}','The REAL reason {niche} creators fail (and how to fix it)','Watch me turn $10 into $100 with {niche}','A day in my life as a {niche} creator','{niche} beginner to pro in 60 seconds','The hack that 10x'd my {niche} results','Stop making these {niche} mistakes (no one tells you this)','How to start {niche} with NO experience','My exact {niche} process from start to finish','The {niche} tool that changed everything for me','5 free resources every {niche} beginner needs','How I learned {niche} in 30 days','What {niche} tutorials don't tell you','The truth about making money with {niche}'],
+  entertaining:['POV: you just discovered {niche} for the first time 👀','Me trying {niche} for the first time vs now 😂','When your {niche} idea is actually genius 🔥','{niche} but make it chaotic (it worked though) 💀','Replying to: "is {niche} worth it?" (honest answer)','That one {niche} hack nobody talks about 🤫','The {niche} glow up nobody asked for ✨','What I thought {niche} was vs what it actually is 😭','My reaction when {niche} finally clicks 🤯','When the {niche} algorithm actually works 🎉'],
+  'behind-scenes':['Pack an order with me — {niche} edition 📦','How I set up my {niche} workspace for free','The reality of running a {niche} business alone','Making my best-selling {niche} product from scratch','What my {niche} workday actually looks like','Unboxing my {niche} supplies haul 🛍️','Come to a {niche} market with me 🌿','My {niche} studio tour — small space edition','How I photograph my {niche} products at home','The honest numbers behind my {niche} business'],
+  trending:['Would I rather {niche} or [trend]? Hot takes 🔥','Using the [viral sound] to explain {niche} 😂','Stitch this if you're in the {niche} community','Things that hit different in {niche} 💅','Green flag vs red flag in {niche} ✅❌','Tell me you love {niche} without telling me 👀','The {niche} version of the [trend] challenge','Rating {niche} content I've seen this week 📊','No because why does {niche} do this? 😭','The unhinged {niche} side of TikTok is my fav 💀'],
+  promotional:['What I create in {niche} (and where to find it) 🔗','New drop just landed — {niche} edition ✨','Why I started my {niche} shop (the real story)','Customer reaction to my {niche} product 🥹','Behind the brand: my {niche} journey','The {niche} product I'm most proud of','How to find me and my {niche} content (save this!)','New {niche} collection coming soon 👀','Answering your questions about my {niche} shop','The {niche} product everyone keeps asking about']
 };
-function genTTIdeas() {
-  var niche = document.getElementById("ttNiche").value.trim() || "your niche";
-  var style = document.getElementById("ttStyle").value;
-  var count = parseInt(document.getElementById("ttCount").value);
-  var ideas = TT[style].slice(0, count).map(function(idea, i) {
-    return (i+1) + ". " + idea.replace(/NICHE/g, niche);
-  });
-  document.getElementById("ttOutput").textContent = ideas.join("\n");
-  document.getElementById("ttResults").style.display = "block";
+function genTTIdeas(){
+  const niche=document.getElementById('ttNiche').value.trim()||'your niche';
+  const style=document.getElementById('ttStyle').value;
+  const count=parseInt(document.getElementById('ttCount').value);
+  const ideas=TT[style].slice(0,count).map((idea,i)=>`${i+1}. ${idea.replace(/{niche}/g,niche).replace(/{n}/g,['$500','$1000','$200','$50'][i%4])}`);
+  document.getElementById('ttOutput').textContent=ideas.join('
+');
+  document.getElementById('ttResults').style.display='block';
 }
-function copyTT() {
-  navigator.clipboard.writeText(document.getElementById("ttOutput").textContent);
-  event.target.textContent = "&#10003; Copied!"; event.target.classList.add("done");
-  setTimeout(function() { event.target.textContent = "&#128203; Copy All"; event.target.classList.remove("done"); }, 2000);
+function cpEl(id){
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  event.target.textContent='✓ Copied!';event.target.classList.add('done');
+  setTimeout(()=>{event.target.textContent='📋 Copy All';event.target.classList.remove('done')},2000);
 }
 </script>
 
+<div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="instagram-caption-generator.html"><div class="ri">📸</div><div class="rn">Instagram Captions</div><div class="rd">Caption generator</div></a>
+<a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Get hashtags</div></a>
+<a class="rc" href="youtube-title-generator.html"><div class="ri">▶️</div><div class="rn">YouTube Titles</div><div class="rd">YouTube SEO titles</div></a>
+<a class="rc" href="social-media-post-generator.html"><div class="ri">📣</div><div class="rn">Social Post Generator</div><div class="rd">Multi-platform posts</div></a>
+<a class="rc" href="index.html"><div class="ri">🏠</div><div class="rn">All Tools</div><div class="rd">Browse all tools</div></a></div></div>
 </div>
-<footer>
-  <div class="fl">
-    <a href="index.html">&#127968; All Tools</a>
-    <span class="sep">&middot;</span>
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <span class="sep">&middot;</span>
-    <a href="terms.html">Terms of Use</a>
-    <span class="sep">&middot;</span>
-    <a href="contact.html">Contact</a>
-  </div>
-  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
-</footer>
+<footer><a href="index.html">← All Tools</a> · Free tools for creators &amp; sellers · Elephast.com</footer>
 </body>
 </html>
