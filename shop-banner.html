@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner Maker Pro</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Raleway:wght@400;700&family=Bebas+Neue&family=Lobster&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Design Etsy shop banners with 26 size presets. Free browser-based banner maker for Etsy sellers.">
+<title>Shop Banner Creator &mdash; Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;display:flex;flex-direction:column}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;flex-shrink:0}
+.hi{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:16px;height:60px}
+.hi a.logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.hi a.logo img{height:42px;width:auto;display:block}
+.htool{font-size:13px;color:var(--muted)}
+.hnav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.hnav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:7px;transition:color .15s}
+.hnav a:hover{color:var(--text)}
+.main{max-width:980px;margin:0 auto;padding:36px 24px 72px;flex:1;width:100%}
+.page-intro{margin-bottom:28px;padding:22px 24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;border-left:3px solid var(--orange)}
+.page-intro h1{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.page-intro .desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:14px}
+.how-to{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.step{display:flex;align-items:flex-start;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;flex:1;min-width:160px}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:12px;color:var(--dim);line-height:1.5}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface);flex-shrink:0}
+.fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
+.fl a:hover{color:var(--text)}
+.fl .sep{color:var(--border-h);font-size:12px}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
+
+/* ── Tool-specific styles ── */
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg: #0a0a0a; --surface: #141414; --surface-2: #1a1a1a; --border: #2a2a2a;
-      --text: #f5f5f5; --text-dim: #a1a1a1; --text-muted: #6b6b6b;
-      --accent: #10b981; --accent-hover: #0d9668;
-    }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    
+    
     
     .app { display: grid; grid-template-columns: 320px 1fr; height: 100vh; }
     @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .sidebar { max-height: 50vh; } }
@@ -111,10 +141,28 @@
     .back-link:hover { color: var(--accent); }
 
     .upscale-badge { font-size: 10px; background: rgba(16,185,129,0.15); color: var(--accent); border: 1px solid rgba(16,185,129,0.3); border-radius: 4px; padding: 2px 6px; }
-  </style>
+  
+</style>
 </head>
 <body>
-  <div class="app">
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+    <span class="htool">/ Shop Banner Creator</span>
+    <div class="hnav">
+      <a href="index.html">All Tools</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+<div class="main">
+<div class="page-intro">
+  <h1><span>🏪</span> Shop Banner Creator</h1>
+  <div class="desc">Your Etsy shop banner is the first thing buyers see. This tool lets you design a professional shop banner with 26 size presets — including Etsy's recommended dimensions — with text, colors, and layout controls.</div>
+  <div class="how-to"><div class="step"><div class="step-num">1</div><div class="step-text">Select your banner size preset</div></div><div class="step"><div class="step-num">2</div><div class="step-text">Choose a background color or upload an image</div></div><div class="step"><div class="step-num">3</div><div class="step-text">Add your shop name and tagline</div></div><div class="step"><div class="step-num">4</div><div class="step-text">Download at 2x resolution for retina displays</div></div></div>
+</div>
+<div class="app">
     <aside class="sidebar">
       <div class="section">
         <div class="section-title">Canvas Size</div>
@@ -327,7 +375,7 @@
       <header class="header">
         <h1>🏪 Banner Maker Pro</h1>
         <div class="header-actions">
-          <a href="index.html" class="back-link">← All Tools</a>
+          
           <span class="upscale-badge">2× Export</span>
           <button class="btn btn-secondary" id="resetBtn">Reset</button>
           <button class="btn btn-primary" id="downloadBtn">⬇️ Download</button>
@@ -890,5 +938,17 @@
 
     init();
   </script>
+</div>
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a><span class="sep">&middot;</span>
+    <a href="services.html">Services</a><span class="sep">&middot;</span>
+    <a href="about.html">About</a><span class="sep">&middot;</span>
+    <a href="privacy-policy.html">Privacy Policy</a><span class="sep">&middot;</span>
+    <a href="terms.html">Terms</a><span class="sep">&middot;</span>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
+</footer>
 </body>
 </html>

@@ -79,7 +79,7 @@ input[type=range]{accent-color:var(--green)}
 <body>
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <a href="index.html" class="logo"><img src="logo-nav.png" alt="Elephast.com" style="height:42px;width:auto;display:block"></a>
     <span class="htool">/ Image Cropper</span>
   </div>
 </header>
@@ -113,10 +113,10 @@ input[type=range]{accent-color:var(--green)}
     <div style="position:relative;display:inline-block;max-width:100%;overflow:hidden;user-select:none" id="cropWrap">
       <img id="cropImg" style="display:block;max-width:100%;max-height:500px">
       <div id="cropBox" style="position:absolute;border:2px solid var(--green);box-shadow:0 0 0 9999px rgba(0,0,0,0.5);cursor:move;top:25%;left:25%;width:50%;height:50%">
-        <div class="cropHandle" data-h="tl" style="position:absolute;width:24px;height:24px;background:var(--green);border-radius:4px;top:-12px;left:-12px;cursor:nw-resize;touch-action:none"></div>
-        <div class="cropHandle" data-h="tr" style="position:absolute;width:24px;height:24px;background:var(--green);border-radius:4px;top:-12px;right:-12px;cursor:ne-resize;touch-action:none"></div>
-        <div class="cropHandle" data-h="bl" style="position:absolute;width:24px;height:24px;background:var(--green);border-radius:4px;bottom:-12px;left:-12px;cursor:sw-resize;touch-action:none"></div>
-        <div class="cropHandle" data-h="br" style="position:absolute;width:24px;height:24px;background:var(--green);border-radius:4px;bottom:-12px;right:-12px;cursor:se-resize;touch-action:none"></div>
+        <div class="cropHandle" data-h="tl" style="position:absolute;width:10px;height:10px;background:var(--green);top:-5px;left:-5px;cursor:nw-resize"></div>
+        <div class="cropHandle" data-h="tr" style="position:absolute;width:10px;height:10px;background:var(--green);top:-5px;right:-5px;cursor:ne-resize"></div>
+        <div class="cropHandle" data-h="bl" style="position:absolute;width:10px;height:10px;background:var(--green);bottom:-5px;left:-5px;cursor:sw-resize"></div>
+        <div class="cropHandle" data-h="br" style="position:absolute;width:10px;height:10px;background:var(--green);bottom:-5px;right:-5px;cursor:se-resize"></div>
       </div>
     </div>
     <div id="cropInfo" style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-top:8px"></div>
@@ -170,19 +170,6 @@ function updateCropInfo(){
   document.getElementById('cropInfo').textContent=`Crop: ${w}×${h}px at (${x}, ${y})`;
 }
 function setupDrag(){
-  // Add touch support
-  var touchToMouse = function(e) {
-    if(e.touches && e.touches.length) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-    }
-    return e;
-  };
-  var box2 = document.getElementById('cropBox');
-  box2.addEventListener('touchstart', function(e){ touchToMouse(e); box2.dispatchEvent(new MouseEvent('mousedown', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY})); }, {passive:true});
-  document.addEventListener('touchmove', function(e){ if(drag) document.dispatchEvent(new MouseEvent('mousemove', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY})); }, {passive:true});
-  document.addEventListener('touchend', function(){ document.dispatchEvent(new MouseEvent('mouseup')); }, {passive:true});
-
   const box=document.getElementById('cropBox');const wrap=document.getElementById('cropWrap');
   let drag=null,startX,startY,startL,startT,startW,startH;
   box.addEventListener('mousedown',function(e){
@@ -241,19 +228,22 @@ function doCrop(){
 <a class="rc" href="simple-frames.html"><div class="ri">🪟</div><div class="rn">Simple Frames</div><div class="rd">Add borders</div></a>
 <a class="rc" href="index.html"><div class="ri">🏠</div><div class="rn">All Tools</div><div class="rd">Browse all tools</div></a></div></div>
 </div>
-<footer><a href="index.html">← All Tools</a> · Free tools for creators &amp; sellers · Elephast.com</footer>
-<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b">
-  <div style="max-width:960px;margin:0 auto">
-    <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px">&#127968; All Tools</a>
-      <span style="color:#71717a">·</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px">Privacy Policy</a>
-      <span style="color:#71717a">·</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px">Terms of Use</a>
-      <span style="color:#71717a">·</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px">Contact</a>
+<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b;flex-shrink:0">
+  <div style="max-width:980px;margin:0 auto">
+    <div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="services.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="about.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">About</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Privacy Policy</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a></p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
   </div>
 </footer>
 </body>

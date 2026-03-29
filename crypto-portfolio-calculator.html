@@ -75,18 +75,11 @@ footer{max-width:960px;margin:0 auto;padding:0 20px 32px;text-align:center;font-
 footer a{color:var(--orange);text-decoration:none}
 input[type=range]{accent-color:var(--green)}
 </style>
-
-<style>
-@media(max-width:600px){
-  .portfolio-row { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
-  .portfolio-row button { grid-column: span 2; }
-}
-</style>
 </head>
 <body>
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">Elephast<span>.com</span></a>
+    <a href="index.html" class="logo"><img src="logo-nav.png" alt="Elephast.com" style="height:42px;width:auto;display:block"></a>
     <span class="htool">/ Crypto Portfolio Calculator</span>
   </div>
 </header>
@@ -97,14 +90,14 @@ input[type=range]{accent-color:var(--green)}
 <div class="card">
   <div class="ctitle">Your Holdings</div>
   <div id="portfolioRows">
-    <div class="portfolio-row" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px;min-width:0">
+    <div class="portfolio-row" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px">
       <input type="text" placeholder="BTC" value="Bitcoin" oninput="calcPort()">
       <input type="number" placeholder="Amount" value="0.5" step="any" oninput="calcPort()">
       <input type="number" placeholder="Buy price $" value="30000" step="any" oninput="calcPort()">
       <input type="number" placeholder="Current $" value="65000" step="any" oninput="calcPort()">
       <button onclick="removeRow(this)" style="background:var(--border);border:none;border-radius:6px;color:var(--muted);cursor:pointer;padding:8px;font-size:16px;height:42px">×</button>
     </div>
-    <div class="portfolio-row" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px;min-width:0">
+    <div class="portfolio-row" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px">
       <input type="text" placeholder="ETH" value="Ethereum" oninput="calcPort()">
       <input type="number" placeholder="Amount" value="5" step="any" oninput="calcPort()">
       <input type="number" placeholder="Buy price $" value="1800" step="any" oninput="calcPort()">
@@ -132,7 +125,7 @@ function addRow(){
   const container=document.getElementById('portfolioRows');
   const div=document.createElement('div');
   div.className='portfolio-row';
-  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px;min-width:0';
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:8px';
   div.innerHTML=`<input type="text" placeholder="Coin name" oninput="calcPort()"><input type="number" placeholder="Amount" step="any" oninput="calcPort()"><input type="number" placeholder="Buy price $" step="any" oninput="calcPort()"><input type="number" placeholder="Current $" step="any" oninput="calcPort()"><button onclick="removeRow(this)" style="background:var(--border);border:none;border-radius:6px;color:var(--muted);cursor:pointer;padding:8px;font-size:16px;height:42px">×</button>`;
   container.appendChild(div);
 }
@@ -183,18 +176,22 @@ calcPort();
 <a class="rc" href="position-size-calculator.html"><div class="ri">📐</div><div class="rn">Position Size</div><div class="rd">Risk management</div></a>
 <a class="rc" href="index.html"><div class="ri">🏠</div><div class="rn">All Tools</div><div class="rd">Browse all tools</div></a></div></div>
 </div>
-<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b">
-  <div style="max-width:960px;margin:0 auto">
-    <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">🏠 All Tools</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Privacy Policy</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Terms of Use</a>
-      <span style="color:#71717a;font-size:12px">·</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px" onmouseover="this.style.color='#f4f4f5'" onmouseout="this.style.color='#a1a1aa'">Contact</a>
+<footer style="border-top:1px solid #2d2d30;padding:24px 20px;text-align:center;background:#18181b;flex-shrink:0">
+  <div style="max-width:980px;margin:0 auto">
+    <div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="services.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="about.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">About</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Privacy Policy</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a>
+      <span style="color:#3f3f46;font-size:12px">&middot;</span>
+      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">© 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> — Free tools for Etsy sellers &amp; creators.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
   </div>
 </footer>
 </body>

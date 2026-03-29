@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PNG Upscaler Pro</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Batch upscale PNG images to custom target sizes with alpha channel preservation. Free online PNG upscaler.">
+<title>PNG Upscaler Pro &mdash; Elephast</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;
+  --border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
+  --green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;display:flex;flex-direction:column}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;flex-shrink:0}
+.hi{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:16px;height:60px}
+.hi a.logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.hi a.logo img{height:42px;width:auto;display:block}
+.htool{font-size:13px;color:var(--muted)}
+.hnav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.hnav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:7px;transition:color .15s}
+.hnav a:hover{color:var(--text)}
+.main{max-width:980px;margin:0 auto;padding:36px 24px 72px;flex:1;width:100%}
+.page-intro{margin-bottom:28px;padding:22px 24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;border-left:3px solid var(--orange)}
+.page-intro h1{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.page-intro .desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:14px}
+.how-to{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.step{display:flex;align-items:flex-start;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;flex:1;min-width:160px}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:12px;color:var(--dim);line-height:1.5}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;background:var(--surface);flex-shrink:0}
+.fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
+.fl a:hover{color:var(--text)}
+.fl .sep{color:var(--border-h);font-size:12px}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
+
+/* ── Tool-specific styles ── */
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg: #0a0a0a; --surface: #141414; --surface-2: #1a1a1a; --border: #2a2a2a;
-      --text: #f5f5f5; --text-dim: #a1a1a1; --text-muted: #6b6b6b;
-      --accent: #10b981;
-    }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
+    
+    
     .container { max-width: 1200px; margin: 0 auto; }
     h1 { font-size: 24px; margin-bottom: 8px; }
     .subtitle { color: var(--text-muted); margin-bottom: 24px; }
@@ -72,10 +105,28 @@
     .quality-dot.good { background: #10b981; }
     .quality-dot.ok { background: #eab308; }
     .quality-dot.poor { background: #ef4444; }
-  </style>
+  
+</style>
 </head>
 <body>
-  <div class="container">
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+    <span class="htool">/ PNG Upscaler Pro</span>
+    <div class="hnav">
+      <a href="index.html">All Tools</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+<div class="main">
+<div class="page-intro">
+  <h1><span>🚀</span> PNG Upscaler Pro</h1>
+  <div class="desc">Need to upscale multiple PNG files to specific dimensions for print or POD? PNG Upscaler Pro handles batch processing and preserves transparency throughout — so your PNGs come out crisp, correctly sized, and ready to upload.</div>
+  <div class="how-to"><div class="step"><div class="step-num">1</div><div class="step-text">Upload one or more PNG files</div></div><div class="step"><div class="step-num">2</div><div class="step-text">Set your target width or height</div></div><div class="step"><div class="step-num">3</div><div class="step-text">Click Upscale</div></div><div class="step"><div class="step-num">4</div><div class="step-text">Download your enlarged PNGs — transparency intact</div></div></div>
+</div>
+<div class="container">
     <h1>🔍 PNG Upscaler Pro</h1>
     <p class="subtitle">Upscale PNGs with transparency preserved • Exact aspect ratio • Max size under 20MB</p>
 
@@ -581,5 +632,17 @@
 
     renderResults();
   </script>
+</div>
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a><span class="sep">&middot;</span>
+    <a href="services.html">Services</a><span class="sep">&middot;</span>
+    <a href="about.html">About</a><span class="sep">&middot;</span>
+    <a href="privacy-policy.html">Privacy Policy</a><span class="sep">&middot;</span>
+    <a href="terms.html">Terms</a><span class="sep">&middot;</span>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; Free tools for Etsy sellers &amp; creators.</p>
+</footer>
 </body>
 </html>
