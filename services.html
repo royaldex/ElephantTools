@@ -1,377 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creative design services from Elephast — social media graphics, brand redesigns, Telegram bot assets, merch design and more.">
-  <title>Services — Elephast.com Creative Studio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg:#0a0a09; --s1:#111110; --s2:#181816; --s3:#1e1e1b;
-      --border:#252520; --b2:#2e2e28; --text:#f0ede8; --dim:#857f74; --muted:#3d3a34;
-      --green:#3cb82e; --green-d:#2a8c20; --gg:rgba(60,184,46,0.07);
-      --orange:#f5820a; --orange-l:#f5c200;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family:'Barlow',system-ui,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
-
-    /* NAV */
-    nav {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 36px; height:66px; border-bottom:1px solid var(--border);
-      background:rgba(10,10,9,0.96); backdrop-filter:blur(18px);
-      position:sticky; top:0; z-index:100;
-    }
-    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
-    .nav-brand-text { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:900; letter-spacing:-.3px; }
-    .nav-brand-text .e,.nav-brand-text .com { color:var(--green); }
-    .nav-brand-text .com { font-size:15px; font-weight:700; }
-    .nav-right { display:flex; align-items:center; gap:6px; }
-    .nav-link {
-      padding:7px 14px; border-radius:7px;
-      font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:.5px;
-      color:var(--dim); text-decoration:none; transition:color .15s,background .15s;
-    }
-    .nav-link:hover { color:var(--text); background:var(--s3); }
-    .nav-link.active { color:var(--green); }
-    .nav-cta {
-      padding:8px 18px; border-radius:7px;
-      background:linear-gradient(135deg,var(--green-d),var(--green)); color:#fff;
-      font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; transition:opacity .2s,transform .15s;
-    }
-    .nav-cta:hover { opacity:.9; transform:translateY(-1px); }
-
-    /* HERO */
-    .hero-wrap {
-      position:relative; overflow:hidden; text-align:center;
-      background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(60,184,46,.06) 0%,transparent 65%),var(--bg);
-      padding:90px 24px 80px;
-    }
-    .hero-wrap::before {
-      content:''; position:absolute; inset:0; z-index:0;
-      background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
-      background-size:52px 52px;
-      mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,black 20%,transparent 85%);
-      opacity:.5;
-    }
-    .hero-inner { position:relative; z-index:1; max-width:760px; margin:0 auto; }
-    .hero-tag {
-      display:inline-flex; align-items:center; gap:8px; padding:5px 16px; border-radius:99px;
-      border:1px solid rgba(60,184,46,.22); background:rgba(60,184,46,.06);
-      font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; color:var(--green);
-      letter-spacing:2px; text-transform:uppercase; margin-bottom:28px;
-    }
-    .hero h1 {
-      font-family:'Barlow Condensed',sans-serif; font-size:clamp(48px,8vw,96px);
-      font-weight:900; line-height:.9; letter-spacing:-2px; text-transform:uppercase; margin-bottom:24px;
-    }
-    .hero h1 .line1 { display:block; color:var(--text); }
-    .hero h1 .line2 {
-      display:block;
-      background:linear-gradient(90deg,var(--orange),var(--orange-l),var(--orange));
-      background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      animation:shimmer 3s linear infinite;
-    }
-    .hero h1 .line3 { display:block; color:var(--green); }
-    @keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
-    .hero-sub { font-size:17px; color:var(--dim); line-height:1.7; max-width:520px; margin:0 auto 36px; }
-    .hero-btns { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
-    .btn-primary {
-      display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:10px;
-      background:linear-gradient(135deg,var(--green-d),var(--green)); color:#fff;
-      font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; transition:transform .2s,box-shadow .2s;
-      box-shadow:0 4px 20px rgba(60,184,46,.22);
-    }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 36px rgba(60,184,46,.36); }
-    .btn-secondary {
-      display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:10px;
-      border:1px solid var(--border); color:var(--dim);
-      font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; transition:all .2s;
-    }
-    .btn-secondary:hover { color:var(--text); border-color:#3a3a34; background:var(--s2); }
-
-    /* SECTIONS */
-    .section { max-width:1200px; margin:0 auto; padding:72px 28px; }
-    .divider { height:1px; background:var(--border); margin:0 28px; }
-    .sh { margin-bottom:40px; }
-    .sh-eyebrow { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--green); margin-bottom:10px; }
-    .sh-title { font-family:'Barlow Condensed',sans-serif; font-size:clamp(32px,5vw,52px); font-weight:900; letter-spacing:-1px; text-transform:uppercase; line-height:.95; }
-    .sh-sub { font-size:15px; color:var(--dim); margin-top:12px; max-width:520px; line-height:1.7; }
-
-    /* SERVICES */
-    .services-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
-    .service-card {
-      background:var(--s1); border:1px solid var(--border); border-radius:14px; padding:28px 24px;
-      display:flex; flex-direction:column; gap:12px;
-      transition:border-color .2s,transform .2s,box-shadow .2s; position:relative; overflow:hidden;
-    }
-    .service-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:linear-gradient(90deg,var(--orange),var(--orange-l));
-      transform:scaleX(0); transform-origin:left; transition:transform .3s;
-    }
-    .service-card:hover { border-color:rgba(245,130,10,.3); transform:translateY(-3px); box-shadow:0 12px 40px rgba(245,130,10,.07); }
-    .service-card:hover::before { transform:scaleX(1); }
-    .service-icon { width:48px; height:48px; border-radius:10px; background:rgba(245,130,10,.1); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-    .service-name { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; letter-spacing:-.2px; }
-    .service-desc { font-size:13px; color:var(--dim); line-height:1.65; }
-    .service-tag { margin-top:auto; font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); }
-
-    /* PORTFOLIO */
-    .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
-    .portfolio-card {
-      border:1px solid var(--border); border-radius:12px; overflow:hidden; aspect-ratio:4/3;
-      display:flex; align-items:center; justify-content:center;
-      transition:border-color .2s,transform .2s;
-    }
-    .portfolio-card:hover { border-color:rgba(60,184,46,.3); transform:scale(1.02); }
-    .portfolio-placeholder { display:flex; flex-direction:column; align-items:center; gap:10px; padding:20px; text-align:center; }
-    .portfolio-icon { font-size:36px; opacity:.4; }
-    .portfolio-label { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
-    .pc-1{background:linear-gradient(135deg,#0f1f0f,#1a3a1a)}
-    .pc-2{background:linear-gradient(135deg,#1f1200,#2a1a00)}
-    .pc-3{background:linear-gradient(135deg,#0a0a1a,#15152a)}
-    .pc-4{background:linear-gradient(135deg,#1a0a0a,#2a1212)}
-    .pc-5{background:linear-gradient(135deg,#0a1a1a,#122222)}
-    .pc-6{background:linear-gradient(135deg,#1a1a0a,#2a2a12)}
-
-    /* TRUST */
-    .trust-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
-    .trust-card { background:var(--s1); border:1px solid var(--border); border-radius:12px; padding:24px 20px; text-align:center; }
-    .trust-num { font-family:'Barlow Condensed',sans-serif; font-size:44px; font-weight:900; color:var(--green); line-height:1; margin-bottom:6px; }
-    .trust-label { font-size:13px; color:var(--dim); line-height:1.5; }
-
-    /* STEPS */
-    .steps { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin-bottom:40px; }
-    .step { background:var(--s1); border:1px solid var(--border); border-radius:12px; padding:24px 20px; display:flex; gap:16px; align-items:flex-start; }
-    .step-num { font-family:'Barlow Condensed',sans-serif; font-size:40px; font-weight:900; color:var(--border); line-height:1; flex-shrink:0; width:40px; }
-    .step-title { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:800; margin-bottom:4px; }
-    .step-desc { font-size:13px; color:var(--dim); line-height:1.6; }
-
-    /* CTA */
-    .cta-block {
-      background:linear-gradient(135deg,#0f1a0f,#141f14); border:1px solid rgba(60,184,46,.2);
-      border-radius:16px; padding:48px 36px; text-align:center; position:relative; overflow:hidden;
-    }
-    .cta-block::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg,transparent,rgba(60,184,46,.5),transparent);
-    }
-    .cta-title { font-family:'Barlow Condensed',sans-serif; font-size:clamp(32px,5vw,56px); font-weight:900; letter-spacing:-1px; text-transform:uppercase; margin-bottom:16px; line-height:.95; }
-    .cta-title .accent { color:var(--green); }
-    .cta-sub { font-size:16px; color:var(--dim); margin-bottom:32px; line-height:1.7; }
-    .cta-btns { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
-    .btn-tg {
-      display:inline-flex; align-items:center; gap:10px; padding:14px 28px; border-radius:10px;
-      background:#0088cc; color:#fff;
-      font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; transition:opacity .2s,transform .15s;
-      box-shadow:0 4px 20px rgba(0,136,204,.25);
-    }
-    .btn-tg:hover { opacity:.9; transform:translateY(-2px); }
-    .btn-tg.ch {
-      background:transparent; border:1px solid rgba(0,136,204,.4); color:#0088cc; box-shadow:none;
-    }
-    .btn-tg.ch:hover { background:rgba(0,136,204,.08); }
-
-    /* FOOTER */
-    footer {
-      border-top:1px solid var(--border); padding:28px 24px; text-align:center;
-      font-size:13px; color:var(--muted);
-      display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap;
-    }
-    footer a { color:var(--green); text-decoration:none; }
-    footer a:hover { text-decoration:underline; }
-    .footer-brand { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:16px; }
-    .footer-brand .e,.footer-brand .com { color:var(--green); }
-    .footer-brand .com { font-size:12px; font-weight:700; }
-
-    @media(max-width:720px){
-      nav { padding:0 18px; height:58px; }
-      .nav-right .nav-link:not(.active) { display:none; }
-      .hero-wrap { padding:56px 20px 52px; }
-      .section { padding:48px 18px; }
-      .cta-block { padding:36px 20px; }
-    }
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .hero-tag  { animation:fadeUp .5s ease .1s both; }
-    .hero h1   { animation:fadeUp .55s ease .2s both; }
-    .hero-sub  { animation:fadeUp .55s ease .3s both; }
-    .hero-btns { animation:fadeUp .55s ease .4s both; }
-  </style>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Elephast.com design and development services — custom web tools, Etsy shop design, and digital product creation for sellers and creators.">
+<meta property="og:title" content="Services — Elephast.com">
+<meta property="og:description" content="Custom design and development services from the team behind Elephast.com.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Services &mdash; Elephast.com</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--orange:#f97316;--green:#10b981}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+/* NAV */
+.unav{background:#18181b;border-bottom:1px solid #2d2d30;position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:#a1a1aa;text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:#f4f4f5;background:#1f1f23}
+.unav-svc{background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)}
+.unav-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:#10b981;border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:.5px;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:#a1a1aa;border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:#18181b;border-bottom:1px solid #2d2d30;z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+/* PAGE */
+.hero{background:linear-gradient(135deg,#111008,#09090b);border-bottom:1px solid var(--border);padding:64px 24px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;opacity:.35;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 85%)}
+.hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.hero img{max-width:300px;width:80%;height:auto;margin-bottom:24px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:99px;border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.07);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,7vw,68px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:16px}
+.hero p{font-size:16px;color:var(--dim);max-width:480px;margin:0 auto 28px;line-height:1.7}
+.main{max-width:1000px;margin:0 auto;padding:52px 24px 80px;flex:1}
+.section{margin-bottom:52px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.section h2{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
+.section-sub{font-size:15px;color:var(--dim);margin-bottom:28px;max-width:560px;line-height:1.7}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.service-card:hover{border-color:rgba(249,115,22,.4);transform:translateY(-2px)}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),#fbbf24);opacity:0;transition:opacity .2s}
+.service-card:hover::before{opacity:1}
+.sc-icon{font-size:32px;margin-bottom:14px}
+.sc-name{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.sc-desc{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:16px}
+.sc-tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.cta-strip{background:linear-gradient(135deg,#0f1a0a,#091408);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:40px 32px;text-align:center;margin-top:52px}
+.cta-strip h2{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:10px}
+.cta-strip p{font-size:15px;color:var(--dim);margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:9px;background:linear-gradient(135deg,#059669,#10b981);color:#000;font-size:15px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(16,185,129,.2)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,.3)}
+.divider{height:1px;background:var(--border);margin:48px 0}
+@media(max-width:600px){.service-grid{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
 </head>
 <body>
-
-<nav>
-  <a href="index.html" class="nav-brand">
-    <div class="nav-brand-text"><span class="e">E</span>LEPHAST<span class="com">.com</span></div>
-  </a>
-  <div class="nav-right">
-    <a href="index.html" class="nav-link">Tools</a>
-    <a href="services.html" class="nav-link active">Services</a>
-    <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);text-decoration:none;transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,.05)'" onmouseout="this.style.background='transparent'">
-      <img src="data:image/png;base64,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" alt="Elephant Shoes Pop Shop" style="height:28px;width:auto;border-radius:4px;">
-    </a>
-    <a href="https://t.me/ElephastDesignBot" target="_blank" rel="noopener" class="nav-cta">Start Project</a>
+<nav class="unav">
+  <div class="unav-inner">
+    <a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+    <div class="unav-spacer"></div>
+    <div class="unav-links">
+      <a href="index.html" class="unav-link">All Tools</a>
+      <a href="services.html" class="unav-link unav-svc" style="color:#f4f4f5;background:rgba(249,115,22,.15)">&#9889; Services</a>
+      <a href="about.html" class="unav-link">About</a>
+      <a href="contact.html" class="unav-link">Contact</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
+    </div>
+    <div class="unav-badge">&#9889; 67 Free Tools</div>
+    <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="unav-drawer" id="unavDrawer">
+  <a href="index.html" class="unav-link">&#127968; All Tools</a>
+  <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+  <a href="about.html" class="unav-link">About</a>
+  <a href="contact.html" class="unav-link">Contact</a>
+  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<script>function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});</script>
 
-<div class="hero-wrap">
+<div class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">⚡ Creative Studio</div>
-    <h1>
-      <span class="line1">Design that</span>
-      <span class="line2">Moves Fast</span>
-      <span class="line3">Sells Hard</span>
-    </h1>
-    <p class="hero-sub">Custom creative services for brands, sellers, and builders — graphics, bots, merch, and everything in between.</p>
-    <div class="hero-btns">
-      <a href="https://t.me/ElephastDesignBot" target="_blank" rel="noopener" class="btn-primary">✈ Start on Telegram</a>
-      <a href="#services" class="btn-secondary">See Services ↓</a>
-    </div>
+    <img src="logo.png" alt="Elephast.com">
+    <div class="hero-tag">&#9889; Custom Services</div>
+    <h1>We Build<br><span style="color:var(--orange)">Fast Things</span></h1>
+    <p>Beyond the free tools &mdash; custom web design, Etsy shop builds, digital product creation, and browser-based tool development for sellers and creators.</p>
   </div>
 </div>
 
-<div class="section" id="services">
-  <div class="sh">
-    <div class="sh-eyebrow">What we do</div>
-    <div class="sh-title">Services</div>
-    <div class="sh-sub">Fast turnaround, clean execution, priced for sellers and small brands.</div>
+<div class="main">
+
+  <div class="section">
+    <div class="section-label">What We Offer</div>
+    <h2>Services</h2>
+    <p class="section-sub">Everything here is built with the same philosophy as our tools &mdash; fast, clean, and actually useful.</p>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="sc-icon">&#128717;&#65039;</div>
+        <div class="sc-name">Etsy Shop Design</div>
+        <p class="sc-desc">Complete Etsy shop visual identity &mdash; banner, logo, listing thumbnail templates, and mockup systems. Built for your brand, not a generic template.</p>
+        <span class="sc-tag">Design</span>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon">&#128296;</div>
+        <div class="sc-name">Custom Browser Tools</div>
+        <p class="sc-desc">Need a tool built specifically for your workflow? We build standalone HTML tools &mdash; calculators, generators, converters &mdash; that run entirely in the browser with no backend required.</p>
+        <span class="sc-tag">Development</span>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon">&#127760;</div>
+        <div class="sc-name">Website Design &amp; Build</div>
+        <p class="sc-desc">Clean, fast, SEO-ready websites for small businesses and creators. Static sites that load instantly and require no monthly hosting fees beyond a domain.</p>
+        <span class="sc-tag">Design &amp; Dev</span>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon">&#128200;</div>
+        <div class="sc-name">Digital Product Creation</div>
+        <p class="sc-desc">We create ready-to-sell digital products &mdash; printable planners, clipart packs, wall art sets, and SVG collections &mdash; built to Etsy's specifications and optimized to sell.</p>
+        <span class="sc-tag">Design</span>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon">&#128269;</div>
+        <div class="sc-name">Etsy SEO &amp; Listing Optimization</div>
+        <p class="sc-desc">Full audit and rewrite of your Etsy titles, tags, and descriptions using real keyword data. Includes a 30-day performance review.</p>
+        <span class="sc-tag">SEO</span>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon">&#129528;</div>
+        <div class="sc-name">Telegram Bot &amp; Shop Development</div>
+        <p class="sc-desc">Custom Telegram-based e-commerce bots &mdash; product catalogs, order management, payment integration, and automated notifications. No app required for your customers.</p>
+        <span class="sc-tag">Development</span>
+      </div>
+
+    </div>
   </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">📱</div>
-      <div class="service-name">Social Media Graphics</div>
-      <div class="service-desc">Posts, stories, banners, thumbnails — on-brand visuals sized for every platform. Delivered as print-ready PNGs or editable files.</div>
-      <div class="service-tag">→ Fast turnaround</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🌐</div>
-      <div class="service-name">Website Graphics & Redesign Visuals</div>
-      <div class="service-desc">Hero sections, UI mockups, landing page graphics, and full visual direction for web redesigns. Pixel-perfect and brand-consistent.</div>
-      <div class="service-tag">→ From $49</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🎨</div>
-      <div class="service-name">Brand Redesign</div>
-      <div class="service-desc">Logo refresh, color system, typography, and visual identity. Full brand kit delivered — ready for print, web, and social.</div>
-      <div class="service-tag">→ Full brand kits</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🤖</div>
-      <div class="service-name">Telegram Bot Launch Assets</div>
-      <div class="service-desc">Bot profile art, welcome banners, post templates, and channel graphics. Everything your bot needs to look legit on launch day.</div>
-      <div class="service-tag">→ Bot-ready assets</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🔥</div>
-      <div class="service-name">Promotional Design</div>
-      <div class="service-desc">Sale graphics, product launch cards, coupon visuals, email headers — built to drive clicks and conversions.</div>
-      <div class="service-tag">→ Conversion-focused</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">👕</div>
-      <div class="service-name">Merch Design</div>
-      <div class="service-desc">Print-ready PNG designs for POD, DTF, sublimation, and Cricut. Built to Etsy spec — 300 DPI, transparent background, shop-ready.</div>
-      <div class="service-tag">→ POD & sublimation</div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label">Why Work With Us</div>
+    <h2>Built by Sellers, for Sellers</h2>
+    <p class="section-sub">Every tool on Elephast.com grew out of a real problem we had running an Etsy shop. We do not guess at what sellers need &mdash; we have lived it.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="font-size:24px;margin-bottom:10px">&#9889;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Fast Delivery</div>
+        <div style="font-size:13px;color:var(--dim)">Most projects delivered within 3&ndash;7 business days. No long agency timelines.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="font-size:24px;margin-bottom:10px">&#128172;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Direct Communication</div>
+        <div style="font-size:13px;color:var(--dim)">You talk directly with the person doing the work. No account managers, no middlemen.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="font-size:24px;margin-bottom:10px">&#127919;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Seller-Focused</div>
+        <div style="font-size:13px;color:var(--dim)">We understand Etsy's algorithm, buyer psychology, and what makes listings convert.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="font-size:24px;margin-bottom:10px">&#128295;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Technical Depth</div>
+        <div style="font-size:13px;color:var(--dim)">67 working browser tools built from scratch. We know how to build things that work reliably.</div>
+      </div>
     </div>
   </div>
+
+  <div class="cta-strip">
+    <h2>Ready to Start?</h2>
+    <p>Tell us what you need and we will get back to you within one business day with a clear plan and quote.</p>
+    <a href="contact.html" class="cta-btn">&#9993;&#65039; Get in Touch</a>
+  </div>
+
 </div>
 
-<div class="divider"></div>
-
-<div class="section" id="portfolio">
-  <div class="sh">
-    <div class="sh-eyebrow">Recent work</div>
-    <div class="sh-title">Portfolio</div>
-    <div class="sh-sub">Examples across branding, merch, and digital assets. More available on request.</div>
-  </div>
-  <div class="portfolio-grid">
-    <div class="portfolio-card pc-1"><div class="portfolio-placeholder"><div class="portfolio-icon">🐘</div><div class="portfolio-label">Elephast Brand System</div></div></div>
-    <div class="portfolio-card pc-2"><div class="portfolio-placeholder"><div class="portfolio-icon">🌱</div><div class="portfolio-label">Autofire Genetics</div></div></div>
-    <div class="portfolio-card pc-3"><div class="portfolio-placeholder"><div class="portfolio-icon">🤖</div><div class="portfolio-label">Telegram Bot UI</div></div></div>
-    <div class="portfolio-card pc-4"><div class="portfolio-placeholder"><div class="portfolio-icon">👕</div><div class="portfolio-label">POD Merch Designs</div></div></div>
-    <div class="portfolio-card pc-5"><div class="portfolio-placeholder"><div class="portfolio-icon">🖼️</div><div class="portfolio-label">Etsy Shop Graphics</div></div></div>
-    <div class="portfolio-card pc-6"><div class="portfolio-placeholder"><div class="portfolio-icon">📱</div><div class="portfolio-label">Social Media Kits</div></div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="sh">
-    <div class="sh-eyebrow">By the numbers</div>
-    <div class="sh-title">Why Elephast</div>
-  </div>
-  <div class="trust-grid">
-    <div class="trust-card"><div class="trust-num">26</div><div class="trust-label">Free tools built for Etsy sellers</div></div>
-    <div class="trust-card"><div class="trust-num">100%</div><div class="trust-label">Browser-based — no installs, ever</div></div>
-    <div class="trust-card"><div class="trust-num">48hr</div><div class="trust-label">Average project turnaround</div></div>
-    <div class="trust-card"><div class="trust-num">∞</div><div class="trust-label">Revisions until you're happy</div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section" id="start">
-  <div class="sh">
-    <div class="sh-eyebrow">Process</div>
-    <div class="sh-title">How to Start</div>
-    <div class="sh-sub">Three steps from idea to delivery.</div>
-  </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div><div class="step-title">Message the Bot</div><div class="step-desc">Hit the Telegram bot and describe what you need — service type, style, any reference images.</div></div>
+<footer style="border-top:1px solid #2d2d30;padding:28px 24px 32px;text-align:center;background:#18181b">
+  <div style="max-width:1100px;margin:0 auto">
+    <a href="index.html" style="display:inline-block;margin-bottom:18px">
+      <img src="logo-nav.png" alt="Elephast.com" style="height:36px;width:auto;opacity:.7">
+    </a>
+    <div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:14px">
+      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a>
+      <span style="color:#3f3f46;font-size:11px">&middot;</span>
+      <a href="services.html" style="font-size:13px;color:#f97316;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:600">Services</a>
+      <span style="color:#3f3f46;font-size:11px">&middot;</span>
+      <a href="about.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">About</a>
+      <span style="color:#3f3f46;font-size:11px">&middot;</span>
+      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Privacy Policy</a>
+      <span style="color:#3f3f46;font-size:11px">&middot;</span>
+      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Terms of Use</a>
+      <span style="color:#3f3f46;font-size:11px">&middot;</span>
+      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div><div class="step-title">Get a Quote</div><div class="step-desc">We'll confirm scope and price within a few hours. No surprises, no upsells.</div></div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div><div class="step-title">Receive Your Files</div><div class="step-desc">Final files delivered directly in Telegram or via download link. Revise until perfect.</div></div>
-    </div>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; Free tools for Etsy sellers, creators &amp; developers.</p>
   </div>
-  <div class="cta-block">
-    <div class="cta-title">Ready to start?<br><span class="accent">Let's build something.</span></div>
-    <p class="cta-sub">Reach out on Telegram — fast replies, no fluff, real results.</p>
-    <div style="margin-bottom:16px;">
-      <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;padding:16px 32px;background:#fff;border-radius:12px;text-decoration:none;box-shadow:0 4px 24px rgba(0,0,0,.3);transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 36px rgba(0,0,0,.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,.3)'">
-        <img src="data:image/png;base64,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" alt="Elephant Shoes Pop Shop" style="height:44px;width:auto;">
-        <div style="text-align:left;">
-          <div style="font-family:Barlow Condensed,sans-serif;font-size:18px;font-weight:900;color:#333;letter-spacing:-.3px;">Elephant Shoes Pop Shop</div>
-          <div style="font-size:12px;color:#888;font-family:Barlow,sans-serif;">Digital downloads on Etsy →</div>
-        </div>
-      </a>
-    </div>
-    <div class="cta-btns">
-      <a href="https://t.me/ElephastDesignBot" target="_blank" rel="noopener" class="btn-tg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-        Message Design Bot
-      </a>
-      <a href="https://t.me/Elephantshoestools" target="_blank" rel="noopener" class="btn-tg ch">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-        Join the Channel
-      </a>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <span class="footer-brand"><span class="e">E</span>LEPHAST<span class="com">.com</span></span>
-  <span>Creative services &amp; free tools for sellers</span>
-  <a href="index.html">Back to Tools</a>
-  <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener">Elephant Shoes Pop Shop</a>
 </footer>
-
 </body>
 </html>
