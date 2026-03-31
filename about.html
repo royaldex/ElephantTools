@@ -175,6 +175,41 @@ document.addEventListener('click',function(e){
     <p>Elephast is connected to <a href="https://elephantshoespopshop.etsy.com" target="_blank" style="color:var(--orange);text-decoration:none">ElephantShoes</a>, an Etsy shop selling PNG sublimation designs, printable wall art, greeting card PDFs, and clipart bundles. Many of the tools on this site were originally built to support that shop &mdash; so they are tested against real seller workflows, not theoretical ones.</p>
   </div>
 
+  
+  <!-- Support Section -->
+  <div style="margin-top:52px;background:linear-gradient(135deg,#111008,#0a0a07);border:1px solid rgba(249,115,22,.2);border-radius:16px;overflow:hidden">
+    <div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0" id="supportGrid">
+      <div style="padding:40px 36px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f97316;margin-bottom:10px">Support the Project</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;line-height:1;margin-bottom:14px">Keep It Free.<br><span style="color:#f97316">Buy Us a Coffee.</span></h2>
+        <p style="font-size:14px;color:#a1a1aa;line-height:1.75;margin-bottom:10px">Every tool on Elephast.com is completely free — no subscriptions, no paywalls, no account required. We plan to keep it that way.</p>
+        <p style="font-size:14px;color:#a1a1aa;line-height:1.75;margin-bottom:24px">Building and maintaining 67 browser tools takes real time. If Elephast has saved you an hour of work, a coffee goes a long way toward keeping the lights on and more tools coming.</p>
+        <a href="https://buymeacoffee.com/elephast" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:10px;background:#FFDD00;color:#000;font-size:15px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(255,221,0,.25)"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 30px rgba(255,221,0,.35)'"
+          onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(255,221,0,.25)'">
+          &#9749; Buy Us a Coffee
+        </a>
+        <div style="margin-top:14px;font-size:12px;color:#71717a">Or scan the QR code &rarr; No account needed.</div>
+      </div>
+      <div style="padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px solid rgba(249,115,22,.15);background:rgba(255,221,0,.03)">
+        <a href="https://buymeacoffee.com/elephast" target="_blank" rel="noopener" style="display:block;transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='none'">
+          <img src="qr-buymeacoffee.png" alt="Scan to support Elephast on Buy Me a Coffee" style="width:200px;height:200px;border-radius:12px;border:3px solid rgba(255,221,0,.3);display:block">
+        </a>
+        <div style="margin-top:14px;font-size:13px;color:#a1a1aa;text-align:center">
+          <strong style="color:#f4f4f5;display:block;margin-bottom:2px">buymeacoffee.com/elephast</strong>
+          Scan with your phone camera
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    @media(max-width:640px){
+      #supportGrid{grid-template-columns:1fr!important}
+      #supportGrid>div:nth-child(2){border-left:none!important;border-top:1px solid rgba(249,115,22,.15)}
+    }
+  </style>
+
   <div class="cta-strip">
     <h3>Ready to use the tools?</h3>
     <p>67 free tools. No account. No install. Just open and go.</p>
