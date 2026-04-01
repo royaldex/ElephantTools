@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Generate beautiful CSS gradients with live preview. Copy the CSS code instantly. Free online gradient generator tool.">
+<meta property="og:title" content="Color Gradient Generator — Elephast.com">
+<meta property="og:description" content="Generate beautiful CSS gradients with live preview. Copy the CSS code instantly. Free online gradient generator tool.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Color Gradient Generator — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px);background:var(--s2)}
+.rc-icon{font-size:22px;margin-bottom:6px}
+.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}
+</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 86 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">🌈</div><div class="intro-text">
+<div class="intro-cat">Image Tools</div><h1>Color Gradient Generator</h1><p class="intro-desc">Create beautiful linear, radial, and conic CSS gradients with a live preview. Add unlimited colour stops, adjust angles, and copy production-ready CSS code.</p></div></div>
+<div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Pick your gradient type (linear, radial, conic)</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Set your start and end colors using the pickers</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Add extra color stops for multi-color gradients</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Adjust the angle or position</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Copy the CSS and use it anywhere</div></div></div></div>
+<div class="card"><div class="ct">Gradient Settings</div>
+<div class="r2">
+<div class="f"><label>Type</label>
+<select id="gType" onchange="updateGrad()">
+<option value="linear">Linear</option>
+<option value="radial">Radial</option>
+<option value="conic">Conic</option>
+</select></div>
+<div class="f"><label id="gAngleLbl">Angle</label>
+<input type="range" id="gAngle" min="0" max="360" value="135" oninput="document.getElementById('gAngleVal').textContent=this.value+'°';updateGrad()" style="margin-top:8px">
+<span id="gAngleVal" style="font-size:12px;color:var(--muted)">135°</span>
+</div>
+</div>
+<div id="gStops">
+<div class="stop-row" style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+<input type="color" value="#f97316" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)">
+<input type="range" min="0" max="100" value="0" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)">
+<span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">0%</span>
+<button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>
+</div>
+<div class="stop-row" style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+<input type="color" value="#10b981" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)">
+<input type="range" min="0" max="100" value="100" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)">
+<span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">100%</span>
+<button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>
+</div>
+</div>
+<button class="btn btn-s btn-sm" onclick="addStop()" style="margin-bottom:14px">+ Add Color Stop</button>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+<button class="btn btn-s btn-sm" onclick="applyPreset(['#f97316','#fbbf24'])">Orange Sunset</button>
+<button class="btn btn-s btn-sm" onclick="applyPreset(['#10b981','#3b82f6'])">Ocean Mint</button>
+<button class="btn btn-s btn-sm" onclick="applyPreset(['#a371f7','#ec4899'])">Purple Pink</button>
+<button class="btn btn-s btn-sm" onclick="applyPreset(['#09090b','#1f1f23','#3f3f46'])">Dark Steel</button>
+<button class="btn btn-s btn-sm" onclick="applyPreset(['#ff0000','#ff7700','#ffff00','#00ff00','#0000ff','#8b00ff'])">Rainbow</button>
+</div>
+</div>
+<div class="card"><div class="ct">Preview</div>
+<div id="gPreview" style="width:100%;height:200px;border-radius:10px;margin-bottom:16px;border:1px solid var(--border)"></div>
+<div class="ct" style="margin-top:0">CSS Code</div>
+<div class="rbox" id="gOutput" style="font-size:13px"></div>
+<div class="arow" style="margin-top:10px">
+<button class="cpbtn" onclick="cpGrad()">&#128203; Copy CSS</button>
+</div>
+</div>
+<script>
+function getStops(){
+var rows=document.querySelectorAll(".stop-row");
+var stops=[];
+rows.forEach(function(row){
+var col=row.querySelector(".stop-color").value;
+var pos=row.querySelector(".stop-pos").value;
+row.querySelector(".stop-pct").textContent=pos+"%";
+stops.push({col:col,pos:parseInt(pos)});
+});
+stops.sort(function(a,b){return a.pos-b.pos;});
+return stops;
+}
+function updateGrad(){
+var type=document.getElementById("gType").value;
+var angle=document.getElementById("gAngle").value;
+var stops=getStops();
+var stopStr=stops.map(function(s){return s.col+" "+s.pos+"%";}).join(", ");
+var css="";
+if(type==="linear")css="linear-gradient("+angle+"deg, "+stopStr+")";
+else if(type==="radial")css="radial-gradient(circle, "+stopStr+")";
+else css="conic-gradient(from "+angle+"deg, "+stopStr+")";
+document.getElementById("gPreview").style.background=css;
+var full="background: "+css+";
+/* Cross-browser fallback */
+background: -webkit-"+css+";";
+document.getElementById("gOutput").textContent=full;
+}
+function addStop(){
+var div=document.createElement("div");div.className="stop-row";
+div.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:10px";
+div.innerHTML='<input type="color" value="#ffffff" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)"><input type="range" min="0" max="100" value="50" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)"><span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">50%</span><button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
+document.getElementById("gStops").appendChild(div);updateGrad();
+}
+function removeStop(btn){if(document.querySelectorAll(".stop-row").length<=2)return;btn.closest(".stop-row").remove();updateGrad();}
+function applyPreset(colors){
+document.getElementById("gStops").innerHTML="";
+colors.forEach(function(c,i){
+var div=document.createElement("div");div.className="stop-row";
+div.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:10px";
+var pos=Math.round(i/(colors.length-1)*100);
+div.innerHTML='<input type="color" value="'+c+'" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)"><input type="range" min="0" max="100" value="'+pos+'" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)"><span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">'+pos+'%</span><button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
+document.getElementById("gStops").appendChild(div);
+});updateGrad();
+}
+function cpGrad(){navigator.clipboard.writeText(document.getElementById("gOutput").textContent);event.target.textContent="&#10003; Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="&#128203; Copy CSS";event.target.classList.remove("done");},2000);}
+updateGrad();
+</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Linear gradients at 135° (diagonal) look more dynamic than straight horizontal or vertical gradients.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For text legibility on gradients, ensure the contrast ratio is at least 4.5:1 at every point along the gradient.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use CSS gradients for backgrounds, buttons, and dividers — they load instantly with no image file.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Subtle gradients (same hue, slightly different lightness) often look more professional than bold color clashes.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Etsy shop banners and thumbnails, gradients can add depth to otherwise flat solid backgrounds.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Three-stop gradients with a transparent middle stop create a vignette effect for photo overlays.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Conic gradients create pie charts and colour wheels — useful for data visualisation and decorative elements.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="color-converter.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Converter</div><div class="rc-desc">Convert HEX RGB HSL</div></a><a class="rc" href="color-palette.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Palette</div><div class="rc-desc">Extract colors from images</div></a><a class="rc" href="color-variants.html"><div class="rc-icon">🌈</div><div class="rc-name">Color Variants</div><div class="rc-desc">Generate color versions</div></a><a class="rc" href="favicon-generator.html"><div class="rc-icon">🖼️</div><div class="rc-name">Favicon Generator</div><div class="rc-desc">Create site favicons</div></a><a class="rc" href="etsy-thumbnail-creator.html"><div class="rc-icon">🖼️</div><div class="rc-name">Thumbnail Creator</div><div class="rc-desc">Create listing images</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
+</footer>
+
+<script>
+function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
+document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+</script>
+
+</body>
+</html>

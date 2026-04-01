@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Generate favicons from any image or text. Download as ICO, PNG at all required sizes. Free browser-based favicon generator.">
+<meta property="og:title" content="Favicon Generator — Elephast.com">
+<meta property="og:description" content="Generate favicons from any image or text. Download as ICO, PNG at all required sizes. Free browser-based favicon generator.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Favicon Generator — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px);background:var(--s2)}
+.rc-icon{font-size:22px;margin-bottom:6px}
+.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}
+</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 86 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">🖼️</div><div class="intro-text">
+<div class="intro-cat">Utility Tools</div><h1>Favicon Generator</h1><p class="intro-desc">Generate browser-ready favicons from any image or create a simple text-based favicon. Downloads PNG files at all required sizes: 16x16, 32x32, 48x48, 180x180, and 512x512.</p></div></div>
+<div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Upload your logo or any square image</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Or switch to Text mode and type an emoji or letter</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Choose your background color</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Preview at all sizes</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Download individual sizes or all at once</div></div></div></div>
+<div class="card"><div class="ct">Source</div>
+<div class="chips" id="fvModeChips">
+<span class="chip on" onclick="setFvMode(this,'image')">Upload Image</span>
+<span class="chip" onclick="setFvMode(this,'text')">Text / Emoji</span>
+</div>
+<div id="fvImagePanel">
+<div id="fvDrop" style="border:2px dashed var(--border);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:border-color .2s" onclick="document.getElementById('fvInput').click()" ondragover="event.preventDefault();this.style.borderColor='var(--green)'" ondragleave="this.style.borderColor=''">
+<div style="font-size:36px;margin-bottom:8px">🖼️</div>
+<div style="color:var(--dim);font-size:14px">Drop image here or click to upload</div>
+<div style="color:var(--muted);font-size:12px;margin-top:4px">Square images work best. PNG with transparency supported.</div>
+<input type="file" id="fvInput" accept="image/*" style="display:none" onchange="fvLoadImage(this.files[0])">
+</div>
+</div>
+<div id="fvTextPanel" style="display:none">
+<div class="r2">
+<div class="f"><label>Character / Emoji</label><input type="text" id="fvText" value="E" maxlength="2" oninput="fvRender()" style="font-size:24px;text-align:center"></div>
+<div class="f"><label>Background Color</label><input type="color" id="fvBg" value="#f97316" oninput="fvRender()" style="height:42px;padding:4px 8px;cursor:pointer"></div>
+</div>
+<div class="f"><label>Text Color</label><input type="color" id="fvTextColor" value="#000000" oninput="fvRender()" style="height:42px;padding:4px 8px;cursor:pointer;width:auto"></div>
+</div>
+</div>
+<div id="fvResults" style="display:none">
+<div class="card"><div class="ct">Favicon Previews</div>
+<div style="display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px">
+<div style="text-align:center"><canvas id="fv16" width="16" height="16" style="image-rendering:pixelated;border:1px solid var(--border);border-radius:4px"></canvas><div style="font-size:10px;color:var(--muted);margin-top:4px">16px</div></div>
+<div style="text-align:center"><canvas id="fv32" width="32" height="32" style="image-rendering:pixelated;border:1px solid var(--border);border-radius:4px"></canvas><div style="font-size:10px;color:var(--muted);margin-top:4px">32px</div></div>
+<div style="text-align:center"><canvas id="fv48" width="48" height="48" style="image-rendering:pixelated;border:1px solid var(--border);border-radius:4px"></canvas><div style="font-size:10px;color:var(--muted);margin-top:4px">48px</div></div>
+<div style="text-align:center"><canvas id="fv180" width="90" height="90" style="border:1px solid var(--border);border-radius:8px"></canvas><div style="font-size:10px;color:var(--muted);margin-top:4px">180px (Apple)</div></div>
+<div style="text-align:center"><canvas id="fv512" width="128" height="128" style="border:1px solid var(--border);border-radius:10px"></canvas><div style="font-size:10px;color:var(--muted);margin-top:4px">512px (PWA)</div></div>
+</div>
+<div class="arow">
+<button class="btn btn-p" onclick="fvDownloadAll()">&#11015; Download All Sizes</button>
+</div>
+<div style="background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:14px">
+<div style="font-size:12px;font-weight:700;color:var(--dim);margin-bottom:8px">Add to your HTML &lt;head&gt;:</div>
+<div style="font-family:Space Mono,monospace;font-size:11px;color:var(--green);line-height:1.8">
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"&gt;<br>
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"&gt;<br>
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png"&gt;
+</div>
+</div>
+</div>
+</div>
+<script>
+var fvMode="image";var fvSourceCanvas=null;
+function setFvMode(el,mode){fvMode=mode;document.querySelectorAll("#fvModeChips .chip").forEach(function(c){c.classList.remove("on");});el.classList.add("on");document.getElementById("fvImagePanel").style.display=mode==="image"?"block":"none";document.getElementById("fvTextPanel").style.display=mode==="text"?"block":"none";if(mode==="text")fvRender();}
+function fvLoadImage(file){if(!file)return;var img=new Image();img.onload=function(){fvSourceCanvas=document.createElement("canvas");var s=Math.min(img.naturalWidth,img.naturalHeight);fvSourceCanvas.width=s;fvSourceCanvas.height=s;var ctx=fvSourceCanvas.getContext("2d");ctx.drawImage(img,(img.naturalWidth-s)/2,(img.naturalHeight-s)/2,s,s,0,0,s,s);fvRender();};img.src=URL.createObjectURL(file);}
+function fvRender(){
+var sizes=[{id:"fv16",s:16},{id:"fv32",s:32},{id:"fv48",s:48},{id:"fv180",s:180,display:90},{id:"fv512",s:512,display:128}];
+sizes.forEach(function(sz){
+var canvas=document.getElementById(sz.id);var ctx=canvas.getContext("2d");ctx.clearRect(0,0,sz.s,sz.s);
+if(fvMode==="text"){
+var bg=document.getElementById("fvBg").value;var tc=document.getElementById("fvTextColor").value;
+var txt=document.getElementById("fvText").value||"E";
+var src=document.createElement("canvas");src.width=sz.s;src.height=sz.s;var sctx=src.getContext("2d");
+var r=sz.s*0.15;sctx.fillStyle=bg;sctx.beginPath();sctx.moveTo(r,0);sctx.lineTo(sz.s-r,0);sctx.arcTo(sz.s,0,sz.s,r,r);sctx.lineTo(sz.s,sz.s-r);sctx.arcTo(sz.s,sz.s,sz.s-r,sz.s,r);sctx.lineTo(r,sz.s);sctx.arcTo(0,sz.s,0,sz.s-r,r);sctx.lineTo(0,r);sctx.arcTo(0,0,r,0,r);sctx.closePath();sctx.fill();
+sctx.fillStyle=tc;sctx.font="bold "+Math.round(sz.s*0.55)+"px Arial";sctx.textAlign="center";sctx.textBaseline="middle";sctx.fillText(txt,sz.s/2,sz.s/2+sz.s*0.04);
+canvas.width=sz.display||sz.s;canvas.height=sz.display||sz.s;ctx.drawImage(src,0,0,canvas.width,canvas.height);
+}else if(fvSourceCanvas){
+canvas.width=sz.display||sz.s;canvas.height=sz.display||sz.s;ctx.drawImage(fvSourceCanvas,0,0,canvas.width,canvas.height);
+}
+});
+document.getElementById("fvResults").style.display="block";
+}
+function fvDl(id,name,actualSize){
+var canvas=document.getElementById(id);
+var out=document.createElement("canvas");out.width=actualSize;out.height=actualSize;
+out.getContext("2d").drawImage(canvas,0,0,actualSize,actualSize);
+var a=document.createElement("a");a.download=name;a.href=out.toDataURL("image/png");a.click();
+}
+function fvDownloadAll(){
+[{id:"fv16",name:"favicon-16.png",s:16},{id:"fv32",name:"favicon-32.png",s:32},{id:"fv48",name:"favicon-48.png",s:48},{id:"fv180",name:"favicon-180.png",s:180},{id:"fv512",name:"favicon-512.png",s:512}].forEach(function(f){fvDl(f.id,f.name,f.s);});
+}
+document.getElementById("fvInput").addEventListener("change",function(){if(this.files[0])fvLoadImage(this.files[0]);});
+fvRender();
+</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">A favicon should be readable at 16x16 pixels — avoid complex logos with fine text at this scale.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use a single bold letter, logo mark, or emoji as your favicon — simpler is always better at small sizes.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For iOS home screen (Apple Touch Icon), provide the 180x180 PNG with no rounded corners — iOS rounds them automatically.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Progressive Web Apps (PWAs), the 512x512 icon is required in your web app manifest.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Place favicon files in your website root directory so browsers find them automatically at /favicon.ico.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">A transparent PNG favicon works in most modern browsers — use a white or brand-colored background for consistency.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Test your favicon in both light and dark browser themes — some favicons look great in one but disappear in the other.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="qr-code-generator.html"><div class="rc-icon">📱</div><div class="rc-name">QR Code Generator</div><div class="rc-desc">Generate QR codes</div></a><a class="rc" href="color-converter.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Converter</div><div class="rc-desc">Pick brand colors</div></a><a class="rc" href="color-gradient-generator.html"><div class="rc-icon">🌈</div><div class="rc-name">Gradient Generator</div><div class="rc-desc">Create gradients</div></a><a class="rc" href="svg-to-png-converter.html"><div class="rc-icon">🔄</div><div class="rc-name">SVG to PNG</div><div class="rc-desc">Convert logo to PNG</div></a><a class="rc" href="image-compressor.html"><div class="rc-icon">🗜️</div><div class="rc-name">Image Compressor</div><div class="rc-desc">Compress image files</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
+</footer>
+
+<script>
+function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
+document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Generate lorem ipsum placeholder text for designs and mockups. Free, browser-based, multiple formats and lengths.">
+<meta property="og:title" content="Lorem Ipsum Generator — Elephast.com">
+<meta property="og:description" content="Generate lorem ipsum placeholder text for designs and mockups. Free, browser-based, multiple formats and lengths.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Lorem Ipsum Generator — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px);background:var(--s2)}
+.rc-icon{font-size:22px;margin-bottom:6px}
+.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}
+</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 86 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">📄</div><div class="intro-text">
+<div class="intro-cat">Utility Tools</div><h1>Lorem Ipsum Generator</h1><p class="intro-desc">Generate placeholder text for designs, mockups, and development. Classic Latin lorem ipsum or modern alternatives — any length, any format.</p></div></div>
+<div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Choose your text type and format</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Set the number of paragraphs, sentences, or words</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Toggle HTML wrapping if needed</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Click Generate</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Copy and paste into your design or project</div></div></div></div>
+<div class="card"><div class="ct">Options</div>
+<div class="r3">
+<div class="f"><label>Type</label><select id="liType">
+<option value="classic">Classic Lorem Ipsum</option>
+<option value="cicero">Cicero Original</option>
+<option value="english">English Placeholder</option>
+</select></div>
+<div class="f"><label>Format</label><select id="liFormat">
+<option value="paragraphs">Paragraphs</option>
+<option value="sentences">Sentences</option>
+<option value="words">Words</option>
+</select></div>
+<div class="f"><label>Amount</label><input type="number" id="liAmount" value="3" min="1" max="50"></div>
+</div>
+<div class="f" style="display:flex;align-items:center;gap:10px">
+<input type="checkbox" id="liHtml" style="width:auto;accent-color:var(--green)">
+<label style="margin:0;font-size:13px;cursor:pointer" for="liHtml">Wrap in &lt;p&gt; tags</label>
+</div>
+<button class="btn btn-p btn-full" onclick="genLorem()">&#9889; Generate</button>
+</div>
+<div id="liResults" style="display:none">
+<div class="card"><div class="ct">Output</div>
+<div class="arow" style="margin-bottom:12px">
+<button class="cpbtn" onclick="cpEl('liOutput')">&#128203; Copy</button>
+<button class="btn btn-s btn-sm" onclick="genLorem()">&#8635; Regenerate</button>
+</div>
+<div class="rbox" id="liOutput"></div>
+</div></div>
+<script>
+var LI_WORDS=["lorem","ipsum","dolor","sit","amet","consectetur","adipiscing","elit","sed","do","eiusmod","tempor","incididunt","ut","labore","et","dolore","magna","aliqua","enim","ad","minim","veniam","quis","nostrud","exercitation","ullamco","laboris","nisi","aliquip","ex","ea","commodo","consequat","duis","aute","irure","in","reprehenderit","voluptate","velit","esse","cillum","eu","fugiat","nulla","pariatur","excepteur","sint","occaecat","cupidatat","non","proident","sunt","culpa","qui","officia","deserunt","mollit","anim","id","est","laborum","curabitur","pretium","tincidunt","lacus","nunc","purus","accumsan","libero","elementum","cursus","porta","pharetra","fermentum","blandit","nisl","ultrices","condimentum"];
+var EN_WORDS=["the","quick","brown","fox","jumps","over","lazy","dog","pack","my","box","with","five","dozen","liquor","jugs","how","vexingly","difficult","find","sphinx","of","black","quartz","judge","vow","jaded","zombies","acted","quaintly","but","kept","driving","their","oxen","forward","waltz","bad","nymph","for","quick","jigs","vex","bright","vixens","jump","dozy","fowl","quack","sphinx","wavy","oblique"];
+var CICERO=["Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo","Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt","Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit","Ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam","Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur"];
+function shuffle(a){var arr=a.slice();for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function makeSentence(words){var pool=shuffle(words);var len=Math.floor(Math.random()*10)+6;var w=pool.slice(0,len);w[0]=w[0].charAt(0).toUpperCase()+w[0].slice(1);return w.join(" ")+".";}
+function makePara(words,sentences){var s=[];for(var i=0;i<sentences;i++)s.push(makeSentence(words));return s.join(" ");}
+function genLorem(){
+var type=document.getElementById("liType").value;
+var fmt=document.getElementById("liFormat").value;
+var amt=Math.min(50,Math.max(1,parseInt(document.getElementById("liAmount").value)||3));
+var html=document.getElementById("liHtml").checked;
+var words=type==="english"?EN_WORDS:LI_WORDS;
+var out="";
+if(fmt==="paragraphs"){
+var paras=[];for(var i=0;i<amt;i++){var p=type==="cicero"?CICERO[i%CICERO.length]:makePara(words,5);paras.push(html?"<p>"+p+"</p>":p);}
+out=paras.join(html?"\n":"\n\n");
+}else if(fmt==="sentences"){
+var sents=[];for(var i=0;i<amt;i++)sents.push(type==="cicero"?CICERO[i%CICERO.length]+".":makeSentence(words));
+out=sents.join(html?"<br>\n":" ");
+}else{
+var w=[];var pool=shuffle(words);while(w.length<amt)w=w.concat(pool);out=w.slice(0,amt).join(" ");}
+if(fmt==="words"&&html)out="<p>"+out+"</p>";
+document.getElementById("liOutput").textContent=out;
+document.getElementById("liResults").style.display="block";
+}
+function cpEl(id){navigator.clipboard.writeText(document.getElementById(id).textContent);event.target.textContent="&#10003; Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="&#128203; Copy";event.target.classList.remove("done");},2000);}
+genLorem();
+</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">First paragraph should always start with 'Lorem ipsum dolor sit amet' for recognisability.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use paragraph mode for body copy mockups and word mode for input field placeholders.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">The HTML wrap option saves time when building web page templates.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For client presentations, English placeholder text is easier for non-designers to understand.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">3–5 paragraphs is the standard amount for testing a full page layout.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Keep lorem ipsum in grayscale/muted colour in mockups so it reads as placeholder, not content.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Switch to Cicero Original for a historically accurate version of the original 45 BC text.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="word-counter.html"><div class="rc-icon">📊</div><div class="rc-name">Word Counter</div><div class="rc-desc">Count words and characters</div></a><a class="rc" href="case-converter.html"><div class="rc-icon">Aa</div><div class="rc-name">Case Converter</div><div class="rc-desc">Transform text case</div></a><a class="rc" href="headline-generator.html"><div class="rc-icon">📰</div><div class="rc-name">Headline Generator</div><div class="rc-desc">Generate catchy headlines</div></a><a class="rc" href="product-description-generator.html"><div class="rc-icon">📝</div><div class="rc-name">Description Generator</div><div class="rc-desc">Write product copy</div></a><a class="rc" href="text-repeater.html"><div class="rc-icon">🔁</div><div class="rc-name">Text Repeater</div><div class="rc-desc">Repeat text quickly</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
+</footer>
+
+<script>
+function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
+document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+</script>
+
+</body>
+</html>

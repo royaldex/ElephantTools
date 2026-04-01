@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Generate QR codes for any URL, text, or contact info. Free browser-based QR generator — download as PNG instantly.">
+<meta property="og:title" content="QR Code Generator — Elephast.com">
+<meta property="og:description" content="Generate QR codes for any URL, text, or contact info. Free browser-based QR generator — download as PNG instantly.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>QR Code Generator — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;font-family:'Space Mono',monospace;word-break:break-all}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px);background:var(--s2)}
+.rc-icon{font-size:22px;margin-bottom:6px}
+.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}
+</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 86 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">📱</div><div class="intro-text">
+<div class="intro-cat">Utility Tools</div><h1>QR Code Generator</h1><p class="intro-desc">Generate QR codes for any URL, text, email, or phone number instantly. Download as PNG — fully browser-based, no data sent anywhere.</p></div></div>
+<div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Enter your URL, text, or contact info</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Choose the QR code size</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Select foreground and background colors</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Click Generate</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Download your QR code as PNG</div></div></div></div>
+<div class="card"><div class="ct">Content</div>
+<div class="f"><label>What should the QR code link to?</label>
+<textarea id="qrInput" rows="3" placeholder="https://elephast.com or any URL, text, email, phone..."></textarea></div>
+<div class="r3">
+<div class="f"><label>Size (px)</label><select id="qrSize">
+<option value="200">200px (small)</option>
+<option value="300" selected>300px (medium)</option>
+<option value="400">400px (large)</option>
+<option value="600">600px (print)</option>
+</select></div>
+<div class="f"><label>QR Color</label><input type="color" id="qrFg" value="#000000" style="height:42px;padding:4px 8px;cursor:pointer"></div>
+<div class="f"><label>Background</label><input type="color" id="qrBg" value="#ffffff" style="height:42px;padding:4px 8px;cursor:pointer"></div>
+</div>
+<button class="btn btn-p btn-full" onclick="genQR()">&#9889; Generate QR Code</button>
+</div>
+<div id="qrResults" style="display:none">
+<div class="card"><div class="ct">Your QR Code</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+<canvas id="qrCanvas" style="border-radius:10px;border:1px solid var(--border)"></canvas>
+<div class="arow" style="justify-content:center">
+<button class="btn btn-p" onclick="downloadQR()">&#11015; Download PNG</button>
+<button class="btn btn-s btn-sm" onclick="genQR()">&#8635; Regenerate</button>
+</div>
+<div id="qrContent" style="font-size:12px;color:var(--muted);text-align:center;max-width:300px;word-break:break-all"></div>
+</div></div></div>
+<script>
+/* QR Code generator — pure JS implementation (Reed-Solomon, pattern generation) */
+/* Minimal QR library embedded */
+var QRCode=(function(){
+"use strict";
+var QR8bitByte=function(d){this.mode=4;this.data=d;this.parsedData=[];for(var i=0;i<d.length;i++){var c=d.charCodeAt(i);if(c>0xff){this.parsedData.push(0xef,0xbb,0xbf);this.parsedData.push((c>>12)|0xe0,((c>>6)&0x3f)|0x80,(c&0x3f)|0x80);}else this.parsedData.push(c);}if(this.parsedData.length!=this.data.length){this.data=this.parsedData;this.parsedData=[];}};
+QR8bitByte.prototype={getLength:function(){return this.parsedData.length||this.data.length;},write:function(qrData){for(var i=0,l=(this.parsedData.length||this.data.length);i<l;i++)qrData.put(this.parsedData[i]||this.data.charCodeAt(i),8);}};
+var QRMode={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8};
+var QRErrorCorrectionLevel={L:1,M:0,Q:3,H:2};
+var QRMath={glog:function(n){if(n<1)throw"glog("+n+")";return QRMath.LOG_TABLE[n];},gexp:function(n){while(n<0)n+=255;while(n>=256)n-=255;return QRMath.EXP_TABLE[n];},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};
+for(var i=0;i<8;i++)QRMath.EXP_TABLE[i]=1<<i;
+for(var i=8;i<256;i++)QRMath.EXP_TABLE[i]=QRMath.EXP_TABLE[i-4]^QRMath.EXP_TABLE[i-5]^QRMath.EXP_TABLE[i-6]^QRMath.EXP_TABLE[i-8];
+for(var i=0;i<255;i++)QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]]=i;
+var QRPolynomial=function(num,shift){this.num=[];for(var i=0;i<num.length&&num[i]==0;i++);this.num=new Array(num.length-i+shift);for(var j=0;j<num.length-i;j++)this.num[j]=num[j+i];};
+QRPolynomial.prototype={get:function(i){return this.num[i];},getLength:function(){return this.num.length;},multiply:function(e){var num=new Array(this.getLength()+e.getLength()-1);for(var i=0;i<this.getLength();i++)for(var j=0;j<e.getLength();j++)num[i+j]^=QRMath.gexp(QRMath.glog(this.get(i))+QRMath.glog(e.get(j)));return new QRPolynomial(num,0);},mod:function(e){if(this.getLength()-e.getLength()<0)return this;var ratio=QRMath.glog(this.get(0))-QRMath.glog(e.get(0));var num=new Array(this.getLength());for(var i=0;i<this.getLength();i++)num[i]=this.get(i);for(var i=0;i<e.getLength();i++)num[i]^=QRMath.gexp(QRMath.glog(e.get(i))+ratio);return new QRPolynomial(num,0).mod(e);}};
+var QRRSBlock=function(tc,dc){this.totalCount=tc;this.dataCount=dc;};
+QRRSBlock.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16]];
+QRRSBlock.getRSBlocks=function(typeNumber,errorCorrectionLevel){var rsBlock=QRRSBlock.getRsBlockTable(typeNumber,errorCorrectionLevel);if(rsBlock==undefined)throw"bad rs block @ typeNumber:"+typeNumber+"/errorCorrectionLevel:"+errorCorrectionLevel;var length=rsBlock.length/3;var list=[];for(var i=0;i<length;i++){var count=rsBlock[i*3+0];var totalCount=rsBlock[i*3+1];var dataCount=rsBlock[i*3+2];for(var j=0;j<count;j++)list.push(new QRRSBlock(totalCount,dataCount));}return list;};
+QRRSBlock.getRsBlockTable=function(typeNumber,errorCorrectionLevel){switch(errorCorrectionLevel){case QRErrorCorrectionLevel.L:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber-1)*4+0];case QRErrorCorrectionLevel.M:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber-1)*4+1];case QRErrorCorrectionLevel.Q:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber-1)*4+2];case QRErrorCorrectionLevel.H:return QRRSBlock.RS_BLOCK_TABLE[(typeNumber-1)*4+3];default:return undefined;}};
+var QRBitBuffer=function(){this.buffer=[];this.length=0;};
+QRBitBuffer.prototype={get:function(i){var bufIndex=Math.floor(i/8);return((this.buffer[bufIndex]>>>(7-i%8))&1)==1;},put:function(num,length){for(var i=0;i<length;i++)this.putBit(((num>>>(length-i-1))&1)==1);},getLengthInBits:function(){return this.length;},putBit:function(b){var bufIndex=Math.floor(this.length/8);if(this.buffer.length<=bufIndex)this.buffer.push(0);if(b)this.buffer[bufIndex]|=(0x80>>>(this.length%8));this.length++;}};
+var QRCodeModel=function(typeNumber,errorCorrectionLevel){this.typeNumber=typeNumber;this.errorCorrectionLevel=errorCorrectionLevel;this.modules=null;this.moduleCount=0;this.dataCache=null;this.dataList=[];};
+QRCodeModel.prototype={addData:function(data){var newData=new QR8bitByte(data);this.dataList.push(newData);this.dataCache=null;},isDark:function(row,col){if(row<0||this.moduleCount<=row||col<0||this.moduleCount<=col)throw row+","+col;return this.modules[row][col];},getModuleCount:function(){return this.moduleCount;},make:function(){this.makeImpl(false,this.getBestMaskPattern());},makeImpl:function(test,maskPattern){this.moduleCount=this.typeNumber*4+17;this.modules=new Array(this.moduleCount);for(var row=0;row<this.moduleCount;row++){this.modules[row]=new Array(this.moduleCount);for(var col=0;col<this.moduleCount;col++)this.modules[row][col]=null;}this.setupPositionProbePattern(0,0);this.setupPositionProbePattern(this.moduleCount-7,0);this.setupPositionProbePattern(0,this.moduleCount-7);this.setupPositionAdjustPattern();this.setupTimingPattern();this.setupTypeInfo(test,maskPattern);if(this.typeNumber>=7)this.setupTypeNumber(test);if(this.dataCache==null)this.dataCache=QRCodeModel.createData(this.typeNumber,this.errorCorrectionLevel,this.dataList);this.mapData(this.dataCache,maskPattern);},setupPositionProbePattern:function(row,col){for(var r=-1;r<=7;r++){if(row+r<=-1||this.moduleCount<=row+r)continue;for(var c=-1;c<=7;c++){if(col+c<=-1||this.moduleCount<=col+c)continue;if((0<=r&&r<=6&&(c==0||c==6))||(0<=c&&c<=6&&(r==0||r==6))||(2<=r&&r<=4&&2<=c&&c<=4))this.modules[row+r][col+c]=true;else this.modules[row+r][col+c]=false;}}},getBestMaskPattern:function(){var minLostPoint=0;var pattern=0;for(var i=0;i<8;i++){this.makeImpl(true,i);var lostPoint=QRUtil.getLostPoint(this);if(i==0||minLostPoint>lostPoint){minLostPoint=lostPoint;pattern=i;}}return pattern;},setupTimingPattern:function(){for(var r=8;r<this.moduleCount-8;r++){if(this.modules[r][6]!=null)continue;this.modules[r][6]=(r%2==0);}for(var c=8;c<this.moduleCount-8;c++){if(this.modules[6][c]!=null)continue;this.modules[6][c]=(c%2==0);}},setupPositionAdjustPattern:function(){var pos=QRUtil.getPatternPosition(this.typeNumber);for(var i=0;i<pos.length;i++)for(var j=0;j<pos.length;j++){var row=pos[i];var col=pos[j];if(this.modules[row][col]!=null)continue;for(var r=-2;r<=2;r++)for(var c=-2;c<=2;c++){if(r==-2||r==2||c==-2||c==2||(r==0&&c==0))this.modules[row+r][col+c]=true;else this.modules[row+r][col+c]=false;}}},setupTypeNumber:function(test){var bits=QRUtil.getBCHTypeNumber(this.typeNumber);for(var i=0;i<18;i++){var mod=(!test&&((bits>>i)&1)==1);this.modules[Math.floor(i/3)][i%3+this.moduleCount-8-3]=mod;}for(var i=0;i<18;i++){var mod=(!test&&((bits>>i)&1)==1);this.modules[i%3+this.moduleCount-8-3][Math.floor(i/3)]=mod;}},setupTypeInfo:function(test,maskPattern){var data=(this.errorCorrectionLevel.bit<<3)|maskPattern;var bits=QRUtil.getBCHTypeInfo(data);for(var i=0;i<15;i++){var mod=(!test&&((bits>>i)&1)==1);if(i<6)this.modules[i][8]=mod;else if(i<8)this.modules[i+1][8]=mod;else this.modules[this.moduleCount-15+i][8]=mod;}for(var i=0;i<15;i++){var mod=(!test&&((bits>>i)&1)==1);if(i<8)this.modules[8][this.moduleCount-i-1]=mod;else if(i<9)this.modules[8][15-i-1+1]=mod;else this.modules[8][15-i-1]=mod;}this.modules[this.moduleCount-8][8]=(!test);},mapData:function(data,maskPattern){var inc=-1;var row=this.moduleCount-1;var bitIndex=7;var byteIndex=0;for(var col=this.moduleCount-1;col>0;col-=2){if(col==6)col--;while(true){for(var c=0;c<2;c++){if(this.modules[row][col-c]==null){var dark=false;if(byteIndex<data.length)dark=((data[byteIndex]>>>bitIndex)&1)==1;var mask=QRUtil.getMask(maskPattern,row,col-c);if(mask)dark=!dark;this.modules[row][col-c]=dark;bitIndex--;if(bitIndex==-1){byteIndex++;bitIndex=7;}}}row+=inc;if(row<0||this.moduleCount<=row){row-=inc;inc=-inc;break;}}}},};
+QRCodeModel.PAD0=0xEC;QRCodeModel.PAD1=0x11;
+QRCodeModel.createData=function(typeNumber,errorCorrectionLevel,dataList){var rsBlocks=QRRSBlock.getRSBlocks(typeNumber,errorCorrectionLevel);var buffer=new QRBitBuffer();for(var i=0;i<dataList.length;i++){var data=dataList[i];buffer.put(data.mode,4);buffer.put(data.getLength(),QRUtil.getLengthInBits(data.mode,typeNumber));data.write(buffer);}var totalDataCount=0;for(var i=0;i<rsBlocks.length;i++)totalDataCount+=rsBlocks[i].dataCount;if(buffer.getLengthInBits()>totalDataCount*8)throw"code length overflow. ("+buffer.getLengthInBits()+">"+totalDataCount*8+")";if(buffer.getLengthInBits()+4<=totalDataCount*8)buffer.put(0,4);while(buffer.getLengthInBits()%8!=0)buffer.putBit(false);while(true){if(buffer.getLengthInBits()>=totalDataCount*8)break;buffer.put(QRCodeModel.PAD0,8);if(buffer.getLengthInBits()>=totalDataCount*8)break;buffer.put(QRCodeModel.PAD1,8);}return QRCodeModel.createBytes(buffer,rsBlocks);};
+QRCodeModel.createBytes=function(buffer,rsBlocks){var offset=0;var maxDcCount=0;var maxEcCount=0;var dcdata=new Array(rsBlocks.length);var ecdata=new Array(rsBlocks.length);for(var r=0;r<rsBlocks.length;r++){var dcCount=rsBlocks[r].dataCount;var ecCount=rsBlocks[r].totalCount-dcCount;maxDcCount=Math.max(maxDcCount,dcCount);maxEcCount=Math.max(maxEcCount,ecCount);dcdata[r]=new Array(dcCount);for(var i=0;i<dcdata[r].length;i++)dcdata[r][i]=0xff&buffer.buffer[i+offset];offset+=dcCount;var rsPoly=QRUtil.getErrorCorrectPolynomial(ecCount);var rawPoly=new QRPolynomial(dcdata[r],rsPoly.getLength()-1);var modPoly=rawPoly.mod(rsPoly);ecdata[r]=new Array(rsPoly.getLength()-1);for(var i=0;i<ecdata[r].length;i++){var modIndex=i+modPoly.getLength()-ecdata[r].length;ecdata[r][i]=(modIndex>=0)?modPoly.get(modIndex):0;}}var totalCodeCount=0;for(var i=0;i<rsBlocks.length;i++)totalCodeCount+=rsBlocks[i].totalCount;var data=new Array(totalCodeCount);var index=0;for(var i=0;i<maxDcCount;i++)for(var r=0;r<rsBlocks.length;r++)if(i<dcdata[r].length)data[index++]=dcdata[r][i];for(var i=0;i<maxEcCount;i++)for(var r=0;r<rsBlocks.length;r++)if(i<ecdata[r].length)data[index++]=ecdata[r][i];return data;};
+var QRUtil={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(data){var d=data<<10;while(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G15)>=0)d^=(QRUtil.G15<<(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G15)));return((data<<10)|d)^QRUtil.G15_MASK;},getBCHTypeNumber:function(data){var d=data<<12;while(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G18)>=0)d^=(QRUtil.G18<<(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G18)));return(data<<12)|d;},getBCHDigit:function(data){var digit=0;while(data!=0){digit++;data>>>=1;}return digit;},getPatternPosition:function(typeNumber){return QRUtil.PATTERN_POSITION_TABLE[typeNumber-1];},getMask:function(maskPattern,i,j){switch(maskPattern){case 0:return(i+j)%2==0;case 1:return i%2==0;case 2:return j%3==0;case 3:return(i+j)%3==0;case 4:return(Math.floor(i/2)+Math.floor(j/3))%2==0;case 5:return(i*j)%2+(i*j)%3==0;case 6:return((i*j)%2+(i*j)%3)%2==0;case 7:return((i+j)%2+(i*j)%3)%2==0;default:throw"bad maskPattern:"+maskPattern;}},getErrorCorrectPolynomial:function(errorCorrectLength){var a=new QRPolynomial([1],0);for(var i=0;i<errorCorrectLength;i++)a=a.multiply(new QRPolynomial([1,QRMath.gexp(i)],0));return a;},getLengthInBits:function(mode,type){if(1<=type&&type<10){switch(mode){case QRMode.MODE_NUMBER:return 10;case QRMode.MODE_ALPHA_NUM:return 9;case QRMode.MODE_8BIT_BYTE:return 8;case QRMode.MODE_KANJI:return 8;default:throw"mode:"+mode;}}else if(type<27){switch(mode){case QRMode.MODE_NUMBER:return 12;case QRMode.MODE_ALPHA_NUM:return 11;case QRMode.MODE_8BIT_BYTE:return 16;case QRMode.MODE_KANJI:return 10;default:throw"mode:"+mode;}}else if(type<41){switch(mode){case QRMode.MODE_NUMBER:return 14;case QRMode.MODE_ALPHA_NUM:return 13;case QRMode.MODE_8BIT_BYTE:return 16;case QRMode.MODE_KANJI:return 12;default:throw"mode:"+mode;}}else throw"type:"+type;},getLostPoint:function(qrCode){var moduleCount=qrCode.getModuleCount();var lostPoint=0;for(var row=0;row<moduleCount;row++){for(var col=0;col<moduleCount;col++){var sameCount=0;var dark=qrCode.isDark(row,col);for(var r=-1;r<=1;r++){if(row+r<0||moduleCount<=row+r)continue;for(var c=-1;c<=1;c++){if(col+c<0||moduleCount<=col+c)continue;if(r==0&&c==0)continue;if(dark==qrCode.isDark(row+r,col+c))sameCount++;}}if(sameCount>5)lostPoint+=(3+sameCount-5);}}for(var row=0;row<moduleCount-1;row++)for(var col=0;col<moduleCount-1;col++){var count=0;if(qrCode.isDark(row,col))count++;if(qrCode.isDark(row+1,col))count++;if(qrCode.isDark(row,col+1))count++;if(qrCode.isDark(row+1,col+1))count++;if(count==0||count==4)lostPoint+=3;}for(var row=0;row<moduleCount;row++)for(var col=0;col<moduleCount-6;col++)if(qrCode.isDark(row,col)&&!qrCode.isDark(row,col+1)&&qrCode.isDark(row,col+2)&&qrCode.isDark(row,col+3)&&qrCode.isDark(row,col+4)&&!qrCode.isDark(row,col+5)&&qrCode.isDark(row,col+6))lostPoint+=40;for(var col=0;col<moduleCount;col++)for(var row=0;row<moduleCount-6;row++)if(qrCode.isDark(row,col)&&!qrCode.isDark(row+1,col)&&qrCode.isDark(row+2,col)&&qrCode.isDark(row+3,col)&&qrCode.isDark(row+4,col)&&!qrCode.isDark(row+5,col)&&qrCode.isDark(row+6,col))lostPoint+=40;var darkCount=0;for(var col=0;col<moduleCount;col++)for(var row=0;row<moduleCount;row++)if(qrCode.isDark(row,col))darkCount++;var ratio=Math.abs(100*darkCount/moduleCount/moduleCount-50)/5;lostPoint+=ratio*10;return lostPoint;}};
+QRErrorCorrectionLevel.L={bit:1};QRErrorCorrectionLevel.M={bit:0};QRErrorCorrectionLevel.Q={bit:3};QRErrorCorrectionLevel.H={bit:2};
+function _createQR(text,typeNumber,errorCorrectionLevel){var qr=new QRCodeModel(typeNumber,errorCorrectionLevel);qr.addData(text);qr.make();return qr;}
+return{make:function(text){for(var t=1;t<=40;t++){try{return _createQR(text,t,QRErrorCorrectionLevel.M);}catch(e){}}throw"Too long";}}
+})();
+
+function genQR(){
+var text=document.getElementById("qrInput").value.trim();
+if(!text){alert("Enter something to encode.");return;}
+var size=parseInt(document.getElementById("qrSize").value);
+var fg=document.getElementById("qrFg").value;
+var bg=document.getElementById("qrBg").value;
+try{
+var qr=QRCode.make(text);
+var count=qr.getModuleCount();
+var canvas=document.getElementById("qrCanvas");
+var ctx=canvas.getContext("2d");
+var cell=Math.floor(size/count);
+var pad=Math.floor((size-cell*count)/2);
+canvas.width=size;canvas.height=size;
+ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);
+for(var r=0;r<count;r++)for(var c=0;c<count;c++){
+ctx.fillStyle=qr.isDark(r,c)?fg:bg;
+ctx.fillRect(pad+c*cell,pad+r*cell,cell,cell);
+}
+document.getElementById("qrContent").textContent="Encodes: "+text.substring(0,60)+(text.length>60?"...":"");
+document.getElementById("qrResults").style.display="block";
+}catch(e){alert("Error: "+e);}
+}
+function downloadQR(){
+var canvas=document.getElementById("qrCanvas");
+var a=document.createElement("a");a.download="qr-code.png";a.href=canvas.toDataURL("image/png");a.click();
+}
+document.getElementById("qrInput").addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();genQR();}});
+</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">QR codes work best at 300px or larger for physical printing — use 600px for business cards and flyers.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Always test your QR code by scanning it before printing or distributing it.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Keep URLs short — shorter content means denser, more scannable QR codes.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For business use, link to a URL redirector so you can update the destination without reprinting.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">White QR codes on dark backgrounds work — just make sure contrast is at least 4:1.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">QR codes with error correction can survive up to 30% damage — useful for codes on textured surfaces.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Etsy: add a QR code to your packaging linking buyers to your shop for repeat purchases.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="url-slug-generator.html"><div class="rc-icon">🔗</div><div class="rc-name">URL Slug Generator</div><div class="rc-desc">Clean URLs for QR codes</div></a><a class="rc" href="favicon-generator.html"><div class="rc-icon">🖼️</div><div class="rc-name">Favicon Generator</div><div class="rc-desc">Generate site favicons</div></a><a class="rc" href="uuid-generator.html"><div class="rc-icon">🔑</div><div class="rc-name">UUID Generator</div><div class="rc-desc">Generate unique IDs</div></a><a class="rc" href="hash-generator.html"><div class="rc-icon">#️⃣</div><div class="rc-name">Hash Generator</div><div class="rc-desc">Generate checksums</div></a><a class="rc" href="color-converter.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Converter</div><div class="rc-desc">Pick QR code colors</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
+</footer>
+
+<script>
+function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
+document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+</script>
+
+</body>
+</html>
