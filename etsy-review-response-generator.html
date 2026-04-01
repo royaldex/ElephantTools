@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="contact.html" class="unav-link">Contact</a>
 <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<div class="unav-badge">&#9889; 86 Free Tools</div>
+<div class="unav-badge">&#9889; 77 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
@@ -141,56 +141,120 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 </div>
 </div>
 <script>
-var rrType="5star";
-document.querySelectorAll("#rrTypeChips .chip").forEach(function(c){c.addEventListener("click",function(){document.querySelectorAll("#rrTypeChips .chip").forEach(function(x){x.classList.remove("on");});c.classList.add("on");rrType=c.dataset.t;});});
-document.querySelectorAll("#rrToneChips .chip").forEach(function(c){c.addEventListener("click",function(){document.querySelectorAll("#rrToneChips .chip").forEach(function(x){x.classList.remove("on");});c.classList.add("on");});});
-function setRRT(el){rrType=el.dataset.t;}
-var RR={
-"5star":{warm:["Thank you so much for this wonderful review, NAME! It truly made my day. I am so glad you are happy with your PRODUCT and I hope it brings you joy every time you use it. Your support means the world to a small shop like mine!","Reading this review put a huge smile on my face, NAME! I put so much care into every PRODUCT and knowing it landed with you so well is the best reward. Thank you for taking the time to share your experience!","This is so lovely to read, NAME! Thank you for supporting my shop and for leaving such a kind review. I hope your PRODUCT is everything you hoped for and more. Please come back any time!"],
-professional:["Thank you for your kind review! I am delighted to hear you are happy with your PRODUCT. Your satisfaction is my priority and I look forward to serving you again in the future.","Thank you so much for taking the time to leave a review. It means a great deal and I am pleased the PRODUCT met your expectations. I hope to see you back in the shop soon!"],
-brief:["Thank you so much! So glad you love it!","This review made my day! Enjoy your PRODUCT!","Thank you! It is always lovely to hear from happy customers!"]},
-"4star":{warm:["Thank you for your lovely review, NAME! I am glad the PRODUCT worked out for you. If there is anything I can do to make your experience even better next time, please do not hesitate to reach out!","So kind of you to leave a review, NAME! I am happy the PRODUCT served its purpose. Feel free to message me if you ever have questions or would like something slightly different!"],
-professional:["Thank you for your review and for your purchase. I am glad the PRODUCT met your needs. Please do not hesitate to reach out if there is anything I can help with.",]},
-"negative":{warm:["I am truly sorry to hear that your experience with PRODUCT was not what you expected, NAME. This is not the standard I hold for my shop and I would love to make it right. Please message me directly so we can resolve this for you — your satisfaction is my absolute priority.","NAME, I appreciate you taking the time to share your feedback and I sincerely apologise that the PRODUCT did not meet your expectations. Please reach out to me directly and I will do everything I can to make this right for you."],
-professional:["Thank you for your honest feedback. I am sorry to hear the PRODUCT did not meet your expectations and I sincerely apologise for any inconvenience. I take all reviews seriously and would welcome the opportunity to resolve this. Please message me directly at your earliest convenience."]},
-"shipping":{warm:["I am so sorry about the shipping experience, NAME! Delays are frustrating and I completely understand. Once your PRODUCT is in the hands of the carrier, tracking can sometimes be unpredictable — but please message me if it has not arrived and I will do everything I can to help. Thank you for your patience!"],
-professional:["I apologise for the shipping delay on your PRODUCT. Shipping times are managed by the carrier and can occasionally differ from estimates, especially during peak periods. Please do not hesitate to contact me directly if your item has not arrived so I can assist you further."]},
-"wrong":{warm:["Oh no, NAME — I am so sorry this happened! Sending the wrong item is entirely my mistake and I want to fix it immediately. Please message me with a photo and your order details and I will send the correct PRODUCT right away. Thank you so much for letting me know!"],
-professional:["I sincerely apologise for the error with your order, NAME. Please contact me directly with your order details and I will arrange for the correct PRODUCT to be sent as soon as possible. I take full responsibility and will ensure this is resolved promptly."]}
-};
-function genRR(){
-var product=document.getElementById("rrProduct").value.trim()||"your order";
-var name=document.getElementById("rrName").value.trim();
-var tone=document.querySelector("#rrToneChips .chip.on").dataset.tone||"warm";
-var responses=(RR[rrType]||RR["5star"])[tone]||RR[rrType][Object.keys(RR[rrType])[0]];
-var list=document.getElementById("rrList");
-list.innerHTML=responses.map(function(r){
-var text=r.replace(/NAME/g,name||"").replace(/PRODUCT/g,product).replace(/^,\s*/,"").replace(/,\s*!/g,"!");
-return'<div style="background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">'+
-'<div style="font-size:13px;color:var(--text);line-height:1.75;white-space:pre-wrap;margin-bottom:10px">'+text+'</div>'+
-'<button class="cpbtn" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='&#10003; Copied!';this.classList.add('done');setTimeout(function(){this.textContent='&#128203; Copy';this.classList.remove('done');}.bind(this),2000)">&#128203; Copy</button>'+
-'</div>';
-}).join("");
-document.getElementById("rrResults").style.display="block";
-}
-</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Responding to every review — positive and negative — signals to Etsy's algorithm that you are an engaged seller.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For negative reviews, never argue or make excuses publicly. Acknowledge, apologise, and offer a solution.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Keep responses under 200 words — longer responses can feel defensive rather than genuine.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Thank the buyer by first name if they have left one — personal responses feel more authentic.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">A genuine, warm response to a 5-star review can prompt that buyer to share your shop with friends.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Responding to negative reviews publicly shows potential buyers how you handle problems — it builds trust.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Do not copy-paste identical responses — vary your wording so your shop does not look automated.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="product-description-generator.html"><div class="rc-icon">📝</div><div class="rc-name">Description Generator</div><div class="rc-desc">Write listing copy</div></a><a class="rc" href="etsy-title-generator.html"><div class="rc-icon">🏷️</div><div class="rc-name">Etsy Title Generator</div><div class="rc-desc">Optimise titles</div></a><a class="rc" href="etsy-tag-generator.html"><div class="rc-icon">🔖</div><div class="rc-name">Tag Generator</div><div class="rc-desc">Generate 13 tags</div></a><a class="rc" href="headline-generator.html"><div class="rc-icon">📰</div><div class="rc-name">Headline Generator</div><div class="rc-desc">Catchy headlines</div></a><a class="rc" href="etsy-profit-calculator.html"><div class="rc-icon">💰</div><div class="rc-name">Profit Calculator</div><div class="rc-desc">Calculate margins</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
-</div>
-<footer>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
-<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
-</div>
-<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
-</footer>
+var rrType = "5star";
 
-<script>
-function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
-document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+var RR = {
+  "5star": {
+    warm: [
+      "Thank you so much for this wonderful review! It truly made my day. I am so glad you are happy with your PRODUCT and I hope it brings you joy every time you use it. Your support means the world to a small shop like mine!",
+      "Reading this review put a huge smile on my face! I put so much care into every PRODUCT and knowing it landed with you so well is the best reward. Thank you for taking the time to share your experience!",
+      "This is so lovely to read! Thank you for supporting my shop and for leaving such a kind review. I hope your PRODUCT is everything you hoped for and more. Please come back any time!"
+    ],
+    professional: [
+      "Thank you for your kind review! I am delighted to hear you are happy with your PRODUCT. Your satisfaction is my priority and I look forward to serving you again in the future.",
+      "Thank you for taking the time to leave a review. I am pleased the PRODUCT met your expectations. I hope to see you back in the shop soon!"
+    ],
+    brief: [
+      "Thank you so much! So glad you love it!",
+      "This review made my day! Enjoy your PRODUCT!",
+      "Thank you! Always lovely to hear from happy customers!"
+    ]
+  },
+  "4star": {
+    warm: [
+      "Thank you for your lovely review! I am glad the PRODUCT worked out for you. If there is anything I can do to make your experience even better next time, please do not hesitate to reach out!",
+      "So kind of you to leave a review! I am happy the PRODUCT served its purpose. Feel free to message me if you ever have questions!"
+    ],
+    professional: [
+      "Thank you for your review. I am glad the PRODUCT met your needs. Please reach out if there is anything I can help with."
+    ],
+    brief: [
+      "Thank you for the review! Happy to help if you ever need anything.",
+      "Really appreciate you taking the time to review! Glad the PRODUCT worked well."
+    ]
+  },
+  "negative": {
+    warm: [
+      "I am truly sorry to hear that your experience with PRODUCT was not what you expected. This is not the standard I hold for my shop and I would love to make it right. Please message me directly so we can resolve this for you.",
+      "I appreciate you taking the time to share your feedback and I sincerely apologise that the PRODUCT did not meet your expectations. Please reach out and I will do everything I can to make this right."
+    ],
+    professional: [
+      "Thank you for your honest feedback. I am sorry to hear the PRODUCT did not meet your expectations. Please message me directly and I will work to resolve this promptly."
+    ],
+    brief: [
+      "I am so sorry about this experience. Please message me directly and I will make it right immediately."
+    ]
+  },
+  "shipping": {
+    warm: [
+      "I am so sorry about the shipping experience! Delays are frustrating and I completely understand. Once your PRODUCT is in the hands of the carrier, tracking can sometimes be unpredictable. Please message me if it has not arrived and I will do everything I can to help. Thank you for your patience!",
+      "I completely understand your frustration with the delay. I do everything I can on my end to get your PRODUCT dispatched quickly. Please message me directly and I will look into this right away!"
+    ],
+    professional: [
+      "I apologise for the shipping delay on your PRODUCT. Shipping times are managed by the carrier and can occasionally vary. Please contact me directly if your item has not arrived so I can assist you further."
+    ],
+    brief: [
+      "So sorry for the shipping delay! Please message me and I will help sort this out right away."
+    ]
+  },
+  "wrong": {
+    warm: [
+      "Oh no, I am so sorry this happened! Sending the wrong item is entirely my mistake and I want to fix it immediately. Please message me with a photo and your order details and I will send the correct PRODUCT right away.",
+      "I sincerely apologise for this error. Please message me with your order number and a photo and I will get the correct PRODUCT sent out to you as soon as possible. I am so sorry for the inconvenience!"
+    ],
+    professional: [
+      "I sincerely apologise for the error with your order. Please contact me directly with your order details and I will arrange for the correct PRODUCT to be sent as soon as possible."
+    ],
+    brief: [
+      "So sorry for the mix-up! Please message me and I will get the correct item sent to you immediately."
+    ]
+  }
+};
+
+document.querySelectorAll("#rrTypeChips .chip").forEach(function(c) {
+  c.addEventListener("click", function() {
+    document.querySelectorAll("#rrTypeChips .chip").forEach(function(x) { x.classList.remove("on"); });
+    c.classList.add("on");
+    rrType = c.dataset.t;
+  });
+});
+
+document.querySelectorAll("#rrToneChips .chip").forEach(function(c) {
+  c.addEventListener("click", function() {
+    document.querySelectorAll("#rrToneChips .chip").forEach(function(x) { x.classList.remove("on"); });
+    c.classList.add("on");
+  });
+});
+
+function setRRT(el) { rrType = el.dataset.t; }
+
+function genRR() {
+  var product = document.getElementById("rrProduct").value.trim() || "your order";
+  var name = document.getElementById("rrName").value.trim();
+  var activeChip = document.querySelector("#rrToneChips .chip.on");
+  var tone = activeChip ? activeChip.dataset.tone : "warm";
+  var typeData = RR[rrType] || RR["5star"];
+  var responses = typeData[tone] || typeData["warm"] || typeData[Object.keys(typeData)[0]];
+  var list = document.getElementById("rrList");
+  list.innerHTML = responses.map(function(r) {
+    var text = r.replace(/PRODUCT/g, product);
+    if (name) text = name + ", " + text.charAt(0).toLowerCase() + text.slice(1);
+    var div = '<div style="background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">';
+    div += '<div style="font-size:13px;color:var(--text);line-height:1.75;margin-bottom:10px;white-space:pre-wrap" class="rr-text">' + text + '</div>';
+    div += '<button class="cpbtn rr-copy-btn" onclick="cpRR(this)">&#128203; Copy</button>';
+    div += '</div>';
+    return div;
+  }).join("");
+  document.getElementById("rrResults").style.display = "block";
+}
+
+function cpRR(btn) {
+  var text = btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(text);
+  btn.textContent = "Copied!";
+  btn.classList.add("done");
+  setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("done"); }, 2000);
+}
 </script>
 
 </body>

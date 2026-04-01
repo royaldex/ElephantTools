@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="contact.html" class="unav-link">Contact</a>
 <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<div class="unav-badge">&#9889; 86 Free Tools</div>
+<div class="unav-badge">&#9889; 77 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
@@ -156,70 +156,82 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 </div>
 </div>
 <script>
-function getStops(){
-var rows=document.querySelectorAll(".stop-row");
-var stops=[];
-rows.forEach(function(row){
-var col=row.querySelector(".stop-color").value;
-var pos=row.querySelector(".stop-pos").value;
-row.querySelector(".stop-pct").textContent=pos+"%";
-stops.push({col:col,pos:parseInt(pos)});
-});
-stops.sort(function(a,b){return a.pos-b.pos;});
-return stops;
+function getStops() {
+  var rows = document.querySelectorAll(".stop-row");
+  var stops = [];
+  rows.forEach(function(row) {
+    var col = row.querySelector(".stop-color").value;
+    var posEl = row.querySelector(".stop-pos");
+    var pos = posEl ? posEl.value : "50";
+    var pctEl = row.querySelector(".stop-pct");
+    if (pctEl) pctEl.textContent = pos + "%";
+    stops.push({col: col, pos: parseInt(pos)});
+  });
+  stops.sort(function(a,b) { return a.pos - b.pos; });
+  return stops;
 }
-function updateGrad(){
-var type=document.getElementById("gType").value;
-var angle=document.getElementById("gAngle").value;
-var stops=getStops();
-var stopStr=stops.map(function(s){return s.col+" "+s.pos+"%";}).join(", ");
-var css="";
-if(type==="linear")css="linear-gradient("+angle+"deg, "+stopStr+")";
-else if(type==="radial")css="radial-gradient(circle, "+stopStr+")";
-else css="conic-gradient(from "+angle+"deg, "+stopStr+")";
-document.getElementById("gPreview").style.background=css;
-var full="background: "+css+";
-/* Cross-browser fallback */
-background: -webkit-"+css+";";
-document.getElementById("gOutput").textContent=full;
-}
-function addStop(){
-var div=document.createElement("div");div.className="stop-row";
-div.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:10px";
-div.innerHTML='<input type="color" value="#ffffff" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)"><input type="range" min="0" max="100" value="50" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)"><span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">50%</span><button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
-document.getElementById("gStops").appendChild(div);updateGrad();
-}
-function removeStop(btn){if(document.querySelectorAll(".stop-row").length<=2)return;btn.closest(".stop-row").remove();updateGrad();}
-function applyPreset(colors){
-document.getElementById("gStops").innerHTML="";
-colors.forEach(function(c,i){
-var div=document.createElement("div");div.className="stop-row";
-div.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:10px";
-var pos=Math.round(i/(colors.length-1)*100);
-div.innerHTML='<input type="color" value="'+c+'" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)"><input type="range" min="0" max="100" value="'+pos+'" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)"><span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">'+pos+'%</span><button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
-document.getElementById("gStops").appendChild(div);
-});updateGrad();
-}
-function cpGrad(){navigator.clipboard.writeText(document.getElementById("gOutput").textContent);event.target.textContent="&#10003; Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="&#128203; Copy CSS";event.target.classList.remove("done");},2000);}
-updateGrad();
-</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Linear gradients at 135° (diagonal) look more dynamic than straight horizontal or vertical gradients.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For text legibility on gradients, ensure the contrast ratio is at least 4.5:1 at every point along the gradient.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use CSS gradients for backgrounds, buttons, and dividers — they load instantly with no image file.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Subtle gradients (same hue, slightly different lightness) often look more professional than bold color clashes.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Etsy shop banners and thumbnails, gradients can add depth to otherwise flat solid backgrounds.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Three-stop gradients with a transparent middle stop create a vignette effect for photo overlays.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Conic gradients create pie charts and colour wheels — useful for data visualisation and decorative elements.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="color-converter.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Converter</div><div class="rc-desc">Convert HEX RGB HSL</div></a><a class="rc" href="color-palette.html"><div class="rc-icon">🎨</div><div class="rc-name">Color Palette</div><div class="rc-desc">Extract colors from images</div></a><a class="rc" href="color-variants.html"><div class="rc-icon">🌈</div><div class="rc-name">Color Variants</div><div class="rc-desc">Generate color versions</div></a><a class="rc" href="favicon-generator.html"><div class="rc-icon">🖼️</div><div class="rc-name">Favicon Generator</div><div class="rc-desc">Create site favicons</div></a><a class="rc" href="etsy-thumbnail-creator.html"><div class="rc-icon">🖼️</div><div class="rc-name">Thumbnail Creator</div><div class="rc-desc">Create listing images</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
-</div>
-<footer>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
-<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
-</div>
-<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
-</footer>
 
-<script>
-function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
-document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+function updateGrad() {
+  var type = document.getElementById("gType").value;
+  var angle = document.getElementById("gAngle").value;
+  var stops = getStops();
+  var stopStr = stops.map(function(s) { return s.col + " " + s.pos + "%"; }).join(", ");
+  var css = "";
+  if (type === "linear") css = "linear-gradient(" + angle + "deg, " + stopStr + ")";
+  else if (type === "radial") css = "radial-gradient(circle, " + stopStr + ")";
+  else css = "conic-gradient(from " + angle + "deg, " + stopStr + ")";
+  document.getElementById("gPreview").style.background = css;
+  var lines = ["background: " + css + ";", "/* Webkit fallback */", "background: -webkit-" + css + ";"];
+  document.getElementById("gOutput").textContent = lines.join("\n");
+}
+
+function addStop() {
+  var div = document.createElement("div");
+  div.className = "stop-row";
+  div.style.cssText = "display:flex;align-items:center;gap:10px;margin-bottom:10px";
+  div.innerHTML = '<input type="color" value="#ffffff" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)">' +
+    '<input type="range" min="0" max="100" value="50" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)">' +
+    '<span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">50%</span>' +
+    '<button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
+  document.getElementById("gStops").appendChild(div);
+  updateGrad();
+}
+
+function removeStop(btn) {
+  if (document.querySelectorAll(".stop-row").length <= 2) return;
+  btn.closest(".stop-row").remove();
+  updateGrad();
+}
+
+function applyPreset(colors) {
+  document.getElementById("gStops").innerHTML = "";
+  colors.forEach(function(c, i) {
+    var div = document.createElement("div");
+    div.className = "stop-row";
+    div.style.cssText = "display:flex;align-items:center;gap:10px;margin-bottom:10px";
+    var pos = Math.round(i / (colors.length - 1) * 100);
+    div.innerHTML = '<input type="color" value="' + c + '" class="stop-color" oninput="updateGrad()" style="width:52px;height:42px;padding:4px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--s3)">' +
+      '<input type="range" min="0" max="100" value="' + pos + '" class="stop-pos" oninput="updateGrad()" style="flex:1;accent-color:var(--green)">' +
+      '<span class="stop-pct" style="font-size:12px;color:var(--muted);width:36px">' + pos + '%</span>' +
+      '<button onclick="removeStop(this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
+    document.getElementById("gStops").appendChild(div);
+  });
+  updateGrad();
+}
+
+function cpGrad() {
+  navigator.clipboard.writeText(document.getElementById("gOutput").textContent);
+  event.target.textContent = "Copied!";
+  event.target.classList.add("done");
+  setTimeout(function() { event.target.textContent = "Copy CSS"; event.target.classList.remove("done"); }, 2000);
+}
+
+document.getElementById("gAngle").addEventListener("input", function() {
+  document.getElementById("gAngleVal").textContent = this.value + "deg";
+  updateGrad();
+});
+
+updateGrad();
 </script>
 
 </body>

@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="contact.html" class="unav-link">Contact</a>
 <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<div class="unav-badge">&#9889; 86 Free Tools</div>
+<div class="unav-badge">&#9889; 77 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
@@ -131,58 +131,97 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <button class="cpbtn" onclick="cpPct()">&#128203; Copy</button>
 </div>
 <script>
-var pctMode="basic";
-var MODES={
-basic:{label:"What is X% of Y?",fields:[{id:"pA",lbl:"Percentage (%)",ph:"25"},{id:"pB",lbl:"Of this number",ph:"200"}],
-calc:function(a,b){return{ans:(a/100*b).toFixed(4).replace(/\.?0+$/,""),formula:a+"% of "+b+" = "+(a/100*b);};}},
-what:{label:"X is what percent of Y?",fields:[{id:"pA",lbl:"This number (X)",ph:"50"},{id:"pB",lbl:"Out of (Y)",ph:"200"}],
-calc:function(a,b){var r=b?a/b*100:0;return{ans:r.toFixed(4).replace(/\.?0+$/,"")+"%",formula:a+" / "+b+" × 100 = "+r.toFixed(2)+"%"};},},
-change:{label:"Percentage change from X to Y",fields:[{id:"pA",lbl:"Original value",ph:"100"},{id:"pB",lbl:"New value",ph:"125"}],
-calc:function(a,b){var r=a?((b-a)/a*100):0;var dir=r>=0?"+":"";return{ans:dir+r.toFixed(4).replace(/\.?0+$/,"")+"%",formula:"(("+b+"−"+a+") / "+a+") × 100 = "+dir+r.toFixed(2)+"%"};},},
-increase:{label:"Increase X by Y%",fields:[{id:"pA",lbl:"Starting number",ph:"100"},{id:"pB",lbl:"Increase by (%)",ph:"15"}],
-calc:function(a,b){var r=a*(1+b/100);return{ans:r.toFixed(4).replace(/\.?0+$/,""),formula:a+" × (1 + "+b+"/100) = "+r.toFixed(2)};},},
-decrease:{label:"Decrease X by Y%",fields:[{id:"pA",lbl:"Starting number",ph:"100"},{id:"pB",lbl:"Decrease by (%)",ph:"20"}],
-calc:function(a,b){var r=a*(1-b/100);return{ans:r.toFixed(4).replace(/\.?0+$/,""),formula:a+" × (1 − "+b+"/100) = "+r.toFixed(2)};},},
-discount:{label:"Sale price after discount",fields:[{id:"pA",lbl:"Original price ($)",ph:"49.99"},{id:"pB",lbl:"Discount (%)",ph:"20"}],
-calc:function(a,b){var save=a*b/100;var final=a-save;return{ans:"$"+final.toFixed(2),formula:"Save $"+save.toFixed(2)+" | Final price: $"+final.toFixed(2)};},},
-};
-function setPctMode(el,mode){pctMode=mode;document.querySelectorAll("#pctChips .chip").forEach(function(c){c.classList.remove("on");});el.classList.add("on");renderPctInputs();}
-function renderPctInputs(){
-var m=MODES[pctMode];var inp=document.getElementById("pctInputs");
-inp.innerHTML='<div class="ct">'+m.label+'</div>'+
-m.fields.map(function(f){return'<div class="f"><label>'+f.lbl+'</label><input type="number" id="'+f.id+'" placeholder="'+f.ph+'" oninput="calcPct()" step="any"></div>';}).join("")+
-'<button class="btn btn-p btn-full" onclick="calcPct()">&#9889; Calculate</button>';
-document.getElementById("pctResult").style.display="none";
-}
-function calcPct(){
-var m=MODES[pctMode];
-var vals=m.fields.map(function(f){return parseFloat(document.getElementById(f.id).value);});
-if(vals.some(isNaN))return;
-var res=m.calc.apply(null,vals);
-document.getElementById("pctAnswer").textContent=res.ans;
-document.getElementById("pctFormula").textContent=res.formula;
-document.getElementById("pctResult").style.display="block";
-}
-function cpPct(){navigator.clipboard.writeText(document.getElementById("pctAnswer").textContent);event.target.textContent="&#10003; Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="&#128203; Copy";event.target.classList.remove("done");},2000);}
-renderPctInputs();
-</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">To find 10% of any number, simply move the decimal point one place to the left.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Percentage change formula: ((New - Old) / Old) × 100. A positive result is an increase.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Etsy discounts: a 20% off a $7.99 item saves $1.60 — adjust pricing to keep margins healthy.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">VAT/tax calculations: to add 20% tax, multiply by 1.20. To find the pre-tax price, divide by 1.20.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">A 50% increase followed by a 50% decrease does NOT return to the original — it results in a 25% net loss.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use percentage change to track your Etsy shop traffic growth week over week.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For profit margins: profit margin % = (revenue - cost) / revenue × 100.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="etsy-profit-calculator.html"><div class="rc-icon">💰</div><div class="rc-name">Etsy Profit Calculator</div><div class="rc-desc">Calculate seller margins</div></a><a class="rc" href="crypto-roi-calculator.html"><div class="rc-icon">📈</div><div class="rc-name">Crypto ROI Calc</div><div class="rc-desc">Investment returns</div></a><a class="rc" href="print-on-demand-calculator.html"><div class="rc-icon">🖨️</div><div class="rc-name">POD Calculator</div><div class="rc-desc">Print-on-demand margins</div></a><a class="rc" href="word-counter.html"><div class="rc-icon">📊</div><div class="rc-name">Word Counter</div><div class="rc-desc">Count and measure text</div></a><a class="rc" href="engagement-estimator.html"><div class="rc-icon">📊</div><div class="rc-name">Engagement Estimator</div><div class="rc-desc">Social media metrics</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
-</div>
-<footer>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
-<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
-</div>
-<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
-</footer>
+var pctMode = "basic";
 
-<script>
-function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
-document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+var MODES = {
+  basic: {
+    label: "What is X% of Y?",
+    fields: [{id:"pA",lbl:"Percentage (%)",ph:"25"},{id:"pB",lbl:"Of this number",ph:"200"}],
+    calc: function(a,b) {
+      var ans = (a/100*b);
+      return {ans: ans.toFixed(4).replace(/\.?0+$/,""), formula: a+"% of "+b+" = "+ans};
+    }
+  },
+  what: {
+    label: "X is what percent of Y?",
+    fields: [{id:"pA",lbl:"This number (X)",ph:"50"},{id:"pB",lbl:"Out of (Y)",ph:"200"}],
+    calc: function(a,b) {
+      var r = b ? a/b*100 : 0;
+      return {ans: r.toFixed(4).replace(/\.?0+$/,"")+"%", formula: a+" / "+b+" x 100 = "+r.toFixed(2)+"%"};
+    }
+  },
+  change: {
+    label: "Percentage change from X to Y",
+    fields: [{id:"pA",lbl:"Original value",ph:"100"},{id:"pB",lbl:"New value",ph:"125"}],
+    calc: function(a,b) {
+      var r = a ? ((b-a)/a*100) : 0;
+      var dir = r>=0 ? "+" : "";
+      return {ans: dir+r.toFixed(4).replace(/\.?0+$/,"")+"%", formula: "(("+b+" - "+a+") / "+a+") x 100 = "+dir+r.toFixed(2)+"%"};
+    }
+  },
+  increase: {
+    label: "Increase X by Y%",
+    fields: [{id:"pA",lbl:"Starting number",ph:"100"},{id:"pB",lbl:"Increase by (%)",ph:"15"}],
+    calc: function(a,b) {
+      var r = a*(1+b/100);
+      return {ans: r.toFixed(4).replace(/\.?0+$/,""), formula: a+" x (1 + "+b+"/100) = "+r.toFixed(2)};
+    }
+  },
+  decrease: {
+    label: "Decrease X by Y%",
+    fields: [{id:"pA",lbl:"Starting number",ph:"100"},{id:"pB",lbl:"Decrease by (%)",ph:"20"}],
+    calc: function(a,b) {
+      var r = a*(1-b/100);
+      return {ans: r.toFixed(4).replace(/\.?0+$/,""), formula: a+" x (1 - "+b+"/100) = "+r.toFixed(2)};
+    }
+  },
+  discount: {
+    label: "Sale price after discount",
+    fields: [{id:"pA",lbl:"Original price ($)",ph:"49.99"},{id:"pB",lbl:"Discount (%)",ph:"20"}],
+    calc: function(a,b) {
+      var save = a*b/100;
+      var final = a - save;
+      return {ans: "$"+final.toFixed(2), formula: "Save $"+save.toFixed(2)+" | Final price: $"+final.toFixed(2)};
+    }
+  }
+};
+
+function setPctMode(el, mode) {
+  pctMode = mode;
+  document.querySelectorAll("#pctChips .chip").forEach(function(c) { c.classList.remove("on"); });
+  el.classList.add("on");
+  renderPctInputs();
+}
+
+function renderPctInputs() {
+  var m = MODES[pctMode];
+  var inp = document.getElementById("pctInputs");
+  var fieldsHtml = m.fields.map(function(f) {
+    return '<div class="f"><label>'+f.lbl+'</label><input type="number" id="'+f.id+'" placeholder="'+f.ph+'" oninput="calcPct()" step="any"></div>';
+  }).join("");
+  inp.innerHTML = '<div class="ct">'+m.label+'</div>' + fieldsHtml +
+    '<button class="btn btn-p btn-full" onclick="calcPct()">&#9889; Calculate</button>';
+  document.getElementById("pctResult").style.display = "none";
+}
+
+function calcPct() {
+  var m = MODES[pctMode];
+  var vals = m.fields.map(function(f) { return parseFloat(document.getElementById(f.id).value); });
+  if (vals.some(isNaN)) return;
+  var res = m.calc.apply(null, vals);
+  document.getElementById("pctAnswer").textContent = res.ans;
+  document.getElementById("pctFormula").textContent = res.formula;
+  document.getElementById("pctResult").style.display = "block";
+}
+
+function cpPct() {
+  navigator.clipboard.writeText(document.getElementById("pctAnswer").textContent);
+  event.target.textContent = "Copied!";
+  event.target.classList.add("done");
+  setTimeout(function() { event.target.textContent = "Copy"; event.target.classList.remove("done"); }, 2000);
+}
+
+renderPctInputs();
 </script>
 
 </body>

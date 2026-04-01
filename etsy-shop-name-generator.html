@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="contact.html" class="unav-link">Contact</a>
 <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<div class="unav-badge">&#9889; 86 Free Tools</div>
+<div class="unav-badge">&#9889; 77 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
@@ -130,65 +130,87 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 </div>
 </div>
 <script>
-var SN={
-creative:{pre:["The","Little","Happy","Whimsy","Merry","Cozy","Bright","Bold","Wild","Sunny","Lucky","Fuzzy","Magic","Mojo","Poppy"],suf:["Studio","Shop","Co","Works","Lab","Spot","Nook","Den","Haus","Hub","Box","Bay","Space","Place","Loft","Cave"],mid:["And","Plus","With","By"]},
-professional:{pre:["Studio","The","Premium","Artisan","Elite","Craft","Design","Prime","Select","Fine"],suf:["Studio","Design","Co","Collective","Works","Craft","Lab","Shop","Supply","Creative"],mid:["And","Design","Creative"]},
-nature:{pre:["Wild","Rooted","Forest","Moon","Sun","Stone","River","Bloom","Fern","Cedar","Sage","Oak","Pine","Birch","Ivy","Willow","Rose","Daisy"],suf:["Studio","Works","Co","Craft","Goods","House","Grove","Garden","Haven","Wild"],mid:["And","Meets","Plus"]},
-minimal:{pre:["The","Simply","Just","Pure","One","Clear","Clean","Neat","Still","Even","Soft"],suf:["Studio","Co","Shop","Goods","Supply","Works","Lab","Edit","Space","Form"],mid:["And","Or","With"]}
+var SN = {
+  creative: {
+    pre: ["The","Little","Happy","Whimsy","Merry","Cozy","Bright","Bold","Wild","Sunny","Lucky","Magic","Mojo","Poppy"],
+    suf: ["Studio","Shop","Co","Works","Lab","Spot","Nook","Den","Haus","Hub","Box","Bay","Space","Loft"]
+  },
+  professional: {
+    pre: ["Studio","Premium","Artisan","Elite","Craft","Design","Prime","Select","Fine"],
+    suf: ["Studio","Design","Co","Collective","Works","Craft","Lab","Shop","Supply","Creative"]
+  },
+  nature: {
+    pre: ["Wild","Rooted","Forest","Moon","Sun","Stone","Bloom","Fern","Cedar","Sage","Oak","Pine","Willow","Rose"],
+    suf: ["Studio","Works","Co","Craft","Goods","House","Grove","Garden","Haven"]
+  },
+  minimal: {
+    pre: ["The","Simply","Pure","One","Clear","Clean","Still","Soft"],
+    suf: ["Studio","Co","Shop","Goods","Supply","Works","Lab","Space","Form"]
+  }
 };
-document.querySelectorAll("#snStyleChips .chip").forEach(function(c){c.addEventListener("click",function(){document.querySelectorAll("#snStyleChips .chip").forEach(function(x){x.classList.remove("on");});c.classList.add("on");});});
-function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-function genShopNames(){
-var niche=document.getElementById("snNiche").value.trim();
-var kw=document.getElementById("snKw").value.trim();
-var style=document.querySelector("#snStyleChips .chip.on").dataset.s||"creative";
-var T=SN[style];
-var nicheWords=niche?niche.split(/[\s,]+/).map(capitalize).filter(Boolean):["Creative"];
-var kwWords=kw?kw.split(/[\s,]+/).map(capitalize).filter(Boolean):[];
-var names=new Set();
-var allWords=nicheWords.concat(kwWords);
-// Pattern generators
-allWords.forEach(function(w){
-T.pre.slice(0,8).forEach(function(p){names.add(p+w);names.add(p+w+"Co");names.add(p+w+"Studio");});
-T.suf.slice(0,8).forEach(function(s){names.add(w+s);names.add("The"+w+s);});
-if(kwWords.length>0)kwWords.forEach(function(k){names.add(k+w+"Co");names.add(w+"And"+k+"Studio");names.add(k+"Plus"+w);});
-});
-T.pre.slice(0,6).forEach(function(p){T.suf.slice(0,6).forEach(function(s){if(allWords[0])names.add(p+allWords[0]+s);});});
-var arr=Array.from(names).slice(0,24);
-var list=document.getElementById("snList");
-list.innerHTML=arr.map(function(n){
-var len=n.length;
-var ok=len<=20;
-var col=ok?"var(--green)":"var(--yellow)";
-var note=ok?"Available length":"Long for Etsy ("+len+" chars)";
-return'<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:6px">' +
-'<div><div style="font-size:15px;font-weight:600;color:var(--text)">'+n+'</div>' +
-'<div style="font-size:11px;color:'+col+';margin-top:2px">'+note+'</div></div>' +
-'<div style="display:flex;gap:8px;align-items:center">' +
-'<a href="https://www.etsy.com/shop/'+n+'" target="_blank" style="font-size:11px;color:var(--orange);text-decoration:none;padding:4px 10px;border:1px solid rgba(249,115,22,.3);border-radius:6px">Check Etsy &#8599;</a>' +
-'<button class="cpbtn" data-n="'+n+'" onclick="navigator.clipboard.writeText(this.dataset.n);this.textContent='&#10003;';setTimeout(function(){this.textContent='&#128203;';}.bind(this),1500)">&#128203;</button>' +
-'</div></div>';
-}).join("");
-document.getElementById("snResults").style.display="block";
-}
-</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Etsy shop names must be 4-20 characters, no spaces, no special characters except letters and numbers.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Shorter names are easier to remember, easier to type, and look cleaner in URLs and on packaging.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Check your shortlisted names on Etsy's shop name field before getting attached — many good ones are taken.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Avoid numbers and hyphens — they make names harder to communicate verbally and harder to find.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">A good shop name reflects what you sell OR creates a brand feeling. Ideally both.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Search the name on Google and social media too — you want consistent availability across platforms.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Your shop name is also your Etsy URL — make sure it is something you are happy sharing everywhere.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="etsy-title-generator.html"><div class="rc-icon">🏷️</div><div class="rc-name">Etsy Title Generator</div><div class="rc-desc">Generate listing titles</div></a><a class="rc" href="etsy-tag-generator.html"><div class="rc-icon">🔖</div><div class="rc-name">Tag Generator</div><div class="rc-desc">Generate 13 tags</div></a><a class="rc" href="shop-banner.html"><div class="rc-icon">🏪</div><div class="rc-name">Shop Banner Creator</div><div class="rc-desc">Design your banner</div></a><a class="rc" href="product-description-generator.html"><div class="rc-icon">📝</div><div class="rc-name">Description Generator</div><div class="rc-desc">Write product copy</div></a><a class="rc" href="etsy-profit-calculator.html"><div class="rc-icon">💰</div><div class="rc-name">Profit Calculator</div><div class="rc-desc">Calculate margins</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
-</div>
-<footer>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
-<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
-</div>
-<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
-</footer>
 
-<script>
-function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
-document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+document.querySelectorAll("#snStyleChips .chip").forEach(function(c) {
+  c.addEventListener("click", function() {
+    document.querySelectorAll("#snStyleChips .chip").forEach(function(x) { x.classList.remove("on"); });
+    c.classList.add("on");
+  });
+});
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase(); }
+
+function genShopNames() {
+  var niche = document.getElementById("snNiche").value.trim();
+  var kw = document.getElementById("snKw").value.trim();
+  var activeChip = document.querySelector("#snStyleChips .chip.on");
+  var style = activeChip ? activeChip.dataset.s : "creative";
+  var T = SN[style] || SN.creative;
+  var nicheWords = niche ? niche.split(/[\s,]+/).map(capitalize).filter(Boolean) : ["Creative"];
+  var kwWords = kw ? kw.split(/[\s,]+/).map(capitalize).filter(Boolean) : [];
+  var names = [];
+  var seen = {};
+  function add(n) {
+    var clean = n.replace(/[^A-Za-z0-9]/g, "");
+    if (!seen[clean] && clean.length >= 4) { seen[clean] = 1; names.push(clean); }
+  }
+  var allWords = nicheWords.concat(kwWords);
+  allWords.forEach(function(w) {
+    T.pre.slice(0,8).forEach(function(p) { add(p+w); add(p+w+"Co"); add(p+w+"Studio"); });
+    T.suf.slice(0,8).forEach(function(s) { add(w+s); add("The"+w+s); });
+  });
+  if (kwWords.length > 0) {
+    kwWords.forEach(function(k) {
+      nicheWords.forEach(function(n) { add(k+n+"Co"); add(n+k+"Studio"); });
+    });
+  }
+  T.pre.slice(0,5).forEach(function(p) {
+    T.suf.slice(0,5).forEach(function(s) {
+      if (allWords[0]) add(p + allWords[0] + s);
+    });
+  });
+  names = names.slice(0, 24);
+  var list = document.getElementById("snList");
+  list.innerHTML = names.map(function(n) {
+    var len = n.length;
+    var ok = len <= 20;
+    var col = ok ? "var(--green)" : "var(--yellow)";
+    var note = ok ? "Good length (" + len + " chars)" : "Too long for Etsy (" + len + " chars)";
+    var row = '<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:6px">';
+    row += '<div><div style="font-size:15px;font-weight:600;color:var(--text)">' + n + '</div>';
+    row += '<div style="font-size:11px;color:' + col + ';margin-top:2px">' + note + '</div></div>';
+    row += '<div style="display:flex;gap:8px;align-items:center">';
+    row += '<a href="https://www.etsy.com/shop/' + n + '" target="_blank" style="font-size:11px;color:var(--orange);text-decoration:none;padding:4px 10px;border:1px solid rgba(249,115,22,.3);border-radius:6px">Check Etsy &#8599;</a>';
+    row += '<button class="cpbtn" data-name="' + n + '" onclick="cpName(this)">&#128203;</button>';
+    row += '</div></div>';
+    return row;
+  }).join("");
+  document.getElementById("snResults").style.display = "block";
+}
+
+function cpName(btn) {
+  navigator.clipboard.writeText(btn.dataset.name);
+  btn.textContent = "OK";
+  setTimeout(function() { btn.textContent = "Copy"; }, 1500);
+}
 </script>
 
 </body>

@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="contact.html" class="unav-link">Contact</a>
 <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<div class="unav-badge">&#9889; 86 Free Tools</div>
+<div class="unav-badge">&#9889; 77 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
@@ -146,66 +146,78 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 </div>
 </div>
 <script>
-var DP={
-home:{printable:["Minimalist botanical line art prints","Abstract watercolor wall art set","Black and white architectural sketch prints","Celestial moon phase art print","Farmhouse style quote prints","Floral vintage botanical illustrations","Gallery wall bundle (12 coordinated prints)","Inspirational typography prints","Scandinavian folk art wall prints","Terrarium and plant lover art","Mid-century modern abstract prints","Maximalist pattern wall art"],
-svg:["Floral SVG wreath bundle","Monogram alphabet SVG set","Mandala cut file collection","Seasonal door hanger SVG bundle","Farmhouse sign SVG set","Home sweet home cut file","Boho feather and arrow SVG bundle"],
-clipart:["Watercolor house clipart set","Interior design element clipart","Plant and botanical clipart bundle","Hygge home scene creator clipart","Architectural detail clipart set"],
-template:["Home inventory spreadsheet template","Room renovation planner Canva template","Moving checklist printable","Interior design mood board template","Home maintenance schedule"],
-planner:["Home management binder printable","Cleaning schedule tracker","Meal planning printable kit","Home project budget tracker","Moving planner checklist"],
-card:["Housewarming card printable set","New home congratulations cards","Home decor gift tags"]},
-business:{printable:["Business expense tracker printable","Client onboarding packet printable","Social media content calendar printable","Invoice and receipt templates","Meeting notes template","Brand style guide template","Business plan worksheet printable"],
-svg:["Business logo elements SVG bundle","Social media icon set SVG","Professional badge and seal SVG","Arrow and graphic element SVG set"],
-clipart:["Business and finance clipart set","Office supplies flat design clipart","Technology and device clipart"],
-template:["Canva business card template bundle","Instagram feed template set","Email newsletter Canva template","Pitch deck PowerPoint template","Client proposal Canva template","LinkedIn banner template"],
-planner:["Entrepreneur weekly planner","Goal setting workbook printable","90-day business planner","Financial budget planner","Content creation calendar"]},
-kids:{printable:["Alphabet learning activity sheets","Sight word flash cards printable","Colouring page bundle for kids","Children's chore chart printable","Kids reward chart and sticker sheet","ABC tracing worksheets","Number and counting activity sheets"],
-svg:["Kids room name sign SVG bundle","Cartoon animal cut file set","Birthday party banner SVG bundle","Baby milestone SVG set","Nursery quote SVG collection"],
-clipart:["Cute kawaii animal clipart set","Kids birthday clipart bundle","Cartoon dinosaur clipart collection","Fairy tale character clipart","Superhero kids clipart set"],
-template:["Kids birthday invitation Canva template","Baby shower invitation template","First birthday party printable kit","School report cover template","Kids story book template"],
-planner:["Homeschool lesson planner printable","Kids chore and routine chart","Summer activity tracker for kids","Reading log for children","Daily schedule for kids printable"]},
-craft:{printable:["Embroidery pattern collection printable","Cross stitch pattern digital download","Knitting pattern printable","Sewing pattern digital download","Crochet amigurumi pattern"],
-svg:["Monogram SVG alphabet for Cricut","Floral cut file bundle for vinyl","Mandala SVG for engraving","Seasonal wreath SVG bundle","Sublimation design bundle PNG SVG"],
-clipart:["Vintage sewing clipart set","Art supplies and craft tools clipart","Yarn and knitting clipart bundle","Watercolor craft element set"],
-template:["Craft fair display sign template","Etsy shop packaging template","Craft tutorial PDF template"],
-planner:["Project planner for crafters","Yarn and fabric stash tracker","Craft supply inventory spreadsheet","Crochet and knitting project log"]},
-celebration:{printable:["Birthday party printable kit","Wedding planning checklist printable","Baby shower game printable bundle","Bachelorette party printable kit","Holiday gift tag printable set","Christmas party game printable","New Year resolution planner printable"],
-svg:["Party banner SVG alphabet","Balloon arch letter SVG set","Birthday cake topper SVG","Wedding monogram SVG bundle","Holiday ornament SVG set"],
-clipart:["Watercolor celebration clipart set","Party balloon and confetti clipart","Floral wedding clipart bundle","Holiday and Christmas clipart set","Birthday cupcake and cake clipart"],
-card:["Birthday card printable bundle","Wedding congratulations card set","Baby shower card printable","Thank you card set printable","Holiday greeting card bundle"],
-template:["Wedding invitation suite Canva template","Baby shower invitation template","Party favour bag tag template","Event programme template","Save the date template"]}
+var DP = {
+  home: {
+    printable: ["Minimalist botanical line art prints","Abstract watercolor wall art set","Black and white architectural sketch prints","Celestial moon phase art print","Farmhouse style quote prints","Floral vintage botanical illustrations","Gallery wall bundle (12 coordinated prints)","Inspirational typography prints","Scandinavian folk art wall prints","Terrarium and plant lover art","Mid-century modern abstract prints","Maximalist pattern wall art"],
+    svg: ["Floral SVG wreath bundle","Monogram alphabet SVG set","Mandala cut file collection","Seasonal door hanger SVG bundle","Farmhouse sign SVG set","Home sweet home cut file","Boho feather and arrow SVG bundle"],
+    clipart: ["Watercolor house clipart set","Interior design element clipart","Plant and botanical clipart bundle","Hygge home scene creator clipart","Architectural detail clipart set"],
+    template: ["Home inventory spreadsheet template","Room renovation planner Canva template","Moving checklist printable","Interior design mood board template","Home maintenance schedule"],
+    planner: ["Home management binder printable","Cleaning schedule tracker","Meal planning printable kit","Home project budget tracker","Moving planner checklist"]
+  },
+  business: {
+    printable: ["Business expense tracker printable","Client onboarding packet printable","Social media content calendar printable","Invoice and receipt templates","Meeting notes template","Brand style guide template","Business plan worksheet printable"],
+    svg: ["Business logo elements SVG bundle","Social media icon set SVG","Professional badge and seal SVG","Arrow and graphic element SVG set"],
+    clipart: ["Business and finance clipart set","Office supplies flat design clipart","Technology and device clipart"],
+    template: ["Canva business card template bundle","Instagram feed template set","Email newsletter Canva template","Pitch deck PowerPoint template","Client proposal Canva template","LinkedIn banner template"],
+    planner: ["Entrepreneur weekly planner","Goal setting workbook printable","90-day business planner","Financial budget planner","Content creation calendar"]
+  },
+  kids: {
+    printable: ["Alphabet learning activity sheets","Sight word flash cards printable","Colouring page bundle for kids","Children chore chart printable","Kids reward chart and sticker sheet","ABC tracing worksheets","Number and counting activity sheets"],
+    svg: ["Kids room name sign SVG bundle","Cartoon animal cut file set","Birthday party banner SVG bundle","Baby milestone SVG set","Nursery quote SVG collection"],
+    clipart: ["Cute kawaii animal clipart set","Kids birthday clipart bundle","Cartoon dinosaur clipart collection","Fairy tale character clipart","Superhero kids clipart set"],
+    template: ["Kids birthday invitation Canva template","Baby shower invitation template","First birthday party printable kit","School report cover template"],
+    planner: ["Homeschool lesson planner printable","Kids chore and routine chart","Summer activity tracker for kids","Reading log for children","Daily schedule for kids printable"]
+  },
+  craft: {
+    printable: ["Embroidery pattern collection printable","Cross stitch pattern digital download","Knitting pattern printable","Sewing pattern digital download","Crochet amigurumi pattern"],
+    svg: ["Monogram SVG alphabet for Cricut","Floral cut file bundle for vinyl","Mandala SVG for engraving","Seasonal wreath SVG bundle","Sublimation design bundle PNG SVG"],
+    clipart: ["Vintage sewing clipart set","Art supplies and craft tools clipart","Yarn and knitting clipart bundle"],
+    template: ["Craft fair display sign template","Etsy shop packaging template","Craft tutorial PDF template"],
+    planner: ["Project planner for crafters","Yarn and fabric stash tracker","Craft supply inventory spreadsheet","Crochet and knitting project log"]
+  },
+  celebration: {
+    printable: ["Birthday party printable kit","Wedding planning checklist printable","Baby shower game printable bundle","Bachelorette party printable kit","Holiday gift tag printable set","Christmas party game printable","New Year resolution planner printable"],
+    svg: ["Party banner SVG alphabet","Balloon arch letter SVG set","Birthday cake topper SVG","Wedding monogram SVG bundle","Holiday ornament SVG set"],
+    clipart: ["Watercolor celebration clipart set","Party balloon and confetti clipart","Floral wedding clipart bundle","Holiday and Christmas clipart set","Birthday cupcake and cake clipart"],
+    card: ["Birthday card printable bundle","Wedding congratulations card set","Baby shower card printable","Thank you card set printable","Holiday greeting card bundle"],
+    template: ["Wedding invitation suite Canva template","Baby shower invitation template","Party favour bag tag template","Event programme template","Save the date template"]
+  },
+  wellness: {
+    printable: ["Self care checklist printable","Habit tracker and mood journal","Mindfulness coloring pages for adults","Gratitude journal printable","Mental health affirmations art print","Meal prep and nutrition tracker","Fitness goal setting worksheet"],
+    planner: ["Daily wellness planner printable","Water intake tracker printable","Sleep tracker journal","Anxiety and stress log printable","Meditation journal printable"],
+    clipart: ["Yoga pose clipart set","Wellness and mindfulness clipart bundle","Watercolor botanical herbs clipart"],
+    template: ["Canva wellness coach template set","Self care social media template"]
+  },
+  pet: {
+    printable: ["Dog breed portrait digital art prints","Cat lover wall art printable set","Pet care routine chart printable","Vet appointment tracker printable","Pet birthday party printable kit"],
+    clipart: ["Cute dog breed clipart bundle","Cat illustration clipart set","Farm animal clipart collection","Woodland creature clipart bundle","Pet accessories clipart set"],
+    svg: ["Pet name tag SVG bundle","Dog paw print SVG set","Cat face SVG bundle","Pet memorial SVG designs"],
+    template: ["Pet grooming appointment card template","Pet birthday invitation Canva template","Dog walker flyer template"]
+  }
 };
-function genDPIdeas(){
-var niche=document.getElementById("dpNiche").value;
-var fmt=document.getElementById("dpFormat").value;
-var pool=DP[niche]||DP["home"];
-var ideas=[];
-if(fmt==="all"){Object.values(pool).forEach(function(arr){ideas=ideas.concat(arr);});}
-else{ideas=(pool[fmt]||[]).concat(pool[Object.keys(pool)[0]]);}
-ideas=ideas.slice(0,20);
-var out=ideas.map(function(idea,i){return(i+1)+". "+idea;}).join("
-");
-document.getElementById("dpOutput").textContent=out;
-document.getElementById("dpResults").style.display="block";
-}
-function cpEl(id){navigator.clipboard.writeText(document.getElementById(id).textContent);event.target.textContent="&#10003; Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="&#128203; Copy All";event.target.classList.remove("done");},2000);}
-</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Niche-down your digital products — a 'birthday card for dog lovers' outsells a generic 'birthday card' every time.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Bundles consistently outperform individual items — aim to create sets of 5-12 related designs.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Research existing Etsy listings in your chosen niche before creating — find the gaps, not the crowded spots.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Evergreen products (not time-sensitive) generate passive income year-round with no seasonal dips.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Seasonally update your product titles and tags to capture holiday traffic without creating new products.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Start with what you can create in under 2 hours — validate before investing 20 hours in a complex product.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Low-competition, mid-demand niches (3,000-30,000 results on Etsy) often yield the best ROI for new sellers.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="etsy-shop-name-generator.html"><div class="rc-icon">🏪</div><div class="rc-name">Shop Name Generator</div><div class="rc-desc">Name your Etsy shop</div></a><a class="rc" href="etsy-title-generator.html"><div class="rc-icon">🏷️</div><div class="rc-name">Title Generator</div><div class="rc-desc">Write listing titles</div></a><a class="rc" href="etsy-tag-generator.html"><div class="rc-icon">🔖</div><div class="rc-name">Tag Generator</div><div class="rc-desc">Generate 13 tags</div></a><a class="rc" href="print-on-demand-calculator.html"><div class="rc-icon">🖨️</div><div class="rc-name">POD Calculator</div><div class="rc-desc">Calculate POD margins</div></a><a class="rc" href="etsy-profit-calculator.html"><div class="rc-icon">💰</div><div class="rc-name">Profit Calculator</div><div class="rc-desc">Calculate your fees</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 86 free tools</div></a></div></div>
-</div>
-<footer>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
-<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
-<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
-</div>
-<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 86 free browser tools. No login. No installs. Always free.</p>
-</footer>
 
-<script>
-function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
-document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
+function genDPIdeas() {
+  var niche = document.getElementById("dpNiche").value;
+  var fmt = document.getElementById("dpFormat").value;
+  var pool = DP[niche] || DP["home"];
+  var ideas = [];
+  if (fmt === "all") {
+    Object.values(pool).forEach(function(arr) { ideas = ideas.concat(arr); });
+  } else {
+    ideas = (pool[fmt] || []).concat(pool[Object.keys(pool)[0]] || []);
+  }
+  ideas = ideas.slice(0, 20);
+  var out = ideas.map(function(idea, i) { return (i+1) + ". " + idea; }).join("\n");
+  document.getElementById("dpOutput").textContent = out;
+  document.getElementById("dpResults").style.display = "block";
+}
+
+function cpEl(id) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  event.target.textContent = "Copied!";
+  event.target.classList.add("done");
+  setTimeout(function() { event.target.textContent = "Copy All"; event.target.classList.remove("done"); }, 2000);
+}
 </script>
 
 </body>
