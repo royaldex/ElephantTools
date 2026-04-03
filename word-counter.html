@@ -232,7 +232,7 @@ footer a{color:var(--orange);text-decoration:none}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -245,97 +245,55 @@ footer a{color:var(--orange);text-decoration:none}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
-<script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
-</script>
-<div class="main">
-<div class="intro">
-  <div class="intro-top">
-    <div class="intro-icon">📊</div>
-    <div class="intro-text">
-      <div class="intro-cat">Utility Tools</div>
-      <h1>Word Counter</h1>
-      <p class="intro-desc">Count every element of your text — words, characters with and without spaces, sentences, paragraphs, and estimated reading time. Includes live character limit bars for Etsy titles and tags, meta descriptions, Twitter, and more.</p>
-    </div>
-  </div>
-  <div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Paste or type your text into the input area</div></div><div class="step"><div class="step-n">2</div><div class="step-t">See all counts update instantly as you type</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Check the character limit bars for common platforms</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Use the clear button to start fresh</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Copy your text using the copy button if needed</div></div></div>
-</div>
-<div class="tool-area">
-<div class="main">
 
-<h1>📊 Word Counter</h1>
-<p class="subtitle">Count words, characters, sentences, paragraphs, and reading time. Useful for Etsy descriptions, blog posts, and SEO content.</p>
-<div class="card">
-  <div class="stat-row" id="wcStats">
-    <div class="stat"><span class="stat-val" id="wcWords">0</span><div class="stat-label">Words</div></div>
-    <div class="stat"><span class="stat-val" id="wcChars">0</span><div class="stat-label">Characters</div></div>
-    <div class="stat"><span class="stat-val" id="wcCharsNoSp">0</span><div class="stat-label">No Spaces</div></div>
-    <div class="stat"><span class="stat-val" id="wcSents">0</span><div class="stat-label">Sentences</div></div>
-    <div class="stat"><span class="stat-val" id="wcParas">0</span><div class="stat-label">Paragraphs</div></div>
-    <div class="stat"><span class="stat-val" id="wcRead">0</span><div class="stat-label">Min Read</div></div>
-  </div>
-  <textarea id="wcInput" rows="16" placeholder="Paste or type your text here..." oninput="countWords()" style="font-size:14px;line-height:1.7"></textarea>
-  <div class="action-row" style="margin-top:10px">
-    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('wcInput').value='';countWords()">🗑 Clear</button>
-    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('wcInput').value)">📋 Copy Text</button>
-  </div>
-</div>
-<div class="card">
-  <div class="card-title">Character Limits Reference</div>
-  <div id="wcLimits" style="display:flex;flex-direction:column;gap:6px"></div>
-</div>
 <script>
-const LIMITS=[
-  {label:'Etsy Title',max:140,color:'var(--orange)'},
-  {label:'Etsy Tag (each)',max:20,color:'var(--orange)'},
-  {label:'Meta Title',max:60,color:'var(--blue)'},
-  {label:'Meta Description',max:160,color:'var(--blue)'},
-  {label:'Twitter/X Tweet',max:280,color:'var(--green)'},
-  {label:'Instagram Caption',max:2200,color:'var(--green)'},
-];
-function countWords(){
-  const text=document.getElementById('wcInput').value;
-  const words=text.trim()===''?0:text.trim().split(/\s+/).length;
-  const chars=text.length;
-  const charsNoSp=text.replace(/\s/g,'').length;
-  const sents=text.split(/[.!?]+/).filter(s=>s.trim().length>0).length;
-  const paras=text.split(/
-{2,}/).filter(p=>p.trim().length>0).length;
-  const readTime=Math.ceil(words/200)||0;
-  document.getElementById('wcWords').textContent=words.toLocaleString();
-  document.getElementById('wcChars').textContent=chars.toLocaleString();
-  document.getElementById('wcCharsNoSp').textContent=charsNoSp.toLocaleString();
-  document.getElementById('wcSents').textContent=sents.toLocaleString();
-  document.getElementById('wcParas').textContent=paras.toLocaleString();
-  document.getElementById('wcRead').textContent=readTime;
-  const limDiv=document.getElementById('wcLimits');
-  limDiv.innerHTML=LIMITS.map(l=>{
-    const pct=Math.min(100,(chars/l.max)*100);
-    const over=chars>l.max;
-    return `<div style="display:flex;align-items:center;gap:10px">
-      <span style="font-size:12px;color:var(--dim);width:160px;flex-shrink:0">${l.label} (${l.max})</span>
-      <div style="flex:1;height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden">
-        <div style="height:100%;width:${pct}%;background:${over?'var(--red)':l.color};transition:width .2s"></div>
-      </div>
-      <span style="font-size:11px;font-family:'Space Mono',monospace;color:${over?'var(--red)':'var(--muted)'};">${chars}/${l.max}</span>
-    </div>`;
-  }).join('');
+function countWords(text) {
+  if (!text.trim()) return 0;
+  return text.trim().split(/\s+/).length;
 }
-countWords();
+
+function update() {
+  var text = document.getElementById('wcInput').value;
+  var words = countWords(text);
+  var chars = text.length;
+  var charsNoSpace = text.replace(/\s/g, '').length;
+  var sentences = text.split(/[.!?]+/).filter(function(s){ return s.trim().length > 0; }).length;
+  var paras = text.split(/\n\n+/).filter(function(p){ return p.trim().length > 0; }).length;
+  var readTime = Math.ceil(words / 238);
+
+  document.getElementById('wcWords').textContent = words.toLocaleString();
+  document.getElementById('wcChars').textContent = chars.toLocaleString();
+  document.getElementById('wcCharsNoSp').textContent = charsNoSpace.toLocaleString();
+  document.getElementById('wcSentences').textContent = sentences.toLocaleString();
+  document.getElementById('wcParas').textContent = paras.toLocaleString();
+  document.getElementById('wcRead').textContent = readTime < 1 ? '< 1 min' : readTime + ' min';
+
+  var limits = [
+    {bar:'wcBarEtsyTitle', lbl:'wcLblEtsyTitle', max:140, label:'Etsy Title'},
+    {bar:'wcBarEtsyTag', lbl:'wcLblEtsyTag', max:20, label:'Etsy Tag'},
+    {bar:'wcBarMeta', lbl:'wcLblMeta', max:160, label:'Meta Desc'},
+    {bar:'wcBarTweet', lbl:'wcLblTweet', max:280, label:'Tweet'},
+    {bar:'wcBarLinkedIn', lbl:'wcLblLinkedIn', max:3000, label:'LinkedIn'}
+  ];
+  limits.forEach(function(lim) {
+    var bar = document.getElementById(lim.bar);
+    var lbl = document.getElementById(lim.lbl);
+    var pct = Math.min(100, chars / lim.max * 100);
+    var color = pct > 100 ? 'var(--red)' : pct > 90 ? 'var(--yellow)' : 'var(--green)';
+    if (bar) { bar.style.width = pct + '%'; bar.style.background = color; }
+    if (lbl) lbl.textContent = chars + ' / ' + lim.max + ' (' + lim.label + ')';
+  });
+}
+
+function clearText() {
+  document.getElementById('wcInput').value = '';
+  update();
+}
+
+document.getElementById('wcInput').addEventListener('input', update);
+update();
 </script>
+
 
 <div class="related">
   <h2>Related Tools</h2>
@@ -378,7 +336,7 @@ countWords();
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

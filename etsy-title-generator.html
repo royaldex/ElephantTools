@@ -232,7 +232,7 @@ footer a{color:var(--orange);text-decoration:none}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -245,22 +245,52 @@ footer a{color:var(--orange);text-decoration:none}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
+var ettFormat = "PNG SVG";
+document.querySelectorAll("#ettFmtChips .chip").forEach(function(c) {
+  c.addEventListener("click", function() {
+    document.querySelectorAll("#ettFmtChips .chip").forEach(function(x){ x.classList.remove("on"); });
+    c.classList.add("on");
+    ettFormat = c.dataset.v;
+  });
 });
+function genEtsyTitles() {
+  var product = document.getElementById("ettProduct").value.trim();
+  var style = document.getElementById("ettStyle").value.trim();
+  var use = document.getElementById("ettUse").value.trim();
+  if (!product) { alert("Enter what you are selling first."); return; }
+  var fmt = ettFormat ? ettFormat + " " : "";
+  var templates = [
+    product + (style ? " " + style : "") + " " + fmt + (use ? "for " + use + " " : "") + "Instant Download Commercial Use",
+    (style ? style + " " : "") + product + " " + fmt + (use ? "| " + use + " | " : "") + "Digital Download | Commercial Use OK",
+    product + (use ? " for " + use + " " : "") + (style ? "| " + style + " " : "") + fmt + "| Instant Download | 300 DPI",
+    "Printable " + (style ? style + " " : "") + product + " " + fmt + (use ? "| " + use : "") + " | Digital File | Commercial License",
+    product + " Bundle " + fmt + (style ? "| " + style + " Style " : "") + (use ? "| " + use + " " : "") + "| Instant Download"
+  ];
+  var list = document.getElementById("ettList");
+  list.innerHTML = "";
+  templates.forEach(function(t) {
+    var clean = t.replace(/\s+/g, " ").trim().slice(0, 140);
+    var len = clean.length;
+    var color = len >= 125 ? "var(--green)" : len >= 100 ? "var(--yellow)" : "var(--dim)";
+    list.innerHTML += "<div style=\"background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px\">" +
+      "<div style=\"display:flex;justify-content:space-between;align-items:flex-start;gap:10px\">" +
+      "<div style=\"font-size:13px;color:var(--text);line-height:1.5;flex:1\">" + clean + "</div>" +
+      "<div style=\"display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0\">" +
+      "<span style=\"font-family:monospace;font-size:11px;color:" + color + "\">" + len + "/140</span>" +
+      "<button class=\"cpbtn\" data-text=\"" + clean.replace(/"/g, "&quot;") + "\" onclick=\"cpBtn(this)\">Copy</button>" +
+      "</div></div></div>";
+  });
+  document.getElementById("ettResults").style.display = "block";
+}
+function cpBtn(btn) {
+  navigator.clipboard.writeText(btn.dataset.text);
+  btn.textContent = "Copied!"; btn.classList.add("done");
+  setTimeout(function(){ btn.textContent = "Copy"; btn.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -311,57 +341,7 @@ document.addEventListener('click',function(e){
     <div id="ettList"></div>
   </div>
 </div>
-<script>
-let ettFormat='PNG SVG';
-document.querySelectorAll('#ettFormatChips .chip').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('#ettFormatChips .chip').forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');ettFormat=c.dataset.v;
-  });
-});
-const ETT={
-  prefixDig:['Instant Download','Digital Download','Printable','Commercial Use'],
-  suffix:['Digital Download','Instant Download','Commercial Use OK','No Attribution','High Resolution','300 DPI'],
-  occasions:['Christmas','Birthday','Wedding','Baby Shower','Valentine','Mother's Day','Halloween','Graduation'],
-  uses:['Wall Art','Cricut','Sublimation','DTF','POD','Print On Demand','Scrapbooking','Card Making'],
-};
-function genEtsyTitles(){
-  const product=document.getElementById('ettProduct').value.trim();
-  const style=document.getElementById('ettStyle').value.trim();
-  const use=document.getElementById('ettUse').value.trim();
-  if(!product){alert('Enter what you're selling first.');return;}
-  const fmt=ettFormat?ettFormat+' ':' ';
-  const templates=[
-    `${product}${style?' '+style:''} ${fmt}${use?' for '+use:''} Instant Download Clipart Bundle Commercial Use`,
-    `${style?style+' ':''}${product} ${fmt}${use?'| '+use+' |':''} Digital Download | Commercial Use OK`,
-    `${product} ${use?'for '+use:''} ${style?'| '+style:''} ${fmt}| Instant Download | 300 DPI`,
-    `Printable ${style?style+' ':''}${product} ${fmt}${use?'| '+use:''} | Digital File | Commercial License`,
-    `${product} Clipart Set ${fmt}${style?'| '+style+' Style':''} ${use?'| '+use:''} | Instant Digital Download`,
-  ];
-  const list=document.getElementById('ettList');
-  list.innerHTML='';
-  templates.forEach((t,i)=>{
-    const clean=t.replace(/\s+/g,' ').trim().slice(0,140);
-    const len=clean.length;
-    const color=len>=125?'var(--green)':len>=100?'var(--yellow)':'var(--dim)';
-    list.innerHTML+=`<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-        <div style="font-size:13px;color:var(--text);line-height:1.5;flex:1">${clean}</div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
-          <span style="font-family:'Space Mono',monospace;font-size:11px;color:${color}">${len}/140</span>
-          <button onclick="copyText(this,'${clean.replace(/'/g,"\'")}','Copied!')" class="copy-btn">📋 Copy</button>
-        </div>
-      </div>
-    </div>`;
-  });
-  document.getElementById('ettResults').style.display='block';
-}
-function copyText(btn,text,label){
-  navigator.clipboard.writeText(text);
-  btn.textContent='✓ Copied!';btn.classList.add('copied');
-  setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('copied')},2000);
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related">
   <h2>Related Tools</h2>
@@ -405,7 +385,7 @@ function copyText(btn,text,label){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

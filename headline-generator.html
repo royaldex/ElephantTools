@@ -232,7 +232,7 @@ footer a{color:var(--orange);text-decoration:none}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -245,22 +245,103 @@ footer a{color:var(--orange);text-decoration:none}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
+var HL_NUMS = [3,5,7,8,10,11,13,15,17,20];
+var HL = {
+  list: [
+    "{n} Ways to {topic}", "{n} Proven Strategies for {topic}", "{n} Things Every {audience} Needs to Know About {topic}",
+    "{n} Tips for {topic} That Actually Work", "{n} Mistakes {audience} Make with {topic} and How to Fix Them",
+    "{n} Secrets to Mastering {topic}", "{n} Ideas for {topic} You Have Not Tried Yet",
+    "{n} Reasons {topic} Changes Everything", "{n} Best Tools for {topic}",
+    "{n} Steps to Get Started with {topic}", "{n} Things I Wish I Knew Before Starting {topic}",
+    "{n} Ways {topic} Can Help {audience}", "The {n} Best {topic} Tips for {audience}",
+    "{n} {topic} Hacks That Save You Time", "{n} Quick Wins for Better {topic}",
+    "{n} Tools Every {audience} Needs for {topic}", "{n} {topic} Trends Worth Knowing in 2025",
+    "{n} Ways to Make More Money with {topic}", "{n} Beginner Mistakes with {topic} and How to Avoid Them",
+    "{n} Reasons {audience} Love {topic}"
+  ],
+  how: [
+    "How to {topic} Step by Step", "How to Start {topic} With Zero Experience",
+    "How to Get More Sales with {topic}", "How {audience} Can Use {topic} to Grow Faster",
+    "How to Master {topic} in 30 Days", "How to Make Money with {topic}",
+    "How to {topic} Without Breaking the Bank", "The Right Way to {topic}",
+    "How to Finally Succeed at {topic}", "How {topic} Transformed My Business",
+    "How to {topic} Even If You Are a Complete Beginner", "How to Double Your Results with {topic}",
+    "How Smart {audience} Use {topic}", "How to Save Time with {topic}",
+    "How to Avoid the Biggest {topic} Mistakes", "How to Use {topic} to Stand Out",
+    "How to Get Started with {topic} Today Free", "How to Scale Your {topic} Strategy",
+    "How to Build a {topic} System That Works", "How to Turn {topic} Into Passive Income"
+  ],
+  question: [
+    "Is {topic} Really Worth It", "Are You Making These {topic} Mistakes",
+    "What No One Tells You About {topic}", "Could {topic} Be Your Next Income Stream",
+    "Why Are So Many {audience} Choosing {topic}", "What Is the Fastest Way to Learn {topic}",
+    "Which {topic} Strategy Actually Works in 2025", "Is {topic} Right for Your Business",
+    "Have You Tried {topic} Yet", "What Would Happen If You Focused on {topic}",
+    "Why Is {topic} So Popular Right Now", "Can {audience} Really Make Money with {topic}",
+    "Is Your {topic} Strategy Costing You Sales", "Should You Start {topic} in 2025",
+    "What Makes {topic} So Effective", "Are You Leaving Money on the Table with {topic}",
+    "How Much Can You Really Make with {topic}", "What Is the Secret to Successful {topic}",
+    "Why Do Most {audience} Fail at {topic}", "What Is the Difference Between Good and Great {topic}"
+  ],
+  secret: [
+    "The Secret to {topic} That Experts Do Not Share", "Insider Secrets for {topic} Success",
+    "The Hidden Truth About {topic}", "What Successful {audience} Know About {topic}",
+    "The Little-Known {topic} Trick That Works Every Time", "The {topic} Method Nobody Talks About",
+    "Why Your {topic} Is Not Working And the Secret Fix", "Unlock the Secret to {topic}",
+    "The {topic} Secret Every {audience} Should Know", "The Overlooked {topic} Technique That Changes Everything",
+    "What the Pros Know About {topic} That You Do Not", "The Surprising Truth About {topic}",
+    "Why Nobody Talks About This {topic} Method", "The Quiet {topic} Technique That Works Every Time",
+    "The {topic} Shortcut You Need to Know", "Uncovering the Real Secret Behind {topic}",
+    "The {topic} Truth That Changes Everything", "The Hidden {topic} Strategy Top {audience} Use",
+    "The One {topic} Habit That Separates Success from Failure", "The Underrated {topic} Approach"
+  ],
+  mistake: [
+    "Stop Making These {topic} Mistakes", "The Biggest {topic} Mistakes {audience} Make",
+    "{n} {topic} Mistakes That Are Costing You Sales", "Why Your {topic} Is Not Working",
+    "The {topic} Mistakes I Wish I Had Avoided", "Are You Sabotaging Your {topic}",
+    "Do Not Make These {n} {topic} Mistakes", "The Worst {topic} Advice for {audience}",
+    "{topic} Mistakes That Hurt Your Growth", "Fix These {topic} Mistakes Before It Is Too Late",
+    "The Most Common {topic} Mistakes and How to Fix Them", "How These {topic} Mistakes Are Killing Your Results",
+    "The {topic} Mistake Almost Everyone Makes", "Stop Wasting Time with These {topic} Errors",
+    "The One {topic} Mistake That Costs You Everything", "{n} {topic} Traps That Catch Beginners",
+    "These {topic} Mistakes Surprised Even the Experts", "The {topic} Mistake I Will Never Make Again",
+    "Avoiding the Most Painful {topic} Mistakes", "The Hidden {topic} Mistakes You Are Probably Making"
+  ],
+  ultimate: [
+    "The Ultimate Guide to {topic}", "The Only {topic} Guide You Will Ever Need",
+    "A Complete Beginner Guide to {topic}", "The Definitive {topic} Playbook for {audience}",
+    "Your Complete Roadmap to {topic}", "The No-Nonsense Guide to {topic}",
+    "Everything You Need to Know About {topic}", "The Complete {topic} Handbook for {audience}",
+    "Master {topic} with This Ultimate Guide", "The Comprehensive Guide to {topic} in 2025",
+    "The A-Z Guide to {topic} for {audience}", "Your All-In-One {topic} Resource",
+    "The Full {topic} Breakdown for {audience}", "Everything {audience} Need to Know About {topic}",
+    "The Definitive {topic} Starter Guide", "A Complete Walkthrough of {topic}",
+    "The {topic} Masterclass for {audience}", "Your Step-by-Step {topic} Blueprint",
+    "The Full Guide to {topic} Success", "The Ultimate {topic} Cheat Sheet"
+  ]
+};
+function genHeadlines() {
+  var topic = document.getElementById("hlTopic").value.trim() || "your topic";
+  var audience = document.getElementById("hlAudience").value.trim() || "beginners";
+  var style = document.getElementById("hlStyle").value;
+  var count = parseInt(document.getElementById("hlCount").value);
+  var templates = HL[style] || HL.list;
+  var results = templates.slice(0, count).map(function(t, i) {
+    var n = HL_NUMS[Math.floor(Math.random() * HL_NUMS.length)];
+    return (i+1) + ". " + t.replace(/{topic}/g, topic).replace(/{audience}/g, audience).replace(/{n}/g, n);
+  });
+  document.getElementById("hlOutput").textContent = results.join("\n");
+  document.getElementById("hlResults").style.display = "block";
 }
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
+function copyHl() {
+  navigator.clipboard.writeText(document.getElementById("hlOutput").textContent);
+  event.target.textContent = "Copied!"; event.target.classList.add("done");
+  setTimeout(function(){ event.target.textContent = "Copy All"; event.target.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -311,35 +392,7 @@ document.addEventListener('click',function(e){
     <div class="result-box" id="hlOutput"></div>
   </div>
 </div>
-<script>
-const HL={
-  list:['{n} Ways to {topic}','{n} Proven Strategies for {topic}','{n} Things Every {audience} Needs to Know About {topic}','{n} Tips for {topic} That Actually Work','{n} Mistakes {audience} Make with {topic} (and How to Fix Them)','{n} Secrets to Mastering {topic}','{n} Ideas for {topic} You Haven't Tried Yet','{n} Reasons {topic} Changes Everything','{n} Best Tools for {topic}','{n} Steps to Get Started with {topic}'],
-  how:['How to {topic} (Step-by-Step Guide)','How to Start {topic} With Zero Experience','How to Get More Sales with {topic}','How {audience} Can Use {topic} to Grow Faster','How to Master {topic} in 30 Days','How to Make Money with {topic}','How to {topic} Without Breaking the Bank','The Right Way to {topic} (Most People Get This Wrong)','How to Finally Succeed at {topic}','How {topic} Transformed My Business'],
-  question:['Is {topic} Really Worth It?','Are You Making These {topic} Mistakes?','What No One Tells You About {topic}','Could {topic} Be Your Next Income Stream?','Why Are So Many {audience} Choosing {topic}?','What's the Fastest Way to Learn {topic}?','Which {topic} Strategy Actually Works in 2025?','Is {topic} Right for Your Business?','Have You Tried {topic} Yet?','What Would Happen If You Focused on {topic}?'],
-  secret:['The Secret to {topic} That Experts Won't Tell You','Insider Secrets for {topic} Success','The Hidden Truth About {topic}','What Successful {audience} Know About {topic}','The Little-Known {topic} Trick That Works Every Time','Secrets of the Most Successful {topic} Strategies','The {topic} Method Nobody Talks About','Why Your {topic} Isn't Working (And the Secret Fix)','Unlock the Secret to {topic}','The {topic} Secret Every {audience} Should Know'],
-  mistake:['Stop Making These {topic} Mistakes','The Biggest {topic} Mistakes {audience} Make','{n} {topic} Mistakes That Are Costing You Sales','Why Your {topic} Isn't Working (Common Mistakes)','The {topic} Mistakes I Wish I'd Avoided','Are You Sabotaging Your {topic}? Common Mistakes Revealed','Don't Make These {n} {topic} Mistakes','The Worst {topic} Advice for {audience}','{topic} Mistakes That Hurt Your Growth','Fix These {topic} Mistakes Before It's Too Late'],
-  ultimate:['The Ultimate Guide to {topic}','The Only {topic} Guide You'll Ever Need','A Complete Beginner's Guide to {topic}','The Definitive {topic} Playbook for {audience}','Your Complete Roadmap to {topic}','The No-BS Guide to {topic}','Everything You Need to Know About {topic}','The Complete {topic} Handbook for {audience}','Master {topic} with This Ultimate Guide','The Comprehensive Guide to {topic} in 2025']
-};
-function genHeadlines(){
-  const topic=document.getElementById('hlTopic').value.trim()||'your topic';
-  const audience=document.getElementById('hlAudience').value.trim()||'beginners';
-  const style=document.getElementById('hlStyle').value;
-  const count=parseInt(document.getElementById('hlCount').value);
-  const nums=[3,5,7,8,10,11,13,15,17,20,21];
-  const templates=HL[style];
-  const results=templates.slice(0,count).map(t=>
-    t.replace(/{topic}/g,topic).replace(/{audience}/g,audience).replace(/{n}/g,nums[Math.floor(Math.random()*nums.length)])
-  );
-  document.getElementById('hlOutput').textContent=results.join('
-');
-  document.getElementById('hlResults').style.display='block';
-}
-function copyEl(id){
-  navigator.clipboard.writeText(document.getElementById(id).textContent);
-  event.target.textContent='✓ Copied!';event.target.classList.add('copied');
-  setTimeout(()=>{event.target.textContent='📋 Copy All';event.target.classList.remove('copied')},2000);
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related">
   <h2>Related Tools</h2>
@@ -382,7 +435,7 @@ function copyEl(id){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,131 +244,59 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
-<script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
-</script>
-<div class="main">
-<div class="intro">
-  <div class="intro-top">
-    <div class="intro-icon">📊</div>
-    <div class="intro-text">
-      <div class="intro-cat">Creator Tools</div>
-      <h1>Engagement & Earnings Estimator</h1>
-      <p class="intro-desc">Calculate your engagement rate and get estimated earnings per sponsored post based on your follower count, likes, comments, and saves. Covers Instagram, TikTok, YouTube, and Twitter with niche-based multipliers.</p>
-    </div>
-  </div>
-  <div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Enter your follower count and average engagement metrics</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Select your platform</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Choose your niche from the dropdown</div></div><div class="step"><div class="step-n">4</div><div class="step-t">See your engagement rate and grade instantly</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Review your estimated earnings range per post type</div></div></div>
-</div>
-<div class="tool-area">
-<div class="main">
 
-<h1>📊 Engagement & Earnings Estimator</h1>
-<p class="sub">Calculate your Instagram engagement rate and estimate earnings per sponsored post. Based on industry benchmarks.</p>
-<div class="card">
-  <div class="ctitle">Your Account Stats</div>
-  <div class="r2">
-    <div class="f"><label>Followers</label><input type="number" id="eeFollowers" value="10000" min="100" oninput="calcEngage()"></div>
-    <div class="f"><label>Avg Likes per Post</label><input type="number" id="eeLikes" value="450" min="0" oninput="calcEngage()"></div>
-  </div>
-  <div class="r2">
-    <div class="f"><label>Avg Comments per Post</label><input type="number" id="eeComments" value="30" min="0" oninput="calcEngage()"></div>
-    <div class="f"><label>Avg Saves per Post</label><input type="number" id="eeSaves" value="50" min="0" oninput="calcEngage()"></div>
-  </div>
-  <div class="r2">
-    <div class="f">
-      <label>Platform</label>
-      <select id="eePlatform" onchange="calcEngage()">
-        <option value="instagram">Instagram</option>
-        <option value="tiktok">TikTok</option>
-        <option value="youtube">YouTube</option>
-        <option value="twitter">Twitter/X</option>
-      </select>
-    </div>
-    <div class="f">
-      <label>Niche</label>
-      <select id="eeNiche" onchange="calcEngage()">
-        <option value="1.0">Lifestyle / General</option>
-        <option value="1.4">Fashion / Beauty</option>
-        <option value="1.6">Food / Recipes</option>
-        <option value="1.5">Fitness / Health</option>
-        <option value="1.8">Small Business / Etsy</option>
-        <option value="2.0">Finance / Investing</option>
-        <option value="1.3">Travel</option>
-        <option value="1.7">Art / Creative</option>
-      </select>
-    </div>
-  </div>
-</div>
-<div class="card">
-  <div class="ctitle">Results</div>
-  <div class="stat-row">
-    <div class="stat"><span class="sv" id="eeRate">0%</span><div class="sl">Engagement Rate</div></div>
-    <div class="stat"><span class="sv" id="eeGrade">—</span><div class="sl">Grade</div></div>
-    <div class="stat"><span class="sv" id="eeReach">0</span><div class="sl">Est. Reach/Post</div></div>
-  </div>
-  <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px">
-    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px">Estimated Earnings Per Post (USD)</div>
-    <div class="r3">
-      <div class="row" style="flex-direction:column;align-items:flex-start"><span style="font-size:11px;color:var(--muted)">Story Post</span><span class="rv pos" id="eeStory">$0</span></div>
-      <div class="row" style="flex-direction:column;align-items:flex-start"><span style="font-size:11px;color:var(--muted)">Feed Post</span><span class="rv pos" id="eeFeed">$0</span></div>
-      <div class="row" style="flex-direction:column;align-items:flex-start"><span style="font-size:11px;color:var(--muted)">Reel / Video</span><span class="rv pos" id="eeReel">$0</span></div>
-    </div>
-  </div>
-  <div style="font-size:11px;color:var(--muted)">💡 Estimates based on average CPM and engagement rates by platform. Actual rates vary by niche, audience quality, and brand.</div>
-</div>
 <script>
-const BENCHMARKS={
-  instagram:{story:0.01,feed:0.018,reel:0.025,reach:0.25},
-  tiktok:{story:0.005,feed:0.025,reel:0.04,reach:0.6},
-  youtube:{story:0.02,feed:0.03,reel:0.08,reach:0.45},
-  twitter:{story:0.003,feed:0.008,reel:0.012,reach:0.15},
+var BENCHMARKS = {
+  instagram: {story:0.01, feed:0.018, reel:0.025, reach:0.25},
+  tiktok:    {story:0.005, feed:0.025, reel:0.04, reach:0.6},
+  youtube:   {story:0.02, feed:0.03, reel:0.08, reach:0.45},
+  twitter:   {story:0.003, feed:0.008, reel:0.012, reach:0.15}
 };
-const GRADE_THRESHOLDS=[
-  {min:8,label:'Excellent 🔥',color:'var(--green)'},
-  {min:5,label:'Very Good ✨',color:'var(--green)'},
-  {min:3,label:'Good 👍',color:'var(--blue)'},
-  {min:1.5,label:'Average 😐',color:'var(--yellow)'},
-  {min:0,label:'Low ⚠️',color:'var(--red)'},
+
+var GRADE = [
+  {min:8, label:'Excellent', color:'var(--green)'},
+  {min:5, label:'Very Good', color:'var(--green)'},
+  {min:3, label:'Good', color:'var(--blue)'},
+  {min:1.5, label:'Average', color:'var(--yellow)'},
+  {min:0, label:'Low', color:'var(--red)'}
 ];
-function fmtMoney(n){if(n>=1000)return'$'+Math.round(n/100)*100;if(n>=100)return'$'+Math.round(n/10)*10;return'$'+Math.round(n);}
-function calcEngage(){
-  const followers=parseInt(document.getElementById('eeFollowers').value)||1;
-  const likes=parseInt(document.getElementById('eeLikes').value)||0;
-  const comments=parseInt(document.getElementById('eeComments').value)||0;
-  const saves=parseInt(document.getElementById('eeSaves').value)||0;
-  const platform=document.getElementById('eePlatform').value;
-  const nicheMult=parseFloat(document.getElementById('eeNiche').value)||1;
-  const engagement=(likes+comments+saves*2)/followers*100;
-  const grade=GRADE_THRESHOLDS.find(g=>engagement>=g.min)||GRADE_THRESHOLDS[4];
-  const B=BENCHMARKS[platform];
-  const reach=Math.round(followers*B.reach);
-  const story=followers*B.story*nicheMult;
-  const feed=followers*B.feed*nicheMult;
-  const reel=followers*B.reel*nicheMult;
-  document.getElementById('eeRate').textContent=engagement.toFixed(2)+'%';
-  document.getElementById('eeRate').style.color=grade.color;
-  document.getElementById('eeGrade').textContent=grade.label;
-  document.getElementById('eeGrade').style.color=grade.color;
-  document.getElementById('eeReach').textContent=reach.toLocaleString();
-  document.getElementById('eeStory').textContent=fmtMoney(story)+'–'+fmtMoney(story*2);
-  document.getElementById('eeFeed').textContent=fmtMoney(feed)+'–'+fmtMoney(feed*2);
-  document.getElementById('eeReel').textContent=fmtMoney(reel)+'–'+fmtMoney(reel*2);
+
+function fmtMoney(n) {
+  if (n >= 1000) return '$' + Math.round(n/100)*100;
+  if (n >= 100) return '$' + Math.round(n/10)*10;
+  return '$' + Math.round(n);
 }
+
+function calcEngage() {
+  var followers = parseInt(document.getElementById('eeFollowers').value) || 1;
+  var likes = parseInt(document.getElementById('eeLikes').value) || 0;
+  var comments = parseInt(document.getElementById('eeComments').value) || 0;
+  var saves = parseInt(document.getElementById('eeSaves').value) || 0;
+  var platform = document.getElementById('eePlatform').value || 'instagram';
+  var nicheMult = parseFloat(document.getElementById('eeNiche').value) || 1.0;
+
+  var engagement = (likes + comments + saves*2) / followers * 100;
+  var grade = GRADE.find(function(g){ return engagement >= g.min; }) || GRADE[4];
+
+  var B = BENCHMARKS[platform] || BENCHMARKS.instagram;
+  var reach = Math.round(followers * B.reach);
+  var story = followers * B.story * nicheMult;
+  var feed = followers * B.feed * nicheMult;
+  var reel = followers * B.reel * nicheMult;
+
+  document.getElementById('eeRate').textContent = engagement.toFixed(2) + '%';
+  document.getElementById('eeRate').style.color = grade.color;
+  document.getElementById('eeGrade').textContent = grade.label;
+  document.getElementById('eeGrade').style.color = grade.color;
+  document.getElementById('eeReach').textContent = reach.toLocaleString();
+  document.getElementById('eeStory').textContent = fmtMoney(story) + ' - ' + fmtMoney(story*2);
+  document.getElementById('eeFeed').textContent = fmtMoney(feed) + ' - ' + fmtMoney(feed*2);
+  document.getElementById('eeReel').textContent = fmtMoney(reel) + ' - ' + fmtMoney(reel*2);
+}
+
 calcEngage();
 </script>
+
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="instagram-caption-generator.html"><div class="ri">📸</div><div class="rn">Instagram Captions</div><div class="rd">Caption generator</div></a>
 <a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Get hashtags</div></a>
@@ -406,7 +334,7 @@ calcEngage();
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

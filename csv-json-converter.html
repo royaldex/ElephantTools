@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,131 +244,80 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
-<script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
-</script>
-<div class="main">
-<div class="intro">
-  <div class="intro-top">
-    <div class="intro-icon">⇄</div>
-    <div class="intro-text">
-      <div class="intro-cat">Developer Tools</div>
-      <h1>CSV ↔ JSON Converter</h1>
-      <p class="intro-desc">Move data between CSV (spreadsheets) and JSON (APIs and code) formats instantly. Supports comma, semicolon, tab, and pipe delimiters. Both directions — CSV to JSON and JSON to CSV — with instant download.</p>
-    </div>
-  </div>
-  <div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Select the conversion direction: CSV to JSON or JSON to CSV</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Paste your CSV or JSON data into the input box</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Select your delimiter if converting from CSV</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Click Convert</div></div><div class="step"><div class="step-n">5</div><div class="step-t">Copy the result or download as a file</div></div></div>
-</div>
-<div class="tool-area">
-<div class="main">
 
-<h1>⇄ CSV ↔ JSON Converter</h1>
-<p class="sub">Convert CSV data to JSON or JSON arrays to CSV instantly. Useful for data processing, APIs, and spreadsheet workflows.</p>
-<div style="display:flex;gap:8px;margin-bottom:16px">
-  <button class="btn btn-p btn-sm" id="tabCSV" onclick="switchCsvTab('csv')">CSV → JSON</button>
-  <button class="btn btn-s btn-sm" id="tabJSON" onclick="switchCsvTab('json')">JSON → CSV</button>
-</div>
-<div id="csvPanel">
-  <div class="card">
-    <div class="ctitle">Paste CSV Data</div>
-    <div class="f"><textarea id="csvInput" rows="10" placeholder="name,age,city&#10;Alice,30,New York&#10;Bob,25,London" style="font-family:monospace;font-size:13px"></textarea></div>
-    <div class="r2">
-      <div class="f"><label>Delimiter</label>
-        <select id="csvDelim"><option value=",">Comma (,)</option><option value=";">Semicolon (;)</option><option value="&#9;">Tab</option><option value="|">Pipe (|)</option></select>
-      </div>
-      <div class="f"><label>Output Format</label>
-        <select id="csvFmt"><option value="array">Array of Objects</option><option value="flat">Flat Array</option></select>
-      </div>
-    </div>
-    <button class="btn btn-p btn-full" onclick="csv2json()">⚡ Convert to JSON</button>
-  </div>
-</div>
-<div id="jsonPanel" style="display:none">
-  <div class="card">
-    <div class="ctitle">Paste JSON Data</div>
-    <div class="f"><textarea id="jsonInputCsv" rows="10" placeholder='[{"name":"Alice","age":30},{"name":"Bob","age":25}]' style="font-family:monospace;font-size:13px"></textarea></div>
-    <button class="btn btn-p btn-full" onclick="json2csv()">⚡ Convert to CSV</button>
-  </div>
-</div>
-<div id="csvResults" style="display:none">
-  <div class="card">
-    <div class="ctitle">Output <span id="csvResultLabel"></span></div>
-    <div class="arow" style="margin-bottom:12px">
-      <button class="cpbtn" onclick="cpEl('csvOutput')">📋 Copy</button>
-      <button class="btn btn-s btn-sm" onclick="dlCsvResult()">⬇ Download</button>
-    </div>
-    <div class="rbox" id="csvOutput"></div>
-  </div>
-</div>
 <script>
-let csvMode='csv';let csvExt='.json';
-function switchCsvTab(t){
-  csvMode=t;
-  document.getElementById('csvPanel').style.display=t==='csv'?'block':'none';
-  document.getElementById('jsonPanel').style.display=t==='json'?'block':'none';
-  document.getElementById('tabCSV').className='btn btn-sm '+(t==='csv'?'btn-p':'btn-s');
-  document.getElementById('tabJSON').className='btn btn-sm '+(t==='json'?'btn-p':'btn-s');
-  document.getElementById('csvResults').style.display='none';
+var csvMode = 'csv';
+var csvExt = '.json';
+
+function switchCsvTab(t) {
+  csvMode = t;
+  document.getElementById('csvPanel').style.display = t === 'csv' ? 'block' : 'none';
+  document.getElementById('jsonPanel').style.display = t === 'json' ? 'block' : 'none';
+  document.getElementById('tabCSV').className = 'btn btn-sm ' + (t === 'csv' ? 'btn-p' : 'btn-s');
+  document.getElementById('tabJSON').className = 'btn btn-sm ' + (t === 'json' ? 'btn-p' : 'btn-s');
+  document.getElementById('csvResults').style.display = 'none';
 }
-function csv2json(){
-  const raw=document.getElementById('csvInput').value.trim();
-  if(!raw){alert('Paste CSV data first.');return;}
-  const delim=document.getElementById('csvDelim').value;
-  const fmt=document.getElementById('csvFmt').value;
-  const lines=raw.split('
-').filter(l=>l.trim());
-  const headers=lines[0].split(delim).map(h=>h.trim().replace(/^"|"$/g,''));
-  const rows=lines.slice(1).map(line=>{
-    const vals=line.split(delim).map(v=>v.trim().replace(/^"|"$/g,''));
-    if(fmt==='flat')return vals;
-    const obj={};headers.forEach((h,i)=>obj[h]=vals[i]||'');return obj;
+
+function csv2json() {
+  var raw = document.getElementById('csvInput').value.trim();
+  if (!raw) { alert('Paste CSV data first.'); return; }
+  var delim = document.getElementById('csvDelim').value;
+  var fmt = document.getElementById('csvFmt').value;
+  var lines = raw.split('\n').filter(function(l){ return l.trim(); });
+  if (lines.length < 2) { alert('Need at least a header row and one data row.'); return; }
+  var headers = lines[0].split(delim).map(function(h){ return h.trim().replace(/^"|"$/g, ''); });
+  var rows = lines.slice(1).map(function(line) {
+    var vals = line.split(delim).map(function(v){ return v.trim().replace(/^"|"$/g, ''); });
+    if (fmt === 'flat') return vals;
+    var obj = {};
+    headers.forEach(function(h, i){ obj[h] = vals[i] || ''; });
+    return obj;
   });
-  document.getElementById('csvOutput').textContent=JSON.stringify(rows,null,2);
-  document.getElementById('csvResultLabel').textContent='(JSON)';
-  document.getElementById('csvResults').style.display='block';
-  csvExt='.json';
+  document.getElementById('csvOutput').textContent = JSON.stringify(rows, null, 2);
+  document.getElementById('csvResultLabel').textContent = '(JSON)';
+  document.getElementById('csvResults').style.display = 'block';
+  csvExt = '.json';
 }
-function json2csv(){
-  const raw=document.getElementById('jsonInputCsv').value.trim();
-  if(!raw){alert('Paste JSON data first.');return;}
-  try{
-    const data=JSON.parse(raw);
-    if(!Array.isArray(data)||!data.length){alert('JSON must be an array of objects.');return;}
-    const headers=Object.keys(data[0]);
-    const rows=[headers.join(','),...data.map(row=>headers.map(h=>{
-      const v=String(row[h]||'');return v.includes(',')?'"'+v+'"':v;
-    }).join(','))];
-    document.getElementById('csvOutput').textContent=rows.join('
-');
-    document.getElementById('csvResultLabel').textContent='(CSV)';
-    document.getElementById('csvResults').style.display='block';
-    csvExt='.csv';
-  }catch(e){alert('Invalid JSON: '+e.message);}
+
+function json2csv() {
+  var raw = document.getElementById('jsonInputCsv').value.trim();
+  if (!raw) { alert('Paste JSON data first.'); return; }
+  try {
+    var data = JSON.parse(raw);
+    if (!Array.isArray(data) || !data.length) { alert('JSON must be an array of objects.'); return; }
+    var headers = Object.keys(data[0]);
+    var csvRows = [headers.join(',')];
+    data.forEach(function(row) {
+      var vals = headers.map(function(h) {
+        var v = String(row[h] !== undefined ? row[h] : '');
+        return v.indexOf(',') >= 0 ? '"' + v + '"' : v;
+      });
+      csvRows.push(vals.join(','));
+    });
+    document.getElementById('csvOutput').textContent = csvRows.join('\n');
+    document.getElementById('csvResultLabel').textContent = '(CSV)';
+    document.getElementById('csvResults').style.display = 'block';
+    csvExt = '.csv';
+  } catch(e) { alert('Invalid JSON: ' + e.message); }
 }
-function cpEl(id){
+
+function cpEl(id) {
   navigator.clipboard.writeText(document.getElementById(id).textContent);
-  event.target.textContent='✓ Copied!';event.target.classList.add('done');
-  setTimeout(()=>{event.target.textContent='📋 Copy';event.target.classList.remove('done')},2000);
+  event.target.textContent = 'Copied!'; event.target.classList.add('done');
+  setTimeout(function(){ event.target.textContent = 'Copy'; event.target.classList.remove('done'); }, 2000);
 }
-function dlCsvResult(){
-  const t=document.getElementById('csvOutput').textContent;if(!t)return;
-  const mime=csvExt==='.json'?'application/json':'text/csv';
-  const a=document.createElement('a');a.href='data:'+mime+','+encodeURIComponent(t);a.download='converted'+csvExt;a.click();
+
+function dlCsvResult() {
+  var t = document.getElementById('csvOutput').textContent;
+  if (!t) return;
+  var mime = csvExt === '.json' ? 'application/json' : 'text/csv';
+  var a = document.createElement('a');
+  a.href = 'data:' + mime + ',' + encodeURIComponent(t);
+  a.download = 'converted' + csvExt;
+  a.click();
 }
 </script>
+
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="json-formatter.html"><div class="ri">{ }</div><div class="rn">JSON Formatter</div><div class="rd">Format & validate JSON</div></a>
 <a class="rc" href="word-counter.html"><div class="ri">📊</div><div class="rn">Word Counter</div><div class="rd">Count words & chars</div></a>
@@ -406,7 +355,7 @@ function dlCsvResult(){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

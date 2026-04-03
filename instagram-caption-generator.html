@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,22 +244,113 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
+var IG = {
+  friendly: {
+    opens: [
+      "Obsessed with this and I cannot stop thinking about it",
+      "This just made my whole day and I had to share it with you",
+      "Can we talk about how much I love this?",
+      "Not me being absolutely in love with TOPIC right now"
+    ],
+    mids: [
+      "Every detail feels so intentional and real.",
+      "This is what passion looks like and I am here for it.",
+      "Small things like this make every day so much better.",
+      "This right here is exactly why I do what I do."
+    ]
+  },
+  funny: {
+    opens: [
+      "Me pretending I have my life together while posting about TOPIC",
+      "Nobody asked but here is TOPIC because it lives in my head rent free",
+      "Plot twist: TOPIC is the answer to all my problems",
+      "Warning: this post about TOPIC may cause excessive happiness"
+    ],
+    mids: [
+      "Absolutely nobody is surprised this ended up on my feed.",
+      "This is peak me, honestly.",
+      "I regret nothing.",
+      "10 out of 10, would do again."
+    ]
+  },
+  inspiring: {
+    opens: [
+      "Every big dream starts with a single step",
+      "Your story matters. Your work matters. Never forget that.",
+      "This is for everyone building something from scratch",
+      "Proof that consistency beats perfection every time"
+    ],
+    mids: [
+      "It has not always been easy, but it has always been worth it.",
+      "Real growth happens in the quiet moments no one sees.",
+      "You do not need perfect conditions. You need to start.",
+      "The only way out is through, and you are doing it."
+    ]
+  },
+  professional: {
+    opens: [
+      "Excited to share this with you today.",
+      "Introducing something I have been working on.",
+      "Here is a closer look at what we have been building.",
+      "Proud to present this — built with care, made to last."
+    ],
+    mids: [
+      "Quality and intention behind every single piece.",
+      "This is what we stand for as a brand.",
+      "Designed to make your life easier and more beautiful.",
+      "Every decision was made with our community in mind."
+    ]
+  },
+  relatable: {
+    opens: [
+      "Be honest, who else does this?",
+      "No filter needed when TOPIC looks this good",
+      "Living my best life and I am not sorry about it",
+      "Tell me you love TOPIC without telling me you love it"
+    ],
+    mids: [
+      "We do not talk about this enough honestly.",
+      "This is so me and I am owning it completely.",
+      "If you know, you know.",
+      "Normalise talking about TOPIC more."
+    ]
   }
-});
+};
+var CTA_TEXT = {
+  shop: "Link in bio to shop! Tap it before it is gone.",
+  comment: "Drop a comment below — would you try this?",
+  save: "Save this post so you do not forget it!",
+  follow: "Follow along for more content like this every week.",
+  none: ""
+};
+function genIgCaptions() {
+  var topic = document.getElementById("igTopic").value.trim() || "my latest creation";
+  var tone = document.getElementById("igTone").value;
+  var cta = document.getElementById("igCta").value;
+  var T = IG[tone] || IG.friendly;
+  var ctaLine = CTA_TEXT[cta] || "";
+  var list = document.getElementById("igList");
+  list.innerHTML = "";
+  for (var i = 0; i < 4; i++) {
+    var open = T.opens[i % T.opens.length].replace(/TOPIC/g, topic);
+    var mid = T.mids[i % T.mids.length].replace(/TOPIC/g, topic);
+    var caption = open + " \u2728\n\n" + mid + (ctaLine ? "\n\n" + ctaLine : "");
+    list.innerHTML += "<div style=\"background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px\">" +
+      "<div style=\"font-size:13px;color:var(--text);line-height:1.7;white-space:pre-line;margin-bottom:10px\">" + caption + "</div>" +
+      "<button class=\"cpbtn\" onclick=\"cpCaption(this.previousElementSibling)\">Copy</button>" +
+      "</div>";
+  }
+  document.getElementById("igResults").style.display = "block";
+}
+function cpCaption(el) {
+  navigator.clipboard.writeText(el.textContent);
+  event.target.textContent = "Copied!"; event.target.classList.add("done");
+  setTimeout(function(){ event.target.textContent = "Copy"; event.target.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -311,45 +402,7 @@ document.addEventListener('click',function(e){
     <div id="igList"></div>
   </div>
 </div>
-<script>
-const IG={
-  friendly:{opens:['Obsessed with this ✨','This just made my whole day 🙌','Can we talk about how much I love this? 💛','Not me being absolutely in love with {topic} 🥹','Y'all… {topic} just happened and I'm not okay 😍'],mids:['Every detail feels so intentional and real.','This is what passion looks like, and I'm here for it.','Small things like this make every day so much better.','This right here is exactly why I do what I do.']},
-  funny:{opens:['Me, pretending I have my life together while posting about {topic} 😂','Nobody asked but here's {topic} because it lives in my head rent free 💀','Plot twist: {topic} is the answer to all my problems 🤣','Warning: this post about {topic} may cause excessive happiness 🚨','My therapist told me to find joy. I found {topic}. Close enough. 😌'],mids:['Absolutely nobody is surprised this ended up on my feed.','This is peak me, honestly.','I regret nothing.','10/10, would do again.']},
-  inspiring:{opens:['Every big dream starts with a single step ✨','Your story matters. Your work matters. Never forget that. 💪','This is for everyone building something from scratch 🛠️','Proof that consistency beats perfection every time 🔥','If you're reading this: keep going. The journey is the destination 🌱'],mids:['It hasn't always been easy, but it's always been worth it.','Real growth happens in the quiet moments no one sees.','You don't need perfect conditions. You need to start.']},
-  professional:{opens:['Excited to share {topic} with you today.','Introducing something I've been working on: {topic}','Here's a closer look at {topic} — the details speak for themselves.','Proud to present {topic}. Built with care, made to last.'],mids:['Quality and intention behind every single piece.','This is what we stand for as a brand.','Designed to make your life easier and more beautiful.']},
-  relatable:{opens:['Be honest, who else does this? 👀','No filter needed when {topic} looks this good 😩','Living my best life via {topic} 🙌','This is my love language and I'm not sorry about it 💅','Tell me you love {topic} without telling me you love {topic} 😌'],mids:['We don't talk about it enough honestly.','This is SO me and I'm owning it completely.','If you know, you know.']}
-};
-const CTA={
-  shop:['Link in bio to shop! 🛒','Get yours — link in bio 🔗','Tap the link in my bio to shop!'],
-  comment:['Drop a 🔥 in the comments if you agree!','Comment below — would you try this?','What do you think? Tell me in the comments! 👇'],
-  save:['Save this post for later! 📌','Double tap if this resonates with you ❤️','Save this so you don't forget it!'],
-  follow:['Follow for more! ✨','Follow along for daily content like this 🌟','Hit follow so you never miss a post!'],
-  none:['']
-};
-function genIgCaptions(){
-  const topic=document.getElementById('igTopic').value.trim()||'my latest creation';
-  const niche=document.getElementById('igNiche').value.trim()||'creator';
-  const tone=document.getElementById('igTone').value;
-  const cta=document.getElementById('igCta').value;
-  const T=IG[tone];
-  const list=document.getElementById('igList');list.innerHTML='';
-  T.opens.slice(0,4).forEach((open,i)=>{
-    const o=open.replace(/{topic}/g,topic);
-    const mid=T.mids[i%T.mids.length];
-    const ctaText=CTA[cta][i%CTA[cta].length];
-    const caption=o+'
-
-'+mid+(ctaText?'
-
-'+ctaText:'');
-    list.innerHTML+=`<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">
-      <div style="font-size:13px;color:var(--text);line-height:1.7;white-space:pre-line;margin-bottom:10px">${caption}</div>
-      <button class="cpbtn" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='✓ Copied!';this.classList.add('done');setTimeout(()=>{this.textContent='📋 Copy';this.classList.remove('done')},2000)">📋 Copy</button>
-    </div>`;
-  });
-  document.getElementById('igResults').style.display='block';
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Generate hashtags</div></a>
 <a class="rc" href="tiktok-idea-generator.html"><div class="ri">🎵</div><div class="rn">TikTok Ideas</div><div class="rd">TikTok content ideas</div></a>
@@ -387,7 +440,7 @@ function genIgCaptions(){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

@@ -600,7 +600,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -613,22 +613,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
-<script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
-</script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -644,551 +629,40 @@ document.addEventListener('click',function(e){
 <div class="tool-area">
 <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useRef, useCallback } = React;
+    
+</div>
 
-        // Upscale image to minimum 3000x3000px with high-quality interpolation
-        async function upscaleImage(file, scale) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    
-                    // Calculate dimensions - use scale factor or minimum 3000px, whichever is larger
-                    const minSize = 3000;
-                    const scaledWidth = img.width * scale;
-                    const scaledHeight = img.height * scale;
-                    
-                    let finalWidth, finalHeight;
-                    
-                    if (scaledWidth >= minSize && scaledHeight >= minSize) {
-                        // Scale factor already meets minimum
-                        finalWidth = scaledWidth;
-                        finalHeight = scaledHeight;
-                    } else {
-                        // Need to scale up more to meet minimum
-                        const scaleToMeetMin = Math.max(minSize / img.width, minSize / img.height);
-                        finalWidth = Math.round(img.width * scaleToMeetMin);
-                        finalHeight = Math.round(img.height * scaleToMeetMin);
-                    }
-                    
-                    canvas.width = finalWidth;
-                    canvas.height = finalHeight;
-                    
-                    // High-quality upscaling for print
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.imageSmoothingQuality = 'high';
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    
-                    URL.revokeObjectURL(img.src);
-                    
-                    resolve({
-                        canvas,
-                        width: canvas.width,
-                        height: canvas.height,
-                        name: file.name
-                    });
-                };
-                img.src = URL.createObjectURL(file);
-            });
-        }
-
-        // Convert canvas to PNG blob
-        function canvasToPngBlob(canvas) {
-            return new Promise((resolve) => {
-                canvas.toBlob((blob) => resolve(blob), 'image/png');
-            });
-        }
-
-        function App() {
-            const [step, setStep] = useState(1);
-            const [files, setFiles] = useState([]);
-            const [scale, setScale] = useState(2);
-            const [zipName, setZipName] = useState('clipart');
-            const [startNumber, setStartNumber] = useState(1);
-            const [processing, setProcessing] = useState(false);
-            const [progress, setProgress] = useState(0);
-            const [progressText, setProgressText] = useState('');
-            const [result, setResult] = useState(null);
-            const fileInputRef = useRef(null);
-            const [dragOver, setDragOver] = useState(false);
-
-            const handleFiles = useCallback((newFiles) => {
-                const pngFiles = Array.from(newFiles).filter(f => 
-                    f.type === 'image/png' && f.name.toLowerCase().endsWith('.png')
-                );
-                
-                const filesWithPreview = pngFiles.map(file => ({
-                    file,
-                    preview: URL.createObjectURL(file),
-                    id: Math.random().toString(36).substr(2, 9)
-                }));
-                
-                setFiles(prev => [...prev, ...filesWithPreview]);
-            }, []);
-
-            const handleDrop = useCallback((e) => {
-                e.preventDefault();
-                setDragOver(false);
-                handleFiles(e.dataTransfer.files);
-            }, [handleFiles]);
-
-            const removeFile = (id) => {
-                setFiles(prev => prev.filter(f => f.id !== id));
-            };
-
-            const processFiles = async () => {
-                setProcessing(true);
-                setProgress(0);
-                
-                try {
-                    const total = files.length;
-                    const pngBlobs = [];
-                    
-                    // PHASE 1: Upscale all images, store blobs with real sizes
-                    for (let i = 0; i < files.length; i++) {
-                        setProgressText(`Upscaling ${i + 1}/${total}...`);
-                        await new Promise(r => setTimeout(r, 50));
-                        
-                        const upscaled = await upscaleImage(files[i].file, scale);
-                        const pngBlob = await canvasToPngBlob(upscaled.canvas);
-                        
-                        pngBlobs.push({
-                            name: upscaled.name.replace(/\.png$/i, ''),
-                            blob: pngBlob,
-                            size: pngBlob.size
-                        });
-                        
-                        // Clear canvas memory
-                        upscaled.canvas.width = 1;
-                        upscaled.canvas.height = 1;
-                        
-                        setProgress(Math.round(((i + 1) / total) * 60));
-                        
-                        await new Promise(r => setTimeout(r, 30));
-                    }
-                    
-                    // PHASE 2: Bin-pack using REAL sizes
-                    setProgressText('Organizing into Etsy-ready ZIPs...');
-                    await new Promise(r => setTimeout(r, 100));
-                    
-                    const MAX_ZIP_SIZE = 19 * 1024 * 1024; // 19MB to be safe
-                    const zipBins = [];
-                    
-                    // Sort largest first for better packing
-                    const sorted = [...pngBlobs].sort((a, b) => b.size - a.size);
-                    
-                    for (const file of sorted) {
-                        // Try to fit in existing bin
-                        let placed = false;
-                        for (const bin of zipBins) {
-                            if (bin.totalSize + file.size <= MAX_ZIP_SIZE) {
-                                bin.files.push(file);
-                                bin.totalSize += file.size;
-                                placed = true;
-                                break;
-                            }
-                        }
-                        // Create new bin if doesn't fit anywhere
-                        if (!placed) {
-                            zipBins.push({ files: [file], totalSize: file.size });
-                        }
-                    }
-                    
-                    setProgress(65);
-                    
-                    // PHASE 3: Create ZIPs
-                    const zipBlobs = [];
-                    
-                    for (let z = 0; z < zipBins.length; z++) {
-                        const bin = zipBins[z];
-                        setProgressText(`Creating ZIP ${z + 1}/${zipBins.length} (${bin.files.length} images)...`);
-                        await new Promise(r => setTimeout(r, 100));
-                        
-                        const zip = new JSZip();
-                        
-                        for (const file of bin.files) {
-                            zip.file(`${file.name}_${scale}x_300dpi.png`, file.blob);
-                        }
-                        
-                        const zipBlob = await zip.generateAsync({ 
-                            type: 'blob',
-                            compression: 'DEFLATE',
-                            compressionOptions: { level: 5 }
-                        });
-                        
-                        zipBlobs.push({
-                            blob: zipBlob,
-                            sizeMB: (zipBlob.size / (1024 * 1024)).toFixed(2),
-                            imageCount: bin.files.length,
-                            isOverLimit: zipBlob.size > 20 * 1024 * 1024
-                        });
-                        
-                        // Clear blobs from this bin to free memory
-                        bin.files.length = 0;
-                        
-                        setProgress(65 + Math.round(((z + 1) / zipBins.length) * 35));
-                    }
-                    
-                    pngBlobs.length = 0;
-                    setProgress(100);
-                    
-                    setResult({
-                        zips: zipBlobs,
-                        totalImages: files.length,
-                        scale: scale,
-                        zipName: zipName,
-                        startNumber: startNumber
-                    });
-                    
-                    setStep(4);
-                } catch (error) {
-                    console.error('Processing error:', error);
-                    setProgressText(`Error: ${error.message}`);
-                } finally {
-                    setProcessing(false);
-                }
-            };
-
-            const downloadZip = (index) => {
-                const zip = result.zips[index];
-                const url = URL.createObjectURL(zip.blob);
-                const a = document.createElement('a');
-                a.href = url;
-                const safeName = sanitizeFilename(result.zipName);
-                const seqNum = result.startNumber + index;
-                a.download = `${safeName}${seqNum}.zip`;
-                a.click();
-                URL.revokeObjectURL(url);
-            };
-
-            const downloadAll = async () => {
-                for (let i = 0; i < result.zips.length; i++) {
-                    downloadZip(i);
-                    await new Promise(r => setTimeout(r, 500));
-                }
-            };
-
-            const sanitizeFilename = (name) => {
-                return name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'clipart';
-            };
-
-            const reset = () => {
-                setStep(1);
-                setFiles([]);
-                setScale(2);
-                setZipName('clipart');
-                setStartNumber(1);
-                setProgress(0);
-                setResult(null);
-            };
-
-            return (
-                <div className="app-container">
-                    <div className="header">
-                        <h1>Clip Art Packager</h1>
-                        <p>Upscale & package clip art for customer delivery</p>
-                    </div>
-
-                    <div className="stepper">
-                        <div className="step-indicator">
-                            <div className={`step-dot ${step >= 1 ? (step > 1 ? 'completed' : 'active') : ''}`}>
-                                {step > 1 ? '✓' : '1'}
-                            </div>
-                        </div>
-                        <div className={`step-line ${step > 1 ? 'completed' : ''}`}></div>
-                        <div className="step-indicator">
-                            <div className={`step-dot ${step >= 2 ? (step > 2 ? 'completed' : 'active') : ''}`}>
-                                {step > 2 ? '✓' : '2'}
-                            </div>
-                        </div>
-                        <div className={`step-line ${step > 2 ? 'completed' : ''}`}></div>
-                        <div className="step-indicator">
-                            <div className={`step-dot ${step >= 3 ? (step > 3 ? 'completed' : 'active') : ''}`}>
-                                {step > 3 ? '✓' : '3'}
-                            </div>
-                        </div>
-                        <div className={`step-line ${step > 3 ? 'completed' : ''}`}></div>
-                        <div className="step-indicator">
-                            <div className={`step-dot ${step >= 4 ? 'active' : ''}`}>4</div>
-                        </div>
-                    </div>
-
-                    {step === 1 && (
-                        <div className="card">
-                            <h2 className="card-title">
-                                <span className="step-num">STEP 1</span>
-                                Upload Clip Art
-                            </h2>
-                            
-                            <div 
-                                className={`dropzone ${dragOver ? 'drag-over' : ''}`}
-                                onClick={() => fileInputRef.current?.click()}
-                                onDrop={handleDrop}
-                                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                                onDragLeave={() => setDragOver(false)}
-                            >
-                                <div className="dropzone-icon">📁</div>
-                                <div className="dropzone-text">Drop PNG files here or click to browse</div>
-                                <div className="dropzone-hint">Transparent PNG files only</div>
-                                <input 
-                                    ref={fileInputRef}
-                                    type="file" 
-                                    accept=".png,image/png"
-                                    multiple
-                                    style={{ display: 'none' }}
-                                    onChange={(e) => handleFiles(e.target.files)}
-                                />
-                            </div>
-
-                            {files.length > 0 && (
-                                <div className="file-list">
-                                    {files.map(f => (
-                                        <div key={f.id} className="file-item">
-                                            <button 
-                                                className="file-remove"
-                                                onClick={() => removeFile(f.id)}
-                                            >×</button>
-                                            <img 
-                                                src={f.preview} 
-                                                alt={f.file.name}
-                                                className="file-thumb"
-                                            />
-                                            <div className="file-name">{f.file.name}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            <div className="action-row">
-                                <button 
-                                    className="btn btn-primary"
-                                    disabled={files.length === 0}
-                                    onClick={() => setStep(2)}
-                                >
-                                    Continue with {files.length} file{files.length !== 1 ? 's' : ''}
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
-                    {step === 2 && (
-                        <div className="card">
-                            <h2 className="card-title">
-                                <span className="step-num">STEP 2</span>
-                                Configure Options
-                            </h2>
-                            
-                            <div className="options-grid">
-                                <div className="option-group">
-                                    <div className="option-label">ZIP Base Name</div>
-                                    <input 
-                                        type="text"
-                                        value={zipName}
-                                        onChange={(e) => setZipName(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
-                                        placeholder="clipart"
-                                        maxLength={30}
-                                        style={{
-                                            width: '100%',
-                                            padding: '12px',
-                                            background: 'var(--bg-primary)',
-                                            border: '1px solid var(--border)',
-                                            borderRadius: '6px',
-                                            color: 'var(--text-primary)',
-                                            fontSize: '1rem',
-                                            fontFamily: 'Space Mono, monospace'
-                                        }}
-                                    />
-                                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '8px' }}>
-                                        Letters and numbers only
-                                    </div>
-                                </div>
-
-                                <div className="option-group">
-                                    <div className="option-label">Start Sequence At</div>
-                                    <input 
-                                        type="number"
-                                        value={startNumber}
-                                        onChange={(e) => setStartNumber(Math.max(1, parseInt(e.target.value) || 1))}
-                                        min="1"
-                                        style={{
-                                            width: '100%',
-                                            padding: '12px',
-                                            background: 'var(--bg-primary)',
-                                            border: '1px solid var(--border)',
-                                            borderRadius: '6px',
-                                            color: 'var(--text-primary)',
-                                            fontSize: '1rem',
-                                            fontFamily: 'Space Mono, monospace'
-                                        }}
-                                    />
-                                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '8px' }}>
-                                        Example: {sanitizeFilename(zipName)}{startNumber}.zip, {sanitizeFilename(zipName)}{startNumber + 1}.zip...
-                                    </div>
-                                </div>
-
-                                <div className="option-group">
-                                    <div className="option-label">Upscale Factor</div>
-                                    <div className="radio-group">
-                                        <label className="radio-option">
-                                            <input 
-                                                type="radio" 
-                                                name="scale" 
-                                                checked={scale === 2}
-                                                onChange={() => setScale(2)}
-                                            />
-                                            <span className="radio-custom"></span>
-                                            <span>2x (Double)</span>
-                                        </label>
-                                        <label className="radio-option">
-                                            <input 
-                                                type="radio" 
-                                                name="scale" 
-                                                checked={scale === 4}
-                                                onChange={() => setScale(4)}
-                                            />
-                                            <span className="radio-custom"></span>
-                                            <span>4x (Quadruple)</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div className="option-group">
-                                    <div className="option-label">Output</div>
-                                    <div style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>
-                                        PNG (transparent, min 3000×3000px)
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="action-row">
-                                <button className="btn btn-secondary" onClick={() => setStep(1)}>
-                                    Back
-                                </button>
-                                <button className="btn btn-primary" onClick={() => setStep(3)}>
-                                    Continue
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
-                    {step === 3 && (
-                        <div className="card">
-                            <h2 className="card-title">
-                                <span className="step-num">STEP 3</span>
-                                Process & Package
-                            </h2>
-                            
-                            {!processing ? (
-                                <>
-                                    <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                                        <p style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                                            Ready to process <strong>{files.length}</strong> image{files.length !== 1 ? 's' : ''}
-                                        </p>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                                            {scale}x upscale • 300 DPI PNG • PDF preview
-                                        </p>
-                                    </div>
-                                    <div className="action-row">
-                                        <button className="btn btn-secondary" onClick={() => setStep(2)}>
-                                            Back
-                                        </button>
-                                        <button className="btn btn-primary" onClick={processFiles}>
-                                            Process Files
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="progress-container">
-                                    <div className="progress-bar">
-                                        <div 
-                                            className="progress-fill" 
-                                            style={{ width: `${progress}%` }}
-                                        ></div>
-                                    </div>
-                                    <div className="progress-text">{progressText}</div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {step === 4 && result && (
-                        <div className="card">
-                            <div className="complete-screen">
-                                <div className="complete-icon">✓</div>
-                                <h2 className="complete-title">Etsy-Ready Packages!</h2>
-                                <p className="complete-subtitle">
-                                    {result.totalImages} images → {result.zips.length} ZIP{result.zips.length > 1 ? 's' : ''} (under 20MB each)
-                                </p>
-                                
-                                <div style={{ 
-                                    display: 'flex', 
-                                    flexDirection: 'column', 
-                                    gap: '12px',
-                                    maxWidth: '400px',
-                                    margin: '24px auto'
-                                }}>
-                                    {result.zips.map((zip, i) => (
-                                        <div key={i} style={{
-                                            background: 'var(--bg-tertiary)',
-                                            border: zip.isOverLimit ? '1px solid #ef4444' : '1px solid var(--border)',
-                                            borderRadius: '8px',
-                                            padding: '16px',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center'
-                                        }}>
-                                            <div>
-                                                <div style={{ fontWeight: '600', marginBottom: '4px', fontFamily: 'Space Mono, monospace' }}>
-                                                    {sanitizeFilename(result.zipName)}{result.startNumber + i}.zip
-                                                </div>
-                                                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                                                    {zip.imageCount} images • {zip.sizeMB} MB
-                                                </div>
-                                            </div>
-                                            <button 
-                                                className="btn btn-primary" 
-                                                style={{ padding: '10px 16px' }}
-                                                onClick={() => downloadZip(i)}
-                                            >
-                                                Download
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div style={{ 
-                                    background: 'var(--bg-tertiary)', 
-                                    padding: '12px 16px', 
-                                    borderRadius: '8px',
-                                    fontSize: '0.875rem',
-                                    color: 'var(--text-muted)',
-                                    maxWidth: '400px',
-                                    margin: '0 auto 24px'
-                                }}>
-                                    Each ZIP contains upscaled <span style={{ color: 'var(--accent)' }}>PNG</span> files ready for Etsy
-                                </div>
-
-                                <div className="action-row">
-                                    <button className="btn btn-secondary" onClick={reset}>
-                                        Start Over
-                                    </button>
-                                    {result.zips.length > 1 && (
-                                        <button className="btn btn-primary" onClick={downloadAll}>
-                                            Download All ({result.zips.length})
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
-
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
+<div class="card">
+  <div class="ct">Upload Clipart Files</div>
+  <div id="capDrop" style="border:2px dashed var(--border);border-radius:10px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px"
+    ondragover="event.preventDefault();this.style.borderColor='var(--green)'"
+    ondragleave="this.style.borderColor=''"
+    ondrop="capDrop(event)">
+    <div style="font-size:40px;margin-bottom:10px">🎭</div>
+    <div style="color:var(--dim);font-size:14px">Drop PNG/JPG clipart files here or click to upload</div>
+    <div style="color:var(--muted);font-size:12px;margin-top:4px">Multiple files supported — PNG with transparency recommended</div>
+    <input type="file" id="capInput" accept="image/*" multiple style="display:none">
+  </div>
+  <div id="capList"></div>
+  <div style="font-size:13px;color:var(--muted)" id="capCounter"></div>
+</div>
+<div id="capResults" style="display:none">
+  <div class="card">
+    <div class="ct">Your Clipart Package</div>
+    <div id="capGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-bottom:16px"></div>
+    <div style="background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:var(--dim)">
+      <div style="font-weight:600;color:var(--text);margin-bottom:6px">&#128196; Include in your package:</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" checked style="width:auto;accent-color:var(--green)"> License / Terms of Use document</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" checked style="width:auto;accent-color:var(--green)"> README with usage instructions</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="width:auto;accent-color:var(--green)"> Preview sheet image (generated below)</label>
+      </div>
+    </div>
+    <div class="arow">
+      <button class="btn btn-p" id="capDlBtn" onclick="downloadCapBundle()">&#11015; Download All Files</button>
+      <button class="btn btn-s btn-sm" onclick="clearCapFiles()">&#128465; Clear</button>
+    </div>
+  </div>
 </div>
 <div class="tips-section">
   <h2>&#128161; Pro Tips &amp; Best Practices</h2>
@@ -1219,8 +693,84 @@ document.addEventListener('click',function(e){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
+
+<script>
+var capFiles = [];
+
+// Setup drag and drop
+var dropZone = document.getElementById('capDrop');
+var fileInput = document.getElementById('capInput');
+
+if(dropZone && fileInput) {
+  dropZone.addEventListener('click', function(){ fileInput.click(); });
+  dropZone.addEventListener('dragover', function(e){ e.preventDefault(); this.style.borderColor='var(--green)'; });
+  dropZone.addEventListener('dragleave', function(){ this.style.borderColor=''; });
+  dropZone.addEventListener('drop', function(e){ e.preventDefault(); this.style.borderColor=''; loadCapFiles(e.dataTransfer.files); });
+  fileInput.addEventListener('change', function(){ loadCapFiles(this.files); });
+}
+
+function loadCapFiles(files) {
+  var list = document.getElementById('capList');
+  var grid = document.getElementById('capGrid');
+  Array.from(files).forEach(function(file) {
+    if (!file.type.startsWith('image/')) return;
+    var idx = capFiles.length;
+    var url = URL.createObjectURL(file);
+    capFiles.push({file:file, url:url, name:file.name});
+    var item = document.createElement('div');
+    item.style.cssText = 'display:flex;align-items:center;gap:12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px';
+    item.setAttribute('data-caprow', idx);
+    var sizeKB = (file.size/1024).toFixed(1);
+    item.innerHTML = '<img src="' + url + '" style="width:56px;height:56px;object-fit:contain;border-radius:6px;background:#fff;border:1px solid var(--border)">' +
+      '<div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">' + file.name + '</div>' +
+      '<div style="font-size:11px;color:var(--muted)">' + sizeKB + 'KB</div></div>' +
+      '<button class="cpbtn rm-cap" data-capidx="' + idx + '" onclick="removeCapFile(parseInt(this.dataset.capidx),this)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px">&#10005;</button>';
+    if (list) list.appendChild(item);
+    if (grid) {
+      var thumb = document.createElement('div');
+      thumb.style.cssText = 'background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center';
+      thumb.innerHTML = '<img src="' + url + '" style="width:100%;height:80px;object-fit:contain"><div style="font-size:10px;color:var(--muted);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + file.name + '</div>';
+      grid.appendChild(thumb);
+    }
+  });
+  updateCapCount();
+  var r = document.getElementById('capResults');
+  if (r) r.style.display = capFiles.filter(Boolean).length > 0 ? 'block' : 'none';
+}
+
+function updateCapCount() {
+  var n = capFiles.filter(Boolean).length;
+  document.getElementById('capCounter').textContent = n > 0 ? n + ' file' + (n !== 1 ? 's' : '') + ' ready to package' : '';
+  document.getElementById('capResults').style.display = n > 0 ? 'block' : 'none';
+}
+
+function clearCapFiles() {
+  capFiles = [];
+  document.getElementById('capList').innerHTML = '';
+  document.getElementById('capGrid').innerHTML = '';
+  document.getElementById('capResults').style.display = 'none';
+  document.getElementById('capCounter').textContent = '';
+}
+
+function downloadCapBundle() {
+  var active = capFiles.filter(Boolean);
+  if(!active.length) { alert('No files to download.'); return; }
+  active.forEach(function(item, i) {
+    setTimeout(function() {
+      var a = document.createElement('a');
+      a.href = item.url;
+      a.download = item.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, i * 150);
+  });
+  var btn = document.getElementById('capDlBtn');
+  if(btn) { btn.innerHTML = '&#10003; Downloading ' + active.length + ' files!'; setTimeout(function(){ btn.innerHTML = '&#11015; Download All Files'; }, 3000); }
+}
+</script>
 </body>
 </html>

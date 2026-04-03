@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,22 +244,137 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
+var TT = {
+  educational: [
+    "How I make money with NICHE step by step",
+    "3 things I wish I knew before starting NICHE",
+    "The real reason NICHE creators fail and how to fix it",
+    "Watch me turn my NICHE idea into income",
+    "A day in my life as a NICHE creator",
+    "NICHE beginner to intermediate in 60 seconds",
+    "The hack that 10x my NICHE results",
+    "Stop making these NICHE mistakes",
+    "How to start NICHE with no experience",
+    "My exact NICHE process from start to finish",
+    "The NICHE tool that changed everything for me",
+    "5 free resources every NICHE beginner needs",
+    "How I learned NICHE in 30 days",
+    "What NICHE tutorials do not tell you",
+    "The truth about making money with NICHE",
+    "Why most people quit NICHE and how to not be one of them",
+    "My NICHE income breakdown this month",
+    "The one NICHE mistake I will never make again",
+    "NICHE for beginners everything you need to know",
+    "How to get your first NICHE sale"
+  ],
+  entertaining: [
+    "POV you just discovered NICHE for the first time",
+    "Me trying NICHE for the first time vs now",
+    "When your NICHE idea is actually genius",
+    "NICHE but make it chaotic and it worked",
+    "Replying to is NICHE worth it honest answer",
+    "That one NICHE hack nobody talks about",
+    "The NICHE glow up nobody asked for",
+    "What I thought NICHE was vs what it actually is",
+    "My reaction when NICHE finally clicks",
+    "When the NICHE algorithm actually works",
+    "Rating NICHE advice I found online",
+    "Things NICHE people say vs what they mean",
+    "The unhinged side of NICHE that I love",
+    "NICHE expectations vs reality",
+    "Things only NICHE people will understand",
+    "Answering the most ridiculous NICHE questions",
+    "NICHE red flags to watch out for",
+    "Reacting to my first NICHE attempt",
+    "The NICHE journey nobody shows you",
+    "Why I could not stop laughing at this NICHE moment"
+  ],
+  bts: [
+    "Pack an order with me NICHE edition",
+    "How I set up my NICHE workspace for free",
+    "The reality of running a NICHE business alone",
+    "Making my best-selling NICHE product from scratch",
+    "What my NICHE workday actually looks like",
+    "Unboxing my NICHE supplies haul",
+    "Come to a NICHE market with me",
+    "My NICHE studio tour small space edition",
+    "How I photograph my NICHE products at home",
+    "The honest numbers behind my NICHE business",
+    "A week in my life running a NICHE side hustle",
+    "How I manage NICHE and a full-time job",
+    "The tools I use every day for NICHE",
+    "My NICHE morning routine",
+    "Behind the scenes of a NICHE launch day",
+    "What nobody shows you about NICHE",
+    "How much time NICHE actually takes per week",
+    "My NICHE failures and what I learned",
+    "Setting up my NICHE shop the beginning",
+    "Honest review of my first NICHE month"
+  ],
+  trending: [
+    "Things that hit different when you love NICHE",
+    "Green flag vs red flag in NICHE",
+    "Tell me you love NICHE without telling me",
+    "The NICHE version of this viral trend",
+    "No because why does NICHE work like this",
+    "Rating NICHE content I have seen this week",
+    "The unhinged NICHE side of the internet",
+    "NICHE girlies rise up",
+    "Signs you are obsessed with NICHE",
+    "NICHE but make it a vibe",
+    "NICHE things that just make sense",
+    "Things I do because I love NICHE",
+    "Stitch this if you are in the NICHE community",
+    "POV your obsession is NICHE",
+    "NICHE people will understand this",
+    "Hot take NICHE is better than people think",
+    "Main character energy for NICHE lovers",
+    "Healing your relationship with NICHE",
+    "NICHE aesthetic unlocked",
+    "Soft life version of NICHE"
+  ],
+  promotional: [
+    "What I create with NICHE and where to find it",
+    "New drop just landed NICHE edition",
+    "Why I started my NICHE shop the real story",
+    "Customer reaction to my NICHE product",
+    "Behind the brand my NICHE journey",
+    "The NICHE product I am most proud of",
+    "How to find me and my NICHE content",
+    "New NICHE collection coming soon",
+    "Answering your questions about my NICHE shop",
+    "The NICHE product everyone keeps asking about",
+    "What makes my NICHE different",
+    "My NICHE bestsellers and why they sell",
+    "The story behind my NICHE brand",
+    "NICHE shop tour everything I sell",
+    "How I price my NICHE products",
+    "Why customers love my NICHE",
+    "Sneak peek of my next NICHE drop",
+    "How to order from my NICHE shop",
+    "Thank you for 1000 NICHE sales",
+    "My NICHE refund and review policy"
+  ]
+};
+function genTTIdeas() {
+  var niche = document.getElementById("ttNiche").value.trim() || "your niche";
+  var style = document.getElementById("ttStyle").value;
+  var count = parseInt(document.getElementById("ttCount").value);
+  var ideas = (TT[style] || TT.educational).slice(0, count).map(function(idea, i) {
+    return (i+1) + ". " + idea.replace(/NICHE/g, niche);
+  });
+  document.getElementById("ttOutput").textContent = ideas.join("\n");
+  document.getElementById("ttResults").style.display = "block";
 }
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
+function copyTT() {
+  navigator.clipboard.writeText(document.getElementById("ttOutput").textContent);
+  event.target.textContent = "Copied!"; event.target.classList.add("done");
+  setTimeout(function(){ event.target.textContent = "Copy All"; event.target.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -308,29 +423,7 @@ document.addEventListener('click',function(e){
     <div class="rbox" id="ttOutput"></div>
   </div>
 </div>
-<script>
-const TT={
-  educational:['How I make {n} in {niche} (step by step)','3 things I wish I knew before starting {niche}','The REAL reason {niche} creators fail (and how to fix it)','Watch me turn $10 into $100 with {niche}','A day in my life as a {niche} creator','{niche} beginner to pro in 60 seconds','The hack that 10x'd my {niche} results','Stop making these {niche} mistakes (no one tells you this)','How to start {niche} with NO experience','My exact {niche} process from start to finish','The {niche} tool that changed everything for me','5 free resources every {niche} beginner needs','How I learned {niche} in 30 days','What {niche} tutorials don't tell you','The truth about making money with {niche}'],
-  entertaining:['POV: you just discovered {niche} for the first time 👀','Me trying {niche} for the first time vs now 😂','When your {niche} idea is actually genius 🔥','{niche} but make it chaotic (it worked though) 💀','Replying to: "is {niche} worth it?" (honest answer)','That one {niche} hack nobody talks about 🤫','The {niche} glow up nobody asked for ✨','What I thought {niche} was vs what it actually is 😭','My reaction when {niche} finally clicks 🤯','When the {niche} algorithm actually works 🎉'],
-  'behind-scenes':['Pack an order with me — {niche} edition 📦','How I set up my {niche} workspace for free','The reality of running a {niche} business alone','Making my best-selling {niche} product from scratch','What my {niche} workday actually looks like','Unboxing my {niche} supplies haul 🛍️','Come to a {niche} market with me 🌿','My {niche} studio tour — small space edition','How I photograph my {niche} products at home','The honest numbers behind my {niche} business'],
-  trending:['Would I rather {niche} or [trend]? Hot takes 🔥','Using the [viral sound] to explain {niche} 😂','Stitch this if you're in the {niche} community','Things that hit different in {niche} 💅','Green flag vs red flag in {niche} ✅❌','Tell me you love {niche} without telling me 👀','The {niche} version of the [trend] challenge','Rating {niche} content I've seen this week 📊','No because why does {niche} do this? 😭','The unhinged {niche} side of TikTok is my fav 💀'],
-  promotional:['What I create in {niche} (and where to find it) 🔗','New drop just landed — {niche} edition ✨','Why I started my {niche} shop (the real story)','Customer reaction to my {niche} product 🥹','Behind the brand: my {niche} journey','The {niche} product I'm most proud of','How to find me and my {niche} content (save this!)','New {niche} collection coming soon 👀','Answering your questions about my {niche} shop','The {niche} product everyone keeps asking about']
-};
-function genTTIdeas(){
-  const niche=document.getElementById('ttNiche').value.trim()||'your niche';
-  const style=document.getElementById('ttStyle').value;
-  const count=parseInt(document.getElementById('ttCount').value);
-  const ideas=TT[style].slice(0,count).map((idea,i)=>`${i+1}. ${idea.replace(/{niche}/g,niche).replace(/{n}/g,['$500','$1000','$200','$50'][i%4])}`);
-  document.getElementById('ttOutput').textContent=ideas.join('
-');
-  document.getElementById('ttResults').style.display='block';
-}
-function cpEl(id){
-  navigator.clipboard.writeText(document.getElementById(id).textContent);
-  event.target.textContent='✓ Copied!';event.target.classList.add('done');
-  setTimeout(()=>{event.target.textContent='📋 Copy All';event.target.classList.remove('done')},2000);
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="instagram-caption-generator.html"><div class="ri">📸</div><div class="rn">Instagram Captions</div><div class="rd">Caption generator</div></a>
 <a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Get hashtags</div></a>
@@ -368,7 +461,7 @@ function cpEl(id){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

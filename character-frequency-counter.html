@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Count how often each character and word appears in your text. Free frequency analysis tool for writers, developers, and SEO.">
+<meta property="og:title" content="Character Frequency Counter — Elephast.com">
+<meta property="og:description" content="Count how often each character and word appears in your text. Free frequency analysis tool for writers, developers, and SEO.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Character Frequency Counter — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;word-break:break-all}
+.mono{font-family:'Space Mono',monospace}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px)}
+.rc-icon{font-size:22px;margin-bottom:6px}.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 100 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<script>function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});</script>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">📊</div><div class="intro-text"><div class="intro-cat">Utility Tools</div><h1>Character Frequency Counter</h1><p class="intro-desc">Analyse how often each character, word, and phrase appears in your text. Useful for finding overused words, analysing writing patterns, keyword density checking, and cryptanalysis.</p></div></div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Paste your text into the input</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Switch between character and word frequency views</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Sort by count or alphabetically</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Export the frequency table as CSV</div></div></div></div>
+<div class="card"><div class="ct">Your Text</div>
+<div class="f"><textarea id="cfText" rows="6" placeholder="Paste any text to analyse its character and word frequency..." oninput="analyseFreq()"></textarea></div>
+<div class="chips" id="cfModeChips">
+<span class="chip on" data-m="chars" onclick="setFreqMode(this)">Characters</span>
+<span class="chip" data-m="words" onclick="setFreqMode(this)">Words</span>
+<span class="chip" data-m="letters" onclick="setFreqMode(this)">Letters Only</span>
+</div>
+</div>
+<div id="cfResults" style="display:none">
+<div class="card"><div class="ct">Frequency Analysis <span id="cfCount"></span></div>
+<div class="arow" style="margin-bottom:12px">
+<select id="cfSort" onchange="renderFreq()" style="width:auto;padding:6px 30px 6px 12px;font-size:12px">
+<option value="count">Sort by Count</option>
+<option value="alpha">Sort Alphabetically</option>
+</select>
+<button class="btn btn-s btn-sm" onclick="exportCSV()">&#11015; CSV</button>
+</div>
+<div id="cfTable" style="max-height:400px;overflow-y:auto"></div>
+</div>
+</div>
+<script>
+var cfMode="chars", cfData=[];
+document.querySelectorAll("#cfModeChips .chip").forEach(function(c){
+  c.addEventListener("click",function(){document.querySelectorAll("#cfModeChips .chip").forEach(function(x){x.classList.remove("on");});c.classList.add("on");cfMode=c.dataset.m;analyseFreq();});
+});
+function setFreqMode(el){cfMode=el.dataset.m;analyseFreq();}
+function analyseFreq(){
+  var text=document.getElementById("cfText").value;
+  if(!text){document.getElementById("cfResults").style.display="none";return;}
+  var map={};
+  if(cfMode==="words"){
+    text.toLowerCase().split(/\s+/).filter(Boolean).forEach(function(w){w=w.replace(/[^a-z0-9'-]/g,"");if(w)map[w]=(map[w]||0)+1;});
+  } else if(cfMode==="letters"){
+    text.toLowerCase().split("").forEach(function(c){if(/[a-z]/.test(c))map[c]=(map[c]||0)+1;});
+  } else {
+    text.split("").forEach(function(c){var cc=c.charCodeAt(0);if(cc!==10&&cc!==13)map[c]=(map[c]||0)+1;});
+  }
+  var total=Object.values(map).reduce(function(a,b){return a+b;},0);
+  cfData=Object.keys(map).map(function(k){return {k:k,n:map[k],pct:(map[k]/total*100).toFixed(1)};});
+  renderFreq();
+  document.getElementById("cfResults").style.display="block";
+}
+function renderFreq(){
+  var sort=document.getElementById("cfSort").value;
+  var sorted=cfData.slice();
+  if(sort==="count")sorted.sort(function(a,b){return b.n-a.n;});
+  else sorted.sort(function(a,b){return a.k.localeCompare(b.k);});
+  var maxN=sorted.length?sorted[0].n:1;
+  if(sort==="alpha"){var tmp=sorted.slice();maxN=Math.max.apply(null,tmp.map(function(x){return x.n;}));}
+  document.getElementById("cfCount").textContent="("+sorted.length+" unique "+(cfMode==="words"?"words":"characters")+")";
+  document.getElementById("cfTable").innerHTML=sorted.slice(0,100).map(function(item){
+    var w=item.n/maxN*100;
+    var label=item.k===" "?"[space]":item.k==="	"?"[tab]":item.k;
+    return "<div style='display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)'>" +
+      "<div style='font-family:Space Mono,monospace;font-size:13px;color:var(--text);min-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap' title='"+item.k+"'>"+label+"</div>" +
+      "<div style='flex:1;height:12px;background:var(--border);border-radius:6px;overflow:hidden'><div style='height:100%;width:"+w+"%;background:var(--orange);border-radius:6px;transition:width .2s'></div></div>" +
+      "<div style='font-family:Space Mono,monospace;font-size:12px;color:var(--dim);min-width:60px;text-align:right'>"+item.n+" ("+item.pct+"%)</div>" +
+      "</div>";
+  }).join("");
+}
+function exportCSV(){
+  var rows=["Character,Count,Percentage"].concat(cfData.map(function(d){return JSON.stringify(d.k)+","+d.n+","+d.pct+"%";}));
+  var a=document.createElement("a");a.href="data:text/csv,"+encodeURIComponent(rows.join("\n"));a.download="frequency.csv";a.click();
+}
+</script><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">In English text, 'e' is the most common letter (~12.7%), followed by 't', 'a', 'o', 'i', 'n'.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Word frequency analysis helps identify overused words — vary vocabulary to improve writing quality.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For SEO: use word frequency to check keyword density — aim for 1-2% for primary keywords.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Letter frequency analysis is the basis of classical cryptanalysis — breaking substitution ciphers.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For Etsy: check which words dominate your listing descriptions to ensure keywords appear prominently.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">The most common English words are: the, be, to, of, and, a, in, that, have, it.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Export as CSV to open in a spreadsheet for deeper analysis and charting.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="word-counter.html"><div class="rc-icon">📊</div><div class="rc-name">Word Counter</div><div class="rc-desc">Count words</div></a><a class="rc" href="readability-checker.html"><div class="rc-icon">📖</div><div class="rc-name">Readability Checker</div><div class="rc-desc">Reading level score</div></a><a class="rc" href="text-repeater.html"><div class="rc-icon">🔁</div><div class="rc-name">Text Repeater</div><div class="rc-desc">Repeat text</div></a><a class="rc" href="lorem-ipsum-generator.html"><div class="rc-icon">📄</div><div class="rc-name">Lorem Ipsum</div><div class="rc-desc">Sample text</div></a><a class="rc" href="hashtag-analyzer.html"><div class="rc-icon">#️⃣</div><div class="rc-name">Hashtag Analyzer</div><div class="rc-desc">Analyse hashtags</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 100 free tools</div></a></div></div>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools. No login. No installs. Always free.</p>
+</footer>
+</body>
+</html>

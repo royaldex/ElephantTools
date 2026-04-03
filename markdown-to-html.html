@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Convert Markdown to HTML with live preview. Free markdown converter — no upload, browser-based, instant.">
+<meta property="og:title" content="Markdown to HTML Converter — Elephast.com">
+<meta property="og:description" content="Convert Markdown to HTML with live preview. Free markdown converter — no upload, browser-based, instant.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Markdown to HTML Converter — Elephast Free Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:var(--s2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
+.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
+.unav-logo img{height:44px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover{color:var(--text);background:var(--s3)}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+.unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
+@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+.main{max-width:1000px;margin:0 auto;padding:36px 24px 80px;flex:1;width:100%}
+.intro{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;border-left:4px solid var(--orange)}
+.intro-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.intro-icon{font-size:36px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.intro h1{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:8px}
+.intro-desc{font-size:14px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:9px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;flex:1;min-width:160px}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-t{font-size:12px;color:var(--dim);line-height:1.55}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--s3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green)}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.f{margin-bottom:14px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:580px){.r2,.r3{grid-template-columns:1fr}}
+.btn{padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;font-family:inherit}
+.btn-p{background:var(--green);color:#000}.btn-p:hover{background:var(--green-d)}
+.btn-s{background:var(--border);color:var(--dim)}.btn-s:hover{background:var(--border-h);color:var(--text)}
+.btn-full{width:100%;justify-content:center}.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.rbox{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:480px;overflow-y:auto;word-break:break-all}
+.mono{font-family:'Space Mono',monospace}
+.arow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.cpbtn{padding:6px 12px;background:var(--border);border:none;border-radius:6px;color:var(--dim);font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.cpbtn:hover{background:var(--border-h);color:var(--text)}.cpbtn.done{background:rgba(16,185,129,.2);color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--s3);color:var(--dim)}
+.chip:hover{border-color:var(--border-h);color:var(--text)}.chip.on{background:rgba(249,115,22,.15);border-color:var(--orange);color:var(--orange)}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1;min-width:90px;text-align:center}
+.sv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--green);display:block}
+.sl{font-size:11px;color:var(--muted);margin-top:2px}
+.tips-section{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.tips-section h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tips-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:var(--s3);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.tip-bullet{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--orange);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.related{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.related h2{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.related h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px}
+.rc{background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:all .18s;display:block}
+.rc:hover{border-color:var(--orange);transform:translateY(-2px)}
+.rc-icon{font-size:22px;margin-bottom:6px}.rc-name{font-size:13px;font-weight:600;margin-bottom:3px}.rc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:center;background:var(--s2);flex-shrink:0}</style>
+</head>
+<body>
+<nav class="unav"><div class="unav-inner">
+<a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+<div class="unav-spacer"></div>
+<div class="unav-links">
+<a href="index.html" class="unav-link">All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<div class="unav-badge">&#9889; 100 Free Tools</div>
+<button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="unav-drawer" id="unavDrawer">
+<a href="index.html" class="unav-link">&#127968; All Tools</a>
+<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+<a href="about.html" class="unav-link">About</a>
+<a href="contact.html" class="unav-link">Contact</a>
+<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<script>function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});</script>
+<div class="main">
+<div class="intro"><div class="intro-top"><div class="intro-icon">📝</div><div class="intro-text"><div class="intro-cat">Developer Tools</div><h1>Markdown to HTML Converter</h1><p class="intro-desc">Convert Markdown syntax to clean HTML with a live side-by-side preview. Supports headings, bold, italic, lists, links, code blocks, and blockquotes. Perfect for blog writers, developers, and content creators.</p></div></div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Paste or type Markdown in the left panel</div></div><div class="step"><div class="step-n">2</div><div class="step-t">See the live HTML preview on the right</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Copy the rendered HTML</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Use the raw HTML view for embedding</div></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div class="card" style="margin:0"><div class="ct">Markdown Input</div>
+<textarea id="mdInput" style="width:100%;min-height:380px;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:14px;color:var(--text);font-family:Space Mono,monospace;font-size:13px;resize:vertical;outline:none;line-height:1.7" placeholder="# Hello World&#10;&#10;Write your **Markdown** here.&#10;&#10;- Item 1&#10;- Item 2&#10;&#10;[Link text](https://example.com)" oninput="renderMD()"></textarea>
+</div>
+<div class="card" style="margin:0"><div class="ct">Preview</div>
+<div id="mdPreview" style="min-height:380px;font-size:14px;line-height:1.75;color:var(--text)"></div>
+</div>
+</div>
+<div class="card"><div class="ct">Raw HTML Output</div>
+<div class="arow" style="margin-bottom:10px"><button class="cpbtn" onclick="cpEl('mdHTML')">&#128203; Copy HTML</button></div>
+<div class="rbox mono" id="mdHTML" style="font-size:12px"></div>
+</div><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use # for H1, ## for H2, ### for H3 — always leave a space after the hash.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Surround text with **double asterisks** for bold and *single* for italic — or use __ and _.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For code blocks, indent with 4 spaces or wrap in triple backticks (```).</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Links use [text](url) syntax — always include https:// in the URL.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">For ordered lists use 1. 2. 3. — the actual numbers do not matter, Markdown renumbers them.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Markdown does not support tables natively — use HTML table tags if needed.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Escape special Markdown characters with a backslash: \\* \\# \\- to display them literally.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="word-counter.html"><div class="rc-icon">📊</div><div class="rc-name">Word Counter</div><div class="rc-desc">Count Markdown content</div></a><a class="rc" href="html-entity-encoder.html"><div class="rc-icon">🔤</div><div class="rc-name">HTML Encoder</div><div class="rc-desc">Encode HTML entities</div></a><a class="rc" href="readability-checker.html"><div class="rc-icon">📖</div><div class="rc-name">Readability Checker</div><div class="rc-desc">Check reading level</div></a><a class="rc" href="lorem-ipsum-generator.html"><div class="rc-icon">📄</div><div class="rc-name">Lorem Ipsum</div><div class="rc-desc">Placeholder text</div></a><a class="rc" href="case-converter.html"><div class="rc-icon">Aa</div><div class="rc-name">Case Converter</div><div class="rc-desc">Change text case</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 100 free tools</div></a></div></div><script>
+function renderMD(){
+var md=document.getElementById("mdInput").value;
+var h=md
+.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+.replace(/^#{6} (.+)$/gm,"<h6>$1</h6>")
+.replace(/^#{5} (.+)$/gm,"<h5>$1</h5>")
+.replace(/^#{4} (.+)$/gm,"<h4>$1</h4>")
+.replace(/^### (.+)$/gm,"<h3>$1</h3>")
+.replace(/^## (.+)$/gm,"<h2>$1</h2>")
+.replace(/^# (.+)$/gm,"<h1>$1</h1>")
+.replace(/\*\*\*(.+?)\*\*\*/g,"<strong><em>$1</em></strong>")
+.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")
+.replace(/\*(.+?)\*/g,"<em>$1</em>")
+.replace(/`{3}([\s\S]*?)`{3}/g,"<pre><code>$1</code></pre>")
+.replace(/`([^`]+)`/g,"<code>$1</code>")
+.replace(/^&gt; (.+)$/gm,"<blockquote>$1</blockquote>")
+.replace(/^- (.+)$/gm,"<li>$1</li>")
+.replace(/^\d+\. (.+)$/gm,"<li>$1</li>")
+.replace(/(<li>.*<\/li>\n?)+/g,"<ul>$&</ul>")
+.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>')
+.replace(/\n\n+/g,"</p><p>")
+.replace(/\n/g,"<br>");
+document.getElementById("mdPreview").innerHTML=h;
+document.getElementById("mdHTML").textContent=h;
+}
+function cpEl(id){navigator.clipboard.writeText(document.getElementById(id).textContent);event.target.textContent="Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="Copy HTML";event.target.classList.remove("done");},2000);}
+document.getElementById("mdInput").value="# Hello World\n\nThis is **bold** and *italic* text.\n\n## Features\n\n- Live preview\n- Instant HTML output\n- Copy with one click\n\n> Blockquote text goes here.\n\n`inline code` and [links](https://elephast.com) are supported.";
+renderMD();
+</script>
+</div>
+<footer>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+<a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="services.html" style="font-size:13px;color:var(--orange);font-weight:600;text-decoration:none;padding:4px 10px">Services</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="about.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">About</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="https://buymeacoffee.com/elephast" target="_blank" style="font-size:13px;color:#FFDD00;font-weight:600;text-decoration:none;padding:4px 10px">&#9749; Support Us</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="privacy-policy.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Privacy</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="terms.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Terms</a><span style="color:var(--border-h);font-size:11px">&middot;</span>
+<a href="contact.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px">Contact</a>
+</div>
+<p style="font-size:12px;color:var(--muted)">&copy; 2025 <a href="index.html" style="color:var(--orange);text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools. No login. No installs. Always free.</p>
+</footer>
+</body>
+</html>

@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,22 +244,154 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
+var POSTS = {
+  instagram: {
+    awareness: {
+      friendly: "Something exciting is happening and I had to share it with you!\n\nTOPIC\n\nEvery detail was crafted with love. Save this post and share it with someone who needs to see it!",
+      professional: "Excited to announce: TOPIC\n\nThis represents an important milestone. Learn more via the link in bio.",
+      exciting: "IT IS HAPPENING! TOPIC\n\nDo not sleep on this! Drop an emoji if you are excited and save this post NOW!"
+    },
+    sales: {
+      friendly: "TOPIC\n\nGrab yours before it is gone! Link in bio!",
+      professional: "Now available: TOPIC\n\nLimited availability. Shop via the link in bio.",
+      exciting: "LIMITED TIME: TOPIC\n\nThis deal will not last! Head to the link in bio right now!"
+    },
+    engagement: {
+      friendly: "TOPIC and I want to hear from you!\n\nDrop your thoughts in the comments below.",
+      professional: "TOPIC\n\nWould love your perspective. Share your thoughts below.",
+      exciting: "Hot topic alert: TOPIC\n\nComment your honest opinion below!"
+    },
+    announce: {
+      friendly: "Big news! TOPIC\n\nI have been working so hard on this and I am so excited to share it!",
+      professional: "Announcing: TOPIC\n\nDetails in the link in bio.",
+      exciting: "ANNOUNCEMENT: TOPIC\n\nShare this with everyone who needs to know!"
+    },
+    value: {
+      friendly: "Here is something useful: TOPIC\n\nSave this for later and share it with someone who needs it!",
+      professional: "Sharing something valuable today: TOPIC\n\nHope this helps. Follow for more tips.",
+      exciting: "Do not scroll past this! TOPIC\n\nSave it now!"
+    }
+  },
+  twitter: {
+    awareness: {
+      friendly: "TOPIC and I am so here for it. Who else?",
+      professional: "Excited to share: TOPIC",
+      exciting: "BIG NEWS: TOPIC RT if you are excited!"
+    },
+    sales: {
+      friendly: "Quick reminder: TOPIC Limited stock, grab yours now.",
+      professional: "Now available: TOPIC",
+      exciting: "Do not miss this: TOPIC Sale ends soon!"
+    },
+    engagement: {
+      friendly: "TOPIC what do you think? Reply below!",
+      professional: "TOPIC Would love to hear your thoughts.",
+      exciting: "HOT TAKE: TOPIC Agree or disagree?"
+    },
+    announce: {
+      friendly: "Announcing something I have been working on: TOPIC",
+      professional: "Official announcement: TOPIC",
+      exciting: "JUST ANNOUNCED: TOPIC This is a big one!"
+    },
+    value: {
+      friendly: "Helpful tip: TOPIC Save this for later!",
+      professional: "Worth knowing: TOPIC",
+      exciting: "Read this! TOPIC You will thank yourself later."
+    }
+  },
+  linkedin: {
+    awareness: {
+      friendly: "Something exciting is happening in my world: TOPIC\n\nI am grateful for everyone who has supported this journey.\n\nWhat is something exciting happening in YOUR work right now? Share below.",
+      professional: "I am pleased to share: TOPIC\n\nThis reflects the dedication of everyone involved. I would welcome your thoughts in the comments.",
+      exciting: "Thrilled to announce: TOPIC\n\nThis has been a long time coming and I could not be more excited."
+    },
+    sales: {
+      friendly: "Excited to introduce: TOPIC\n\nBuilt for professionals who want better results. Happy to connect if relevant to your work.",
+      professional: "Announcing: TOPIC\n\nFor professionals looking to level up. Details in the comments.",
+      exciting: "Now live: TOPIC\n\nLimited availability. Comment below to learn more."
+    },
+    engagement: {
+      friendly: "I have been thinking about TOPIC and I want to hear from my network.\n\nWhat has been your experience? Drop your thoughts below.",
+      professional: "TOPIC raises an important question for our industry.\n\nWhat are your thoughts?",
+      exciting: "Let us talk about TOPIC.\n\nThis needs more discussion. Share your perspective."
+    },
+    announce: {
+      friendly: "Excited to share some big news: TOPIC\n\nThis has been a long time in the making and I am proud of what we have built.",
+      professional: "Official announcement: TOPIC\n\nFull details available. Feel free to reach out.",
+      exciting: "Big announcement: TOPIC\n\nThis is a major step forward."
+    },
+    value: {
+      friendly: "Something I have learned that might help you: TOPIC\n\nHope this is useful. Save it for later.",
+      professional: "A valuable insight worth sharing: TOPIC\n\nThis has made a significant difference in my work.",
+      exciting: "Do not overlook this: TOPIC\n\nThis insight has the potential to transform your results."
+    }
+  },
+  facebook: {
+    awareness: {
+      friendly: "TOPIC and I am SO excited to share it with all of you! Share this post if you think someone else would love it too!",
+      professional: "We are thrilled to announce: TOPIC Click the link to learn more!",
+      exciting: "BIG NEWS! TOPIC Share this with your friends who need to see it!"
+    },
+    sales: {
+      friendly: "Heads up! TOPIC Tag a friend who would love this and shop the link!",
+      professional: "Now available: TOPIC Limited time. See the link for details.",
+      exciting: "FLASH SALE: TOPIC Grab it NOW before it is gone!"
+    },
+    engagement: {
+      friendly: "TOPIC and I want to know what you think! Drop your answer in the comments!",
+      professional: "TOPIC We would love your perspective in the comments.",
+      exciting: "We need to talk about TOPIC Comment your hot take below!"
+    },
+    announce: {
+      friendly: "Exciting news! TOPIC We have been working so hard on this and cannot wait for you to see it!",
+      professional: "Important announcement: TOPIC Stay tuned for more details.",
+      exciting: "BIG ANNOUNCEMENT: TOPIC Share this with everyone you know!"
+    },
+    value: {
+      friendly: "Here is something useful for you: TOPIC Save this post and tag a friend who needs to see it!",
+      professional: "Worth sharing: TOPIC Hope this is helpful to our community.",
+      exciting: "Stop scrolling! TOPIC Share this before you forget!"
+    }
   }
-});
+};
+var PLATFORMS = [
+  {key:"instagram", name:"Instagram", icon:"&#128247;", max:2200},
+  {key:"twitter", name:"Twitter/X", icon:"&#128038;", max:280},
+  {key:"linkedin", name:"LinkedIn", icon:"&#128188;", max:3000},
+  {key:"facebook", name:"Facebook", icon:"&#128101;", max:500}
+];
+function genSocialPosts() {
+  var topic = document.getElementById("smTopic").value.trim() || "our latest update";
+  var goal = document.getElementById("smGoal").value;
+  var tone = document.getElementById("smTone").value;
+  var list = document.getElementById("smPostList");
+  list.innerHTML = "";
+  PLATFORMS.forEach(function(p) {
+    var goalData = POSTS[p.key][goal] || POSTS[p.key]["awareness"];
+    var post = (goalData[tone] || goalData["friendly"] || Object.values(goalData)[0]).replace(/TOPIC/g, topic);
+    var len = post.length;
+    var over = len > p.max;
+    list.innerHTML += "<div class=\"card\" style=\"margin-bottom:12px\">" +
+      "<div style=\"display:flex;align-items:center;justify-content:space-between;margin-bottom:12px\">" +
+      "<div style=\"font-size:14px;font-weight:700\">" + p.icon + " " + p.name + "</div>" +
+      "<span style=\"font-size:11px;font-family:monospace;color:" + (over?"var(--red)":"var(--muted)") + "\">" + len + "/" + p.max + "</span>" +
+      "</div>" +
+      "<div style=\"background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.7;white-space:pre-wrap;color:var(--text);margin-bottom:10px\" id=\"smPost_" + p.key + "\">" + post + "</div>" +
+      "<button class=\"cpbtn\" data-key=\"" + p.key + "\" onclick=\"cpPost(this)\">Copy " + p.name + " Post</button>" +
+      "</div>";
+  });
+  document.getElementById("smResults").style.display = "block";
+}
+function cpPost(btn) {
+  var el = document.getElementById("smPost_" + btn.dataset.key);
+  navigator.clipboard.writeText(el.textContent);
+  btn.textContent = "Copied!"; btn.classList.add("done");
+  setTimeout(function(){ btn.textContent = "Copy " + btn.dataset.key + " Post"; btn.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -305,107 +437,7 @@ document.addEventListener('click',function(e){
 <div id="smResults" style="display:none">
   <div id="smPostList"></div>
 </div>
-<script>
-const SM_TEMPLATES={
-  instagram:{
-    awareness:{friendly:'✨ {topic} ✨
-
-This is something I've been working on and I couldn't wait to share it with you! Every detail was crafted with love.
-
-Save this post and share with someone who needs to see it! 💛',professional:'Excited to announce: {topic}
-
-This represents a milestone in my journey and I'm grateful for your continued support.
-
-Learn more — link in bio 🔗',exciting:'🚨 IT'S HAPPENING 🚨
-
-{topic}
-
-Don't sleep on this! Drop a ❤️ if you're excited and save this post NOW!'},
-    sales:{friendly:'🛒 {topic}
-
-Grab yours before it's gone — this is selling fast and I don't want you to miss out!
-
-Link in bio 💛',exciting:'🔥 LIMITED TIME: {topic} 🔥
-
-This deal won't last! Head to the link in bio right now before it's too late 🚨'},
-  },
-  twitter:{
-    awareness:{friendly:'{topic} 🧵
-
-Here's the thing no one talks about — (1/)',professional:'Excited to share: {topic}
-
-A few thoughts on what this means 👇',exciting:'BIG NEWS: {topic} 🚨
-
-RT if you're hyped!'},
-    sales:{friendly:'Quick reminder: {topic} 🛒
-
-Limited spots/stock — grab yours:',exciting:'🔥 Don't miss this: {topic}
-
-Sale ends soon. Link ⬇️'},
-  },
-  linkedin:{
-    awareness:{professional:'Excited to share: {topic}
-
-This has been a journey, and I want to give a behind-the-scenes look at what it took.
-
-Here are 3 things I learned along the way:
-
-1. Consistency matters more than perfection
-2. Your network is your biggest asset
-3. Done is better than perfect
-
-I'd love to hear your thoughts in the comments. 👇',friendly:'Something exciting is happening in my world: {topic}
-
-I'm grateful for everyone who has supported this journey. It truly takes a community.
-
-What's something exciting happening in YOUR business right now? Share below 👇'},
-    sales:{professional:'Announcing: {topic}
-
-For teams and individuals looking to level up, this is exactly what you've been waiting for.
-
-Details in the comments 👇'}
-  },
-  facebook:{
-    awareness:{friendly:'Hey everyone! 👋 {topic} and I'm SO excited to share it with all of you!
-
-Share this post if you think someone else would love it too! ❤️',professional:'We're thrilled to announce: {topic}
-
-Click the link to learn more and share with anyone who might be interested!'},
-    sales:{friendly:'📢 Heads up friends! {topic}
-
-Don't forget — shop the link! Tag a friend who would love this! 🛒',exciting:'🚨 {topic} 🚨
-
-This is your sign to grab it NOW! Share with a friend who needs this!'}
-  }
-};
-const PLATFORMS=[
-  {key:'instagram',name:'Instagram',icon:'📸',maxLen:2200},
-  {key:'twitter',name:'Twitter/X',icon:'🐦',maxLen:280},
-  {key:'linkedin',name:'LinkedIn',icon:'💼',maxLen:3000},
-  {key:'facebook',name:'Facebook',icon:'👥',maxLen:500},
-];
-function genSocialPosts(){
-  const topic=document.getElementById('smTopic').value.trim()||'our latest update';
-  const goal=document.getElementById('smGoal').value;
-  const tone=document.getElementById('smTone').value;
-  const list=document.getElementById('smPostList');list.innerHTML='';
-  PLATFORMS.forEach(p=>{
-    const T=SM_TEMPLATES[p.key];
-    const goalT=T[goal]||T['awareness'];
-    const post=(goalT[tone]||goalT['friendly']||goalT['professional']||Object.values(goalT)[0]).replace(/{topic}/g,topic);
-    const len=post.length;const over=len>p.maxLen;
-    list.innerHTML+=`<div class="card" style="margin-bottom:12px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div style="font-size:14px;font-weight:700">${p.icon} ${p.name}</div>
-        <span style="font-size:11px;font-family:'Space Mono',monospace;color:${over?'var(--red)':'var(--muted)'}">${len}/${p.maxLen}</span>
-      </div>
-      <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.7;white-space:pre-wrap;color:var(--text);margin-bottom:10px">${post}</div>
-      <button class="cpbtn" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='✓ Copied!';this.classList.add('done');setTimeout(()=>{this.textContent='📋 Copy';this.classList.remove('done')},2000)">📋 Copy ${p.name} Post</button>
-    </div>`;
-  });
-  document.getElementById('smResults').style.display='block';
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="instagram-caption-generator.html"><div class="ri">📸</div><div class="rn">Instagram Captions</div><div class="rd">Caption generator</div></a>
 <a class="rc" href="hashtag-generator.html"><div class="ri">#️⃣</div><div class="rn">Hashtag Generator</div><div class="rd">Get hashtags</div></a>
@@ -443,7 +475,7 @@ function genSocialPosts(){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>

@@ -231,7 +231,7 @@ input[type=range]{accent-color:var(--green)}
       <a href="contact.html" class="unav-link" >Contact</a>
       <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
     </div>
-    <div class="unav-badge">&#9889; 77 Free Tools</div>
+    <div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -244,22 +244,91 @@ input[type=range]{accent-color:var(--green)}
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
 </div>
+
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
+var YT = {
+  tutorial: [
+    "How to TOPIC Step by Step for Beginners",
+    "The Only KW Tutorial You Need in YEAR",
+    "TOPIC Complete Beginner Guide",
+    "How I TOPIC and Made Money Doing It",
+    "Watch Me TOPIC From Start to Finish",
+    "Do THIS to Get Better at KW Most People Get It Wrong"
+  ],
+  review: [
+    "KW Honest Review Is It Worth It",
+    "I Tried TOPIC for 30 Days Here Is What Happened",
+    "Best KW in YEAR I Tested Them All",
+    "TOPIC The Good the Bad and the Honest Truth",
+    "The Truth About TOPIC Nobody Tells You"
+  ],
+  vlog: [
+    "Day in My Life TOPIC",
+    "Come With Me to TOPIC",
+    "A Real Day Working on TOPIC",
+    "My TOPIC Routine What Actually Works",
+    "Week in My Life Running a KW Business"
+  ],
+  listicle: [
+    "NUM KW Tips That Changed Everything",
+    "NUM Things Every KW Beginner Needs to Know",
+    "The NUM Best Ways to TOPIC",
+    "NUM KW Mistakes I Wish I Avoided",
+    "Top NUM KW Tools for YEAR"
+  ],
+  story: [
+    "How I Started TOPIC With Nothing",
+    "My TOPIC Journey From Zero to Results",
+    "Why I Quit My Job to Do TOPIC Full Time",
+    "The Honest Story Behind My KW Business",
+    "How TOPIC Changed My Life"
+  ]
+};
+function genYtContent() {
+  var topic = document.getElementById("ytTopic").value.trim() || "your topic";
+  var kw = document.getElementById("ytKw").value.trim() || topic;
+  var type = document.getElementById("ytType").value;
+  var channel = document.getElementById("ytChannel").value.trim() || "creators";
+  var yr = new Date().getFullYear();
+  var nums = [5,7,10,11,15];
+  var num = nums[Math.floor(Math.random() * nums.length)];
+  var titles = (YT[type] || YT.tutorial).map(function(t) {
+    return t.replace(/TOPIC/g, topic).replace(/KW/g, kw).replace(/YEAR/g, yr).replace(/NUM/g, num);
+  });
+  var titleList = document.getElementById("ytTitleList");
+  titleList.innerHTML = titles.map(function(t) {
+    var len = t.length;
+    var color = len > 70 ? "var(--yellow)" : "var(--green)";
+    return "<div style=\"background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px\">" +
+      "<div style=\"flex:1;font-size:13px;color:var(--text)\">" + t + "</div>" +
+      "<span style=\"font-family:monospace;font-size:10px;color:" + color + ";flex-shrink:0\">" + len + "/70</span>" +
+      "<button class=\"cpbtn\" data-t=\"" + t.replace(/"/g,"&quot;") + "\" onclick=\"cpYtTitle(this)\">Copy</button>" +
+      "</div>";
+  }).join("");
+  var kwTag = kw.replace(/\s+/g,"");
+  var chTag = channel.replace(/\s+/g,"");
+  var desc = titles[0] + "\n\n" +
+    "In this video I will show you " + topic + ". Whether you are a beginner or looking to level up your " + kw + " game, this is for you.\n\n" +
+    "TIMESTAMPS:\n0:00 Intro\n1:30 Getting Started\n5:00 The Main Process\n10:00 Tips and Tricks\n15:00 Final Thoughts\n\n" +
+    "LINKS MENTIONED:\n- Add your link here\n- Add your resource here\n\n" +
+    "FOLLOW ME:\nInstagram: @yourhandle\nTikTok: @yourhandle\n\n" +
+    "SUBSCRIBE for weekly " + kw + " content!\n\n" +
+    "#" + kwTag + " #" + chTag + " #" + yr;
+  document.getElementById("ytDesc").textContent = desc;
+  document.getElementById("ytResults").style.display = "block";
 }
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
+function cpYtTitle(btn) {
+  navigator.clipboard.writeText(btn.dataset.t);
+  btn.textContent = "OK"; btn.classList.add("done");
+  setTimeout(function(){ btn.textContent = "Copy"; btn.classList.remove("done"); }, 1500);
+}
+function copyYtDesc() {
+  navigator.clipboard.writeText(document.getElementById("ytDesc").textContent);
+  event.target.textContent = "Copied!"; event.target.classList.add("done");
+  setTimeout(function(){ event.target.textContent = "Copy"; event.target.classList.remove("done"); }, 2000);
+}
 </script>
+
 <div class="main">
 <div class="intro">
   <div class="intro-top">
@@ -310,64 +379,7 @@ document.addEventListener('click',function(e){
     <div class="rbox" id="ytDesc" style="font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.7;white-space:pre-wrap"></div>
   </div>
 </div>
-<script>
-const YT_TITLES={
-  tutorial:['How to {topic} (Step-by-Step for Beginners)','The ONLY {kw} Tutorial You Need in {yr}','{topic}: Complete Beginner Guide','How I {topic} and Made ${money}','Watch Me {topic} From Start to Finish','Do THIS to {kw} (Most People Get It Wrong)'],
-  review:['{kw} Honest Review — Is It Worth It?','I Tried {topic} for 30 Days — Here's What Happened','Best {kw} in {yr}? (I Tested Them All)','{topic}: The Good, Bad, and Ugly','{kw} vs [Alternative] — Which Is Better?','The Truth About {topic} Nobody Tells You'],
-  vlog:['Day in My Life: {topic}','Come With Me to {topic} 🎥','A Real Day Working on {topic}','My {topic} Routine — What Actually Works','Week in My Life Running a {kw} Business'],
-  listicle:['{n} {kw} Tips That Changed Everything','{n} Things Every {kw} Beginner Needs to Know','The {n} Best Ways to {topic}','{n} {kw} Mistakes I Wish I Avoided','Top {n} {kw} Tools for {yr}'],
-  story:['How I Started {topic} With $0','My {topic} Journey — From Zero to {money}','Why I Quit My Job to Do {topic} Full Time','The Honest Story Behind My {kw} Business','How {topic} Changed My Life']
-};
-function genYtContent(){
-  const topic=document.getElementById('ytTopic').value.trim()||'your topic';
-  const kw=document.getElementById('ytKw').value.trim()||topic;
-  const type=document.getElementById('ytType').value;
-  const channel=document.getElementById('ytChannel').value.trim()||'creators';
-  const yr=new Date().getFullYear();
-  const money=['$1,000','$500','$5,000'][Math.floor(Math.random()*3)];
-  const n=[5,7,10,11,15][Math.floor(Math.random()*5)];
-  const fill=s=>s.replace(/{topic}/g,topic).replace(/{kw}/g,kw).replace(/{yr}/g,yr).replace(/{money}/g,money).replace(/{n}/g,n);
-  const titles=YT_TITLES[type].map(fill);
-  const titleList=document.getElementById('ytTitleList');
-  titleList.innerHTML=titles.map(t=>{
-    const len=t.length;const color=len>70?'var(--yellow)':'var(--green)';
-    return `<div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px">
-      <div style="flex:1;font-size:13px;color:var(--text)">${t}</div>
-      <span style="font-family:'Space Mono',monospace;font-size:10px;color:${color};flex-shrink:0">${len}/70</span>
-      <button class="cpbtn" onclick="navigator.clipboard.writeText('${t.replace(/'/g,"\'")}');this.textContent='✓';setTimeout(()=>this.textContent='📋',1500)">📋</button>
-    </div>`;
-  }).join('');
-  const desc=`${titles[0]}
-
-📌 In this video I'll show you ${topic}. Whether you're a beginner or just looking to level up your ${kw} game, this is for you.
-
-🕐 TIMESTAMPS:
-0:00 — Intro
-1:30 — Getting Started
-5:00 — The Main Process
-10:00 — Tips & Tricks
-15:00 — Final Thoughts
-
-🔗 LINKS MENTIONED:
-• [Add your link here]
-• [Add your resource here]
-
-📱 FOLLOW ME:
-Instagram: @yourhandle
-TikTok: @yourhandle
-
-🔔 SUBSCRIBE for weekly ${kw} content!
-
-#${kw.replace(/\s+/g,'')} #${channel.replace(/\s+/g,'')} #${type === 'tutorial' ? 'tutorial' : 'youtube'} #${yr}`;
-  document.getElementById('ytDesc').textContent=desc;
-  document.getElementById('ytResults').style.display='block';
-}
-function cpEl(id){
-  navigator.clipboard.writeText(document.getElementById(id).textContent);
-  event.target.textContent='✓ Copied!';event.target.classList.add('done');
-  setTimeout(()=>{event.target.textContent='📋 Copy';event.target.classList.remove('done')},2000);
-}
-</script>
+<SCRIPT_PLACEHOLDER/>
 
 <div class="related"><h2>Related Tools</h2><div class="rgrid"><a class="rc" href="instagram-caption-generator.html"><div class="ri">📸</div><div class="rn">Instagram Captions</div><div class="rd">Caption generator</div></a>
 <a class="rc" href="tiktok-idea-generator.html"><div class="ri">🎵</div><div class="rn">TikTok Ideas</div><div class="rd">TikTok content ideas</div></a>
@@ -405,7 +417,7 @@ function cpEl(id){
       <span style="color:#3f3f46;font-size:11px">&middot;</span>
       <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 67 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
   </div>
 </footer>
 </body>
