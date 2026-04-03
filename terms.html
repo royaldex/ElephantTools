@@ -189,6 +189,9 @@
 .unav-links{display:flex;align-items:center;gap:2px}
 .unav-link{font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:#a1a1aa;text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
 .unav-link:hover{color:#f4f4f5;background:#1f1f23}
+
+.unav-tutor{background:rgba(163,113,247,.12);color:#a371f7;border:1px solid rgba(163,113,247,.25)}
+.unav-tutor:hover{background:rgba(163,113,247,.2);color:#a371f7}
 .unav-svc{background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)}
 .unav-svc:hover{background:rgba(249,115,22,.18);color:#f97316}
 .unav-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:#10b981;border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:.5px;margin-left:6px}
@@ -226,24 +229,26 @@
     </a>
     <div class="unav-spacer"></div>
     <div class="unav-links">
-      <a href="index.html" class="unav-link" >All Tools</a>
+      <a href="index.html" class="unav-link">All Tools</a>
+      <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI</a>
       <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
-      <a href="about.html" class="unav-link" >About</a>
-      <a href="contact.html" class="unav-link" >Contact</a>
-      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
+      <a href="about.html" class="unav-link">About</a>
+      <a href="contact.html" class="unav-link">Contact</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
     </div>
-    <div class="unav-badge">&#9889; 100 Free Tools</div>
+    <div class="unav-badge"<div class="unav-badge">&#9889; 100 Free Tools</div>
     <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 <div class="unav-drawer" id="unavDrawer">
-  <a href="index.html" class="unav-link">&#127968; All Tools</a>
+  <a href="index.html" class="unav-link">&#127968; All 100 Tools</a>
+  <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI &mdash; 1-on-1 Training</a>
   <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
   <a href="about.html" class="unav-link">About</a>
   <a href="contact.html" class="unav-link">Contact</a>
-  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
+  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
 </div>
 <script>
 function toggleMenu(){

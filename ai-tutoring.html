@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="1-on-1 AI tutoring for beginners, small business owners, and side hustlers. Learn ChatGPT, Claude, Grok, Runway, and how to make money with AI. In person or online.">
+<meta property="og:title" content="Learn AI Fast — 1-on-1 AI Tutoring | Elephast.com">
+<meta property="og:description" content="Personal AI training sessions. ChatGPT, Claude, Grok, Runway, automation, and online income. Simple. Practical. In person or online.">
+<meta property="og:image" content="https://elephast.com/logo.png">
+<title>Learn AI Fast — 1-on-1 AI Tutoring | Elephast.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--orange:#f97316;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;--purple-d:#7c3aed}
+html{scroll-behavior:smooth}
+body{font-family:"Barlow",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.unav{background:rgba(18,18,27,.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 24px;backdrop-filter:blur(20px)}
+.unav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;width:100%;gap:4px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:12px}
+.unav-logo img{height:42px;width:auto}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:7px;transition:all .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover,.unav-link.active{color:var(--text);background:var(--s3)}
+.unav-tutor{background:rgba(163,113,247,.12)!important;color:var(--purple)!important;border:1px solid rgba(163,113,247,.25)}
+.unav-svc{background:rgba(249,115,22,.1)!important;color:var(--orange)!important;border:1px solid rgba(249,115,22,.2)}
+.unav-badge{padding:5px 11px;border-radius:7px;font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:800;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:1.5px;text-transform:uppercase;margin-left:8px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--dim);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:899;padding:12px 20px;flex-direction:column;gap:4px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:13px 16px;border-radius:9px}
+@media(max-width:720px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+main{flex:1}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:80px 24px 64px;text-align:center;background:linear-gradient(180deg,rgba(163,113,247,.06) 0%,transparent 60%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.3;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.htag{display:inline-flex;align-items:center;gap:7px;padding:5px 18px;border-radius:99px;border:1px solid rgba(163,113,247,.3);background:rgba(163,113,247,.08);font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:800;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-family:"Barlow Condensed",sans-serif;font-size:clamp(52px,10vw,100px);font-weight:900;line-height:.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:20px}
+.hero p{font-size:17px;color:var(--dim);max-width:540px;margin:0 auto 32px;line-height:1.7}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-purple{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:9px;background:var(--purple);color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(163,113,247,.35)}
+.btn-purple:hover{background:var(--purple-d);transform:translateY(-3px);box-shadow:0 12px 36px rgba(163,113,247,.45)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:9px;border:1px solid rgba(163,113,247,.35);color:var(--purple);font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.btn-outline:hover{background:rgba(163,113,247,.1);transform:translateY(-3px)}
+.hero-proof{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.hp{text-align:center}
+.hp-n{font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:900;color:var(--purple);display:block;line-height:1}
+.hp-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+
+/* TRUST BAR */
+.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--s2);padding:16px 24px}
+.trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--dim)}
+.trust-item span{font-size:18px}
+
+/* SECTIONS */
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
+.section h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(32px,5vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:1;margin-bottom:12px}
+.section p{font-size:15px;color:var(--dim);line-height:1.75;max-width:560px;margin-bottom:32px}
+
+/* WHAT YOU LEARN */
+.learn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.learn-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .2s,transform .2s}
+.learn-card:hover{border-color:rgba(163,113,247,.4);transform:translateY(-2px)}
+.lc-icon{font-size:32px;margin-bottom:12px}
+.lc-name{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.lc-desc{font-size:13px;color:var(--dim);line-height:1.6}
+.lc-tools{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.lc-tool{padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(163,113,247,.1);color:var(--purple);border:1px solid rgba(163,113,247,.2)}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:8px}
+.how-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center}
+.how-n{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:900;color:rgba(163,113,247,.25);line-height:1;margin-bottom:8px}
+.how-title{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.how-desc{font-size:13px;color:var(--dim);line-height:1.55}
+
+/* FOR WHO */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.who-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:22px}
+.who-icon{font-size:28px;margin-bottom:10px}
+.who-title{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.who-desc{font-size:13px;color:var(--dim);line-height:1.55}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,#0f0a1e,#110d22);border-top:1px solid rgba(163,113,247,.2);border-bottom:1px solid rgba(163,113,247,.2);padding:72px 24px;text-align:center}
+.cta-inner{max-width:600px;margin:0 auto}
+.cta-section h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(40px,7vw,72px);font-weight:900;text-transform:uppercase;letter-spacing:-1.5px;line-height:.95;margin-bottom:16px}
+.cta-section p{font-size:16px;color:var(--dim);margin-bottom:32px;line-height:1.7}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;max-width:420px;margin-left:auto;margin-right:auto}
+.contact-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:9px;font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;border:1px solid}
+.cb-text{background:rgba(163,113,247,.12);color:var(--purple);border-color:rgba(163,113,247,.3)}
+.cb-text:hover{background:rgba(163,113,247,.2);transform:translateY(-2px)}
+.cb-email{background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.25)}
+.cb-email:hover{background:rgba(16,185,129,.18);transform:translateY(-2px)}
+.also-free{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-top:32px;text-align:left}
+.af-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.af-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+footer{border-top:1px solid var(--border);background:var(--s1);padding:32px 24px;text-align:center;flex-shrink:0}
+.fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
+.fl a:hover{color:var(--text)}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
+@media(max-width:600px){.how-grid,.who-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="unav">
+  <div class="unav-inner">
+    <a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
+    <div class="unav-spacer"></div>
+    <div class="unav-links">
+      <a href="index.html" class="unav-link">&#127968; Tools</a>
+      <a href="ai-tutoring.html" class="unav-link unav-tutor active">&#129504; Learn AI</a>
+      <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+      <a href="about.html" class="unav-link">About</a>
+      <a href="contact.html" class="unav-link">Contact</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy &#8599;</a>
+    </div>
+    <div class="unav-badge">100 Free Tools</div>
+    <button class="unav-ham" id="unavHam" onclick="toggleUNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="unav-drawer" id="unavDrawer">
+  <a href="index.html" class="unav-link">&#127968; All 100 Free Tools</a>
+  <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI 1-on-1</a>
+  <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+  <a href="about.html" class="unav-link">About</a>
+  <a href="contact.html" class="unav-link">Contact</a>
+  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+</div>
+<script>function toggleUNav(){var h=document.getElementById("unavHam"),d=document.getElementById("unavDrawer"),o=d.classList.contains("open");o?(d.classList.remove("open"),h.classList.remove("open")):(d.classList.add("open"),h.classList.add("open"));}document.addEventListener("click",function(e){var h=document.getElementById("unavHam"),d=document.getElementById("unavDrawer");if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove("open");h.classList.remove("open");}});</script>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="htag">&#129504; 1-on-1 AI Training &bull; In Person or Online</div>
+    <h1>
+      <span style="color:var(--text);display:block">Learn AI</span>
+      <span style="color:var(--purple);display:block">Fast.</span>
+    </h1>
+    <p>Real skills. Real tools. No fluff. Learn ChatGPT, Claude, Grok, Runway, and how to use AI to make money online — with a personal tutor who actually uses this stuff every day.</p>
+    <div class="hero-ctas">
+      <a href="contact.html" class="btn-purple">&#128172; Text or Email to Start</a>
+      <a href="#what-you-learn" class="btn-outline">&#128196; See What You Learn</a>
+    </div>
+    <div class="hero-proof">
+      <div class="hp"><span class="hp-n">1-on-1</span><span class="hp-l">Personal Sessions</span></div>
+      <div class="hp"><span class="hp-n">&#128205;</span><span class="hp-l">In Person or Online</span></div>
+      <div class="hp"><span class="hp-n">Any</span><span class="hp-l">Skill Level</span></div>
+      <div class="hp"><span class="hp-n">Real</span><span class="hp-l">Results</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span>&#129302;</span> ChatGPT &amp; Claude</div>
+    <div class="trust-item"><span>&#127916;</span> Runway Video AI</div>
+    <div class="trust-item"><span>&#127925;</span> Suno Music AI</div>
+    <div class="trust-item"><span>&#128269;</span> Grok AI Research</div>
+    <div class="trust-item"><span>&#128176;</span> AI Income Streams</div>
+    <div class="trust-item"><span>&#9889;</span> Simple &amp; Practical</div>
+  </div>
+</div>
+
+<!-- WHAT YOU LEARN -->
+<div class="section" id="what-you-learn">
+  <div class="section-tag">Curriculum</div>
+  <h2>What You Will <span style="color:var(--purple)">Learn</span></h2>
+  <p>Every session is tailored to what you want to accomplish. These are the most common topics — just tell me where you want to start.</p>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="lc-icon">&#129302;</div>
+      <div class="lc-name">ChatGPT &amp; Claude</div>
+      <div class="lc-desc">Master prompt engineering, automation, content creation, and using AI as a real productivity multiplier in your work.</div>
+      <div class="lc-tools"><span class="lc-tool">ChatGPT</span><span class="lc-tool">Claude</span><span class="lc-tool">Prompts</span><span class="lc-tool">Automation</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#128176;</div>
+      <div class="lc-name">Make Money With AI</div>
+      <div class="lc-desc">Digital products, Etsy automation, online resale, AI-generated content — real strategies that are working right now.</div>
+      <div class="lc-tools"><span class="lc-tool">Etsy</span><span class="lc-tool">Digital Products</span><span class="lc-tool">Online Resale</span><span class="lc-tool">Passive Income</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#127916;</div>
+      <div class="lc-name">Runway Video AI</div>
+      <div class="lc-desc">Create professional AI-generated videos for marketing, social media, YouTube, and client work using Runway and similar tools.</div>
+      <div class="lc-tools"><span class="lc-tool">Runway</span><span class="lc-tool">AI Video</span><span class="lc-tool">Content Creation</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#128269;</div>
+      <div class="lc-name">Grok AI Research</div>
+      <div class="lc-desc">Use Grok for in-depth research, market analysis, competitive intelligence, and data-driven decision making.</div>
+      <div class="lc-tools"><span class="lc-tool">Grok</span><span class="lc-tool">Research</span><span class="lc-tool">Analysis</span><span class="lc-tool">Data</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#127760;</div>
+      <div class="lc-name">Build Websites &amp; Tools</div>
+      <div class="lc-desc">Use AI to design and build websites, browser tools, and automation systems — even with zero coding experience.</div>
+      <div class="lc-tools"><span class="lc-tool">Web Design</span><span class="lc-tool">No-Code AI</span><span class="lc-tool">Automation</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#9889;</div>
+      <div class="lc-name">Automate Your Work</div>
+      <div class="lc-desc">Stop doing repetitive tasks manually. Learn to automate your workflow with AI so you can focus on what actually matters.</div>
+      <div class="lc-tools"><span class="lc-tool">Automation</span><span class="lc-tool">Workflow</span><span class="lc-tool">Productivity</span><span class="lc-tool">AI Tools</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#128221;</div>
+      <div class="lc-name">Write &amp; Create Content</div>
+      <div class="lc-desc">Generate blogs, social posts, product listings, email campaigns, and video scripts faster than you thought possible.</div>
+      <div class="lc-tools"><span class="lc-tool">Copywriting</span><span class="lc-tool">Social Media</span><span class="lc-tool">SEO Content</span></div>
+    </div>
+    <div class="learn-card">
+      <div class="lc-icon">&#127925;</div>
+      <div class="lc-name">Suno &amp; AI Music</div>
+      <div class="lc-desc">Create original AI-generated music for videos, content, and commercial projects using Suno and other music AI tools.</div>
+      <div class="lc-tools"><span class="lc-tool">Suno</span><span class="lc-tool">AI Music</span><span class="lc-tool">Commercial Use</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 24px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-tag">How It Works</div>
+    <h2>Simple to <span style="color:var(--purple)">Get Started</span></h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-n">01</div>
+        <div class="how-title">Reach Out</div>
+        <div class="how-desc">Text or email me. Tell me what you want to learn or what problem you are trying to solve with AI.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-n">02</div>
+        <div class="how-title">Pick Your Format</div>
+        <div class="how-desc">Meet in person locally or connect online via video call. Flexible scheduling to fit your life.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-n">03</div>
+        <div class="how-title">Learn Practically</div>
+        <div class="how-desc">No slides, no fluff. We work on real tasks using real tools. You leave every session with something you can actually use.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-n">04</div>
+        <div class="how-title">Keep Building</div>
+        <div class="how-desc">Book follow-up sessions as needed. Most people come back when they hit the next level — or just want to go deeper.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO IS IT FOR -->
+<div class="section">
+  <div class="section-tag">Who This Is For</div>
+  <h2>Anyone Ready to <span style="color:var(--purple)">Level Up</span></h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-icon">&#128100;</div>
+      <div class="who-title">Beginners</div>
+      <div class="who-desc">You have heard about AI but have no idea where to start. We start from zero — no jargon, no assumptions about your tech knowledge.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">&#127978;&#65039;</div>
+      <div class="who-title">Small Biz Owners</div>
+      <div class="who-desc">You run a business and want AI to save you time and money. We focus on automation, content, and customer communication.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">&#128176;</div>
+      <div class="who-title">Side Hustlers</div>
+      <div class="who-desc">You want to build an online income stream using AI. Digital products, Etsy, content creation, resale — we map out your path.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">&#128188;</div>
+      <div class="who-title">Businessers</div>
+      <div class="who-desc">You need AI integrated into your operations, team, or workflow. We scope the use case and build a plan that actually works.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="book">
+  <div class="cta-inner">
+    <div class="section-tag" style="color:var(--purple)">Get Started Today</div>
+    <h2>Ready to <span style="color:var(--purple)">Learn?</span></h2>
+    <p>Text or email to book your first session. No pressure, no commitment. We will figure out what you need and go from there.</p>
+    <a href="contact.html" class="btn-purple" style="display:inline-flex;margin-bottom:16px">&#129504; Contact Us to Start</a>
+    <div class="contact-grid">
+      <a href="contact.html" class="contact-btn cb-text">&#128172; Send a Message</a>
+      <a href="contact.html" class="contact-btn cb-email">&#9993;&#65039; Email Us</a>
+    </div>
+    <div class="also-free">
+      <div class="af-title">&#128296; Also — everything on Elephast is free</div>
+      <div class="af-desc">While you book a session, explore 100 free browser tools for Etsy, SEO, image editing, development, and more. No signup, no cost, no catches. <a href="index.html" style="color:var(--purple)">Browse all 100 tools &rarr;</a></div>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="ai-tutoring.html" style="color:var(--purple)">&#129504; Learn AI</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="services.html">Services</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="about.html">About</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="https://buymeacoffee.com/elephast" target="_blank" style="color:#FFDD00">&#9749; Support Us</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="privacy-policy.html">Privacy</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; AI &amp; eCommerce Expert. 100 free tools + 1-on-1 AI training.</p>
+</footer>
+</body>
+</html>

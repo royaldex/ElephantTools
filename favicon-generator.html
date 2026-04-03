@@ -23,6 +23,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .unav-links{display:flex;align-items:center;gap:2px}
 .unav-link{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
 .unav-link:hover{color:var(--text);background:var(--s3)}
+
+.unav-tutor{background:rgba(163,113,247,.12);color:#a371f7;border:1px solid rgba(163,113,247,.25)}
+.unav-tutor:hover{background:rgba(163,113,247,.2);color:#a371f7}
 .unav-svc{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
 .unav-svc:hover{background:rgba(249,115,22,.18)}
 .unav-badge{display:flex;align-items:center;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;margin-left:6px}
@@ -91,21 +94,23 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 <a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
 <div class="unav-spacer"></div>
 <div class="unav-links">
-<a href="index.html" class="unav-link">All Tools</a>
-<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
-<a href="about.html" class="unav-link">About</a>
-<a href="contact.html" class="unav-link">Contact</a>
-<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
-</div>
-<div class="unav-badge">&#9889; 100 Free Tools</div>
+      <a href="index.html" class="unav-link">All Tools</a>
+      <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI</a>
+      <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+      <a href="about.html" class="unav-link">About</a>
+      <a href="contact.html" class="unav-link">Contact</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
+    </div>
+    <div class="unav-badge"<div class="unav-badge">&#9889; 100 Free Tools</div>
 <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="unav-drawer" id="unavDrawer">
-<a href="index.html" class="unav-link">&#127968; All Tools</a>
-<a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
-<a href="about.html" class="unav-link">About</a>
-<a href="contact.html" class="unav-link">Contact</a>
-<a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
+  <a href="index.html" class="unav-link">&#127968; All 100 Tools</a>
+  <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI &mdash; 1-on-1 Training</a>
+  <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+  <a href="about.html" class="unav-link">About</a>
+  <a href="contact.html" class="unav-link">Contact</a>
+  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
 </div>
 <div class="main">
 <div class="intro"><div class="intro-top"><div class="intro-icon">🖼️</div><div class="intro-text">

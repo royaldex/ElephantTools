@@ -2,416 +2,639 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="67 free browser-based tools for Etsy sellers, digital creators, influencers, and crypto users. SEO tools, image tools, keyword generators, crypto calculators, and more. No signup required.">
-<meta property="og:title" content="Elephast.com — 100 Free Tools for Creators & Sellers">
-<meta property="og:description" content="Free SEO tools, Etsy tools, image converters, crypto calculators, and influencer tools. All browser-based, no signup.">
-<title>Elephast.com — 100 Free Tools for Etsy Sellers, Creators & Developers</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAAoklEQVRoge3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAABHgAAAABJRU5ErkJggg==">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--s4:#27272a;
-  --border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;
-  --green:#10b981;--green-d:#059669;--orange:#f97316;--orange-l:#fbbf24;
-  --blue:#3b82f6;--purple:#a371f7;--red:#ef4444;
-}
-html{scroll-behavior:smooth}
-body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1px solid var(--border);background:rgba(9,9,11,.96);backdrop-filter:blur(18px);position:sticky;top:0;z-index:100}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
-.bn{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.3px}
-.bn .e{color:var(--green)}.bn .c{color:var(--green);font-size:14px}
-.ns{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px;line-height:1}
-.nav-right{display:flex;align-items:center;gap:6px}
-.nl{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .15s}
-.nl:hover{color:var(--text);background:var(--s3)}
-.nbadge{padding:6px 14px;border-radius:7px;font-size:11px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2)}
-
-.hero{position:relative;overflow:hidden;padding:64px 24px 52px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% -5%,rgba(16,185,129,.06) 0%,transparent 60%)}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.45;z-index:0}
-.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
-.htag{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:99px;border:1px solid rgba(16,185,129,.22);background:rgba(16,185,129,.06);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,8vw,88px);font-weight:900;line-height:.92;letter-spacing:-2px;text-transform:uppercase;margin-bottom:18px}
-.l1{color:var(--text);display:block}.l2{display:block;background:linear-gradient(90deg,var(--orange),var(--orange-l),var(--orange));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}.l3{color:var(--green);display:block}
-@keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
-.hero-p{font-size:16px;color:var(--dim);max-width:520px;margin:0 auto 28px;line-height:1.7}
-.hcta{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:9px;background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;font-size:14px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(16,185,129,.2)}
-.hcta:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(16,185,129,.32)}
-.hstats{display:flex;gap:28px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-.hs{text-align:center}.hs-n{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--green);display:block}.hs-l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
-
-.search-wrap{max-width:540px;margin:0 auto 36px;padding:0 20px}
-.si{position:relative}
-.sicon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
-#searchInput{width:100%;padding:13px 16px 13px 42px;background:var(--s2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:'Barlow',sans-serif;transition:border-color .15s}
-#searchInput:focus{outline:none;border-color:var(--green)}
-#searchInput::placeholder{color:var(--muted)}
-
-.content{max-width:1280px;margin:0 auto;padding:0 20px 80px}
-.section{margin-bottom:44px}
-.sh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.si2{font-size:18px}.stitle{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
-.scount{font-size:11px;color:var(--dim);background:var(--s3);padding:3px 9px;border-radius:20px;margin-left:auto}
-.sline{flex:1;height:1px;background:var(--border)}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;color:var(--text);transition:all .18s;display:flex;flex-direction:column;gap:7px;position:relative}
-.card:hover{border-color:rgba(249,115,22,.5);background:var(--s3);transform:translateY(-2px)}
-.ci{font-size:22px;line-height:1}
-.cn{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.2px;line-height:1.2}
-.cd{font-size:12px;color:var(--dim);line-height:1.4}
-.ctag{position:absolute;top:10px;right:10px;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.tnew{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid rgba(249,115,22,.25)}
-.thot{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
-.tseo{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
-.tcrypto{background:rgba(251,191,36,.12);color:var(--orange-l);border:1px solid rgba(251,191,36,.2)}
-.tinfluencer{background:rgba(163,113,247,.12);color:#c4a5fd;border:1px solid rgba(163,113,247,.2)}
-.no-results{text-align:center;padding:60px 20px;color:var(--dim);font-size:14px;display:none}
-footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted)}
-footer a{color:var(--orange);text-decoration:none}
-@media(max-width:600px){.hstats{gap:16px}.grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}}
-
-
-/* ── UNIVERSAL NAV ── */
-.unav{background:#18181b;border-bottom:1px solid #2d2d30;position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
-.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
-.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
-.unav-logo img{height:44px;width:auto;display:block}
-.unav-spacer{flex:1}
-.unav-links{display:flex;align-items:center;gap:2px}
-.unav-link{font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:#a1a1aa;text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
-.unav-link:hover{color:#f4f4f5;background:#1f1f23}
-.unav-svc{background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)}
-.unav-svc:hover{background:rgba(249,115,22,.18);color:#f97316}
-.unav-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:#10b981;border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:.5px;margin-left:6px}
-/* Hamburger */
-.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px;transition:background .15s}
-.unav-ham:hover{background:#1f1f23}
-.unav-ham span{display:block;width:22px;height:2px;background:#a1a1aa;border-radius:2px;transition:all .25s}
-.unav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.unav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.unav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-/* Mobile drawer */
-.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:#18181b;border-bottom:1px solid #2d2d30;z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.unav-drawer.open{display:flex}
-.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px;text-align:left}
-.unav-drawer .unav-svc{margin-top:4px}
-@media(max-width:680px){
-  .unav-links{display:none}
-  .unav-badge{display:none}
-  .unav-ham{display:flex}
-}
-
-</style>
-  <!-- ╔══════════════════════════════════════════════════╗
-       ║  GOOGLE ADSENSE — Replace with your publisher tag  ║
-       ║  Get your tag at: https://adsense.google.com       ║
-       ╚══════════════════════════════════════════════════╝ -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
-
+<link rel="icon" type="image/png" href="logo-icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Elephast.com — 100 free browser tools for Etsy sellers, creators & developers. Plus 1-on-1 AI tutoring, custom tool builds, and eCommerce services. No login required.">
+<meta property="og:title" content="Elephast.com — 100 Free AI & Creator Tools + Expert AI Training">
+<meta property="og:description" content="Free SEO tools, image editors, Etsy calculators, dev utilities + 1-on-1 AI training for beginners and businesses. No signup. Instant results.">
 <meta property="og:image" content="https://elephast.com/logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://elephast.com/logo.png">
+<title>Elephast.com — 100 Free Tools + AI Tutoring for Creators & Sellers</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--s4:#27272a;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;--red:#ef4444}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+.unav{background:rgba(18,18,27,.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 24px;backdrop-filter:blur(20px)}
+.unav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;width:100%;gap:4px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:12px}
+.unav-logo img{height:42px;width:auto;display:block}
+.unav-spacer{flex:1}
+.unav-links{display:flex;align-items:center;gap:2px}
+.unav-link{font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover,.unav-link.active{color:var(--text);background:var(--s3)}
+.unav-tutor{background:rgba(163,113,247,.12);color:var(--purple)!important;border:1px solid rgba(163,113,247,.25)}
+.unav-tutor:hover{background:rgba(163,113,247,.2)!important}
+.unav-svc{background:rgba(249,115,22,.1);color:var(--orange)!important;border:1px solid rgba(249,115,22,.2)}
+.unav-svc:hover{background:rgba(249,115,22,.18)!important}
+.unav-badge{display:flex;align-items:center;padding:5px 11px;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:1.5px;text-transform:uppercase;margin-left:8px}
+.unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--dim);border-radius:2px;transition:all .25s}
+.unav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.unav-ham.open span:nth-child(2){opacity:0}
+.unav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.unav-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:899;padding:12px 20px;flex-direction:column;gap:4px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.unav-drawer.open{display:flex}
+.unav-drawer .unav-link{font-size:15px;padding:13px 16px;border-radius:9px}
+@media(max-width:720px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:72px 24px 60px;text-align:center;background:linear-gradient(180deg,rgba(16,185,129,.04) 0%,transparent 60%)}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.35;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:820px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 18px;border-radius:99px;border:1px solid rgba(16,185,129,.25);background:rgba(16,185,129,.07);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,9vw,96px);font-weight:900;line-height:.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:20px}
+.hero h1 .line-white{color:var(--text);display:block}
+.hero h1 .line-orange{display:block;background:linear-gradient(90deg,var(--orange),var(--yellow),var(--orange));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3s linear infinite}
+.hero h1 .line-green{color:var(--green);display:block}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+.hero-sub{font-size:17px;color:var(--dim);max-width:560px;margin:0 auto 32px;line-height:1.7}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(16,185,129,.25)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(16,185,129,.35)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:rgba(163,113,247,.12);color:var(--purple);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(163,113,247,.3);transition:all .2s}
+.btn-secondary:hover{background:rgba(163,113,247,.2);transform:translateY(-3px)}
+.hero-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:900;color:var(--green);display:block;line-height:1}
+.hstat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+
+/* WHAT WE DO */
+.what-section{padding:0 24px 52px;max-width:1200px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:6px}
+.section-sub{font-size:14px;color:var(--dim);margin-bottom:28px;max-width:480px;line-height:1.65}
+.pillar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pillar{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .2s;text-decoration:none;color:var(--text);display:block;position:relative;overflow:hidden}
+.pillar:hover{transform:translateY(-3px)}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.pillar:hover::before{opacity:1}
+.pillar-tools::before{background:linear-gradient(90deg,var(--green),#6ee7b7)}
+.pillar-tools:hover{border-color:rgba(16,185,129,.4)}
+.pillar-tutor::before{background:linear-gradient(90deg,var(--purple),#c4b5fd)}
+.pillar-tutor:hover{border-color:rgba(163,113,247,.4)}
+.pillar-services::before{background:linear-gradient(90deg,var(--orange),var(--yellow))}
+.pillar-services:hover{border-color:rgba(249,115,22,.4)}
+.pillar-etsy::before{background:linear-gradient(90deg,#f59e0b,#d97706)}
+.pillar-etsy:hover{border-color:rgba(245,158,11,.4)}
+.pillar-icon{font-size:32px;margin-bottom:14px}
+.pillar-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px}
+.pillar-desc{font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:14px}
+.pillar-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.pillar-tools .pillar-cta{color:var(--green)}
+.pillar-tutor .pillar-cta{color:var(--purple)}
+.pillar-services .pillar-cta{color:var(--orange)}
+.pillar-etsy .pillar-cta{color:#f59e0b}
+
+/* TUTOR STRIP */
+.tutor-strip{background:linear-gradient(135deg,#0f0a1e,#110e1f);border-top:1px solid rgba(163,113,247,.15);border-bottom:1px solid rgba(163,113,247,.15);padding:56px 24px;margin-bottom:0}
+.tutor-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.tutor-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 16px;border-radius:99px;border:1px solid rgba(163,113,247,.3);background:rgba(163,113,247,.08);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px}
+.tutor-strip h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:16px}
+.tutor-strip p{font-size:15px;color:var(--dim);line-height:1.75;margin-bottom:24px;max-width:440px}
+.tutor-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tutor-card{background:rgba(163,113,247,.07);border:1px solid rgba(163,113,247,.15);border-radius:10px;padding:14px}
+.tc-icon{font-size:22px;margin-bottom:6px}
+.tc-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tc-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.tutor-right{display:flex;flex-direction:column;gap:12px}
+.tutor-feature{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(163,113,247,.1);border-radius:10px;padding:16px}
+.tf-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.tf-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tf-desc{font-size:13px;color:var(--dim);line-height:1.5}
+.tutor-audience{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.ta-pill{padding:6px 14px;background:rgba(163,113,247,.1);border:1px solid rgba(163,113,247,.2);border-radius:20px;font-size:12px;font-weight:600;color:var(--purple)}
+.btn-tutor{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:var(--purple);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(163,113,247,.3)}
+.btn-tutor:hover{background:#8b5cf6;transform:translateY(-3px);box-shadow:0 12px 36px rgba(163,113,247,.4)}
+@media(max-width:700px){.tutor-inner{grid-template-columns:1fr}.tutor-right{display:none}}
+
+/* TOOLS SECTION */
+.tools-wrap{max-width:1200px;margin:0 auto;padding:48px 24px 80px}
+.tools-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px}
+.search-box{position:relative;flex:1;max-width:440px}
+.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#searchInput{width:100%;padding:11px 16px 11px 40px;background:var(--s2);border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:14px;font-family:'Barlow',sans-serif;transition:border-color .15s;outline:none}
+#searchInput:focus{border-color:var(--green)}
+#searchInput::placeholder{color:var(--muted)}
+.cat-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.cat-btn{padding:7px 16px;border:1px solid var(--border);border-radius:7px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;color:var(--dim);background:var(--s2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.cat-btn:hover,.cat-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(249,115,22,.07)}
+.tool-section{margin-bottom:44px;scroll-margin-top:80px}
+.tool-section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.tsh-icon{font-size:20px}
+.tsh-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+.tsh-count{font-size:11px;color:var(--muted);background:var(--s3);padding:3px 10px;border-radius:20px;margin-left:auto}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.tool-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;color:var(--text);transition:all .18s;position:relative;display:flex;flex-direction:column;gap:6px}
+.tool-card:hover{border-color:rgba(249,115,22,.45);background:var(--s3);transform:translateY(-2px)}
+.tc-badge{position:absolute;top:10px;right:10px;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.b-new{background:rgba(249,115,22,.14);color:var(--orange);border:1px solid rgba(249,115,22,.24)}
+.b-hot{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.b-seo{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
+.b-crypto{background:rgba(251,191,36,.12);color:var(--yellow);border:1px solid rgba(251,191,36,.2)}
+.b-creator{background:rgba(163,113,247,.12);color:#c4a5fd;border:1px solid rgba(163,113,247,.2)}
+.tc-em{font-size:22px;line-height:1}
+.tc-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;line-height:1.2;letter-spacing:.1px}
+.tc-desc{font-size:12px;color:var(--dim);line-height:1.45}
+.no-results{text-align:center;padding:60px 20px;color:var(--dim);display:none}
+
+/* BMC */
+.bmc-strip{background:linear-gradient(135deg,#111008,#0c0c08);border-top:1px solid rgba(255,221,0,.1);border-bottom:1px solid rgba(255,221,0,.1);padding:24px;margin-bottom:0}
+.bmc-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bmc-text{flex:1;min-width:200px}
+.bmc-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.bmc-sub{font-size:12px;color:var(--muted)}
+.bmc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;background:#FFDD00;color:#000;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;transition:transform .15s,box-shadow .15s;box-shadow:0 3px 12px rgba(255,221,0,.2)}
+.bmc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,221,0,.3)}
+
+/* FOOTER */
+.site-footer{border-top:1px solid var(--border);background:var(--s1);padding:52px 24px 36px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:36px;margin-bottom:36px}
+.footer-brand img{height:38px;width:auto;margin-bottom:14px;opacity:.85}
+.footer-brand p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--text)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p,.footer-bottom a{font-size:12px;color:#52525b;text-decoration:none}
+.footer-bottom a:hover{color:var(--muted)}
+
+@media(max-width:600px){.tool-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}.pillar-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav class="unav">
   <div class="unav-inner">
-    <a href="index.html" class="unav-logo" aria-label="Elephast home">
-      <img src="logo-nav.png" alt="Elephast.com — Hella Fast Tools">
-    </a>
+    <a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com — AI Tools & Training"></a>
     <div class="unav-spacer"></div>
     <div class="unav-links">
-      <a href="index.html" class="unav-link" style='color:#f4f4f5'>All Tools</a>
+      <a href="index.html" class="unav-link active">&#127968; Tools</a>
+      <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI</a>
       <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
-      <a href="about.html" class="unav-link" >About</a>
-      <a href="contact.html" class="unav-link" >Contact</a>
-      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
+      <a href="about.html" class="unav-link">About</a>
+      <a href="contact.html" class="unav-link">Contact</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy &#8599;</a>
     </div>
-    <div class="unav-badge">&#9889; 100 Free Tools</div>
-    <button class="unav-ham" id="unavHam" aria-label="Menu" onclick="toggleMenu()">
+    <div class="unav-badge">100 Free Tools</div>
+    <button class="unav-ham" id="unavHam" aria-label="Open menu" onclick="toggleUNav()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 <div class="unav-drawer" id="unavDrawer">
-  <a href="index.html" class="unav-link">&#127968; All Tools</a>
-  <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
+  <a href="index.html" class="unav-link">&#127968; All 100 Free Tools</a>
+  <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; 1-on-1 AI Training</a>
+  <a href="services.html" class="unav-link unav-svc">&#9889; Services & Custom Builds</a>
   <a href="about.html" class="unav-link">About</a>
   <a href="contact.html" class="unav-link">Contact</a>
-  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop ↗</a>
+  <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
 <script>
-function toggleMenu(){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  var isOpen=drawer.classList.contains('open');
-  if(isOpen){drawer.classList.remove('open');ham.classList.remove('open');}
-  else{drawer.classList.add('open');ham.classList.add('open');}
-}
-document.addEventListener('click',function(e){
-  var ham=document.getElementById('unavHam');
-  var drawer=document.getElementById('unavDrawer');
-  if(!ham.contains(e.target)&&!drawer.contains(e.target)){
-    drawer.classList.remove('open');ham.classList.remove('open');
-  }
-});
+function toggleUNav(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');
+o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}
+document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');
+if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});
 </script>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="htag">⚡ Free · No Signup · Instant Results</div>
-    <img src="logo.png" alt="Elephast.com — Hella Fast Tools" style="max-width:320px;width:90%;height:auto;margin:0 auto 8px;display:block">
-    <p class="hero-p">77 tools for Etsy sellers, SEO beginners, digital creators, influencers, and crypto users. No installs. No accounts. Just results.</p>
-    <a href="#tools" class="hcta">Browse All 67 Tools ↓</a>
-    <div class="hstats">
-      <div class="hs"><span class="hs-n">100</span><span class="hs-l">Tools</span></div>
-      <div class="hs"><span class="hs-n">100%</span><span class="hs-l">Free</span></div>
-      </div>
+    <div class="hero-tag">&#9889; AI Tools &bull; eCommerce &bull; Expert Training</div>
+    <img src="logo.png" alt="Elephast.com" style="max-width:300px;width:85%;height:auto;margin:0 auto 16px;display:block">
+    <h1>
+      <span class="line-white">100 Free</span>
+      <span class="line-orange">Browser Tools</span>
+      <span class="line-green">+ AI Training</span>
+    </h1>
+    <p class="hero-sub">Free tools for Etsy sellers, creators, and developers — plus 1-on-1 AI tutoring to help you automate your work, build online income, and actually understand the technology.</p>
+    <div class="hero-ctas">
+      <a href="#tools" class="btn-primary">&#128296; Browse All 100 Tools</a>
+      <a href="ai-tutoring.html" class="btn-secondary">&#129504; Learn AI 1-on-1</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">100</span><span class="hstat-l">Free Tools</span></div>
+      <div class="hstat"><span class="hstat-n">0</span><span class="hstat-l">Installs</span></div>
+      <div class="hstat"><span class="hstat-n">100%</span><span class="hstat-l">Browser-Based</span></div>
+      <div class="hstat"><span class="hstat-n">Free</span><span class="hstat-l">Always</span></div>
+    </div>
   </div>
 </section>
 
-
-<!-- Buy Me a Coffee Strip -->
-<div style="max-width:1280px;margin:0 auto;padding:0 20px 8px">
-  <div style="background:linear-gradient(135deg,#111008,#0d0c07);border:1px solid rgba(255,221,0,.15);border-radius:12px;padding:18px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-    <span style="font-size:22px;flex-shrink:0">&#9749;</span>
-    <div style="flex:1;min-width:200px">
-      <div style="font-size:14px;font-weight:700;color:#f4f4f5;margin-bottom:2px">Elephast is free — keep it that way</div>
-      <div style="font-size:12px;color:#a1a1aa">77 tools. No subscriptions. No paywalls. If it saved you time, a coffee helps us build more.</div>
-    </div>
-    <a href="https://buymeacoffee.com/elephast" target="_blank" rel="noopener"
-      style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:8px;background:#FFDD00;color:#000;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:transform .15s"
-      onmouseover="this.style.transform='translateY(-1px)'"
-      onmouseout="this.style.transform='none'">
-      Buy Us a Coffee &#8599;
+<!-- WHAT WE DO -->
+<div style="padding:48px 24px 8px;max-width:1200px;margin:0 auto">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">One Hub. Everything You Need.</h2>
+  <p class="section-sub">Free tools that work instantly in your browser. Expert AI training that actually makes sense. Custom builds when you need something built for you.</p>
+  <div class="pillar-grid">
+    <a href="#tools" class="pillar pillar-tools">
+      <div class="pillar-icon">&#128296;</div>
+      <div class="pillar-name">100 Free Tools</div>
+      <p class="pillar-desc">SEO tools, Etsy calculators, image editors, dev utilities, creator tools, and more. All browser-based. No signup, no installs, no cost — ever.</p>
+      <div class="pillar-cta">Browse Tools &#8594;</div>
+    </a>
+    <a href="ai-tutoring.html" class="pillar pillar-tutor">
+      <div class="pillar-icon">&#129504;</div>
+      <div class="pillar-name">1-on-1 AI Training</div>
+      <p class="pillar-desc">Learn ChatGPT, Claude, Grok, Runway, and more with a real expert. Beginner-friendly. In person or online. Walk away knowing how to use AI to make money.</p>
+      <div class="pillar-cta">Book a Session &#8594;</div>
+    </a>
+    <a href="services.html" class="pillar pillar-services">
+      <div class="pillar-icon">&#9889;</div>
+      <div class="pillar-name">Custom Services</div>
+      <p class="pillar-desc">Custom browser tools, Etsy shop design, website builds, SEO audits, and Telegram bots. Built fast, built to work, built by someone who actually uses this stuff.</p>
+      <div class="pillar-cta">View Services &#8594;</div>
+    </a>
+    <a href="https://elephantshoespopshop.etsy.com" target="_blank" rel="noopener" class="pillar pillar-etsy">
+      <div class="pillar-icon">&#128717;&#65039;</div>
+      <div class="pillar-name">Etsy Shop</div>
+      <p class="pillar-desc">Digital downloads, PNG sublimation designs, printable wall art, greeting card PDFs, and clipart from the ElephantShoes shop. Instant download, commercial use.</p>
+      <div class="pillar-cta">Shop Now &#8594;</div>
     </a>
   </div>
 </div>
 
-<div class="search-wrap" id="tools">
-  <div class="si">
-    <svg class="sicon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Search 77 tools…" oninput="filterTools(this.value)">
-  </div>
-</div>
-
-<div class="content">
-<div 
-<!-- ── NEW TOOLS SECTION ── -->
-
-<!-- ── NEW TOOLS BATCH 2 ── -->
-<div class="section" data-section="new2">
-  <div class="sh"><span class="si2">⚡</span><span class="stitle">New This Month</span><div class="sline"></div><span class="scount">23 tools</span></div>
-  <div class="grid">
-    <a class="card" href="text-repeater.html" data-k="text repeater repeat string character copy fill"><div class="ctag tnew">NEW</div><div class="ci">🔁</div><div class="cn">Text Repeater</div><div class="cd">Repeat any text N times with custom separator.</div></a>
-    <a class="card" href="binary-hex-converter.html" data-k="binary hex decimal octal converter base number"><div class="ctag tnew">NEW</div><div class="ci">🔢</div><div class="cn">Binary & Hex Converter</div><div class="cd">Convert between binary, hex, decimal, and octal.</div></a>
-    <a class="card" href="readability-checker.html" data-k="readability checker flesch kincaid grade level score"><div class="ctag tnew">NEW</div><div class="ci">📖</div><div class="cn">Readability Checker</div><div class="cd">Flesch-Kincaid reading ease and grade level score.</div></a>
-    <a class="card" href="number-to-words.html" data-k="number to words converter write spell out invoice cheque"><div class="ctag tnew">NEW</div><div class="ci">💬</div><div class="cn">Number to Words</div><div class="cd">Convert numbers to written English words.</div></a>
-    <a class="card" href="character-frequency-counter.html" data-k="character frequency counter letter word analysis text"><div class="ctag tnew">NEW</div><div class="ci">📊</div><div class="cn">Character Frequency</div><div class="cd">Analyse character and letter frequency in text.</div></a>
-    <a class="card" href="random-name-generator.html" data-k="random name generator character business fantasy pet baby"><div class="ctag tnew">NEW</div><div class="ci">🎲</div><div class="cn">Random Name Generator</div><div class="cd">Names for characters, businesses, and projects.</div></a>
-    <a class="card" href="html-entity-encoder.html" data-k="html entity encoder decoder escape special characters"><div class="ctag tnew">NEW</div><div class="ci">🔤</div><div class="cn">HTML Entity Encoder</div><div class="cd">Encode and decode HTML special characters.</div></a>
-    <a class="card" href="url-encoder-decoder.html" data-k="url encoder decoder percent encode query string"><div class="ctag tnew">NEW</div><div class="ci">🔗</div><div class="cn">URL Encoder / Decoder</div><div class="cd">Encode and decode URLs and query strings.</div></a>
-    <a class="card" href="jwt-decoder.html" data-k="jwt decoder json web token header payload expiry"><div class="ctag tnew">NEW</div><div class="ci">🔓</div><div class="cn">JWT Decoder</div><div class="cd">Decode and inspect JSON Web Tokens.</div></a>
-    <a class="card" href="cron-job-generator.html" data-k="cron job generator expression scheduler linux server"><div class="ctag tnew">NEW</div><div class="ci">⏱️</div><div class="cn">Cron Job Generator</div><div class="cd">Build cron expressions visually with preview.</div></a>
-    <a class="card" href="markdown-to-html.html" data-k="markdown to html converter preview live blog"><div class="ctag tnew">NEW</div><div class="ci">📝</div><div class="cn">Markdown to HTML</div><div class="cd">Convert Markdown to HTML with live preview.</div></a>
-    <a class="card" href="instagram-bio-generator.html" data-k="instagram bio generator profile creator social media"><div class="ctag tinfluencer">CREATOR</div><div class="ci">👤</div><div class="cn">Instagram Bio Generator</div><div class="cd">Generate compelling Instagram profile bios.</div></a>
-    <a class="card" href="thread-writer.html" data-k="twitter x thread writer format auto-split 280 character"><div class="ctag tinfluencer">CREATOR</div><div class="ci">🧵</div><div class="cn">Thread Writer</div><div class="cd">Format content as a Twitter/X thread automatically.</div></a>
-    <a class="card" href="video-script-generator.html" data-k="video script generator youtube tiktok outline structure hook cta"><div class="ctag tinfluencer">CREATOR</div><div class="ci">🎬</div><div class="cn">Video Script Generator</div><div class="cd">Structured script outlines for any video platform.</div></a>
-    <a class="card" href="hashtag-analyzer.html" data-k="hashtag analyzer analyse mix size distribution instagram reach"><div class="ctag tinfluencer">CREATOR</div><div class="ci">#️⃣</div><div class="cn">Hashtag Analyzer</div><div class="cd">Analyse hashtag mix for size balance and reach.</div></a>
-    <a class="card" href="tip-calculator.html" data-k="tip calculator restaurant bill split per person gratuity"><div class="ctag thot">HOT</div><div class="ci">💰</div><div class="cn">Tip Calculator</div><div class="cd">Calculate tip and split bills between any group.</div></a>
-    <a class="card" href="age-calculator.html" data-k="age calculator date of birth birthday years months days"><div class="ctag thot">HOT</div><div class="ci">🎂</div><div class="cn">Age Calculator</div><div class="cd">Exact age in years, months, days, and hours.</div></a>
-    <a class="card" href="bmi-calculator.html" data-k="bmi calculator body mass index metric imperial height weight"><div class="ci">⚕️</div><div class="cn">BMI Calculator</div><div class="cd">BMI and healthy weight range calculator.</div></a>
-    <a class="card" href="pomodoro-timer.html" data-k="pomodoro timer focus productivity work break interval"><div class="ci">🍅</div><div class="cn">Pomodoro Timer</div><div class="cd">Focus timer with work sessions and breaks.</div></a>
-    <a class="card" href="currency-converter.html" data-k="currency converter exchange rate USD EUR GBP international"><div class="ctag thot">HOT</div><div class="ci">💱</div><div class="cn">Currency Converter</div><div class="cd">Convert between 30+ world currencies instantly.</div></a>
-    <a class="card" href="random-number-generator.html" data-k="random number generator dice coin flip lottery range"><div class="ci">🎲</div><div class="cn">Random Number Generator</div><div class="cd">Dice, coin flip, lottery, or any custom range.</div></a>
-    <a class="card" href="text-diff-checker.html" data-k="text diff checker compare two texts differences changes"><div class="ci">🔍</div><div class="cn">Text Diff Checker</div><div class="cd">Compare two texts and highlight every change.</div></a>
-    <a class="card" href="word-frequency-counter.html" data-k="word frequency counter analyse text keyword density overused"><div class="ci">📈</div><div class="cn">Word Frequency Counter</div><div class="cd">See how often each word appears in your text.</div></a>
-  </div>
-</div>
-
-<div class="section" data-section="new">
-  <div class="sh"><span class="si2">🆕</span><span class="stitle">New Tools</span><div class="sline"></div><span class="scount">11 tools</span></div>
-  <div class="grid">
-    <a class="card" href="lorem-ipsum-generator.html" data-k="lorem ipsum generator placeholder text design dummy"><div class="ctag tnew">NEW</div><div class="ci">📄</div><div class="cn">Lorem Ipsum Generator</div><div class="cd">Placeholder text in any length and format.</div></a>
-    <a class="card" href="qr-code-generator.html" data-k="qr code generator url link download png free"><div class="ctag tnew">NEW</div><div class="ci">📱</div><div class="cn">QR Code Generator</div><div class="cd">Generate QR codes for any URL or text.</div></a>
-    <a class="card" href="url-slug-generator.html" data-k="url slug generator seo clean link hyphen"><div class="ctag tnew">NEW</div><div class="ci">🔗</div><div class="cn">URL Slug Generator</div><div class="cd">Convert titles to clean SEO-friendly slugs.</div></a>
-    <a class="card" href="percentage-calculator.html" data-k="percentage calculator percent change discount increase decrease"><div class="ctag tnew">NEW</div><div class="ci">📊</div><div class="cn">Percentage Calculator</div><div class="cd">6 types of percentage calculations instantly.</div></a>
-    <a class="card" href="aspect-ratio-calculator.html" data-k="aspect ratio calculator image video dimensions width height 16 9"><div class="ctag tnew">NEW</div><div class="ci">📐</div><div class="cn">Aspect Ratio Calculator</div><div class="cd">Find dimensions from any aspect ratio.</div></a>
-    <a class="card" href="color-gradient-generator.html" data-k="css gradient generator linear radial color background code"><div class="ctag tnew">NEW</div><div class="ci">🌈</div><div class="cn">Gradient Generator</div><div class="cd">Build CSS gradients with live preview.</div></a>
-    <a class="card" href="favicon-generator.html" data-k="favicon generator image logo ico png 32 180 512"><div class="ctag tnew">NEW</div><div class="ci">🖼️</div><div class="cn">Favicon Generator</div><div class="cd">Generate favicons at all required sizes.</div></a>
-    <a class="card" href="etsy-shop-name-generator.html" data-k="etsy shop name generator ideas business creative"><div class="ctag tnew">NEW</div><div class="ci">🏪</div><div class="cn">Shop Name Generator</div><div class="cd">Generate creative Etsy shop name ideas.</div></a>
-    <a class="card" href="print-on-demand-calculator.html" data-k="print on demand calculator printify printful gelato margin profit pod"><div class="ctag tnew">NEW</div><div class="ci">🖨️</div><div class="cn">POD Calculator</div><div class="cd">Printify, Printful &amp; Gelato profit margins.</div></a>
-    <a class="card" href="etsy-review-response-generator.html" data-k="etsy review response generator reply professional template"><div class="ctag tnew">NEW</div><div class="ci">⭐</div><div class="cn">Review Response Generator</div><div class="cd">Professional replies to any Etsy review.</div></a>
-    <a class="card" href="digital-product-ideas.html" data-k="digital product ideas generator etsy niche printable svg clipart"><div class="ctag tnew">NEW</div><div class="ci">💡</div><div class="cn">Digital Product Ideas</div><div class="cd">Generate profitable digital product ideas.</div></a>
-  </div>
-</div>
-
-class="no-results" id="noResults">No tools match your search.</div>
-
-<!-- 🔥 POPULAR -->
-<div class="section"><div class="sh"><span class="si2">🔥</span><span class="stitle">Popular Tools</span><div class="sline"></div><span class="scount">10 tools</span></div>
-<div class="grid">
-  <a class="card" href="keyword-generator.html" data-k="keyword generator seo research ideas"><div class="ctag thot">HOT</div><div class="ci">🔍</div><div class="cn">Keyword Generator</div><div class="cd">Hundreds of keyword ideas from one seed term.</div></a>
-  <a class="card" href="word-counter.html" data-k="word counter characters sentences paragraphs"><div class="ctag thot">HOT</div><div class="ci">📊</div><div class="cn">Word Counter</div><div class="cd">Count words, characters, and reading time.</div></a>
-  <a class="card" href="password-generator.html" data-k="password generator secure random strong"><div class="ctag tnew">NEW</div><div class="ci">🔒</div><div class="cn">Password Generator</div><div class="cd">Strong, secure passwords with custom options.</div></a>
-  <a class="card" href="image-compressor.html" data-k="image compressor compress jpg png reduce size"><div class="ci">🗜️</div><div class="cn">Image Compressor</div><div class="cd">Compress JPEG/PNG in your browser.</div></a>
-  <a class="card" href="color-converter.html" data-k="color converter hex rgb hsl cmyk"><div class="ctag tnew">NEW</div><div class="ci">🎨</div><div class="cn">Color Converter</div><div class="cd">Convert HEX, RGB, HSL, CMYK with preview.</div></a>
-  <a class="card" href="json-formatter.html" data-k="json formatter validator prettify minify"><div class="ci">{ }</div><div class="cn">JSON Formatter</div><div class="cd">Format, validate, and minify JSON.</div></a>
-  <a class="card" href="uuid-generator.html" data-k="uuid generator unique id v4"><div class="ctag tnew">NEW</div><div class="ci">🔑</div><div class="cn">UUID Generator</div><div class="cd">Bulk generate UUID v4 strings.</div></a>
-  <a class="card" href="crypto-profit-calculator.html" data-k="crypto profit loss calculator pnl"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💰</div><div class="cn">Crypto P&amp;L Calc</div><div class="cd">Calculate profit or loss on any crypto trade.</div></a>
-  <a class="card" href="serp-preview-tool.html" data-k="serp preview google search result listing"><div class="ci">👁️</div><div class="cn">SERP Preview</div><div class="cd">See your page in Google results live.</div></a>
-  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees printify margin"><div class="ci">🛍️</div><div class="cn">Etsy Profit Calc</div><div class="cd">2025 Etsy + Printify fee breakdown.</div></a>
-</div></div>
-
-<!-- 🧠 SEO -->
-<div class="section"><div class="sh"><span class="si2">🧠</span><span class="stitle">SEO Tools</span><div class="sline"></div><span class="scount">6 tools</span></div>
-<div class="grid">
-  <a class="card" href="keyword-generator.html" data-k="keyword generator seo ideas seed term"><div class="ctag tseo">SEO</div><div class="ci">🔍</div><div class="cn">Keyword Generator</div><div class="cd">Hundreds of keyword ideas from a seed term.</div></a>
-  <a class="card" href="keyword-question-generator.html" data-k="question keyword who what why how generate"><div class="ctag tseo">SEO</div><div class="ci">❓</div><div class="cn">Question Keywords</div><div class="cd">Who/what/why/how keyword questions.</div></a>
-  <a class="card" href="serp-preview-tool.html" data-k="serp preview google search listing title description"><div class="ctag tseo">SEO</div><div class="ci">👁️</div><div class="cn">SERP Preview Tool</div><div class="cd">Preview your Google listing before publishing.</div></a>
-  <a class="card" href="meta-title-description-generator.html" data-k="meta title description generator seo tags og"><div class="ctag tseo">SEO</div><div class="ci">🧩</div><div class="cn">Meta Tag Generator</div><div class="cd">SEO meta titles and descriptions.</div></a>
-  <a class="card" href="xml-sitemap-generator.html" data-k="xml sitemap generator google search console submit"><div class="ctag tseo">SEO</div><div class="ci">🗺️</div><div class="cn">Sitemap Generator</div><div class="cd">Build a valid XML sitemap for your site.</div></a>
-  <a class="card" href="robots-txt-generator.html" data-k="robots txt generator crawl disallow seo bot"><div class="ctag tseo">SEO</div><div class="ci">🤖</div><div class="cn">Robots.txt Generator</div><div class="cd">Control search engine crawlers.</div></a>
-</div></div>
-
-<!-- 🛍 ETSY -->
-<div class="section"><div class="sh"><span class="si2">🛍️</span><span class="stitle">Etsy Seller Tools</span><div class="sline"></div><span class="scount">16 tools</span></div>
-<div class="grid">
-  <a class="card" href="etsy-title-generator.html" data-k="etsy title generator seo listing 140 chars"><div class="ci">🏷️</div><div class="cn">Title Generator</div><div class="cd">SEO-optimized Etsy titles up to 140 chars.</div></a>
-  <a class="card" href="etsy-title-optimizer.html" data-k="etsy title optimizer 140 character counter check"><div class="ci">✏️</div><div class="cn">Title Optimizer</div><div class="cd">Live 140-char counter for your titles.</div></a>
-  <a class="card" href="etsy-tag-generator.html" data-k="etsy tag generator 13 tags 20 character seo"><div class="ci">🔖</div><div class="cn">Tag Generator</div><div class="cd">13 SEO tags under 20 characters each.</div></a>
-  <a class="card" href="etsy-tag-checker.html" data-k="etsy tag checker 13 tags 20 char validate"><div class="ci">✔️</div><div class="cn">Tag Checker</div><div class="cd">Validate 13 Etsy tags with 20-char limits.</div></a>
-  <a class="card" href="product-description-generator.html" data-k="product description generator etsy copy listing"><div class="ci">📝</div><div class="cn">Description Generator</div><div class="cd">Compelling product descriptions instantly.</div></a>
-  <a class="card" href="listing-description-formatter.html" data-k="etsy listing description formatter clean polish copy"><div class="ci">📋</div><div class="cn">Description Formatter</div><div class="cd">Clean up messy Etsy listing copy.</div></a>
-  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees printify 2025 margin"><div class="ci">💰</div><div class="cn">Profit Calculator</div><div class="cd">Exact Etsy + Printify profit with 2025 fees.</div></a>
-  <a class="card" href="etsy-thumbnail-creator.html" data-k="etsy thumbnail creator pad image ratio background 2000"><div class="ci">🖼️</div><div class="cn">Thumbnail Creator</div><div class="cd">Pad images to Etsy ratio with custom background.</div></a>
-  <a class="card" href="headline-generator.html" data-k="headline generator click-worthy blog ad title catchy"><div class="ci">📰</div><div class="cn">Headline Generator</div><div class="cd">Click-worthy headlines from proven formulas.</div></a>
-  <a class="card" href="hashtag-generator.html" data-k="hashtag generator instagram tiktok pinterest social"><div class="ci">#️⃣</div><div class="cn">Hashtag Generator</div><div class="cd">Best hashtags for Instagram, TikTok, Pinterest.</div></a>
-  <a class="card" href="bundle-creator.html" data-k="bundle creator combine designs product etsy digital"><div class="ci">📦</div><div class="cn">Bundle Creator</div><div class="cd">Combine designs into one sellable bundle.</div></a>
-  <a class="card" href="clip-art-packager.html" data-k="clip art packager clipart collection export etsy"><div class="ci">🎭</div><div class="cn">Clip Art Packager</div><div class="cd">Package clipart collections for download.</div></a>
-  <a class="card" href="shop-banner.html" data-k="etsy shop banner creator design size presets"><div class="ci">🏪</div><div class="cn">Shop Banner</div><div class="cd">Design shop banners with 26 size presets.</div></a>
-  <a class="card" href="etsy-image-optimizer.html" data-k="etsy image optimizer compress 20mb limit"><div class="ci">🗜️</div><div class="cn">Image Optimizer</div><div class="cd">Compress images under Etsy's 20MB limit.</div></a>
-  <a class="card" href="file-size-checker.html" data-k="file size checker 20mb etsy limit verify upload"><div class="ci">📁</div><div class="cn">File Size Checker</div><div class="cd">Verify files are under Etsy's 20MB limit.</div></a>
-  <a class="card" href="image-resolution-checker.html" data-k="resolution checker dpi 300 print size pixel dimensions"><div class="ci">🔎</div><div class="cn">Resolution Checker</div><div class="cd">Check DPI and max print size at 300 DPI.</div></a>
-</div></div>
-
-<!-- 🎨 IMAGE -->
-<div class="section"><div class="sh"><span class="si2">🎨</span><span class="stitle">Image Tools</span><div class="sline"></div><span class="scount">19 tools</span></div>
-<div class="grid">
-  <a class="card" href="image-compressor.html" data-k="image compressor compress jpeg png reduce file size"><div class="ci">🗜️</div><div class="cn">Image Compressor</div><div class="cd">Compress JPEG/PNG in your browser.</div></a>
-  <a class="card" href="bulk-image-resizer.html" data-k="bulk image resizer multiple images resize dimensions pixels"><div class="ci">📐</div><div class="cn">Bulk Image Resizer</div><div class="cd">Resize multiple images to exact dimensions.</div></a>
-  <a class="card" href="png-to-jpg.html" data-k="png to jpg converter convert jpeg background"><div class="ctag tnew">NEW</div><div class="ci">🖼️</div><div class="cn">PNG → JPG</div><div class="cd">Convert PNG to JPG with quality control.</div></a>
-  <a class="card" href="jpg-to-png.html" data-k="jpg to png converter convert jpeg transparent"><div class="ctag tnew">NEW</div><div class="ci">🔄</div><div class="cn">JPG → PNG</div><div class="cd">Convert JPG to PNG with transparency.</div></a>
-  <a class="card" href="webp-converter.html" data-k="webp converter png jpg to webp smaller format"><div class="ci">🔄</div><div class="cn">WebP Converter</div><div class="cd">Convert images to WebP — 30% smaller.</div></a>
-  <a class="card" href="image-cropper.html" data-k="image cropper crop online aspect ratio free"><div class="ctag tnew">NEW</div><div class="ci">✂️</div><div class="cn">Image Cropper</div><div class="cd">Crop images to any size or aspect ratio.</div></a>
-  <a class="card" href="svg-to-png-converter.html" data-k="svg to png converter vector raster high resolution"><div class="ci">🔄</div><div class="cn">SVG to PNG</div><div class="cd">Convert SVG to high-res PNG at any size.</div></a>
-  <a class="card" href="png-to-svg.html" data-k="png to svg converter cricut design space wrap"><div class="ci">✏️</div><div class="cn">PNG to SVG</div><div class="cd">Wrap PNG inside SVG for Cricut workflows.</div></a>
-  <a class="card" href="wall-art-resizer.html" data-k="wall art resizer print size 300 dpi standard"><div class="ci">📐</div><div class="cn">Wall Art Resizer</div><div class="cd">Resize to standard print sizes at 300 DPI.</div></a>
-  <a class="card" href="wall-art-sizer-pro.html" data-k="wall art sizer pro batch custom preset resize"><div class="ci">🖼️</div><div class="cn">Wall Art Sizer Pro</div><div class="cd">Batch resize with custom size presets.</div></a>
-  <a class="card" href="png-upscaler.html" data-k="png upscaler upscale transparency alpha channel"><div class="ci">⬆️</div><div class="cn">PNG Upscaler</div><div class="cd">Upscale PNGs with transparency preserved.</div></a>
-  <a class="card" href="png-upscaler-pro-1.html" data-k="png upscaler pro batch custom size target upscale"><div class="ci">🚀</div><div class="cn">PNG Upscaler Pro</div><div class="cd">Batch upscaling with custom size targets.</div></a>
-  <a class="card" href="WatermarkStudioPro.html" data-k="watermark studio pro tile protect design copyright"><div class="ci">💧</div><div class="cn">Watermark Studio Pro</div><div class="cd">Tile or single watermarks to protect work.</div></a>
-  <a class="card" href="color-palette.html" data-k="color palette extractor image colors hex rgb"><div class="ci">🎨</div><div class="cn">Color Palette</div><div class="cd">Extract color palettes from any image.</div></a>
-  <a class="card" href="color-variants.html" data-k="color variants multiple versions design recolor hue"><div class="ci">🌈</div><div class="cn">Color Variants</div><div class="cd">Generate multiple color versions of a design.</div></a>
-  <a class="card" href="coloring-book.html" data-k="coloring book creator photo edge convert algorithm"><div class="ci">🖍️</div><div class="cn">Coloring Book Creator</div><div class="cd">Turn photos into coloring pages.</div></a>
-  <a class="card" href="simple-frames.html" data-k="simple frames border elegant image frame add"><div class="ci">🪟</div><div class="cn">Simple Frames</div><div class="cd">Add elegant borders to any image.</div></a>
-  <a class="card" href="photo-composer.html" data-k="photo composer grid layout multiple photos arrange listing"><div class="ci">📸</div><div class="cn">Photo Composer</div><div class="cd">Arrange photos into grid layouts.</div></a>
-  <a class="card" href="sticker-builder.html" data-k="sticker builder sticker sheet pod print design"><div class="ci">⭐</div><div class="cn">Sticker Builder</div><div class="cd">Design sticker sheets for POD and print.</div></a>
-</div></div>
-
-<!-- 🛠 UTILITY -->
-<div class="section"><div class="sh"><span class="si2">🛠️</span><span class="stitle">Utility & Developer Tools</span><div class="sline"></div><span class="scount">12 tools</span></div>
-<div class="grid">
-  <a class="card" href="json-formatter.html" data-k="json formatter validator prettify minify"><div class="ci">{ }</div><div class="cn">JSON Formatter</div><div class="cd">Format, validate, and minify JSON.</div></a>
-  <a class="card" href="base64-encoder-decoder.html" data-k="base64 encoder decoder text file image convert"><div class="ci">🔐</div><div class="cn">Base64 Encoder</div><div class="cd">Encode/decode text and files to Base64.</div></a>
-  <a class="card" href="word-counter.html" data-k="word counter characters sentences paragraphs reading time"><div class="ci">📊</div><div class="cn">Word Counter</div><div class="cd">Count words, chars, sentences, reading time.</div></a>
-  <a class="card" href="case-converter.html" data-k="case converter lowercase uppercase title camelcase snake"><div class="ci">Aa</div><div class="cn">Case Converter</div><div class="cd">Convert to lowercase, UPPER, camelCase + more.</div></a>
-  <a class="card" href="uuid-generator.html" data-k="uuid generator unique id v4 bulk database token"><div class="ctag tnew">NEW</div><div class="ci">🔑</div><div class="cn">UUID Generator</div><div class="cd">Bulk generate UUID v4 strings instantly.</div></a>
-  <a class="card" href="hash-generator.html" data-k="hash generator md5 sha-1 sha-256 sha-512 checksum"><div class="ctag tnew">NEW</div><div class="ci">#️⃣</div><div class="cn">Hash Generator</div><div class="cd">MD5, SHA-1, SHA-256, SHA-512 hashes.</div></a>
-  <a class="card" href="csv-json-converter.html" data-k="csv json converter convert data format spreadsheet"><div class="ctag tnew">NEW</div><div class="ci">⇄</div><div class="cn">CSV ↔ JSON Converter</div><div class="cd">Convert CSV to JSON and back instantly.</div></a>
-  <a class="card" href="timestamp-converter.html" data-k="timestamp converter unix epoch human date time"><div class="ctag tnew">NEW</div><div class="ci">🕐</div><div class="cn">Timestamp Converter</div><div class="cd">Convert Unix timestamps to human dates.</div></a>
-  <a class="card" href="regex-tester.html" data-k="regex tester regular expression test debug match"><div class="ctag tnew">NEW</div><div class="ci">🔎</div><div class="cn">Regex Tester</div><div class="cd">Test regex with live highlighting and groups.</div></a>
-  <a class="card" href="password-generator.html" data-k="password generator secure random strong custom"><div class="ctag tnew">NEW</div><div class="ci">🔒</div><div class="cn">Password Generator</div><div class="cd">Cryptographically strong passwords.</div></a>
-  <a class="card" href="color-converter.html" data-k="color converter hex rgb hsl cmyk shades preview"><div class="ctag tnew">NEW</div><div class="ci">🎨</div><div class="cn">Color Converter</div><div class="cd">Convert HEX, RGB, HSL, CMYK with shades.</div></a>
-  <a class="card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees 2025 printify margin monthly"><div class="ci">💰</div><div class="cn">Profit Calculator</div><div class="cd">Etsy + Printify 2025 fee breakdown.</div></a>
-</div></div>
-
-<!-- 📱 INFLUENCER -->
-<div class="section"><div class="sh"><span class="si2">📱</span><span class="stitle">Influencer & Creator Tools</span><div class="sline"></div><span class="scount">5 tools</span></div>
-<div class="grid">
-  <a class="card" href="instagram-caption-generator.html" data-k="instagram caption generator post social media tone"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📸</div><div class="cn">Instagram Captions</div><div class="cd">Engaging captions for any Instagram post.</div></a>
-  <a class="card" href="tiktok-idea-generator.html" data-k="tiktok idea generator video content viral niche"><div class="ctag tinfluencer">CREATOR</div><div class="ci">🎵</div><div class="cn">TikTok Idea Generator</div><div class="cd">Viral TikTok video ideas for any niche.</div></a>
-  <a class="card" href="youtube-title-generator.html" data-k="youtube title description generator seo video channel"><div class="ctag tinfluencer">CREATOR</div><div class="ci">▶️</div><div class="cn">YouTube Title Generator</div><div class="cd">Click-worthy titles and SEO descriptions.</div></a>
-  <a class="card" href="engagement-estimator.html" data-k="instagram engagement rate earnings estimator influencer"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📊</div><div class="cn">Engagement Estimator</div><div class="cd">Estimate engagement rate and earnings/post.</div></a>
-  <a class="card" href="social-media-post-generator.html" data-k="social media post generator instagram twitter linkedin facebook"><div class="ctag tinfluencer">CREATOR</div><div class="ci">📣</div><div class="cn">Social Post Generator</div><div class="cd">Posts for Instagram, Twitter, LinkedIn, Facebook.</div></a>
-</div></div>
-
-<!-- 💎 CRYPTO -->
-<div class="section"><div class="sh"><span class="si2">💎</span><span class="stitle">Crypto Tools</span><div class="sline"></div><span class="scount">5 tools</span></div>
-<div class="grid">
-  <a class="card" href="crypto-profit-calculator.html" data-k="crypto profit loss calculator pnl trade fee bitcoin"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💰</div><div class="cn">Crypto P&amp;L Calculator</div><div class="cd">Calculate profit/loss on any crypto trade.</div></a>
-  <a class="card" href="crypto-roi-calculator.html" data-k="crypto roi calculator return on investment annual bitcoin"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📈</div><div class="cn">Crypto ROI Calculator</div><div class="cd">ROI, annualized returns, and investment multiple.</div></a>
-  <a class="card" href="dca-calculator.html" data-k="dca calculator dollar cost averaging bitcoin crypto monthly"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📅</div><div class="cn">DCA Calculator</div><div class="cd">Dollar cost averaging results and comparison.</div></a>
-  <a class="card" href="crypto-portfolio-calculator.html" data-k="crypto portfolio calculator tracker holdings value pnl allocation"><div class="ctag tcrypto">CRYPTO</div><div class="ci">💼</div><div class="cn">Portfolio Calculator</div><div class="cd">Track all your crypto holdings and total P&amp;L.</div></a>
-  <a class="card" href="position-size-calculator.html" data-k="position size calculator crypto risk management stop loss rr"><div class="ctag tcrypto">CRYPTO</div><div class="ci">📐</div><div class="cn">Position Size Calc</div><div class="cd">Risk-based position sizing with R:R ratio.</div></a>
-</div></div>
-
-<!-- 📄 PRINTABLE -->
-<div class="section"><div class="sh"><span class="si2">📄</span><span class="stitle">Printable & Card Tools</span><div class="sline"></div><span class="scount">4 tools</span></div>
-<div class="grid">
-  <a class="card" href="greeting-cards.html" data-k="greeting card print ready custom layout fold design"><div class="ci">💌</div><div class="cn">Greeting Cards</div><div class="cd">Print-ready greeting cards with custom layouts.</div></a>
-  <a class="card" href="invitations.html" data-k="invitation maker event party occasion design printable"><div class="ci">✉️</div><div class="cn">Invitation Maker</div><div class="cd">Create event invitations for any occasion.</div></a>
-  <a class="card" href="journal-builder.html" data-k="journal builder planner pages professional custom printable"><div class="ci">📓</div><div class="cn">Journal Builder</div><div class="cd">Build custom journal and planner pages.</div></a>
-  <a class="card" href="kids-cards.html" data-k="kids cards colorful fun family children design printable"><div class="ci">🎈</div><div class="cn">Kids Cards Creator</div><div class="cd">Fun colorful cards for kids and families.</div></a>
-</div></div>
-
-</div><!-- /content -->
-
-<footer style="border-top:1px solid #2d2d30;padding:28px 24px 32px;text-align:center;background:#18181b">
-  <div style="max-width:1100px;margin:0 auto">
-    <a href="index.html" style="display:inline-block;margin-bottom:18px">
-      <img src="logo-nav.png" alt="Elephast.com" style="height:36px;width:auto;opacity:.7">
-    </a>
-    <div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:14px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="services.html" style="font-size:13px;color:#f97316;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:600">Services</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="about.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">About</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Privacy Policy</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Terms of Use</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+<!-- AI TUTOR STRIP -->
+<section class="tutor-strip" id="ai-training">
+  <div class="tutor-inner">
+    <div class="tutor-left">
+      <div class="tutor-tag">&#129504; 1-on-1 AI Tutoring</div>
+      <h2>Learn AI <span style="color:var(--purple)">Fast.</span><br>Get Real Skills.</h2>
+      <p>Stop watching YouTube tutorials that never go anywhere. Get 1-on-1 training from an actual AI &amp; eCommerce expert — simple, practical, and tailored to what YOU want to do with AI.</p>
+      <div class="tutor-audience">
+        <span class="ta-pill">&#128100; Beginners</span>
+        <span class="ta-pill">&#127978; Small Biz Owners</span>
+        <span class="ta-pill">&#128176; Side Hustlers</span>
+        <span class="ta-pill">&#128188; Businessers</span>
+      </div>
+      <div class="tutor-cards">
+        <div class="tutor-card">
+          <div class="tc-icon">&#129302;</div>
+          <div class="tc-name">ChatGPT &amp; Claude</div>
+          <div class="tc-desc">Prompts, automation, content creation</div>
+        </div>
+        <div class="tutor-card">
+          <div class="tc-icon">&#128200;</div>
+          <div class="tc-name">Make $$ Online</div>
+          <div class="tc-desc">Digital products, Etsy, online resale</div>
+        </div>
+        <div class="tutor-card">
+          <div class="tc-icon">&#127381;</div>
+          <div class="tc-name">Runway &amp; Suno</div>
+          <div class="tc-desc">AI video &amp; music creation</div>
+        </div>
+        <div class="tutor-card">
+          <div class="tc-icon">&#127760;</div>
+          <div class="tc-name">Grok &amp; Research</div>
+          <div class="tc-desc">AI research, analysis, data</div>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <a href="ai-tutoring.html" class="btn-tutor">&#129504; Book Your Session</a>
+        <a href="contact.html" style="margin-left:14px;font-size:13px;color:var(--purple);text-decoration:none;font-weight:600">Text or Email to Start &#8594;</a>
+      </div>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; 100 free browser tools for Etsy sellers, digital creators &amp; developers. No login. No installs.</p>
+    <div class="tutor-right">
+      <div class="tutor-feature">
+        <div class="tf-icon">&#128205;</div>
+        <div><div class="tf-name">In Person or Online</div><div class="tf-desc">Meet locally or connect via video call — whatever works best for your schedule and learning style.</div></div>
+      </div>
+      <div class="tutor-feature">
+        <div class="tf-icon">&#127919;</div>
+        <div><div class="tf-name">Simple &amp; Practical</div><div class="tf-desc">No jargon. No fluff. You will leave every session with real skills you can use immediately.</div></div>
+      </div>
+      <div class="tutor-feature">
+        <div class="tf-icon">&#128176;</div>
+        <div><div class="tf-name">Make Money With AI</div><div class="tf-desc">Learn to build online income streams using AI tools — digital products, automation, resale, content.</div></div>
+      </div>
+      <div class="tutor-feature">
+        <div class="tf-icon">&#9889;</div>
+        <div><div class="tf-name">Build Websites &amp; Tools</div><div class="tf-desc">Learn how AI can help you build websites, tools, and automation systems with no coding experience required.</div></div>
+      </div>
+      <div class="tutor-feature">
+        <div class="tf-icon">&#128172;</div>
+        <div><div class="tf-name">Direct &amp; Personal</div><div class="tf-desc">You talk directly with the expert. Not a course platform, not an AI chatbot — a real human who knows this stuff.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BMC -->
+<div class="bmc-strip">
+  <div class="bmc-inner">
+    <span style="font-size:24px;flex-shrink:0">&#9749;</span>
+    <div class="bmc-text">
+      <div class="bmc-title">Elephast is 100% free — and always will be.</div>
+      <div class="bmc-sub">100 tools. Zero subscriptions. Zero paywalls. If one tool saved you an hour, a coffee keeps new ones coming.</div>
+    </div>
+    <a href="https://buymeacoffee.com/elephast" target="_blank" rel="noopener" class="bmc-btn">&#9749; Buy Us a Coffee</a>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="tools-wrap" id="tools">
+  <div class="tools-header">
+    <div>
+      <div class="section-label">Free Browser Tools</div>
+      <h2 class="section-title" style="font-size:28px">All 100 Tools</h2>
+    </div>
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Search 100 tools…" oninput="filterTools(this.value)" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="cat-nav" id="catNav">
+    <button class="cat-btn active" onclick="filterCat('all',this)">All 100</button>
+    <button class="cat-btn" onclick="filterCat('etsy',this)">&#128717; Etsy</button>
+    <button class="cat-btn" onclick="filterCat('seo',this)">&#128269; SEO</button>
+    <button class="cat-btn" onclick="filterCat('image',this)">&#127912; Image</button>
+    <button class="cat-btn" onclick="filterCat('dev',this)">&#128296; Developer</button>
+    <button class="cat-btn" onclick="filterCat('creator',this)">&#127894; Creator</button>
+    <button class="cat-btn" onclick="filterCat('utility',this)">&#128295; Utility</button>
+    <button class="cat-btn" onclick="filterCat('crypto',this)">&#128142; Crypto</button>
+    <button class="cat-btn" onclick="filterCat('printable',this)">&#128220; Printable</button>
+  </div>
+
+  <div class="no-results" id="noResults">No tools match — try a different search term.</div>
+
+<!-- ━━━━━━ POPULAR ━━━━━━ -->
+<div class="tool-section" data-cat="popular" id="popular">
+  <div class="tool-section-header"><span class="tsh-icon">&#128293;</span><span class="tsh-title">Popular Right Now</span><span class="tsh-count">10 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="keyword-generator.html" data-k="keyword seo research seed ideas"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128269;</div><div class="tc-name">Keyword Generator</div><div class="tc-desc">Hundreds of keyword ideas from one seed term.</div></a>
+    <a class="tool-card" href="word-counter.html" data-k="word counter characters sentences reading time"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128202;</div><div class="tc-name">Word Counter</div><div class="tc-desc">Words, characters, sentences, reading time.</div></a>
+    <a class="tool-card" href="age-calculator.html" data-k="age calculator birthday date of birth years months days"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#127874;</div><div class="tc-name">Age Calculator</div><div class="tc-desc">Exact age in years, months, days, and hours.</div></a>
+    <a class="tool-card" href="tip-calculator.html" data-k="tip calculator restaurant bill split per person"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128176;</div><div class="tc-name">Tip Calculator</div><div class="tc-desc">Calculate tip and split bills for any group.</div></a>
+    <a class="tool-card" href="currency-converter.html" data-k="currency converter USD EUR GBP exchange rate international"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128178;</div><div class="tc-name">Currency Converter</div><div class="tc-desc">Convert between 30+ world currencies.</div></a>
+    <a class="tool-card" href="image-compressor.html" data-k="image compressor compress jpeg png reduce file size"><div class="tc-em">&#128476;&#65039;</div><div class="tc-name">Image Compressor</div><div class="tc-desc">Compress JPEG/PNG in your browser.</div></a>
+    <a class="tool-card" href="qr-code-generator.html" data-k="qr code generator url link download png"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128241;</div><div class="tc-name">QR Code Generator</div><div class="tc-desc">Generate QR codes for any URL or text.</div></a>
+    <a class="tool-card" href="password-generator.html" data-k="password generator secure random strong custom"><div class="tc-em">&#128274;</div><div class="tc-name">Password Generator</div><div class="tc-desc">Cryptographically strong passwords.</div></a>
+    <a class="tool-card" href="readability-checker.html" data-k="readability checker flesch kincaid grade level score"><div class="tc-em">&#128214;</div><div class="tc-name">Readability Checker</div><div class="tc-desc">Flesch-Kincaid reading ease score.</div></a>
+    <a class="tool-card" href="percentage-calculator.html" data-k="percentage calculator percent change discount increase"><div class="tc-em">&#128202;</div><div class="tc-name">Percentage Calculator</div><div class="tc-desc">6 types of percentage calculations.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ ETSY ━━━━━━ -->
+<div class="tool-section" data-cat="etsy" id="etsy">
+  <div class="tool-section-header"><span class="tsh-icon">&#128717;&#65039;</span><span class="tsh-title">Etsy Seller Tools</span><span class="tsh-count">18 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="etsy-title-generator.html" data-k="etsy title generator seo listing 140 chars keywords"><div class="tc-em">&#128247;</div><div class="tc-name">Title Generator</div><div class="tc-desc">SEO-optimized Etsy titles up to 140 chars.</div></a>
+    <a class="tool-card" href="etsy-title-optimizer.html" data-k="etsy title optimizer 140 character counter check"><div class="tc-em">&#9999;&#65039;</div><div class="tc-name">Title Optimizer</div><div class="tc-desc">Live 140-char counter for your titles.</div></a>
+    <a class="tool-card" href="etsy-tag-generator.html" data-k="etsy tag generator 13 tags 20 character seo"><div class="tc-em">&#128278;</div><div class="tc-name">Tag Generator</div><div class="tc-desc">13 SEO tags under 20 characters each.</div></a>
+    <a class="tool-card" href="etsy-tag-checker.html" data-k="etsy tag checker 13 tags 20 char validate length"><div class="tc-em">&#10004;&#65039;</div><div class="tc-name">Tag Checker</div><div class="tc-desc">Validate all 13 Etsy tags at once.</div></a>
+    <a class="tool-card" href="product-description-generator.html" data-k="product description generator etsy copy listing tone"><div class="tc-em">&#128221;</div><div class="tc-name">Description Generator</div><div class="tc-desc">Compelling product descriptions instantly.</div></a>
+    <a class="tool-card" href="listing-description-formatter.html" data-k="etsy listing description formatter clean polish copy"><div class="tc-em">&#128203;</div><div class="tc-name">Description Formatter</div><div class="tc-desc">Clean and format messy listing copy.</div></a>
+    <a class="tool-card" href="etsy-profit-calculator.html" data-k="etsy profit calculator fees printify 2025 margin monthly"><div class="tc-em">&#128176;</div><div class="tc-name">Profit Calculator</div><div class="tc-desc">Exact Etsy + Printify profit breakdown.</div></a>
+    <a class="tool-card" href="print-on-demand-calculator.html" data-k="print on demand calculator printify printful gelato margin pod"><div class="tc-em">&#128424;&#65039;</div><div class="tc-name">POD Calculator</div><div class="tc-desc">Printify, Printful &amp; Gelato margins.</div></a>
+    <a class="tool-card" href="etsy-thumbnail-creator.html" data-k="etsy thumbnail creator pad image ratio background 2000"><div class="tc-em">&#128444;&#65039;</div><div class="tc-name">Thumbnail Creator</div><div class="tc-desc">Pad images to Etsy ratio — clean and fast.</div></a>
+    <a class="tool-card" href="etsy-image-optimizer.html" data-k="etsy image optimizer compress 20mb limit upload"><div class="tc-em">&#128476;&#65039;</div><div class="tc-name">Image Optimizer</div><div class="tc-desc">Compress images under Etsy's 20MB limit.</div></a>
+    <a class="tool-card" href="file-size-checker.html" data-k="file size checker 20mb etsy limit verify upload digital"><div class="tc-em">&#128193;</div><div class="tc-name">File Size Checker</div><div class="tc-desc">Verify files are under Etsy's 20MB limit.</div></a>
+    <a class="tool-card" href="etsy-shop-name-generator.html" data-k="etsy shop name generator ideas business creative unique"><div class="tc-em">&#127978;&#65039;</div><div class="tc-name">Shop Name Generator</div><div class="tc-desc">Creative, available-style Etsy shop names.</div></a>
+    <a class="tool-card" href="etsy-review-response-generator.html" data-k="etsy review response generator reply professional 5 star negative"><div class="tc-em">&#11088;</div><div class="tc-name">Review Responder</div><div class="tc-desc">Professional replies to any Etsy review.</div></a>
+    <a class="tool-card" href="digital-product-ideas.html" data-k="digital product ideas generator etsy niche printable svg clipart"><div class="tc-em">&#128161;</div><div class="tc-name">Product Ideas Generator</div><div class="tc-desc">Profitable digital product ideas by niche.</div></a>
+    <a class="tool-card" href="headline-generator.html" data-k="headline generator click-worthy blog ad title listing copywriting"><div class="tc-em">&#128240;</div><div class="tc-name">Headline Generator</div><div class="tc-desc">Click-worthy headlines from proven formulas.</div></a>
+    <a class="tool-card" href="bundle-creator.html" data-k="bundle creator combine designs product etsy digital download"><div class="tc-em">&#128230;</div><div class="tc-name">Bundle Creator</div><div class="tc-desc">Combine designs into one sellable bundle.</div></a>
+    <a class="tool-card" href="clip-art-packager.html" data-k="clip art packager clipart collection export etsy digital"><div class="tc-em">&#127917;</div><div class="tc-name">Clip Art Packager</div><div class="tc-desc">Package clipart collections for download.</div></a>
+    <a class="tool-card" href="shop-banner.html" data-k="etsy shop banner creator design size presets custom"><div class="tc-em">&#127978;&#65039;</div><div class="tc-name">Shop Banner Creator</div><div class="tc-desc">Design shop banners with 26 size presets.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ SEO ━━━━━━ -->
+<div class="tool-section" data-cat="seo" id="seo">
+  <div class="tool-section-header"><span class="tsh-icon">&#128269;</span><span class="tsh-title">SEO Tools</span><span class="tsh-count">6 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="keyword-generator.html" data-k="keyword generator seo ideas seed term research long tail"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#128269;</div><div class="tc-name">Keyword Generator</div><div class="tc-desc">Hundreds of keyword ideas from a seed term.</div></a>
+    <a class="tool-card" href="keyword-question-generator.html" data-k="question keyword who what why how generate featured snippet faq"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#10067;</div><div class="tc-name">Question Keywords</div><div class="tc-desc">Who/what/why/how keyword questions.</div></a>
+    <a class="tool-card" href="serp-preview-tool.html" data-k="serp preview google search listing title description ctr meta"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#128065;&#65039;</div><div class="tc-name">SERP Preview</div><div class="tc-desc">Preview your Google result before publishing.</div></a>
+    <a class="tool-card" href="meta-title-description-generator.html" data-k="meta title description generator seo tags og page head"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#129521;</div><div class="tc-name">Meta Tag Generator</div><div class="tc-desc">SEO meta titles and descriptions.</div></a>
+    <a class="tool-card" href="xml-sitemap-generator.html" data-k="xml sitemap generator google search console submit url crawl"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#128506;&#65039;</div><div class="tc-name">Sitemap Generator</div><div class="tc-desc">Valid XML sitemap for Google Search Console.</div></a>
+    <a class="tool-card" href="robots-txt-generator.html" data-k="robots txt generator crawl disallow seo bot allow rule"><div class="tc-badge b-seo">SEO</div><div class="tc-em">&#129302;</div><div class="tc-name">Robots.txt Generator</div><div class="tc-desc">Control search engine crawlers easily.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ IMAGE ━━━━━━ -->
+<div class="tool-section" data-cat="image" id="image">
+  <div class="tool-section-header"><span class="tsh-icon">&#127912;</span><span class="tsh-title">Image Tools</span><span class="tsh-count">22 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="image-compressor.html" data-k="image compressor compress jpeg png webp reduce file size browser"><div class="tc-em">&#128476;&#65039;</div><div class="tc-name">Image Compressor</div><div class="tc-desc">Compress JPEG, PNG, WebP in your browser.</div></a>
+    <a class="tool-card" href="bulk-image-resizer.html" data-k="bulk image resizer multiple resize dimensions pixels batch"><div class="tc-em">&#128208;</div><div class="tc-name">Bulk Image Resizer</div><div class="tc-desc">Resize multiple images to exact dimensions.</div></a>
+    <a class="tool-card" href="png-to-jpg.html" data-k="png to jpg converter convert jpeg background quality"><div class="tc-em">&#128444;&#65039;</div><div class="tc-name">PNG &rarr; JPG</div><div class="tc-desc">Convert PNG to JPG with quality control.</div></a>
+    <a class="tool-card" href="jpg-to-png.html" data-k="jpg to png converter convert jpeg transparent alpha"><div class="tc-em">&#128260;</div><div class="tc-name">JPG &rarr; PNG</div><div class="tc-desc">Convert JPG to PNG with transparency.</div></a>
+    <a class="tool-card" href="webp-converter.html" data-k="webp converter png jpg to webp smaller format google"><div class="tc-em">&#128260;</div><div class="tc-name">WebP Converter</div><div class="tc-desc">Convert to WebP — 30% smaller files.</div></a>
+    <a class="tool-card" href="image-cropper.html" data-k="image cropper crop aspect ratio free online drag resize"><div class="tc-em">&#9986;&#65039;</div><div class="tc-name">Image Cropper</div><div class="tc-desc">Crop images to any aspect ratio or size.</div></a>
+    <a class="tool-card" href="svg-to-png-converter.html" data-k="svg to png converter vector raster high resolution transparent"><div class="tc-em">&#128260;</div><div class="tc-name">SVG &rarr; PNG</div><div class="tc-desc">Convert SVG to high-res PNG at any size.</div></a>
+    <a class="tool-card" href="png-to-svg.html" data-k="png to svg converter cricut design space wrap embed"><div class="tc-em">&#9999;&#65039;</div><div class="tc-name">PNG &rarr; SVG</div><div class="tc-desc">Wrap PNG in SVG for Cricut workflows.</div></a>
+    <a class="tool-card" href="wall-art-resizer.html" data-k="wall art resizer print size 300 dpi standard preset digital"><div class="tc-em">&#128208;</div><div class="tc-name">Wall Art Resizer</div><div class="tc-desc">Resize to standard print sizes at 300 DPI.</div></a>
+    <a class="tool-card" href="wall-art-sizer-pro.html" data-k="wall art sizer pro batch custom preset resize multiple"><div class="tc-em">&#128444;&#65039;</div><div class="tc-name">Wall Art Sizer Pro</div><div class="tc-desc">Batch resize wall art with custom presets.</div></a>
+    <a class="tool-card" href="png-upscaler.html" data-k="png upscaler upscale transparency alpha channel enlarge quality"><div class="tc-em">&#11014;&#65039;</div><div class="tc-name">PNG Upscaler</div><div class="tc-desc">Upscale PNGs with transparency preserved.</div></a>
+    <a class="tool-card" href="png-upscaler-pro-1.html" data-k="png upscaler pro batch custom size target upscale multiple"><div class="tc-em">&#128640;</div><div class="tc-name">PNG Upscaler Pro</div><div class="tc-desc">Batch upscaling with custom size targets.</div></a>
+    <a class="tool-card" href="WatermarkStudioPro.html" data-k="watermark studio pro tile protect design copyright logo text"><div class="tc-em">&#128167;</div><div class="tc-name">Watermark Studio Pro</div><div class="tc-desc">Tile or single watermarks to protect work.</div></a>
+    <a class="tool-card" href="color-palette.html" data-k="color palette extractor image colors hex rgb dominant brand"><div class="tc-em">&#127912;</div><div class="tc-name">Color Palette</div><div class="tc-desc">Extract color palettes from any image.</div></a>
+    <a class="tool-card" href="color-variants.html" data-k="color variants multiple versions design recolor hue palette"><div class="tc-em">&#127752;</div><div class="tc-name">Color Variants</div><div class="tc-desc">Generate multiple color versions of a design.</div></a>
+    <a class="tool-card" href="coloring-book.html" data-k="coloring book creator photo edge convert algorithm canny printable"><div class="tc-em">&#128397;</div><div class="tc-name">Coloring Book Creator</div><div class="tc-desc">Turn any photo into a printable coloring page.</div></a>
+    <a class="tool-card" href="simple-frames.html" data-k="simple frames border elegant image frame add white gallery"><div class="tc-em">&#128759;</div><div class="tc-name">Simple Frames</div><div class="tc-desc">Add elegant borders to any image.</div></a>
+    <a class="tool-card" href="photo-composer.html" data-k="photo composer grid layout multiple photos arrange listing collage"><div class="tc-em">&#128248;</div><div class="tc-name">Photo Composer</div><div class="tc-desc">Arrange photos into clean grid layouts.</div></a>
+    <a class="tool-card" href="sticker-builder.html" data-k="sticker builder sticker sheet pod print design layout"><div class="tc-em">&#11088;</div><div class="tc-name">Sticker Builder</div><div class="tc-desc">Design sticker sheets for POD and print.</div></a>
+    <a class="tool-card" href="color-gradient-generator.html" data-k="css gradient generator linear radial color background code stops"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#127752;</div><div class="tc-name">Gradient Generator</div><div class="tc-desc">Build CSS gradients with live preview.</div></a>
+    <a class="tool-card" href="favicon-generator.html" data-k="favicon generator image logo ico png 32 180 512 website icon"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128444;&#65039;</div><div class="tc-name">Favicon Generator</div><div class="tc-desc">Generate favicons at all required sizes.</div></a>
+    <a class="tool-card" href="image-resolution-checker.html" data-k="resolution checker dpi 300 print size pixel dimensions quality"><div class="tc-em">&#128270;</div><div class="tc-name">Resolution Checker</div><div class="tc-desc">Check DPI and max print size at 300 DPI.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ DEVELOPER ━━━━━━ -->
+<div class="tool-section" data-cat="dev" id="dev">
+  <div class="tool-section-header"><span class="tsh-icon">&#128296;</span><span class="tsh-title">Developer Tools</span><span class="tsh-count">14 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="json-formatter.html" data-k="json formatter validator prettify minify format code api"><div class="tc-em">{ }</div><div class="tc-name">JSON Formatter</div><div class="tc-desc">Format, validate, and minify JSON.</div></a>
+    <a class="tool-card" href="base64-encoder-decoder.html" data-k="base64 encoder decoder text file image convert data uri"><div class="tc-em">&#128272;</div><div class="tc-name">Base64 Encoder</div><div class="tc-desc">Encode/decode text and files to Base64.</div></a>
+    <a class="tool-card" href="uuid-generator.html" data-k="uuid generator unique id v4 bulk database token random"><div class="tc-em">&#128273;</div><div class="tc-name">UUID Generator</div><div class="tc-desc">Bulk generate cryptographic UUID v4 strings.</div></a>
+    <a class="tool-card" href="hash-generator.html" data-k="hash generator md5 sha-1 sha-256 sha-512 checksum verify"><div class="tc-em">#&#65039;&#8419;</div><div class="tc-name">Hash Generator</div><div class="tc-desc">MD5, SHA-1, SHA-256, SHA-512 hashes.</div></a>
+    <a class="tool-card" href="csv-json-converter.html" data-k="csv json converter convert data format spreadsheet api import"><div class="tc-em">&#8644;</div><div class="tc-name">CSV &harr; JSON</div><div class="tc-desc">Convert between CSV and JSON instantly.</div></a>
+    <a class="tool-card" href="timestamp-converter.html" data-k="timestamp converter unix epoch human date time seconds milliseconds"><div class="tc-em">&#128336;</div><div class="tc-name">Timestamp Converter</div><div class="tc-desc">Convert Unix timestamps to human dates.</div></a>
+    <a class="tool-card" href="regex-tester.html" data-k="regex tester regular expression test debug match highlight group"><div class="tc-em">&#128270;</div><div class="tc-name">Regex Tester</div><div class="tc-desc">Test regex with live highlighting and groups.</div></a>
+    <a class="tool-card" href="color-converter.html" data-k="color converter hex rgb hsl cmyk shades preview picker"><div class="tc-em">&#127912;</div><div class="tc-name">Color Converter</div><div class="tc-desc">Convert HEX, RGB, HSL, CMYK with shades.</div></a>
+    <a class="tool-card" href="binary-hex-converter.html" data-k="binary hex decimal octal converter base number bitwise programming"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128290;</div><div class="tc-name">Binary &amp; Hex Converter</div><div class="tc-desc">Convert between binary, hex, decimal, octal.</div></a>
+    <a class="tool-card" href="html-entity-encoder.html" data-k="html entity encoder decoder escape special characters xss safe"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128288;</div><div class="tc-name">HTML Entity Encoder</div><div class="tc-desc">Encode and decode HTML special characters.</div></a>
+    <a class="tool-card" href="url-encoder-decoder.html" data-k="url encoder decoder percent encode query string parameter api"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128279;</div><div class="tc-name">URL Encoder / Decoder</div><div class="tc-desc">Encode and decode URLs and query strings.</div></a>
+    <a class="tool-card" href="jwt-decoder.html" data-k="jwt decoder json web token header payload expiry auth api"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128275;</div><div class="tc-name">JWT Decoder</div><div class="tc-desc">Decode and inspect JSON Web Tokens.</div></a>
+    <a class="tool-card" href="cron-job-generator.html" data-k="cron job generator expression scheduler linux server ci cd task"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#9201;&#65039;</div><div class="tc-name">Cron Job Generator</div><div class="tc-desc">Build cron expressions visually with preview.</div></a>
+    <a class="tool-card" href="markdown-to-html.html" data-k="markdown to html converter preview live blog readme documentation"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128221;</div><div class="tc-name">Markdown to HTML</div><div class="tc-desc">Convert Markdown to HTML with live preview.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ CREATOR ━━━━━━ -->
+<div class="tool-section" data-cat="creator" id="creator">
+  <div class="tool-section-header"><span class="tsh-icon">&#127894;&#65039;</span><span class="tsh-title">Creator &amp; Influencer Tools</span><span class="tsh-count">10 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="instagram-caption-generator.html" data-k="instagram caption generator post social media tone cta engagement"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">&#128247;</div><div class="tc-name">Instagram Captions</div><div class="tc-desc">Engaging captions for any Instagram post.</div></a>
+    <a class="tool-card" href="tiktok-idea-generator.html" data-k="tiktok idea generator video content viral niche bts educational"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">&#127925;</div><div class="tc-name">TikTok Idea Generator</div><div class="tc-desc">Viral TikTok video ideas for any niche.</div></a>
+    <a class="tool-card" href="youtube-title-generator.html" data-k="youtube title description generator seo video channel keywords"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">&#9654;&#65039;</div><div class="tc-name">YouTube Title Generator</div><div class="tc-desc">Click-worthy titles and SEO descriptions.</div></a>
+    <a class="tool-card" href="engagement-estimator.html" data-k="instagram engagement rate earnings estimator influencer followers"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">&#128202;</div><div class="tc-name">Engagement Estimator</div><div class="tc-desc">Estimate engagement rate and earnings/post.</div></a>
+    <a class="tool-card" href="social-media-post-generator.html" data-k="social media post generator instagram twitter linkedin facebook multi"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">&#128227;</div><div class="tc-name">Social Post Generator</div><div class="tc-desc">Multi-platform posts from a single prompt.</div></a>
+    <a class="tool-card" href="instagram-bio-generator.html" data-k="instagram bio generator profile creator social media 150 character"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128100;</div><div class="tc-name">Instagram Bio Generator</div><div class="tc-desc">Compelling 150-char Instagram bios.</div></a>
+    <a class="tool-card" href="thread-writer.html" data-k="twitter x thread writer format auto-split 280 character numbered"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#129525;</div><div class="tc-name">Thread Writer</div><div class="tc-desc">Format content as a Twitter/X thread.</div></a>
+    <a class="tool-card" href="video-script-generator.html" data-k="video script generator youtube tiktok outline structure hook cta"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#127916;</div><div class="tc-name">Video Script Generator</div><div class="tc-desc">Structured script outlines for any platform.</div></a>
+    <a class="tool-card" href="hashtag-analyzer.html" data-k="hashtag analyzer analyse mix size distribution instagram reach niche"><div class="tc-badge b-new">NEW</div><div class="tc-em">#&#65039;&#8419;</div><div class="tc-name">Hashtag Analyzer</div><div class="tc-desc">Analyse hashtag mix for size and reach balance.</div></a>
+    <a class="tool-card" href="hashtag-generator.html" data-k="hashtag generator instagram tiktok pinterest social media tag niche"><div class="tc-badge b-creator">CREATOR</div><div class="tc-em">#&#65039;&#8419;</div><div class="tc-name">Hashtag Generator</div><div class="tc-desc">Best hashtags for Instagram, TikTok, Pinterest.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ UTILITY ━━━━━━ -->
+<div class="tool-section" data-cat="utility" id="utility">
+  <div class="tool-section-header"><span class="tsh-icon">&#128295;</span><span class="tsh-title">Utility Tools</span><span class="tsh-count">24 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="word-counter.html" data-k="word counter characters sentences paragraphs reading time text"><div class="tc-em">&#128202;</div><div class="tc-name">Word Counter</div><div class="tc-desc">Words, chars, sentences, reading time.</div></a>
+    <a class="tool-card" href="case-converter.html" data-k="case converter lowercase uppercase title camelcase snake kebab"><div class="tc-em">Aa</div><div class="tc-name">Case Converter</div><div class="tc-desc">10 text case formats including camelCase.</div></a>
+    <a class="tool-card" href="password-generator.html" data-k="password generator secure random strong cryptographic custom length"><div class="tc-em">&#128274;</div><div class="tc-name">Password Generator</div><div class="tc-desc">Cryptographically strong custom passwords.</div></a>
+    <a class="tool-card" href="lorem-ipsum-generator.html" data-k="lorem ipsum generator placeholder text design dummy mockup"><div class="tc-em">&#128196;</div><div class="tc-name">Lorem Ipsum</div><div class="tc-desc">Placeholder text in any format or length.</div></a>
+    <a class="tool-card" href="url-slug-generator.html" data-k="url slug generator seo clean link hyphen convert title path"><div class="tc-em">&#128279;</div><div class="tc-name">URL Slug Generator</div><div class="tc-desc">Convert titles to clean SEO-friendly slugs.</div></a>
+    <a class="tool-card" href="percentage-calculator.html" data-k="percentage calculator percent change discount increase decrease margin"><div class="tc-em">&#128202;</div><div class="tc-name">Percentage Calculator</div><div class="tc-desc">6 types of percentage calculations.</div></a>
+    <a class="tool-card" href="aspect-ratio-calculator.html" data-k="aspect ratio calculator image video dimensions width height 16 9 1 1"><div class="tc-em">&#128208;</div><div class="tc-name">Aspect Ratio Calculator</div><div class="tc-desc">Find dimensions from any aspect ratio.</div></a>
+    <a class="tool-card" href="text-repeater.html" data-k="text repeater repeat string character copy fill times separator"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128257;</div><div class="tc-name">Text Repeater</div><div class="tc-desc">Repeat any text N times with separator.</div></a>
+    <a class="tool-card" href="readability-checker.html" data-k="readability checker flesch kincaid grade level score fog index"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128214;</div><div class="tc-name">Readability Checker</div><div class="tc-desc">Flesch-Kincaid reading ease and grade level.</div></a>
+    <a class="tool-card" href="number-to-words.html" data-k="number to words converter write spell out invoice cheque legal ordinal"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128172;</div><div class="tc-name">Number to Words</div><div class="tc-desc">Convert numbers to written English words.</div></a>
+    <a class="tool-card" href="character-frequency-counter.html" data-k="character frequency counter letter word analysis text pattern density"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128202;</div><div class="tc-name">Character Frequency</div><div class="tc-desc">Analyse character and letter frequency.</div></a>
+    <a class="tool-card" href="random-name-generator.html" data-k="random name generator character business fantasy pet baby brand"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#127922;</div><div class="tc-name">Random Name Generator</div><div class="tc-desc">Names for characters, brands, and projects.</div></a>
+    <a class="tool-card" href="tip-calculator.html" data-k="tip calculator restaurant bill split per person gratuity group"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128176;</div><div class="tc-name">Tip Calculator</div><div class="tc-desc">Calculate tip and split bills for any group.</div></a>
+    <a class="tool-card" href="age-calculator.html" data-k="age calculator birthday date of birth years months days hours milestones"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#127874;</div><div class="tc-name">Age Calculator</div><div class="tc-desc">Exact age in years, months, days, and hours.</div></a>
+    <a class="tool-card" href="bmi-calculator.html" data-k="bmi calculator body mass index metric imperial height weight healthy range"><div class="tc-em">&#9877;&#65039;</div><div class="tc-name">BMI Calculator</div><div class="tc-desc">BMI and healthy weight range calculator.</div></a>
+    <a class="tool-card" href="pomodoro-timer.html" data-k="pomodoro timer focus productivity work break interval session 25 5"><div class="tc-em">&#127813;</div><div class="tc-name">Pomodoro Timer</div><div class="tc-desc">Focus timer with custom work and break sessions.</div></a>
+    <a class="tool-card" href="currency-converter.html" data-k="currency converter USD EUR GBP exchange rate international 30"><div class="tc-badge b-hot">HOT</div><div class="tc-em">&#128178;</div><div class="tc-name">Currency Converter</div><div class="tc-desc">Convert between 30+ world currencies.</div></a>
+    <a class="tool-card" href="random-number-generator.html" data-k="random number generator dice coin flip lottery range bulk custom"><div class="tc-em">&#127922;</div><div class="tc-name">Random Number Generator</div><div class="tc-desc">Dice, coin flip, lottery, or any custom range.</div></a>
+    <a class="tool-card" href="text-diff-checker.html" data-k="text diff checker compare two texts differences changes green red highlight"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128269;</div><div class="tc-name">Text Diff Checker</div><div class="tc-desc">Compare two texts and highlight every change.</div></a>
+    <a class="tool-card" href="word-frequency-counter.html" data-k="word frequency counter analyse text keyword density overused stopword csv"><div class="tc-badge b-new">NEW</div><div class="tc-em">&#128200;</div><div class="tc-name">Word Frequency Counter</div><div class="tc-desc">See how often each word appears in text.</div></a>
+    <a class="tool-card" href="qr-code-generator.html" data-k="qr code generator url link download png free browser scan"><div class="tc-em">&#128241;</div><div class="tc-name">QR Code Generator</div><div class="tc-desc">Generate QR codes for any URL or text.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ CRYPTO ━━━━━━ -->
+<div class="tool-section" data-cat="crypto" id="crypto">
+  <div class="tool-section-header"><span class="tsh-icon">&#128142;</span><span class="tsh-title">Crypto Tools</span><span class="tsh-count">5 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="crypto-profit-calculator.html" data-k="crypto profit loss calculator pnl trade fee bitcoin ethereum"><div class="tc-badge b-crypto">CRYPTO</div><div class="tc-em">&#128176;</div><div class="tc-name">Crypto P&amp;L Calculator</div><div class="tc-desc">Calculate profit/loss on any crypto trade.</div></a>
+    <a class="tool-card" href="crypto-roi-calculator.html" data-k="crypto roi calculator return investment annual bitcoin holding period"><div class="tc-badge b-crypto">CRYPTO</div><div class="tc-em">&#128200;</div><div class="tc-name">Crypto ROI Calculator</div><div class="tc-desc">ROI, annualized returns, investment multiple.</div></a>
+    <a class="tool-card" href="dca-calculator.html" data-k="dca calculator dollar cost averaging bitcoin crypto monthly weekly"><div class="tc-badge b-crypto">CRYPTO</div><div class="tc-em">&#128197;</div><div class="tc-name">DCA Calculator</div><div class="tc-desc">Dollar-cost averaging results and comparison.</div></a>
+    <a class="tool-card" href="crypto-portfolio-calculator.html" data-k="crypto portfolio calculator tracker holdings value pnl allocation bitcoin"><div class="tc-badge b-crypto">CRYPTO</div><div class="tc-em">&#128188;</div><div class="tc-name">Portfolio Calculator</div><div class="tc-desc">Track all crypto holdings and total P&amp;L.</div></a>
+    <a class="tool-card" href="position-size-calculator.html" data-k="position size calculator crypto risk management stop loss risk reward ratio"><div class="tc-badge b-crypto">CRYPTO</div><div class="tc-em">&#128208;</div><div class="tc-name">Position Size Calc</div><div class="tc-desc">Risk-based position sizing with R:R ratio.</div></a>
+  </div>
+</div>
+
+<!-- ━━━━━━ PRINTABLE ━━━━━━ -->
+<div class="tool-section" data-cat="printable" id="printable">
+  <div class="tool-section-header"><span class="tsh-icon">&#128220;</span><span class="tsh-title">Printable &amp; Card Tools</span><span class="tsh-count">4 tools</span></div>
+  <div class="tool-grid">
+    <a class="tool-card" href="greeting-cards.html" data-k="greeting card print ready custom layout fold design birthday holiday"><div class="tc-em">&#128140;</div><div class="tc-name">Greeting Cards</div><div class="tc-desc">Print-ready greeting cards with custom layouts.</div></a>
+    <a class="tool-card" href="invitations.html" data-k="invitation maker event party occasion design printable birthday wedding"><div class="tc-em">&#9993;&#65039;</div><div class="tc-name">Invitation Maker</div><div class="tc-desc">Create event invitations for any occasion.</div></a>
+    <a class="tool-card" href="journal-builder.html" data-k="journal builder planner pages habit tracker professional printable custom"><div class="tc-em">&#128211;</div><div class="tc-name">Journal Builder</div><div class="tc-desc">Build custom journal and planner pages.</div></a>
+    <a class="tool-card" href="kids-cards.html" data-k="kids cards colorful fun family children design printable classroom valentine"><div class="tc-em">&#127880;</div><div class="tc-name">Kids Cards Creator</div><div class="tc-desc">Fun colorful cards for kids and families.</div></a>
+  </div>
+</div>
+
+</div><!-- /tools-wrap -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-nav.png" alt="Elephast.com">
+        <p>100 free browser tools for creators, sellers, and developers. Plus expert AI training and custom builds.</p>
+        <a href="https://buymeacoffee.com/elephast" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;background:#FFDD00;color:#000;font-size:12px;font-weight:700;text-decoration:none">&#9749; Buy Us a Coffee</a>
+      </div>
+      <div>
+        <div class="footer-col-title" style="color:var(--orange)">Free Tools</div>
+        <div class="footer-links">
+          <a href="#etsy">&#128717; Etsy Tools (18)</a>
+          <a href="#seo">&#128269; SEO Tools (6)</a>
+          <a href="#image">&#127912; Image Tools (22)</a>
+          <a href="#dev">&#128296; Developer Tools (14)</a>
+          <a href="#creator">&#127894; Creator Tools (10)</a>
+          <a href="#utility">&#128295; Utility Tools (24)</a>
+          <a href="#crypto">&#128142; Crypto Tools (5)</a>
+          <a href="#printable">&#128220; Printable Tools (4)</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" style="color:var(--purple)">Learn &amp; Services</div>
+        <div class="footer-links">
+          <a href="ai-tutoring.html">&#129504; 1-on-1 AI Tutoring</a>
+          <a href="ai-tutoring.html#what-you-learn">&#129302; ChatGPT &amp; Claude Training</a>
+          <a href="ai-tutoring.html#what-you-learn">&#128176; Make Money With AI</a>
+          <a href="services.html">&#9889; Custom Services</a>
+          <a href="services.html#builds">&#128296; Custom Tool Builds</a>
+          <a href="services.html#etsy-design">&#128717; Etsy Shop Design</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" style="color:var(--green)">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Elephast</a>
+          <a href="contact.html">Contact &amp; Booking</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="https://elephantshoespopshop.etsy.com" target="_blank">Etsy Shop &#8599;</a>
+          <a href="sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Elephast.com &mdash; AI &amp; eCommerce expert. 100 free tools, always free.</p>
+      <div style="display:flex;gap:16px">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <script>
-function filterTools(q){
-  q=q.toLowerCase().trim();
-  const cards=document.querySelectorAll('.card');
-  const sections=document.querySelectorAll('.section, [data-section]');
-  let total=0;
-  if(!q){cards.forEach(c=>c.style.display='');sections.forEach(s=>s.style.display='');document.getElementById('noResults').style.display='none';return;}
-  sections.forEach(section=>{
-    const sc=section.querySelectorAll('.card');
-    let vis=0;
-    sc.forEach(card=>{
-      const kw=(card.dataset.k||card.textContent).toLowerCase();
-      if(kw.includes(q)){card.style.display='';vis++;total++;}
-      else card.style.display='none';
+function filterTools(q) {
+  q = q.toLowerCase().trim();
+  var sections = document.querySelectorAll('.tool-section');
+  var nr = document.getElementById('noResults');
+  var total = 0;
+  if (!q) {
+    sections.forEach(function(s){ s.style.display=''; });
+    document.querySelectorAll('.tool-card').forEach(function(c){ c.style.display=''; });
+    nr.style.display = 'none';
+    return;
+  }
+  sections.forEach(function(section) {
+    var cards = section.querySelectorAll('.tool-card');
+    var vis = 0;
+    cards.forEach(function(card) {
+      var kw = ((card.dataset.k||'') + ' ' + card.textContent).toLowerCase();
+      if (kw.includes(q)) { card.style.display=''; vis++; total++; }
+      else card.style.display = 'none';
     });
-    section.style.display=vis>0?'':'none';
+    section.style.display = vis > 0 ? '' : 'none';
   });
-  document.getElementById('noResults').style.display=total===0?'block':'none';
+  nr.style.display = total === 0 ? 'block' : 'none';
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('searchInput').value = '';
+  var sections = document.querySelectorAll('.tool-section');
+  document.querySelectorAll('.tool-card').forEach(function(c){ c.style.display=''; });
+  if (cat === 'all') {
+    sections.forEach(function(s){ s.style.display=''; });
+    return;
+  }
+  sections.forEach(function(s){
+    s.style.display = s.dataset.cat === cat ? '' : 'none';
+  });
+  var target = document.getElementById(cat);
+  if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
 </body>

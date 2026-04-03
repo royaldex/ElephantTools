@@ -3,65 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="logo-icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Elephast.com design and development services — custom web tools, Etsy shop design, and digital product creation for sellers and creators.">
-<meta property="og:title" content="Services — Elephast.com">
-<meta property="og:description" content="Custom design and development services from the team behind Elephast.com.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="AI training, custom browser tools, Etsy shop design, website builds, and eCommerce services from an AI &amp; eCommerce expert. Get something built that actually works.">
+<meta property="og:title" content="Services — Elephast.com | AI Expert &amp; Custom Builds">
+<meta property="og:description" content="1-on-1 AI tutoring, custom web tools, Etsy shop builds, SEO audits, and more. Real work from a real AI &amp; eCommerce expert.">
 <meta property="og:image" content="https://elephast.com/logo.png">
-<title>Services &mdash; Elephast.com</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<title>Services — Elephast.com | AI &amp; eCommerce Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#09090b;--surface:#18181b;--surface-2:#1f1f23;--border:#2d2d30;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--orange:#f97316;--green:#10b981}
+:root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--orange:#f97316;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7;--red:#ef4444}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
-/* NAV */
-.unav{background:#18181b;border-bottom:1px solid #2d2d30;position:sticky;top:0;z-index:500;height:62px;display:flex;align-items:center;padding:0 20px}
-.unav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;width:100%;gap:6px}
-.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:10px}
-.unav-logo img{height:44px;width:auto;display:block}
+body{font-family:"Barlow",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+.unav{background:rgba(18,18,27,.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 24px;backdrop-filter:blur(20px)}
+.unav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;width:100%;gap:4px}
+.unav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;margin-right:12px}
+.unav-logo img{height:42px;width:auto}
 .unav-spacer{flex:1}
 .unav-links{display:flex;align-items:center;gap:2px}
-.unav-link{font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:#a1a1aa;text-decoration:none;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
-.unav-link:hover{color:#f4f4f5;background:#1f1f23}
-.unav-svc{background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)}
-.unav-svc:hover{background:rgba(249,115,22,.18)}
-.unav-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;background:rgba(16,185,129,.08);color:#10b981;border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:.5px;margin-left:6px}
+.unav-link{font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:7px;transition:all .15s;white-space:nowrap;border:none;background:none;cursor:pointer}
+.unav-link:hover,.unav-link.active{color:var(--text);background:var(--s3)}
+.unav-tutor{background:rgba(163,113,247,.12)!important;color:var(--purple)!important;border:1px solid rgba(163,113,247,.25)}
+.unav-svc{background:rgba(249,115,22,.1)!important;color:var(--orange)!important;border:1px solid rgba(249,115,22,.2)}
+.unav-badge{padding:5px 11px;border-radius:7px;font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:800;background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.2);white-space:nowrap;letter-spacing:1.5px;text-transform:uppercase;margin-left:8px}
 .unav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;border-radius:7px}
-.unav-ham span{display:block;width:22px;height:2px;background:#a1a1aa;border-radius:2px;transition:all .25s}
-.unav-drawer{display:none;position:fixed;top:62px;left:0;right:0;background:#18181b;border-bottom:1px solid #2d2d30;z-index:499;padding:12px 16px;flex-direction:column;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.unav-ham span{display:block;width:22px;height:2px;background:var(--dim);border-radius:2px;transition:all .25s}
+.unav-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:var(--s2);border-bottom:1px solid var(--border);z-index:899;padding:12px 20px;flex-direction:column;gap:4px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
 .unav-drawer.open{display:flex}
-.unav-drawer .unav-link{font-size:15px;padding:12px 16px;border-radius:9px}
-@media(max-width:680px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
-/* PAGE */
-.hero{background:linear-gradient(135deg,#111008,#09090b);border-bottom:1px solid var(--border);padding:64px 24px 56px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;opacity:.35;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 85%)}
-.hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
-.hero img{max-width:300px;width:80%;height:auto;margin-bottom:24px}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border-radius:99px;border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.07);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
-.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,7vw,68px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:16px}
-.hero p{font-size:16px;color:var(--dim);max-width:480px;margin:0 auto 28px;line-height:1.7}
-.main{max-width:1000px;margin:0 auto;padding:52px 24px 80px;flex:1}
-.section{margin-bottom:52px}
-.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
-.section h2{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
-.section-sub{font-size:15px;color:var(--dim);margin-bottom:28px;max-width:560px;line-height:1.7}
-.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.service-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
-.service-card:hover{border-color:rgba(249,115,22,.4);transform:translateY(-2px)}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),#fbbf24);opacity:0;transition:opacity .2s}
-.service-card:hover::before{opacity:1}
-.sc-icon{font-size:32px;margin-bottom:14px}
-.sc-name{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
-.sc-desc{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:16px}
-.sc-tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
-.cta-strip{background:linear-gradient(135deg,#0f1a0a,#091408);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:40px 32px;text-align:center;margin-top:52px}
-.cta-strip h2{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:10px}
-.cta-strip p{font-size:15px;color:var(--dim);margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:9px;background:linear-gradient(135deg,#059669,#10b981);color:#000;font-size:15px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(16,185,129,.2)}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,.3)}
-.divider{height:1px;background:var(--border);margin:48px 0}
-@media(max-width:600px){.service-grid{grid-template-columns:1fr}.hero h1{font-size:36px}}
+.unav-drawer .unav-link{font-size:15px;padding:13px 16px;border-radius:9px}
+@media(max-width:720px){.unav-links,.unav-badge{display:none}.unav-ham{display:flex}}
+main{flex:1}
+
+.hero{padding:72px 24px 56px;text-align:center;background:linear-gradient(180deg,rgba(249,115,22,.04) 0%,transparent 60%);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 20%,transparent 85%);opacity:.3;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:740px;margin:0 auto}
+.htag{display:inline-flex;align-items:center;gap:7px;padding:5px 18px;border-radius:99px;border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.07);font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:800;color:var(--orange);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-family:"Barlow Condensed",sans-serif;font-size:clamp(52px,9vw,88px);font-weight:900;line-height:.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:18px}
+.hero p{font-size:16px;color:var(--dim);max-width:520px;margin:0 auto 32px;line-height:1.7}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-orange{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:9px;background:var(--orange);color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(249,115,22,.3)}
+.btn-orange:hover{background:#ea6c0f;transform:translateY(-3px)}
+.btn-purple{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:9px;background:rgba(163,113,247,.12);color:var(--purple);font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(163,113,247,.3);transition:all .2s}
+.btn-purple:hover{background:rgba(163,113,247,.2);transform:translateY(-3px)}
+
+.wrap{max-width:1100px;margin:0 auto;padding:64px 24px}
+.sl{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.sh{font-family:"Barlow Condensed",sans-serif;font-size:clamp(32px,5vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:12px}
+.sp{font-size:15px;color:var(--dim);line-height:1.75;max-width:540px;margin-bottom:32px}
+
+/* FEATURED — AI TUTORING */
+.tutor-feature{background:linear-gradient(135deg,#0f0a1e,#110d22);border:1px solid rgba(163,113,247,.2);border-radius:16px;padding:40px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.tf-tag{display:inline-flex;align-items:center;gap:7px;padding:4px 14px;border-radius:99px;border:1px solid rgba(163,113,247,.3);background:rgba(163,113,247,.08);font-family:"Barlow Condensed",sans-serif;font-size:10px;font-weight:800;color:var(--purple);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.tf-title{font-family:"Barlow Condensed",sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:12px;line-height:1}
+.tf-desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:20px}
+.tf-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.tf-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--dim)}
+.tf-list li::before{content:"&#10003;";color:var(--purple);font-weight:700;flex-shrink:0;margin-top:2px}
+.tf-right{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tf-card{background:rgba(163,113,247,.07);border:1px solid rgba(163,113,247,.15);border-radius:10px;padding:16px;text-align:center}
+.tfc-icon{font-size:28px;margin-bottom:6px}
+.tfc-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tfc-desc{font-size:11px;color:var(--muted)}
+@media(max-width:680px){.tutor-feature{grid-template-columns:1fr}.tf-right{grid-template-columns:1fr 1fr}}
+
+/* SERVICE CARDS */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:48px}
+.svc-card{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.svc-card:hover{transform:translateY(-3px)}
+.svc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.svc-card:hover::before{opacity:1}
+.sc-orange::before{background:linear-gradient(90deg,var(--orange),var(--yellow))}
+.sc-orange:hover{border-color:rgba(249,115,22,.4)}
+.sc-green::before{background:linear-gradient(90deg,var(--green),#6ee7b7)}
+.sc-green:hover{border-color:rgba(16,185,129,.4)}
+.sc-blue::before{background:linear-gradient(90deg,var(--blue),#93c5fd)}
+.sc-blue:hover{border-color:rgba(59,130,246,.4)}
+.sc-purple::before{background:linear-gradient(90deg,var(--purple),#c4b5fd)}
+.sc-purple:hover{border-color:rgba(163,113,247,.4)}
+.sc-icon{font-size:36px;margin-bottom:16px}
+.sc-name{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.2px;margin-bottom:10px}
+.sc-desc{font-size:14px;color:var(--dim);line-height:1.65;margin-bottom:16px}
+.sc-tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:52px}
+.why-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.wc-icon{font-size:28px;margin-bottom:10px}
+.wc-title{font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.wc-desc{font-size:13px;color:var(--dim);line-height:1.55}
+
+.cta-strip{background:linear-gradient(135deg,#0f1a0a,#091408);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:44px 36px;text-align:center;margin-bottom:0}
+.cta-strip h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(32px,5vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:1;margin-bottom:12px}
+.cta-strip p{font-size:15px;color:var(--dim);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7}
+.btn-green{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:9px;background:var(--green);color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(16,185,129,.25)}
+.btn-green:hover{background:#059669;transform:translateY(-3px)}
+
+footer{border-top:1px solid var(--border);background:var(--s1);padding:32px 24px;text-align:center;flex-shrink:0}
+.fl{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s}
+.fl a:hover{color:var(--text)}
+.fc{font-size:12px;color:var(--muted)}
+.fc a{color:var(--orange);text-decoration:none}
 </style>
 </head>
 <body>
@@ -70,147 +112,174 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
     <a href="index.html" class="unav-logo"><img src="logo-nav.png" alt="Elephast.com"></a>
     <div class="unav-spacer"></div>
     <div class="unav-links">
-      <a href="index.html" class="unav-link">All Tools</a>
-      <a href="services.html" class="unav-link unav-svc" style="color:#f4f4f5;background:rgba(249,115,22,.15)">&#9889; Services</a>
+      <a href="index.html" class="unav-link">&#127968; Tools</a>
+      <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI</a>
+      <a href="services.html" class="unav-link unav-svc active">&#9889; Services</a>
       <a href="about.html" class="unav-link">About</a>
       <a href="contact.html" class="unav-link">Contact</a>
-      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank" rel="noopener">Etsy Shop &#8599;</a>
+      <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy &#8599;</a>
     </div>
-    <div class="unav-badge">&#9889; 100 Free Tools</div>
-    <button class="unav-ham" id="unavHam" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div class="unav-badge">100 Free Tools</div>
+    <button class="unav-ham" id="unavHam" onclick="toggleUNav()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="unav-drawer" id="unavDrawer">
-  <a href="index.html" class="unav-link">&#127968; All Tools</a>
+  <a href="index.html" class="unav-link">&#127968; All 100 Free Tools</a>
+  <a href="ai-tutoring.html" class="unav-link unav-tutor">&#129504; Learn AI 1-on-1</a>
   <a href="services.html" class="unav-link unav-svc">&#9889; Services</a>
   <a href="about.html" class="unav-link">About</a>
   <a href="contact.html" class="unav-link">Contact</a>
   <a href="https://elephantshoespopshop.etsy.com" class="unav-link" target="_blank">Etsy Shop &#8599;</a>
 </div>
-<script>function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});</script>
+<script>function toggleUNav(){var h=document.getElementById("unavHam"),d=document.getElementById("unavDrawer"),o=d.classList.contains("open");o?(d.classList.remove("open"),h.classList.remove("open")):(d.classList.add("open"),h.classList.add("open"));}document.addEventListener("click",function(e){var h=document.getElementById("unavHam"),d=document.getElementById("unavDrawer");if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove("open");h.classList.remove("open");}});</script>
 
-<div class="hero">
+<main>
+<section class="hero">
   <div class="hero-inner">
-    <img src="logo.png" alt="Elephast.com">
-    <div class="hero-tag">&#9889; Custom Services</div>
-    <h1>We Build<br><span style="color:var(--orange)">Fast Things</span></h1>
-    <p>Beyond the free tools &mdash; custom web design, Etsy shop builds, digital product creation, and browser-based tool development for sellers and creators.</p>
+    <div class="htag">&#9889; AI Expert &bull; eCommerce &bull; Custom Builds</div>
+    <h1>
+      <span style="color:var(--text);display:block">Built by Someone</span>
+      <span style="color:var(--orange);display:block">Who Uses This Stuff</span>
+    </h1>
+    <p>Every service here comes from real experience — running an Etsy shop, building 100 browser tools, training AI systems, and helping businesses automate their work. No agency overhead. Direct expertise.</p>
+    <div class="hero-ctas">
+      <a href="contact.html" class="btn-orange">&#9993;&#65039; Get in Touch</a>
+      <a href="ai-tutoring.html" class="btn-purple">&#129504; Learn AI 1-on-1</a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="main">
+<div class="wrap">
 
-  <div class="section">
-    <div class="section-label">What We Offer</div>
-    <h2>Services</h2>
-    <p class="section-sub">Everything here is built with the same philosophy as our tools &mdash; fast, clean, and actually useful.</p>
-    <div class="service-grid">
-
-      <div class="service-card">
-        <div class="sc-icon">&#128717;&#65039;</div>
-        <div class="sc-name">Etsy Shop Design</div>
-        <p class="sc-desc">Complete Etsy shop visual identity &mdash; banner, logo, listing thumbnail templates, and mockup systems. Built for your brand, not a generic template.</p>
-        <span class="sc-tag">Design</span>
-      </div>
-
-      <div class="service-card">
-        <div class="sc-icon">&#128296;</div>
-        <div class="sc-name">Custom Browser Tools</div>
-        <p class="sc-desc">Need a tool built specifically for your workflow? We build standalone HTML tools &mdash; calculators, generators, converters &mdash; that run entirely in the browser with no backend required.</p>
-        <span class="sc-tag">Development</span>
-      </div>
-
-      <div class="service-card">
-        <div class="sc-icon">&#127760;</div>
-        <div class="sc-name">Website Design &amp; Build</div>
-        <p class="sc-desc">Clean, fast, SEO-ready websites for small businesses and creators. Static sites that load instantly and require no monthly hosting fees beyond a domain.</p>
-        <span class="sc-tag">Design &amp; Dev</span>
-      </div>
-
-      <div class="service-card">
-        <div class="sc-icon">&#128200;</div>
-        <div class="sc-name">Digital Product Creation</div>
-        <p class="sc-desc">We create ready-to-sell digital products &mdash; printable planners, clipart packs, wall art sets, and SVG collections &mdash; built to Etsy's specifications and optimized to sell.</p>
-        <span class="sc-tag">Design</span>
-      </div>
-
-      <div class="service-card">
-        <div class="sc-icon">&#128269;</div>
-        <div class="sc-name">Etsy SEO &amp; Listing Optimization</div>
-        <p class="sc-desc">Full audit and rewrite of your Etsy titles, tags, and descriptions using real keyword data. Includes a 30-day performance review.</p>
-        <span class="sc-tag">SEO</span>
-      </div>
-
-      <div class="service-card">
-        <div class="sc-icon">&#129528;</div>
-        <div class="sc-name">Telegram Bot &amp; Shop Development</div>
-        <p class="sc-desc">Custom Telegram-based e-commerce bots &mdash; product catalogs, order management, payment integration, and automated notifications. No app required for your customers.</p>
-        <span class="sc-tag">Development</span>
-      </div>
-
+  <!-- FEATURED: AI TUTORING -->
+  <div class="sl" style="color:var(--purple)">Featured Service</div>
+  <div class="tutor-feature" id="tutoring">
+    <div class="tutor-left">
+      <div class="tf-tag">&#129504; Most Popular</div>
+      <div class="tf-title">1-on-1 <span style="color:var(--purple)">AI Training</span></div>
+      <p class="tf-desc">Personal AI tutoring sessions for beginners, business owners, and side hustlers. Learn the tools that are changing how money gets made — in plain English, at your pace.</p>
+      <ul class="tf-list">
+        <li>ChatGPT, Claude, Grok, Runway &mdash; whatever you want to learn</li>
+        <li>How to use AI to make money online and automate your work</li>
+        <li>Build websites and tools with no coding experience needed</li>
+        <li>In person locally or online via video call &mdash; your choice</li>
+        <li>Simple, practical, zero jargon &mdash; no boring slides</li>
+      </ul>
+      <a href="ai-tutoring.html" style="display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:9px;background:var(--purple);color:#fff;font-family:Barlow Condensed,sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s">&#129504; Full Details &amp; Booking &#8594;</a>
+    </div>
+    <div class="tf-right">
+      <div class="tf-card"><div class="tfc-icon">&#129302;</div><div class="tfc-name">ChatGPT &amp; Claude</div><div class="tfc-desc">Prompts &amp; automation</div></div>
+      <div class="tf-card"><div class="tfc-icon">&#127916;</div><div class="tfc-name">Runway Video AI</div><div class="tfc-desc">Create AI videos</div></div>
+      <div class="tf-card"><div class="tfc-icon">&#128176;</div><div class="tfc-name">Make $$ Online</div><div class="tfc-desc">Digital products &amp; resale</div></div>
+      <div class="tf-card"><div class="tfc-icon">&#127760;</div><div class="tfc-name">Build &amp; Automate</div><div class="tfc-desc">Websites &amp; workflows</div></div>
+      <div class="tf-card"><div class="tfc-icon">&#128100;</div><div class="tfc-name">Beginners Welcome</div><div class="tfc-desc">Zero experience needed</div></div>
+      <div class="tf-card"><div class="tfc-icon">&#128205;</div><div class="tfc-name">In Person or Online</div><div class="tfc-desc">Flexible scheduling</div></div>
     </div>
   </div>
 
-  <div class="divider"></div>
+  <!-- OTHER SERVICES -->
+  <div class="sl" style="color:var(--orange);margin-top:48px">Custom Services</div>
+  <h2 class="sh">What We Build</h2>
+  <div class="svc-grid">
+    <div class="svc-card sc-orange" id="builds">
+      <div class="sc-icon">&#128296;</div>
+      <div class="sc-name">Custom Browser Tools</div>
+      <p class="sc-desc">Need a tool built specifically for your workflow? We build standalone HTML tools — calculators, generators, converters, packagers — that run entirely in the browser with no backend, no hosting costs, no dependencies.</p>
+      <span class="sc-tag" style="background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)">Development</span>
+    </div>
+    <div class="svc-card sc-green" id="etsy-design">
+      <div class="sc-icon">&#128717;&#65039;</div>
+      <div class="sc-name">Etsy Shop Design</div>
+      <p class="sc-desc">Complete Etsy visual identity — shop banner, listing thumbnail templates, mockup systems, and listing copy written for search. Built for your brand, optimized to sell.</p>
+      <span class="sc-tag" style="background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)">Design</span>
+    </div>
+    <div class="svc-card sc-blue" id="website">
+      <div class="sc-icon">&#127760;</div>
+      <div class="sc-name">Website Design &amp; Build</div>
+      <p class="sc-desc">Fast, clean, SEO-ready websites for small businesses and creators. Static sites that load instantly, look professional, and require no monthly platform fees.</p>
+      <span class="sc-tag" style="background:rgba(59,130,246,.1);color:var(--blue);border:1px solid rgba(59,130,246,.2)">Design &amp; Dev</span>
+    </div>
+    <div class="svc-card sc-orange" id="seo-audit">
+      <div class="sc-icon">&#128269;</div>
+      <div class="sc-name">Etsy SEO &amp; Listing Audit</div>
+      <p class="sc-desc">Full audit and rewrite of your Etsy titles, tags, and descriptions using real keyword research. Know exactly what to change and why, with a 30-day performance check-in.</p>
+      <span class="sc-tag" style="background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)">SEO</span>
+    </div>
+    <div class="svc-card sc-purple" id="automation">
+      <div class="sc-icon">&#129664;</div>
+      <div class="sc-name">AI Automation &amp; Bots</div>
+      <p class="sc-desc">Custom Telegram bots, AI-powered automation workflows, and business process automation. Order management, inventory, notifications — built and deployed.</p>
+      <span class="sc-tag" style="background:rgba(163,113,247,.1);color:var(--purple);border:1px solid rgba(163,113,247,.2)">Development</span>
+    </div>
+    <div class="svc-card sc-green" id="digital-products">
+      <div class="sc-icon">&#128200;</div>
+      <div class="sc-name">Digital Product Creation</div>
+      <p class="sc-desc">Ready-to-sell digital products — printable planners, clipart packs, wall art sets, SVG bundles — built to Etsy specifications and optimized to convert from day one.</p>
+      <span class="sc-tag" style="background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)">Design</span>
+    </div>
+  </div>
 
-  <div class="section">
-    <div class="section-label">Why Work With Us</div>
-    <h2>Built by Sellers, for Sellers</h2>
-    <p class="section-sub">Every tool on Elephast.com grew out of a real problem we had running an Etsy shop. We do not guess at what sellers need &mdash; we have lived it.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div style="font-size:24px;margin-bottom:10px">&#9889;</div>
-        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Fast Delivery</div>
-        <div style="font-size:13px;color:var(--dim)">Most projects delivered within 3&ndash;7 business days. No long agency timelines.</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div style="font-size:24px;margin-bottom:10px">&#128172;</div>
-        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Direct Communication</div>
-        <div style="font-size:13px;color:var(--dim)">You talk directly with the person doing the work. No account managers, no middlemen.</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div style="font-size:24px;margin-bottom:10px">&#127919;</div>
-        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Seller-Focused</div>
-        <div style="font-size:13px;color:var(--dim)">We understand Etsy's algorithm, buyer psychology, and what makes listings convert.</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px">
-        <div style="font-size:24px;margin-bottom:10px">&#128295;</div>
-        <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:6px">Technical Depth</div>
-        <div style="font-size:13px;color:var(--dim)">67 working browser tools built from scratch. We know how to build things that work reliably.</div>
-      </div>
+  <!-- WHY -->
+  <div class="sl" style="color:var(--green)">Why Work With Us</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="wc-icon">&#9889;</div>
+      <div class="wc-title">Fast Delivery</div>
+      <div class="wc-desc">Most projects delivered in 3–7 business days. No agency timelines.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-icon">&#128172;</div>
+      <div class="wc-title">Direct Contact</div>
+      <div class="wc-desc">You talk to the person doing the work. No project managers, no handoffs.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-icon">&#127919;</div>
+      <div class="wc-title">Seller-First</div>
+      <div class="wc-desc">We run an Etsy shop. We know what buyers want and what algorithms reward.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-icon">&#128296;</div>
+      <div class="wc-title">Technical Depth</div>
+      <div class="wc-desc">100 working browser tools built from scratch. We build things that actually work.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-icon">&#129302;</div>
+      <div class="wc-title">AI-First</div>
+      <div class="wc-desc">We use AI in every project — for speed, quality, and results that would take agencies weeks.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-icon">&#128200;</div>
+      <div class="wc-title">Results Focused</div>
+      <div class="wc-desc">Not here to look pretty on a call. Here to build things that grow your income or save you time.</div>
     </div>
   </div>
 
   <div class="cta-strip">
     <h2>Ready to Start?</h2>
-    <p>Tell us what you need and we will get back to you within one business day with a clear plan and quote.</p>
-    <a href="contact.html" class="cta-btn">&#9993;&#65039; Get in Touch</a>
-  </div>
-
-</div>
-
-<footer style="border-top:1px solid #2d2d30;padding:28px 24px 32px;text-align:center;background:#18181b">
-  <div style="max-width:1100px;margin:0 auto">
-    <a href="index.html" style="display:inline-block;margin-bottom:18px">
-      <img src="logo-nav.png" alt="Elephast.com" style="height:36px;width:auto;opacity:.7">
-    </a>
-    <div style="display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:14px">
-      <a href="index.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">&#127968; All Tools</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="services.html" style="font-size:13px;color:#f97316;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:600">Services</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="https://buymeacoffee.com/elephast" target="_blank" rel="noopener" style="font-size:13px;color:#FFDD00;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:600">&#9749; Support Us</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="about.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">About</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="privacy-policy.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Privacy Policy</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="terms.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Terms of Use</a>
-      <span style="color:#3f3f46;font-size:11px">&middot;</span>
-      <a href="contact.html" style="font-size:13px;color:#a1a1aa;text-decoration:none;padding:4px 10px;border-radius:6px">Contact</a>
+    <p>Tell us what you need. We will get back to you within one business day with a clear plan and honest quote.</p>
+    <a href="contact.html" class="btn-green">&#9993;&#65039; Get in Touch</a>
+    <div style="margin-top:20px;font-size:13px;color:var(--muted)">
+      Not sure what you need? <a href="ai-tutoring.html" style="color:var(--purple);text-decoration:none">Start with an AI tutoring session &#8594;</a>
     </div>
-    <p style="font-size:12px;color:#71717a">&copy; 2025 <a href="index.html" style="color:#f97316;text-decoration:none">Elephast.com</a> &mdash; Free tools for Etsy sellers, creators &amp; developers.</p>
+    <div style="margin-top:28px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:18px 22px;text-align:left">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px">&#128296; While you decide — everything on Elephast is free</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6">100 free browser tools for SEO, Etsy, image editing, development, and more. No signup, no cost. <a href="index.html" style="color:var(--orange)">Browse all 100 tools &rarr;</a></div>
+    </div>
   </div>
+</div>
+</main>
+
+<footer>
+  <div class="fl">
+    <a href="index.html">&#127968; All Tools</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="ai-tutoring.html" style="color:var(--purple)">&#129504; Learn AI</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="services.html" style="color:var(--orange)">Services</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="about.html">About</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="https://buymeacoffee.com/elephast" target="_blank" style="color:#FFDD00">&#9749; Support Us</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="privacy-policy.html">Privacy</a><span style="color:var(--border);font-size:11px">&middot;</span>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="fc">&copy; 2025 <a href="index.html">Elephast.com</a> &mdash; AI &amp; eCommerce expert. 100 free tools + custom services.</p>
 </footer>
 </body>
 </html>
