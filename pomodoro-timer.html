@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="logo-icon.png">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Encode text to HTML entities or decode entities back to text. Essential for safely displaying code in HTML pages.">
-<meta property="og:title" content="HTML Entity Encoder / Decoder — Elephast.com">
-<meta property="og:description" content="Encode text to HTML entities or decode entities back to text. Essential for safely displaying code in HTML pages.">
+<meta name="description" content="Boost focus and productivity with a customisable Pomodoro timer. Work sessions, short breaks, and long breaks — free browser-based.">
+<meta property="og:title" content="Pomodoro Timer — Elephast.com">
+<meta property="og:description" content="Boost focus and productivity with a customisable Pomodoro timer. Work sessions, short breaks, and long breaks — free browser-based.">
 <meta property="og:image" content="https://elephast.com/logo.png">
-<title>HTML Entity Encoder / Decoder — Elephast Free Tools</title>
+<title>Pomodoro Timer — Elephast Free Tools</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>*{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#09090b;--s1:#111110;--s2:#18181b;--s3:#1f1f23;--border:#2d2d30;--border-h:#3f3f46;--text:#f4f4f5;--dim:#a1a1aa;--muted:#71717a;--green:#10b981;--green-d:#059669;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#3b82f6;--purple:#a371f7}
@@ -113,23 +113,62 @@ footer{border-top:1px solid var(--border);padding:28px 24px 32px;text-align:cent
 </div>
 <script>function toggleMenu(){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer'),o=d.classList.contains('open');o?(d.classList.remove('open'),h.classList.remove('open')):(d.classList.add('open'),h.classList.add('open'));}document.addEventListener('click',function(e){var h=document.getElementById('unavHam'),d=document.getElementById('unavDrawer');if(h&&d&&!h.contains(e.target)&&!d.contains(e.target)){d.classList.remove('open');h.classList.remove('open');}});</script>
 <div class="main">
-<div class="intro"><div class="intro-top"><div class="intro-icon">🔤</div><div class="intro-text"><div class="intro-cat">Developer Tools</div><h1>HTML Entity Encoder / Decoder</h1><p class="intro-desc">Convert special characters to their HTML entity equivalents and back. Prevents XSS vulnerabilities and ensures special characters display correctly in HTML — essential for web developers and content creators.</p></div></div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Paste text or HTML with entities</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Choose Encode or Decode</div></div><div class="step"><div class="step-n">3</div><div class="step-t">See the result update instantly</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Copy the output to use in your code</div></div></div></div><div class="card"><div class="ct">Input</div>
-<div class="f"><textarea id="heInput" rows="6" placeholder="Paste your text or HTML here..." oninput="heAuto()"></textarea></div>
-<div style="display:flex;gap:8px;margin-bottom:0">
-<button class="btn btn-p" style="flex:1;justify-content:center" onclick="heEncode()">&#9889; Encode to Entities</button>
-<button class="btn btn-s" style="flex:1;justify-content:center" onclick="heDecode()">&#8592; Decode from Entities</button>
+<div class="intro"><div class="intro-top"><div class="intro-icon">🍅</div><div class="intro-text"><div class="intro-cat">Utility Tools</div><h1>Pomodoro Timer</h1><p class="intro-desc">The Pomodoro Technique improves focus by breaking work into timed intervals separated by short breaks. This timer handles the countdown automatically — just set your session length and focus.</p></div></div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Set your work session length (default 25 min)</div></div><div class="step"><div class="step-n">2</div><div class="step-t">Set short break and long break lengths</div></div><div class="step"><div class="step-n">3</div><div class="step-t">Click Start to begin the timer</div></div><div class="step"><div class="step-n">4</div><div class="step-t">Take a break when the timer ends</div></div><div class="step"><div class="step-n">5</div><div class="step-t">After 4 sessions, take a long break</div></div></div></div><div class="card" style="text-align:center">
+<div class="ct">Current Phase</div>
+<div id="ptPhase" style="font-size:16px;font-weight:700;color:var(--orange);margin-bottom:20px">Work Session</div>
+<div id="ptDisplay" style="font-family:Space Mono,monospace;font-size:80px;font-weight:700;color:var(--text);margin-bottom:16px;letter-spacing:4px">25:00</div>
+<div style="height:8px;background:var(--border);border-radius:4px;margin-bottom:24px;overflow:hidden">
+<div id="ptBar" style="height:100%;width:0%;background:var(--orange);border-radius:4px;transition:width 1s linear"></div>
+</div>
+<div style="display:flex;gap:12px;justify-content:center;margin-bottom:20px">
+<button class="btn btn-p" id="ptStart" onclick="ptToggle()" style="min-width:120px">&#9654; Start</button>
+<button class="btn btn-s" onclick="ptReset()">&#9632; Reset</button>
+<button class="btn btn-s" onclick="ptSkip()">&#9654;&#9654; Skip</button>
+</div>
+<div style="display:flex;gap:16px;justify-content:center">
+<div class="stat" style="min-width:80px"><span class="sv" id="ptCount">0</span><div class="sl">Pomodoros</div></div>
 </div>
 </div>
-<div id="heResults" style="display:none"><div class="card"><div class="ct">Output</div>
-<div class="arow" style="margin-bottom:10px"><button class="cpbtn" onclick="cpEl('heOutput')">&#128203; Copy</button></div>
-<div class="rbox mono" id="heOutput"></div>
-</div></div><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Always encode user-generated content before inserting it into HTML to prevent XSS attacks.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">& must be encoded as &amp; before other entities — always escape ampersands first.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Named entities like &copy; are more readable than numeric &amp;#169; in source code.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Decode HTML before processing it in your application — raw entities can break string operations.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use encode when putting text inside HTML attributes, especially href and title values.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">The five characters that must always be encoded: < > & " ' — these are the dangerous ones.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">HTML entities are case-sensitive: &amp;Agrave; and &amp;agrave; produce different characters.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="base64-encoder-decoder.html"><div class="rc-icon">🔐</div><div class="rc-name">Base64 Encoder</div><div class="rc-desc">Encode decode data</div></a><a class="rc" href="url-encoder-decoder.html"><div class="rc-icon">🔗</div><div class="rc-name">URL Encoder</div><div class="rc-desc">Encode URLs</div></a><a class="rc" href="json-formatter.html"><div class="rc-icon">{ }</div><div class="rc-name">JSON Formatter</div><div class="rc-desc">Format JSON</div></a><a class="rc" href="regex-tester.html"><div class="rc-icon">🔎</div><div class="rc-name">Regex Tester</div><div class="rc-desc">Test patterns</div></a><a class="rc" href="markdown-to-html.html"><div class="rc-icon">📝</div><div class="rc-name">Markdown to HTML</div><div class="rc-desc">Convert Markdown</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 100 free tools</div></a></div></div><script>
-var HE_MAP={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","©":"&copy;","®":"&reg;","™":"&trade;","€":"&euro;","£":"&pound;","¥":"&yen;","°":"&deg;","±":"&plusmn;","×":"&times;","÷":"&divide;","—":"&mdash;","–":"&ndash;","…":"&hellip;","·":"&middot;","«":"&laquo;","»":"&raquo;","½":"&frac12;","¼":"&frac14;","¾":"&frac34;"};
-var HE_REV={};Object.keys(HE_MAP).forEach(function(k){HE_REV[HE_MAP[k]]=k;});
-function heEncode(){var t=document.getElementById("heInput").value;var out=t.replace(/[&<>"'©®™€£¥°±×÷—–…·«»½¼¾]/g,function(c){return HE_MAP[c]||c;});document.getElementById("heOutput").textContent=out;document.getElementById("heResults").style.display="block";}
-function heDecode(){var t=document.getElementById("heInput").value;var out=t.replace(/&[a-zA-Z0-9#]+;/g,function(e){if(HE_REV[e])return HE_REV[e];if(e.startsWith("&#x"))return String.fromCharCode(parseInt(e.slice(3,-1),16));if(e.startsWith("&#"))return String.fromCharCode(parseInt(e.slice(2,-1),10));return e;});document.getElementById("heOutput").textContent=out;document.getElementById("heResults").style.display="block";}
-function heAuto(){}
-function cpEl(id){navigator.clipboard.writeText(document.getElementById(id).textContent);event.target.textContent="Copied!";event.target.classList.add("done");setTimeout(function(){event.target.textContent="Copy";event.target.classList.remove("done");},2000);}
+<div class="card"><div class="ct">Timer Settings</div>
+<div class="r3">
+<div class="f"><label>Work (min)</label><input type="number" id="ptWork" value="25" min="1" max="90" onchange="ptReset()"></div>
+<div class="f"><label>Short Break</label><input type="number" id="ptShort" value="5" min="1" max="30" onchange="ptReset()"></div>
+<div class="f"><label>Long Break</label><input type="number" id="ptLong" value="15" min="5" max="60" onchange="ptReset()"></div>
+</div>
+</div><div class="tips-section"><h2>&#128161; Pro Tips</h2><div class="tips-grid"><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">The standard Pomodoro is 25 minutes of focused work followed by a 5-minute break.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Eliminate all distractions before starting — phone on silent, browser tabs closed, notifications off.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">After 4 Pomodoros, take a longer break (15-30 minutes) to fully recover your focus.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Adjust session length to suit your work: deep coding may need 50-minute blocks, writing may need 25.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Use the break timer as a strict deadline — do not extend breaks, it defeats the purpose.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Keep a notepad nearby during sessions — write down distracting thoughts and return to them later.</div></div><div class="tip"><div class="tip-bullet">&#10003;</div><div class="tip-text">Track completed Pomodoros to understand your productive hours and daily capacity.</div></div></div></div><div class="related"><h2>&#128279; Related Tools</h2><div class="rgrid"><a class="rc" href="age-calculator.html"><div class="rc-icon">🎂</div><div class="rc-name">Age Calculator</div><div class="rc-desc">Time calculations</div></a><a class="rc" href="timestamp-converter.html"><div class="rc-icon">🕐</div><div class="rc-name">Timestamp Converter</div><div class="rc-desc">Unix timestamps</div></a><a class="rc" href="word-counter.html"><div class="rc-icon">📊</div><div class="rc-name">Word Counter</div><div class="rc-desc">Track writing output</div></a><a class="rc" href="video-script-generator.html"><div class="rc-icon">🎬</div><div class="rc-name">Script Generator</div><div class="rc-desc">Plan video work</div></a><a class="rc" href="readability-checker.html"><div class="rc-icon">📖</div><div class="rc-name">Readability Checker</div><div class="rc-desc">Check your writing</div></a><a class="rc" href="index.html"><div class="rc-icon">&#127968;</div><div class="rc-name">All Tools</div><div class="rc-desc">Browse all 100 free tools</div></a></div></div><script>
+var ptInterval=null,ptRunning=false,ptSeconds=0,ptTotal=0,ptPhaseNum=0,ptPomodoros=0;
+var PHASES=["Work","Short Break","Work","Short Break","Work","Short Break","Work","Long Break"];
+function ptGetSecs(phase){var work=parseInt(document.getElementById("ptWork").value)*60;var short=parseInt(document.getElementById("ptShort").value)*60;var long=parseInt(document.getElementById("ptLong").value)*60;return phase.includes("Work")?work:phase.includes("Long")?long:short;}
+function ptUpdate(){
+  var m=Math.floor(ptSeconds/60),s=ptSeconds%60;
+  document.getElementById("ptDisplay").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  var pct=ptTotal>0?(ptTotal-ptSeconds)/ptTotal*100:0;
+  document.getElementById("ptBar").style.width=pct+"%";
+  var phase=PHASES[ptPhaseNum%PHASES.length];
+  document.getElementById("ptBar").style.background=phase==="Work"?"var(--orange)":"var(--green)";
+}
+function ptTick(){
+  ptSeconds--;
+  if(ptSeconds<0){ptPhaseNum++;ptPomodoros+=PHASES[(ptPhaseNum-1)%PHASES.length]==="Work"?1:0;document.getElementById("ptCount").textContent=ptPomodoros;ptNext();}
+  else ptUpdate();
+}
+function ptNext(){
+  var phase=PHASES[ptPhaseNum%PHASES.length];
+  ptSeconds=ptGetSecs(phase);ptTotal=ptSeconds;
+  document.getElementById("ptPhase").textContent=phase;
+  ptUpdate();
+  if(typeof Notification!=="undefined"&&Notification.permission==="granted")new Notification("Elephast Timer",{body:phase+" started! "+Math.round(ptSeconds/60)+" minutes."});
+}
+function ptToggle(){
+  ptRunning=!ptRunning;
+  document.getElementById("ptStart").innerHTML=ptRunning?"&#9646;&#9646; Pause":"&#9654; Start";
+  if(ptRunning){if(!ptInterval)ptInterval=setInterval(ptTick,1000);}
+  else{clearInterval(ptInterval);ptInterval=null;}
+}
+function ptReset(){clearInterval(ptInterval);ptInterval=null;ptRunning=false;ptPhaseNum=0;var phase=PHASES[0];ptSeconds=ptGetSecs(phase);ptTotal=ptSeconds;document.getElementById("ptPhase").textContent=phase;document.getElementById("ptStart").innerHTML="&#9654; Start";ptUpdate();}
+function ptSkip(){ptPhaseNum++;ptNext();if(ptRunning&&!ptInterval)ptInterval=setInterval(ptTick,1000);}
+if(typeof Notification!=="undefined"&&Notification.permission==="default")Notification.requestPermission();
+ptReset();
 </script>
 </div>
 <footer>
